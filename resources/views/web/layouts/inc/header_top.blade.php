@@ -1,6 +1,3 @@
-<img src="{{ defWebAssets('img/primary-hero-el-1.png') }}" alt="image" class="img-fluid primary-hero__el primary-hero__el-1">
-<img src="{{ defWebAssets('img/primary-hero-el-2.png') }}" alt="image" class="img-fluid primary-hero__el primary-hero__el-2">
-
 <div class="border-bottom header-top">
     <div class="container">
         <div class="row">
@@ -24,11 +21,7 @@
                                     <i class="fa-solid fa-globe language"></i>
                                 </a>
                             </li>
-                            @if($WebConfig->fav_view)
-                                <li class="fav_menu d-xl-none">
-                                    <livewire:site.favorite-menu />
-                                </li>
-                            @endif
+
 
 
                            <li class="d-none d-lg-block descMenu">

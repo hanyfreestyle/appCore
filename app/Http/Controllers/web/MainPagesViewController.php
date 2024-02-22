@@ -6,8 +6,6 @@ use App\Http\Controllers\DefaultMainController;
 use App\Http\Controllers\WebMainController;
 use App\Http\Requests\data\ContactUsFormRequest;
 use App\Http\Requests\data\ContactUsOnPageRequest;
-use App\Models\admin\Listing;
-use App\Models\admin\Post;
 use App\Models\data\ContactUsForm;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -23,24 +21,14 @@ class MainPagesViewController extends WebMainController{
         $Meta = parent::getMeatByCatId('home');
         parent::printSeoMeta($Meta,'page_index');
 
-        $locations = DefaultMainController::CashLocationList(0);
-        View::share('locations', $locations);
-
-        $DeveloperArr = DefaultMainController::CashDeveloperList(0);
-        View::share('DeveloperArr', $DeveloperArr);
-
         $pageView = $this->pageView ;
         $pageView['SelMenu'] = 'HomePage' ;
 
-        $relatedPosts = Post::def()
-            ->orderBy('id','desc')
-            ->limit('10')
-            ->get();
+
 
         return view('web.index')->with(
             [
                 'pageView'=>$pageView,
-                'relatedPosts'=>$relatedPosts,
             ]
         );
     }

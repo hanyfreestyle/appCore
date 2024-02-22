@@ -1,17 +1,17 @@
 <script>
     @if($arFont)
     async function loadarfont(){
-        const font_ar = new FontFace('Aljazeera','url({{ defWebAssets('fonts/Ar/Aljazeera.woff') }}');
+        const font_ar = new FontFace('Tajawal','url({{ defWebAssets('fonts/Ar/TajawalRegular.woff2') }}');
         await font_ar.load();
         document.fonts.add(font_ar);
-        document.body.classList.add('Aljazeera');
+        document.body.classList.add('Tajawal');
     };
     loadarfont();
     @endif
 
     @if($enFont )
     async function loadarfont_en(){
-        const font_en = new FontFace('Poppins','url({{ defWebAssets('fonts/En/Inter-Regular.woff2') }}');
+        const font_en = new FontFace('Poppins','url({{ defWebAssets('fonts/En/Poppins-Regular.woff2') }}');
         await font_en.load();
         document.fonts.add(font_en);
         document.body.classList.add('Poppins');
@@ -36,14 +36,4 @@
     };
     fontawesomeB();
     @endif
-
-{{--    @if($materialicon)--}}
-{{--    async function materialOutlined(){--}}
-{{--        const materialOutlined = new FontFace('MaterialOutlined','url({{ defWebAssets('material-icon/MaterialSymbolsOutlined.woff2') }}');--}}
-{{--        await materialOutlined.load();--}}
-{{--        document.fonts.add(materialOutlined);--}}
-{{--        document.body.classList.add('MaterialOutlined');--}}
-{{--    };--}}
-{{--    materialOutlined();--}}
-{{--    @endif--}}
 </script>
