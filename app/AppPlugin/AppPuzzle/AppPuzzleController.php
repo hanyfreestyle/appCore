@@ -41,11 +41,87 @@ class AppPuzzleController{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # CopyModel
-    public function CopyModel($model){
+    public function RemoveModel($model){
         $modelTree = self::ModelTree();
 
         $thisModel = $modelTree[$model];
 
+        self::RemoveAppFolder($thisModel);
+        self::RemoveViewFolder($thisModel);
+        self::RemoveRouteFile($thisModel);
+        self::RemoveMigrations($thisModel);
+        self::RemoveSeeder($thisModel);
+
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    public function RemoveAppFolder($thisModel){
+        if($thisModel['app'] != null ){
+            $thisDir = app_path("AppPlugin/".$thisModel['app']);
+            if(File::isDirectory($thisDir)){
+                File::deleteDirectory($thisDir);
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    public function RemoveViewFolder($thisModel){
+        if($thisModel['view'] != null ){
+            $thisDir = resource_path("views/AppPlugin/".$thisModel['view']);
+            if(File::isDirectory($thisDir)){
+                File::deleteDirectory($thisDir);
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     RemoveRouteFile
+    public function RemoveRouteFile($thisModel){
+        if($thisModel['route'] != null ){
+            $fileName = $thisModel['route'] ;
+            $routeFolder = $thisModel['routeFolder'] ;
+            $filePath = base_path('routes/AppPlugin/'.$routeFolder.$fileName);
+            if(File::isFile($filePath)){
+                File::delete($filePath);
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     RemoveMigrations
+    public function RemoveMigrations($thisModel){
+        if($thisModel['migrations'] != null ){
+            foreach ($thisModel['migrations'] as $migrations){
+                $filePath = base_path('database/migrations/'.$migrations);
+                if(File::isFile($filePath)){
+                    File::delete($filePath);
+                }
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopySeeder
+    public function RemoveSeeder($thisModel){
+        if($thisModel['seeder'] != null ){
+            foreach ($thisModel['seeder'] as $seeder){
+                $filePath = public_path('db/'.$seeder);
+                if(File::isFile($filePath)){
+                    File::delete($filePath);
+                }
+            }
+        }
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # CopyModel
+    public function CopyModel($model){
+        $modelTree = self::ModelTree();
+
+        $thisModel = $modelTree[$model];
         self::CopyAppFolder($thisModel);
         self::CopyViewFolder($thisModel);
         self::CopyRouteFile($thisModel);
