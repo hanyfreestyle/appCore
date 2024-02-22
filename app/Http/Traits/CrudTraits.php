@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 use App\Helpers\AdminHelper;
 use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Requests\admin\MorePhotosRequest;
-use App\Models\admin\Listing;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
