@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\config;
+namespace App\AppPlugin\ConfigMeta;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MetaTagRequest extends FormRequest
-{
+class MetaTagRequest extends FormRequest{
 
     public function authorize(): bool
     {

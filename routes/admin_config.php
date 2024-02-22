@@ -1,9 +1,9 @@
 <?php
 
+use App\AppPlugin\ConfigMeta\MetaTagController;
 use App\Http\Controllers\admin\config\DefPhotoController;
 use App\Http\Controllers\admin\config\LangFileController;
 use App\Http\Controllers\admin\config\LangFileWebController;
-use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;

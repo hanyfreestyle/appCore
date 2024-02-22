@@ -24,7 +24,7 @@ return [
     */
 
     //'view' => 'breadcrumbs::bootstrap5',
-    'view' => 'web.partials.breadcrumbs',
+    'view' => 'web.layouts.inc.breadcrumbs',
 
     /*
     |--------------------------------------------------------------------------

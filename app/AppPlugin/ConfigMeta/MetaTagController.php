@@ -1,13 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\admin\config;
+namespace App\AppPlugin\ConfigMeta;
 
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
-use App\Models\admin\config\MetaTag;
-
-use App\Http\Requests\admin\config\MetaTagRequest;
-use App\Models\admin\config\MetaTagTranslation;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -50,7 +46,7 @@ class MetaTagController extends AdminMainController {
         $pageData['Trashed'] = MetaTag::onlyTrashed()->count();
 
         $rowData = self::getSelectQuery(MetaTag::where('id','!=',0));
-        return view('admin.config.meta.index',compact('pageData','rowData'));
+        return view('AppPlugin.ConfigMeta.index',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -59,7 +55,7 @@ class MetaTagController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "deleteList";
         $rowData = self::getSelectQuery(MetaTag::onlyTrashed());
-        return view('admin.config.meta.index',compact('pageData','rowData'));
+        return view('AppPlugin.ConfigMeta.index',compact('pageData','rowData'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
@@ -67,7 +63,7 @@ class MetaTagController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $oldData = new MetaTag();
-        return view('admin.config.meta.form',compact('oldData','pageData'));
+        return view('AppPlugin.ConfigMeta.form',compact('oldData','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -76,7 +72,7 @@ class MetaTagController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
         $oldData = MetaTag::findOrFail($id);
-        return view('admin.config.meta.form',compact('oldData','pageData'));
+        return view('AppPlugin.ConfigMeta.form',compact('oldData','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

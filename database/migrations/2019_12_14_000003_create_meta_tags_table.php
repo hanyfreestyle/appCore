@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('meta_tags', function (Blueprint $table) {
+        Schema::create('config_meta_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('cat_id')->unique()->index();
             $table->string('photo')->nullable();
@@ -20,6 +20,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('meta_tags');
+        Schema::dropIfExists('config_meta_tags');
     }
 };

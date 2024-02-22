@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 04:51 PM
+-- Generation Time: Feb 22, 2024 at 12:55 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,14 +18,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `a_realestate_test2024`
+-- Database: `a_cart`
 --
 
 --
--- Dumping data for table `meta_tag_translations`
+-- Dumping data for table `config_meta_tag_translations`
 --
 
-INSERT INTO `meta_tag_translations` (`id`, `meta_tag_id`, `locale`, `g_title`, `g_des`) VALUES
+INSERT INTO `config_meta_tag_translations` (`id`, `meta_tag_id`, `locale`, `g_title`, `g_des`) VALUES
 (1, 1, 'ar', 'موقع عقارات مصر | وجهتك العقارية الأولى في مصر', 'موقع عقارات مصر الموقع العقاري الأول للكمبوندات والمنتجعات والمشاريع العقارية في مصر'),
 (2, 1, 'en', 'Real Estate Egypt | Egypt\'s #1 Real Estate Destination', 'Real Estate Egypt is the biggest real estate website in Egypt for compounds, resorts and commercial projects'),
 (3, 2, 'ar', 'المطورين العقاريين | موقع عقارات مصر', 'المطورين العقاريين  موقع عقارات مصر'),

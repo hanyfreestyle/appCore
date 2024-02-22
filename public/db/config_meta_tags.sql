@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2024 at 04:51 PM
+-- Generation Time: Feb 22, 2024 at 12:55 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,14 +18,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `a_realestate_test2024`
+-- Database: `a_cart`
 --
 
 --
--- Dumping data for table `meta_tags`
+-- Dumping data for table `config_meta_tags`
 --
 
-INSERT INTO `meta_tags` (`id`, `cat_id`, `photo`, `photo_thum_1`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `config_meta_tags` (`id`, `cat_id`, `photo`, `photo_thum_1`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'home', NULL, NULL, '2023-08-16 09:18:40', '2023-08-16 09:18:40', NULL),
 (2, 'developer', NULL, NULL, '2023-08-16 11:16:16', '2023-08-16 11:16:16', NULL),
 (3, 'blog', NULL, NULL, '2023-08-16 11:30:42', '2023-08-16 11:30:42', NULL),

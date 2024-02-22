@@ -10,7 +10,7 @@
 
                         <div class="col-lg-3 col-6 mb-3 text-center">
                             <div class="menu">
-                                <a href="{{route('page_compounds')}}">
+                                <a href="#">
                                     <i class="fa-regular fa-building"></i>
                                     <p> {{ __('web/err404.menu_1') }}</p>
                                 </a>
@@ -19,7 +19,7 @@
 
                         <div class="col-lg-3 col-6 mb-3 text-center">
                             <div class="menu">
-                                <a href="{{route('page_for_sale')}}">
+                                <a href="#">
                                     <i class="fa-solid fa-sitemap"></i>
                                     <p> {{ __('web/err404.menu_2') }}</p>
                                 </a>
@@ -28,7 +28,7 @@
 
                         <div class="col-lg-3 col-6 mb-3 text-center">
                             <div class="menu">
-                                <a href="{{route('page_blog')}}">
+                                <a href="#">
                                     <i class="fa-solid fa-rss"></i>
                                     <p> {{ __('web/err404.menu_3')}}</p>
                                 </a>
@@ -37,7 +37,7 @@
 
                         <div class="col-lg-3 col-6 mb-3 text-center">
                             <div class="menu">
-                                <a href="{{route('page_ContactUs')}}">
+                                <a href="#">
                                     <i class="fa-solid fa-phone-volume"></i>
                                     <p> {{__('web/err404.menu_4')}}</p>
                                 </a>

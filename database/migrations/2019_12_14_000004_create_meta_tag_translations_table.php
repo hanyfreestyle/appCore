@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('meta_tag_translations', function (Blueprint $table) {
+        Schema::create('config_meta_tag_translations', function (Blueprint $table) {
 
             $table->increments('id');
             $table->integer('meta_tag_id')->unsigned();
@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('g_title')->nullable();
             $table->text('g_des')->nullable();
             $table->unique(['meta_tag_id','locale']);
-            $table->foreign('meta_tag_id')->references('id')->on('meta_tags')->onDelete('cascade');
+            $table->foreign('meta_tag_id')->references('id')->on('config_meta_tags')->onDelete('cascade');
         });
     }
 
 
     public function down(): void
     {
-        Schema::dropIfExists('meta_tag_translations');
+        Schema::dropIfExists('config_meta_tag_translations');
     }
 };
