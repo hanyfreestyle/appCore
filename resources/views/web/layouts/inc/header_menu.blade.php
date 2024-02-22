@@ -6,16 +6,7 @@
                     <div class="menu-mobile-nav d-flex align-items-center justify-content-between py-3 py-lg-0 order-lg-2">
 
                         <ul class="list list-row gap-4 flex-wrap align-items-center order-1">
-                            <li class="d-xl-none">
-                                <div class="d-flex align-items-center gap-5">
-                                    <div class="header_search">
-                                        <form action="{{route('Search')}}" method="get">
-                                            <input type="text"  name="project_name" value="{{old('project_name',issetArr($_GET,"project_name"))}}" placeholder="{{__('web/layout.header_search')}}">
-                                            <button type="submit" aria-label="search" ><i class="fas fa-search"></i></button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
+
 
 
                             <x-site.contact.call-to-action-button :unit="null" view-type="TopMenu"  :config="$WebConfig" />
@@ -36,10 +27,6 @@
                     </div>
                     <ul class="list list-lg-row menu-nav order-lg-1">
                         <li class="menu-list {{activeMenu($pageView,'HomePage')}}"><a href="{{route('page_index')}}" class="link menu-link "> {{__('web/menu.main_home')}} </a> </li>
-                        <li class="menu-list {{activeMenu($pageView,'Compounds')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_compounds')) }}" class="link menu-link "> {!! __('web/menu.main_compounds')!!} </a></li>
-                        <li class="menu-list {{activeMenu($pageView,'Blog')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_blog')) }}" class="link menu-link "> {{__('web/menu.main_blog')}} </a> </li>
-                        <li class="menu-list {{activeMenu($pageView,'ForSale')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_for_sale')) }}" class="link menu-link "> {{__('web/menu.main_for_sale')}} </a> </li>
-                        <li class="menu-list {{activeMenu($pageView,'Developers')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_developers')) }}" class="link menu-link ">{{__('web/menu.main_developer')}}  </a> </li>
                         <li class="menu-list {{activeMenu($pageView,'Contact')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_ContactUs')) }}" class="link menu-link "> {{__('web/menu.main_contatc_us')}} </a> </li>
                     </ul>
                 </nav>

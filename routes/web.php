@@ -1,13 +1,5 @@
 <?php
-
-use App\Http\Controllers\web\BlogsViewController;
-use App\Http\Controllers\web\DevelopersViewController;
-use App\Http\Controllers\web\ListingsListController;
-use App\Http\Controllers\web\LocationsViewController;
 use App\Http\Controllers\web\MainPagesViewController;
-use App\Http\Controllers\web\PagesViewController;
-use App\Http\Controllers\web\ProjectViewController;
-use App\Http\Controllers\web\SearchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -34,8 +26,6 @@ Route::group(['middleware' => ['UnderConstruction','MinifyHtml']], function() {
 Route::group(['middleware' => ['UnderConstruction','MinifyHtml','localeSessionRedirect']], function() {
     Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
 
-        Route::get('/search', [SearchController::class, 'Search'])->name('Search');
-
 
         Route::get('/contact-us', [MainPagesViewController::class, 'ContactUs'])->name('page_ContactUs');
         Route::post('/contact/SaveForm', [MainPagesViewController::class, 'ContactSaveForm'])->name('ContactSaveForm');
@@ -49,26 +39,8 @@ Route::group(['middleware' => ['UnderConstruction','MinifyHtml','localeSessionRe
         Route::get('/Meeting/request', [MainPagesViewController::class, 'RequestListingView'])->name('MeetingRequestPage');
         Route::get('/favorite-listing', [MainPagesViewController::class, 'FavoriteListing'])->name('FavoriteListing');
 
-        Route::get('/listings/{type}', [PagesViewController::class, 'ListingPageView'])->name('page_ListingPageView');
 
-        Route::get('/developers', [DevelopersViewController::class, 'DevelopersList'])->name('page_developers');
-        Route::get('/developers/{slug}', [DevelopersViewController::class, 'DeveloperView'])->name('page_developer_view');
-
-        Route::get('/blog', [BlogsViewController::class, 'BlogList'])->name('page_blog');
-        Route::get('/blog/{catSlug}', [BlogsViewController::class, 'BlogCatList'])->name('page_blogCatList');
-        Route::get('/blog/{catSlug}/{postSlug}', [BlogsViewController::class, 'BlogView'])->name('page_blogView');
-
-        Route::get('/compounds', [ListingsListController::class, 'CompoundsList'])->name('page_compounds');
-        Route::get('/for-sale', [ListingsListController::class, 'ForSaleList'])->name('page_for_sale');
-
-        Route::get('/{listingid}', [ProjectViewController::class, 'ListView'])
-            ->name('page_ListView')->where('listingid','^(\d+)+-+[^\/]+$');
-
-        Route::get('{slug}', [LocationsViewController::class, 'LocationView'])
-            ->name('page_locationView')->where('slug', '(.*)');
 
     });
 });
 
-
-//Route::fallback(RouteNotFoundController::class);

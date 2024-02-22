@@ -76,13 +76,13 @@
             </div>
 
             <div class="sticky-info">
-                <a href="{{ LaravelLocalization::localizeUrl(route('page_compounds')) }}" class="sticky_a  @if($pageView['SelMenu'] == 'Compounds') sticky_active @endif ">
+                <a href="#" class="sticky_a  @if($pageView['SelMenu'] == 'Compounds') sticky_active @endif ">
                     <i class="fa-solid fa-building"></i>
                     {{ __('web/menu.sticky_project')}}
                 </a>
             </div>
             <div class="sticky-info">
-                <a  href="{{ LaravelLocalization::localizeUrl(route('page_for_sale')) }}" class="sticky_a @if($pageView['SelMenu'] == 'ForSale') sticky_active @endif">
+                <a  href="@" class="sticky_a @if($pageView['SelMenu'] == 'ForSale') sticky_active @endif">
                     <i class="fa-regular fa-sitemap"></i>
                     {{ __('web/menu.sticky_units') }}
                 </a>
@@ -112,10 +112,6 @@
     <h3 class="nav01">x</h3>
     <ul>
         <li class="menu-list {{activeMenu($pageView,'HomePage')}}"><a href="{{route('page_index')}}" class="link menu-link "> {{__('web/menu.main_home')}} </a> </li>
-        <li class="menu-list {{activeMenu($pageView,'Compounds')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_compounds')) }}" class="link menu-link "> {!! __('web/menu.main_compounds')!!} </a></li>
-        <li class="menu-list {{activeMenu($pageView,'Blog')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_blog')) }}" class="link menu-link "> {{__('web/menu.main_blog')}} </a> </li>
-        <li class="menu-list {{activeMenu($pageView,'ForSale')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_for_sale')) }}" class="link menu-link "> {{__('web/menu.main_for_sale')}} </a> </li>
-        <li class="menu-list {{activeMenu($pageView,'Developers')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_developers')) }}" class="link menu-link ">{{__('web/menu.main_developer')}}  </a> </li>
         <li class="menu-list {{activeMenu($pageView,'Contact')}} "><a href="{{ LaravelLocalization::localizeUrl(route('page_ContactUs')) }}" class="link menu-link "> {{__('web/menu.main_contatc_us')}} </a> </li>
     </ul>
 </nav>

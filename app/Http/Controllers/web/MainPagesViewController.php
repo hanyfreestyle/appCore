@@ -33,15 +33,6 @@ class MainPagesViewController extends WebMainController{
         );
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     FavoriteListing
-    public function FavoriteListing(){
-        $pageView = $this->pageView ;
-        $pageView['SelMenu'] = '' ;
-        $Meta = parent::getMeatByCatId('favorite_list');
-        parent::printSeoMeta($Meta);
-        return view('web.favorite')->with(['pageView'=>$pageView]);
-    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
