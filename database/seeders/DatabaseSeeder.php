@@ -2,27 +2,6 @@
 
 namespace Database\Seeders;
 
-
-use Database\Seeders\admin\AmenitySeeder;
-use Database\Seeders\admin\AmenityTranslationSeeder;
-use Database\Seeders\admin\CategorySeeder;
-use Database\Seeders\admin\CategoryTranslationSeeder;
-use Database\Seeders\admin\DeveloperPhotoSeeder;
-use Database\Seeders\admin\DeveloperSeeder;
-use Database\Seeders\admin\DeveloperTranslationSeeder;
-use Database\Seeders\admin\ListingPhotoSeeder;
-use Database\Seeders\admin\ListingSeeder;
-use Database\Seeders\admin\ListingTranslationSeeder;
-use Database\Seeders\admin\LocationSeeder;
-use Database\Seeders\admin\LocationTranslationSeeder;
-use Database\Seeders\admin\PageSeeder;
-use Database\Seeders\admin\PageTranslationSeeder;
-use Database\Seeders\admin\PostPhotoSeeder;
-use Database\Seeders\admin\PostSeeder;
-use Database\Seeders\admin\PostTranslationSeeder;
-use Database\Seeders\admin\QuestionSeeder;
-use Database\Seeders\admin\QuestionTranslationSeeder;
-use Database\Seeders\admin\UpdateCountSeeder;
 use Database\Seeders\data\ContactUsFormSeeder;
 use Database\Seeders\data\CountrySeeder;
 use Database\Seeders\data\CountryTranslationSeeder;
@@ -62,32 +41,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CountryTranslationSeeder::class);
         $this->call(NewsLetterSeeder::class);
         $this->call(ContactUsFormSeeder::class);
-
-//        $this->call(AmenitySeeder::class);
-//        $this->call(AmenityTranslationSeeder::class);
-//
-//        $this->call(CategorySeeder::class);
-//        $this->call(CategoryTranslationSeeder::class);
-//        $this->call(LocationSeeder::class);
-//        $this->call(LocationTranslationSeeder::class);
-//
-//        $this->call(DeveloperSeeder::class);
-//        $this->call(DeveloperTranslationSeeder::class);
-//        $this->call(DeveloperPhotoSeeder::class);
-//
-//        $this->call(ListingSeeder::class);
-//        $this->call(ListingTranslationSeeder::class);
-//        $this->call(ListingPhotoSeeder::class);
-//        $this->call(QuestionSeeder::class);
-//        $this->call(QuestionTranslationSeeder::class);
-//
-//        $this->call(PostSeeder::class);
-//        $this->call(PostTranslationSeeder::class);
-//        $this->call(PostPhotoSeeder::class);
-//
-//        $this->call(PageSeeder::class);
-//        $this->call(PageTranslationSeeder::class);
-//        $this->call(UpdateCountSeeder::class);
 
 
     }
