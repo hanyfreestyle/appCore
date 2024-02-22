@@ -1,0 +1,236 @@
+body{font-family: 'Poppins', sans-serif!important; font-size:18px;font-display: swap!important;}
+.breadcrumb i{font-size:13px;line-height:14px!important;}
+.breadcrumb-item + .breadcrumb-item::before{font-size: 15px!important;  float:left;content:"\f101";padding-right:0!important;margin-left:0!important;padding-left:3px;margin-right:3px!important}
+.breadcrumb{font-size:15px!important;list-style:none;line-height:20px;margin-top:10px!important;}
+.fav_icon_number {top: 12px;right: 3px;}
+.lang_menu{position: absolute;right:15px!important;}
+.fav_menu{position: absolute;right:60px!important;}
+.menu_call_icon{position: absolute;right:5px!important;}
+.menu_whatsapp_icon{position: absolute;right:55px!important;}
+.menu-list a{ font-size: 16px;}
+.header_search input[type="text"]{padding:8px 40px 8px 15px;font-size:14px}
+.header_search button[type="submit"]{left:auto;right:10px}
+.header_search input[type="text"]:focus{outline:0!important}
+.err404_h2{font-size: 20px;}
+.err404_menu .menu p{ font-size:14px;}
+.footer_text{font-size: 17px; line-height: 25px}
+.newsletter_text{font-size: 15px;}
+
+.footer_copy_right p{font-size:14px; font-weight: normal!important;}
+.footer_copy_right .footerYears{font-size: 14px;}
+
+.Featured_Projects_Scroll{
+    padding-left: 0!important;
+    padding-right: 10px!important;
+}
+
+.Featured_Projects_Scroll a{
+    font-size: 17px;
+    margin-left:0!important;
+    margin-right: 8px;
+
+}
+
+.Home_h2 h2{font-size: 30px!important;}
+.Home_h2 p{font-size: 18px;line-height: 30px;}
+.location_card_name{font-size:22px}
+.location_card_project{font-size:17px}
+.location_card_units{font-size:17px}
+.location_card_project .En_Font,.location_card_units .En_Font{font-size:15px}
+.location_card_icon{right: 20px!important; left: auto}
+.home_developer_name{font-size: 16px;}
+
+.header_search input::placeholder{ color: rgba(0,0,0,.6); opacity: 1; font-size: 14px; font-weight: bold}
+.sticky-navbar .sticky-info .sticky_a {font-size:13px!important; font-weight: bold!important;}
+
+.NewsSlider_text h3{
+    font-size: 18px;
+    line-height: 30px;
+    height: 60px;
+}
+.NewsSlider_text p{
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.h1_def{font-size: 25px!important; font-weight: bold}
+.h1_def_en{
+    font-size: 28px!important;
+}
+.def_h2_out{font-size:22px!important; font-weight: normal!important; }
+.def_h2_blocks{font-size:25px;}
+
+.FS_16{font-size: 15px!important;}
+.FS_17{font-size: 16px!important;}
+.FS_18{font-size: 17px!important;}
+.FS_19{font-size: 18px!important;}
+.FS_20{font-size: 19px!important;}
+.FS_21{font-size: 20px!important;}
+.FS_22{font-size: 21px!important;}
+.FS_23{font-size: 22px!important;}
+.FS_24{font-size: 23px!important;}
+
+
+.blog_li h2{font-size: 20px;}
+.blog_li p{font-size: 16px;}
+.blog_li .read_more a{float: right;font-size: 16px!important;}
+.blog_category_list a{font-size: 16px!important;}
+
+
+
+
+.developer_col h2{font-size:18px}
+.icons_line .number{font-size:12px!important;text-align:right}
+.icons_line .title{text-align:left;font-size:14px;font-weight:700}
+
+
+
+.property_type_name{
+    font-size:13px!important;
+    font-weight: bold;
+}
+.property-card__content .distance_name a{
+    font-size:16px!important;
+}
+.units_li_text{
+    font-size: 15px;
+    font-weight: bold;
+
+}
+.units_li_text .En_Font{
+    font-size: 13px;
+    font-weight: bold;
+
+}
+
+.BlogView h1{font-size: 24px;}
+.property-card__content .distance_name a{font-size: 16px!important;}
+.property-card__content h3{font-size:20px;}
+.units_li li{border-left:none;border-right: 1px solid rgba(0,0,0,.1);}
+.units_li li:last-child{border-left:none;border-right:none;}
+.amenity_list_li{ font-size: 16px;}
+.youtube_play_but {line-height:1px;}
+.youtube_play_but i {font-size:27px;}
+.google_view_but {line-height:1px;}
+.google_view_but i {font-size:27px;}
+.card_fa_location{margin-left: 0; margin-right: 7px;}
+
+/*
+.ButDivCon .show_text_but,.ButDivCon .hide_text_but{float:right}
+.ButDivCon .show-more{float:right}
+
+.listing_card_content .project_type{
+    font-size: 14px!important;
+    color: #fff;
+}
+
+.listing_card_content .project_price{
+    font-size: 17px!important;
+}
+
+.listing_card_content .project_name{
+    font-size: 20px!important;
+    font-weight:normal!important;
+    line-height: 30px;
+    width: 100%!important;
+    margin-bottom: 20px!important;
+    min-height: 50px;
+}
+.listing_card_content .project_locationName{
+    font-size: 14px;
+    font-weight: normal!important;
+    display:inline-block;
+    width:130px!important;
+    text-overflow:ellipsis;white-space:nowrap;overflow:hidden
+}
+
+.DeveloperSide h3{
+    font-size: 20px!important;
+    font-weight: bold;
+
+}
+
+.RightSide_Blog .h1_name{
+    font-size: 17px!important;
+    color: var(--h1Color);
+}
+
+.RightSide_Blog .published_at{
+    font-size: 15px;
+    margin-top: 5px;
+    color: var(--textColor);
+}
+
+.sticky-navbar .sticky-info a {
+    font-family: 'Poppins', sans-serif!important;
+    font-size:12px;
+    letter-spacing: .5px;
+}
+.sticky_a_call{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+
+*/
+.faq_question{font-size:16px!important; font-weight: bold!important; }
+.ProjectViewInfo .pro_info {
+    font-size:15px;
+    color:rgba(0,0,0,.7)!important
+}
+
+.ProjectViewInfo .pro_info a {
+    color:rgba(0,0,0,.7)!important;
+    font-size:15px;
+}
+
+
+.contactPage h1{font-size:25px}
+.contactPage p{font-size:15px ; padding: 1px 20px}
+.ThanksPage h1{font-size:35px;line-height:50px}
+.ThanksPage p{font-size:18px;line-height:35px}
+.contactForm h2{font-size:18px}
+.contactForm input{font-size:15px; height: 50px}
+.contactForm textarea{font-size:15px}
+.contactForm .send_but{font-size:15px;float:right}
+.send_but_onpage{font-size: 14px!important;}
+.invalid-feedback strong{font-size:12px}
+.contact_us_but h3{font-size:20px;font-weight:700!important}
+.contact_us_but .span_info{font-size:16px}
+.invalid_feedback_Div{font-size: 12px; margin-top: 5px;}
+
+
+
+.rightSearchBox .SearchSelect{background-position: right .50rem center;}
+.home_search .homeSelect{ background-position: right .05rem center;}
+.rightSearchBox h4{ font-size: 25px;}
+.rightSearchBox .btn_serach{ float: right;font-size: 18px;}
+.rightSearchBox .btn_serach i{font-size: 15px;}
+.rightSearchBox label{font-weight: bold!important; font-size: 15px;}
+.rightSearchBox .SearchSelect{font-size: 15px;}
+.SearchSelect option  {font-size:15px;}
+
+.scroll-nav {
+    display: none;
+}
+@media (min-width: 1220px) {
+    .scroll-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        inset-inline-start: 50%;
+        inset-block-end: 2rem;
+        transform: translateX(-50%);
+    }
+}
+
+.FeaturedLocationsHome a{
+    font-size:18px;
+    color: hsl(var(--neutral-700));
+}
+
+.FeaturedLocationsHome a:hover{
+    color:  hsl(var(--primary-300))!important;
+}

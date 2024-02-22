@@ -1,0 +1,25 @@
+.header-top{padding-top:20px;padding-bottom:20px}
+.top_header_logo{max-width:230px;height: auto;}
+.mobile_logo{max-width:230px;height: auto;}
+.list_divider_2 .descMenu{padding-right:15px}
+.list_divider_2 .descMenu .text_span{font-size:15px;font-weight:400!important}
+.list_divider_2 .descMenu .text_link{font-family:'Poppins',sans-serif!important;font-size:13px}
+.phone_in_talk{color:#fff;font-weight:400!important;font-size:17px}
+.whatsapp_icon{color:#fff;font-weight:400;font-size:22px;line-height:50px}
+.mark_as_unread{font-weight:400;font-size:20px}
+.language{font-weight:400;font-size:20px}
+.favorite_icon{font-weight:400;font-size:20px}
+.fav_icon_red{color:red}
+.header_search{position:relative}
+.header_search input[type="text"]{border:1px solid #ddd;border-radius:25px;padding:8px 15px 8px 40px;font-size:15px;width:245px}
+.header_search button[type="submit"]{position:absolute;left:10px;top:6px;border:none;margin:0; color: rgba(0,0,0,.6);background:none}
+.menu-list a{ font-size:20px;}
+.header_search input::placeholder{ color: rgba(0,0,0,.6); opacity: 1; font-size: 15px}
+
+
+
+
+
+
+
+

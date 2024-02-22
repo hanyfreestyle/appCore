@@ -1,0 +1,46 @@
+body{font-family: 'Aljazeera', sans-serif!important; font-size:20px;font-display: swap!important;}
+.lang_menu{position: absolute;left:15px!important;}
+.fav_menu{position: absolute;left:60px!important;}
+.menu_call_icon{position: absolute;left:5px!important;}
+.menu_whatsapp_icon{position: absolute;left:55px!important;}
+
+.faq_container .accordion-button {
+    text-align: right;
+}
+.faq_container .accordion-button::after {
+    margin-right: auto!important;
+    margin-left: unset!important;
+}
+.rightSearchBox .SearchSelect{background-position: left .50rem center;}
+.home_search .homeSelect{ background-position: left .05rem center;}
+
+.scroll-nav {
+    display: none;
+}
+@media (min-width: 1220px) {
+    .scroll-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        inset-inline-end: 50%;
+        inset-block-end: 3rem;
+        transform: translateX(-50%);
+    }
+}
+
+.FeaturedLocationsHome a{
+    font-size: 22px;
+    color: hsl(var(--neutral-700));
+}
+
+.FeaturedLocationsHome a:hover{
+    color:  hsl(var(--primary-300))!important;
+
+
+}
+
+
+
+
+

@@ -1,0 +1,163 @@
+.list-disc {
+    list-style: disc;
+    -webkit-padding-start: 1rem;
+    padding-inline-start: 1rem;
+}
+
+.list-divider>li+li {
+    -webkit-padding-start: 1rem;
+    padding-inline-start: 1rem;
+    -webkit-margin-start: 1rem;
+    margin-inline-start: 1rem;
+    position: relative;
+    isolation: isolate;
+}
+.list-divider>li+li::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 70%;
+    background-color: hsl(var(--neutral-50));
+}
+.list-divider-half>li+li {
+    -webkit-padding-start: 1rem;
+    padding-inline-start: 1rem;
+    -webkit-margin-start: 1rem;
+    margin-inline-start: 1rem;
+    position: relative;
+    isolation: isolate;
+}
+.list-divider-half>li+li::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 45%;
+    background-color: hsl(var(--neutral-50));
+}
+.list-divider-half-xs>li+li {
+    -webkit-padding-start: 0.5rem;
+    padding-inline-start: 0.5rem;
+    -webkit-margin-start: 0.5rem;
+    margin-inline-start: 0.5rem;
+    position: relative;
+    isolation: isolate;
+}
+.list-divider-half-xs>li+li::before {
+    content: "";
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 50%;
+    background-color: hsl(var(--neutral-500));
+}
+@media (min-width: 768px) {
+    .list-divider-dot>li+li {
+        -webkit-padding-start: 1.5rem;
+        padding-inline-start: 1.5rem;
+        -webkit-margin-start: 1.5rem;
+        margin-inline-start: 1.5rem;
+        position: relative;
+        isolation: isolate;
+    }
+    .list-divider-dot>li+li::before {
+        content: "";
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: 0;
+        transform: translateY(-50%);
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background-color: hsl(var(--primary-300));
+    }
+}
+@media (min-width: 992px) {
+    .list-divider-dot>li+li {
+        -webkit-padding-start: 3.25rem;
+        padding-inline-start: 3.25rem;
+        -webkit-margin-start: 3.25rem;
+        margin-inline-start: 3.25rem;
+    }
+}
+@media (min-width: 1200px) {
+    .list-divider-dot>li+li {
+        -webkit-padding-start: 1.5rem;
+        padding-inline-start: 1.5rem;
+        -webkit-margin-start: 1.5rem;
+        margin-inline-start: 1.5rem;
+    }
+}
+@media (min-width: 1400px) {
+    .list-divider-dot>li+li {
+        -webkit-padding-start: 2.75rem;
+        padding-inline-start: 2.75rem;
+        -webkit-margin-start: 2.75rem;
+        margin-inline-start: 2.75rem;
+    }
+}
+@media (min-width: 768px) {
+    .list-divider-dot-sm>li+li {
+        -webkit-padding-start: 1.5rem;
+        padding-inline-start: 1.5rem;
+        -webkit-margin-start: 1.5rem;
+        margin-inline-start: 1.5rem;
+        position: relative;
+        isolation: isolate;
+    }
+    .list-divider-dot-sm>li+li::before {
+        content: "";
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: 0;
+        transform: translateY(-50%);
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background-color: hsl(var(--primary-300));
+    }
+}
+@media (min-width: 992px) {
+    .list-divider-dot-sm>li+li {
+        -webkit-padding-start: 3.25rem;
+        padding-inline-start: 3.25rem;
+        -webkit-margin-start: 3.25rem;
+        margin-inline-start: 3.25rem;
+    }
+}
+@media (min-width: 1200px) {
+    .list-divider-dot-sm>li+li {
+        -webkit-padding-start: 1.5rem;
+        padding-inline-start: 1.5rem;
+        -webkit-margin-start: 1.5rem;
+        margin-inline-start: 1.5rem;
+    }
+}
+@media (min-width: 768px) {
+    .list-divider-dot-xsm>li+li {
+        -webkit-padding-start: 1.25rem;
+        padding-inline-start: 1.25rem;
+        -webkit-margin-start: 1.25rem;
+        margin-inline-start: 1.25rem;
+        position: relative;
+        isolation: isolate;
+    }
+    .list-divider-dot-xsm>li+li::before {
+        content: "";
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: 0;
+        transform: translateY(-50%);
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background-color: hsl(var(--primary-300));
+    }
+}

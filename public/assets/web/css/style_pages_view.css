@@ -1,0 +1,30 @@
+.pages_link_list{
+    padding: 0!important;
+    list-style: none;
+}
+.pages_link_list li{
+    font-size: 20px;
+    margin-bottom: 5px;
+
+
+}
+
+.pages_link_list li a{
+    color: var(--h1Color)!important;
+
+
+}
+
+.pages_link_list li a:hover{
+    color:var(--linkColor)!important;
+
+
+}
+
+.pages_link_list_h{
+    font-size: 30px;
+    font-weight: normal;
+
+}
+
+

@@ -1,0 +1,97 @@
+.start_from{font-size: 14px; font-weight: bold}
+.property-gallery-slider__btn {
+    top:45%!important
+}
+
+.Pro_Slider_Old {
+    text-align:center;
+    height:360px;
+    overflow:hidden
+}
+
+.Pro_Slider_Old img {
+    width:100%;
+    height:auto;
+    min-height:100%
+}
+
+@media (max-width:1400px) {
+    .Pro_Slider_Old {
+        height:270px
+    }
+}
+
+.ProjectViewInfo .pro_type {
+    font-size:18px
+}
+
+.ProjectViewInfo h1 {
+    font-size:24px;
+    font-weight:400!important;
+    line-height:35px;
+    color:var(--h1Color)
+}
+
+.ProjectViewInfo .iconColor {
+    font-size: 15px;
+    color:rgba(0,0,0,.7)!important
+}
+
+.ProjectViewInfo .pro_info {
+    font-size:18px;
+    color:rgba(0,0,0,.7)!important
+}
+
+.ProjectViewInfo .pro_info a {
+    color:rgba(0,0,0,.7)!important;
+    font-size:18px;
+}
+
+.ProjectViewInfo .pro_info a:hover {
+    color:var(--linkColor)!important;
+
+
+}
+
+.faq_container .accordion-button {
+    font-weight:600;
+    font-size:16px!important;
+    line-height:30px;
+    padding-right:25px;
+    padding-left:25px
+}
+
+.faq_question {
+    font-size:22px!important;
+    line-height:30px;
+    font-weight:400!important
+}
+
+.ListingViewInfo .pro_type {
+    font-size:18px
+}
+
+.ListingViewInfo h1 {
+    font-size:24px;
+    font-weight:400!important;
+    line-height:35px;
+    color:var(--h1Color)
+}
+
+.ListingViewInfo_Social i {
+    font-size:14px
+}
+
+.ListingViewInfo .iconColor {
+    color:rgba(0,0,0,.7)!important
+}
+
+.ListingViewInfo .pro_info {
+    font-size:18px;
+    color:rgba(0,0,0,.7)!important
+}
+
+.ListingViewInfo .pro_info a {
+    font-size:18px;
+    color:rgba(0,0,0,.7)!important
+}

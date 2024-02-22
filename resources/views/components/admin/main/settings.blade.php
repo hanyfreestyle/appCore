@@ -1,0 +1,50 @@
+<form class="mainForm pb-0" action="{{route('config.model.update')}}" method="post">
+    @csrf
+    <input type="hidden" value="{{$modelname}}" name="model_id">
+    <input type="hidden" value="{{$PrefixRoute}}" name="PrefixRoute">
+    <div class="row">
+        <input type="hidden" value="{{$modelname}}" name="model_id">
+
+        <x-admin.form.input label="{{__('admin/config/settings.set_perpage')}}" name="{{$modelname}}_perpage" :requiredSpan="true" colrow="col-lg-3" dir="ar"
+                      value="{{old($modelname.'_perpage',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_perpage',10))}}" inputclass="dir_ar" />
+
+        @if($datatable)
+            <x-admin.form.select-arr   label="{{__('admin/config/settings.set_datatable')}}" name="{{$modelname}}_datatable" colrow="col-lg-3"
+                                sendvalue="{{old($modelname.'_datatable',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_datatable',1))}}" select-type="selActive"/>
+        @else
+            <input type="hidden" value="0" name="{{$modelname}}_datatable">
+        @endif
+
+        @if($editor)
+            <x-admin.form.select-arr   label="{{ __('admin/config/settings.set_editor') }}" name="{{$modelname}}_editor" colrow="col-lg-3"
+                                sendvalue="{{old($modelname.'_editor',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_editor',0))}}" select-type="selActive"/>
+        @else
+            <input type="hidden" value="0" name="{{$modelname}}_editor">
+        @endif
+
+
+        @if($orderby)
+            <x-admin.form.select-arr   label="{{__('admin/config/settings.set_orderby')}}" name="{{$modelname}}_orderby" colrow="col-lg-3" :send-arr="$OrderByArr"
+                                sendvalue="{{old($modelname.'_orderby',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_orderby',0))}}" select-type="normal"/>
+        @else
+            <input type="hidden" value="{{$orderbyDef}}" name="{{$modelname}}_orderby">
+        @endif
+
+        @if($filterid)
+            <x-admin.form.select-arr   label="{{ __('admin/config/settings.set_filter_id') }}" name="{{$modelname}}_filterid" colrow="col-lg-3"
+                                sendvalue="{{old($modelname.'_filterid',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_filterid',0))}}" :send-arr="$filterTypes"/>
+        @endif
+
+        @if($morePhotoFilterid)
+            <x-admin.form.select-arr   label="{{ __('admin/config/settings.set_filter_filter_more_photo') }}" name="{{$modelname}}_morephoto_filterid" colrow="col-lg-3"
+                                sendvalue="{{old($modelname.'_morephoto_filterid',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_morephoto_filterid',0))}}" :send-arr="$filterTypes"/>
+        @endif
+
+        {{$slot}}
+    </div>
+    @if(isset($pageData['ModelId']))
+        <input type="hidden" name="ModelId" value="{{$pageData['ModelId']}}">
+    @endif
+
+    <x-admin.form.submit-role-back :page-data="$pageData" />
+</form>

@@ -1,0 +1,55 @@
+.project_side_bar .img_div {
+    height:275px!important;
+    overflow:hidden
+}
+
+.project_side_bar .img_div img {
+    width:100%;
+    height:100%;
+    -o-object-fit:cover;
+    object-fit:cover
+}
+
+.project_side_bar_home .img_div {
+    height:580px!important;
+    overflow:hidden
+}
+
+.project_side_bar_home .img_div img {
+    width:100%;
+    height:100%;
+    -o-object-fit:cover;
+    object-fit:cover
+}
+
+.listing_card_content .project_type {
+    font-size:16px!important;
+    color:#fff
+}
+
+.listing_card_content .project_price {
+    font-size:20px!important
+}
+
+.listing_card_content .project_name {
+    font-size:23px!important;
+    font-weight:400!important;
+    line-height:30px;
+    width:100%!important;
+    margin-bottom:20px!important;
+    min-height:50px
+}
+
+.listing_card_content .project_locationName {
+    font-size:16px;
+    font-weight:400!important;
+    display:inline-block;
+    width:130px!important;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden
+}
+
+.project_price_span {
+    font-size:16px
+}
