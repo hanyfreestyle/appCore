@@ -3,18 +3,10 @@
 $MenuView = [
 //    'Permissions'=>false,
 //    'Update'=>false,
-//    'Broken'=>false,
 //    'Data'=>false,
 //    'AdminLang'=>false,
 //    'WebLang'=>false,
 //    'Setting'=>false,
-//    'Developer'=>false,
-//    'Amenity'=>false,
-//    'Location'=>false,
-//    'Pages'=>false,
-//    'BlogPost'=>false,
-//    'Project'=>false,
-//    'ForSale'=>false,
 //    'LeadsFrom'=>false,
 ];
 
@@ -33,85 +25,6 @@ $MenuView = [
                 ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_conatct','url'=> 'LeadsFrom.ContactUs.index','sel_routs'=> 'ContactUs','icon'=>'fas fa-mail-bulk'],
             ],
         ],  #LeadsFrom
-        [
-            'view'=>IsMenuView($MenuView,"Project"),
-            'sel_routs'=>'project',
-            'type'=>'one',
-            'text'=> 'admin/menu.project',
-            'url'=> 'project.index',
-            'icon'=>'fas fa-building',
-            'roleView'=>'project_view',
-        ],  #Project
-        [
-            'view'=>IsMenuView($MenuView,"ForSale"),
-            'sel_routs'=>'ForSale',
-            'type'=>'one',
-            'text'=> 'admin/menu.unit',
-            'url'=> 'ForSale.index',
-            'icon'=>'fas fa-bath',
-            'roleView'=>'forSale_view',
-        ],  #ForSale
-        [
-            'view'=> IsMenuView($MenuView,"Amenity"),
-            'sel_routs'=>'amenity',
-            'type'=>'one',
-            'text'=> 'admin/menu.amenity',
-            'url'=> 'amenity.index',
-            'icon'=>'fas fa-swimming-pool',
-            'roleView'=>'amenity_view',
-        ],  #Amenity
-        [
-            'view'=>IsMenuView($MenuView,"Location"),
-            'sel_routs'=>'location',
-            'type'=>'one',
-            'text'=> 'admin/menu.location',
-            'url'=> 'location.index',
-            'icon'=>'fas fa-map-marker-alt',
-            'roleView'=>'location_view',
-        ],  #Location
-        [
-            'view'=>IsMenuView($MenuView,"Developer"),
-            'sel_routs'=>'developer',
-            'type'=>'one',
-            'text'=> 'admin/menu.developer',
-            'url'=> 'developer.index',
-            'icon'=>'fas fa-truck-monster',
-            'roleView'=>'developer_view',
-        ],  #Developer
-        [
-            'view'=>IsMenuView($MenuView,"Pages"),
-            'sel_routs'=>'pages',
-            'type'=>'one',
-            'text'=> 'admin/menu.pages',
-            'url'=> 'pages.index',
-            'icon'=>'fab fa-html5',
-            'roleView'=>'pages_view',
-        ],  #Pages
-        [
-            'view'=>IsMenuView($MenuView,"BlogPost"),
-            'sel_routs'=>'Blog',
-            'type'=>'many',
-            'text'=> 'admin/menu.post',
-            'icon'=>'fas fa-rss-square',
-            'roleView'=>'post_view',
-            'submenu'=>[
-                [
-                    'sel_routs'=> 'category',
-                    'url'=> 'Blog.category.index',
-                    'roleView'=>'post_view',
-                    'text'=> 'admin/menu.category',
-                    'icon'=>'fas fa-sitemap'
-                ],
-                [
-                    'sel_routs'=> 'post',
-                    'url'=> 'Blog.post.index',
-                    'roleView'=>'post_view',
-                    'text'=> 'admin/menu.post',
-                    'icon'=>'fab fa-blogger-b'
-                ],
-
-            ],
-        ],  #BlogPost
         [
             'view'=> IsMenuView($MenuView,"Permissions"),
             'sel_routs'=>'users',
