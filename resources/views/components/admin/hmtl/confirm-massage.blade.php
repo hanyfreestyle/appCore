@@ -41,11 +41,11 @@
         </div>
     </div>
 @elseif(Session::has('confirmException'))
-    <div class="col-lg-12">
-        <div class="alert alert-danger alert-dismissible">
-            {!! __('admin/alertMass.confirm_exception') !!}
-            <x-admin.realestate.delete-mass-info/>
-        </div>
-    </div>
+{{--    <div class="col-lg-12">--}}
+{{--        <div class="alert alert-danger alert-dismissible">--}}
+{{--            {!! __('admin/alertMass.confirm_exception') !!}--}}
+{{--            <x-admin.realestate.delete-mass-info/>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endif
 

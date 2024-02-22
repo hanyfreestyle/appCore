@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\AdminMainController;
 use App\Helpers\PDF;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 class DashboardController extends AdminMainController{
@@ -32,6 +33,9 @@ class DashboardController extends AdminMainController{
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # Home
     public function Dashboard(){
+        $Lang =  LaravelLocalization::getCurrentLocale() ;
+
+
         return view('admin.dashbord');
     }
 

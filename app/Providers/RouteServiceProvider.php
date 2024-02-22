@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\RouteNotFoundController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -35,12 +36,14 @@ class RouteServiceProvider extends ServiceProvider{
                         Route::middleware('web')->group(base_path('routes/AppPlugin/configMeta.php'));
                         Route::middleware('web')->group(base_path('routes/admin_config.php'));
                         Route::middleware('web')->group(base_path('routes/admin_roles.php'));
+
                     });
                 });
+
             });
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+            Route::middleware('web')->group(base_path('routes/web.php'));
+            Route::fallback(RouteNotFoundController::class);
         });
 
     }

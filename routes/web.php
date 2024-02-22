@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\RouteNotFoundController;
 use App\Http\Controllers\web\MainPagesViewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +45,6 @@ Route::group(['middleware' => ['UnderConstruction','MinifyHtml','localeSessionRe
 
     });
 });
+
+
 
