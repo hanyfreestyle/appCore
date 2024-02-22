@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
 
     'admin_lang' =>[
         'ar'=>'العربية',

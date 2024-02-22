@@ -35,7 +35,7 @@ class SchemaTools {
 
         $this->WebConfig = WebMainController::getWebConfig($this->StopeCash);
         $this->DefPhotoList = WebMainController::getDefPhotoList($this->StopeCash);
-        $this->amenities =  WebMainController::CashAmenityList($this->StopeCash);
+//        $this->amenities =  WebMainController::CashAmenityList($this->StopeCash);
 
     }
 

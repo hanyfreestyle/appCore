@@ -3,7 +3,6 @@
 use App\AppPlugin\SiteMap\SiteMapController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/config/SiteMap', [SiteMapController::class, 'index'])->name('config.SiteMap.index');
 Route::post('/config/UpdateDeveloper', [SiteMapController::class, 'UpdateDeveloper'])->name('config.SiteMap.UpdateDeveloper');
 Route::post('/config/UpdateBlog', [SiteMapController::class, 'UpdateBlog'])->name('config.SiteMap.UpdateBlog');

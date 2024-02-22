@@ -1,6 +1,5 @@
 <?php
 
-use App\AppPlugin\ConfigMeta\MetaTagController;
 use App\Http\Controllers\admin\config\DefPhotoController;
 use App\Http\Controllers\admin\config\LangFileController;
 use App\Http\Controllers\admin\config\LangFileWebController;
@@ -23,17 +22,6 @@ Route::post('/weblang/updateFile',[LangFileWebController::class,'updateFile'])->
 
 Route::get('/config/webConfig', [SettingsController::class, 'webConfigEdit'])->name('config.web.index');
 Route::post('/config/webConfigUpdate', [SettingsController::class, 'webConfigUpdate'])->name('admin.webConfigUpdate');
-
-Route::get('/metaTags', [MetaTagController::class,'index'])->name('config.Meta.index');
-Route::get('/metaTags/create', [MetaTagController::class,'create'])->name('config.Meta.create');
-Route::get('/metaTags/edit/{id}', [MetaTagController::class,'edit'])->name('config.Meta.edit');
-Route::post('/metaTags/Update/{id}', [MetaTagController::class,'storeUpdate'])->name('config.Meta.update');
-Route::get('/metaTags/delete/{id}', [MetaTagController::class,'destroy'])->name('config.Meta.destroy');
-Route::get('/metaTags/config', [MetaTagController::class,'config'])->name('config.Meta.config');
-Route::get('/metaTags/emptyPhoto/{id}', [MetaTagController::class,'emptyPhoto'])->name('config.Meta.emptyPhoto');
-Route::get('/metaTags/SoftDelete/',[MetaTagController::class,'SoftDeletes'])->name('config.Meta.SoftDelete');
-Route::get('/metaTags/restore/{id}',[MetaTagController::class,'Restore'])->name('config.Meta.restore');
-Route::get('/metaTags/force/{id}',[MetaTagController::class,'ForceDelete'])->name('config.Meta.force');
 
 Route::get('/defPhotos', [DefPhotoController::class,'index'])->name('config.defPhoto.index');
 Route::get('/sortDefPhoto/ListAll', [DefPhotoController::class,'sortDefPhotoList'])->name('config.defPhoto.sortDefPhotoList');

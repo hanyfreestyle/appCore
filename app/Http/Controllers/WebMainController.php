@@ -37,9 +37,6 @@ class WebMainController extends DefaultMainController {
         $this->DefPhotoList = self::getDefPhotoList($this->StopeCash);
         View::share('DefPhotoList',  $this->DefPhotoList);
 
-        $this->amenities =  self::CashAmenityList($this->StopeCash);
-        View::share('amenities', $this->amenities);
-
         $pageView = [
             'SelMenu' => '',
             'show_fix' => true,
