@@ -9,13 +9,10 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class RouteServiceProvider extends ServiceProvider
-{
+class RouteServiceProvider extends ServiceProvider{
 
 
     public const HOME = '/';
-   # public const HOME = '/ar/AppPanel/Home';
-    #ChangeAdmin
 
 
     public function boot(): void
@@ -35,10 +32,7 @@ class RouteServiceProvider extends ServiceProvider
                         Route::middleware('web')->group(base_path('routes/admin.php'));
                         Route::middleware('web')->group(base_path('routes/admin_data.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/siteMap.php'));
-                        Route::middleware('web')->group(base_path('routes/admin_tools.php'));
-                        Route::middleware('web')->group(base_path('routes/admin_project.php'));
                         Route::middleware('web')->group(base_path('routes/admin_config.php'));
-
                         Route::middleware('web')->group(base_path('routes/admin_roles.php'));
                     });
                 });
@@ -46,10 +40,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-
-
         });
-
 
     }
 }

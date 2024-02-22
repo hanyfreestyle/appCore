@@ -23,5 +23,4 @@ return
 	'unit_status' => 'حالة الوحدة',
 	'units_project_title' => 'الواحدات التابعة للمشروع',
 	'view' => 'المطل',
-	'youtube' => 'اليوتيوب',
 ];

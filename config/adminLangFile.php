@@ -5,7 +5,7 @@ return [
        'filter'=> ['id'=> 'filter' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'filter','name'=>'Filter Form' ],
        'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'leadForm','name'=>'Lead Form' ],
        'sitemap'=> ['id'=> 'sitemap' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'sitemap','name'=>'SiteMap' ],
-       'dataTable'=> ['id'=> 'dataTable' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'dataTable','name'=>'dataTable' ],
+
        'def' => ['id'=> 'def' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'def','name'=>'Default Variables' ],
        'alertMass'=> ['id'=> 'alertMass' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'alertMass','name'=>'Alert Mass' ],
        'form'=> ['id'=> 'form' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'form','name'=>'Forms' ],
@@ -21,6 +21,7 @@ return [
        'page'=> ['id'=> 'page' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'page','name'=>'Real Estate Pages' ],
        'country'=> ['id'=> 'country' , 'group'=>'admin' , 'sub_dir'=> 'data' , 'file_name'=> 'country','name'=>'Country' ],
 
+//       'dataTable'=> ['id'=> 'dataTable' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'dataTable','name'=>'dataTable' ],
     ],
     'webFile' => [
         'def'=> ['id'=> 'def' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'def','name'=>'Default Variables' ],

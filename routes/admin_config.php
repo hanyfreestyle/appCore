@@ -7,7 +7,6 @@ use App\Http\Controllers\admin\config\MetaTagController;
 use App\Http\Controllers\admin\config\SettingsController;
 use App\Http\Controllers\admin\config\UploadFilterController;
 use App\Http\Controllers\admin\config\UploadFilterSizeController;
-use App\Http\Controllers\admin\UpdateDataController;
 use App\Http\Controllers\AdminMainController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +35,6 @@ Route::get('/metaTags/SoftDelete/',[MetaTagController::class,'SoftDeletes'])->na
 Route::get('/metaTags/restore/{id}',[MetaTagController::class,'Restore'])->name('config.Meta.restore');
 Route::get('/metaTags/force/{id}',[MetaTagController::class,'ForceDelete'])->name('config.Meta.force');
 
-
 Route::get('/defPhotos', [DefPhotoController::class,'index'])->name('config.defPhoto.index');
 Route::get('/sortDefPhoto/ListAll', [DefPhotoController::class,'sortDefPhotoList'])->name('config.defPhoto.sortDefPhotoList');
 Route::get('/defPhotos/create', [DefPhotoController::class,'create'])->name('config.defPhoto.create');
@@ -60,11 +58,3 @@ Route::get('/upFilterSize/edit/{id}', [UploadFilterSizeController::class,'edit']
 Route::get('/upFilterSize/delete/{id}', [UploadFilterSizeController::class,'destroy'])->name('config.upFilter.size.destroy');
 Route::post('/upFilterSize/store/{id}', [UploadFilterSizeController::class,'storeUpdate'])->name('config.upFilter.size.storeOrUpdate');
 Route::get('/clearCash/',[SettingsController::class,'clearCash'])->name('cash.index');
-
-Route::get('/UpdateData',[UpdateDataController::class,'index'])->name('config.update.UpdateData');
-Route::post('/UpdateData/ClearKey',[UpdateDataController::class,'ClearKey'])->name('config.update.ClearKey');
-Route::post('/UpdateData/ClearAll',[UpdateDataController::class,'ClearAll'])->name('config.update.ClearAll');
-Route::post('/UpdateData/DBDeveloper',[UpdateDataController::class,'DBDeveloper'])->name('config.update.DBDeveloper');
-Route::post('/UpdateData/DBLocation',[UpdateDataController::class,'DBLocation'])->name('config.update.DBLocation');
-Route::post('/UpdateData/DBProject',[UpdateDataController::class,'DBProject'])->name('config.update.DBProject');
-

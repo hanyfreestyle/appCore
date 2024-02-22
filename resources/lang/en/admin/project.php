@@ -23,5 +23,4 @@ return
 	'unit_status' => 'Unit Status',
 	'units_project_title' => 'Project Units',
 	'view' => 'View',
-	'youtube' => 'Youtube Url',
 ];

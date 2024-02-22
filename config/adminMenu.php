@@ -81,7 +81,6 @@ $MenuView = [
                 ['roleView'=>'config_defPhoto_view','text'=> 'admin/config/upFilter.app_menu_def_photo','url'=> 'config.defPhoto.index','sel_routs'=> 'defPhoto','icon'=>'fas fa-image'],
                 ['roleView'=>'config_upFilter_view','text'=> 'admin/config/upFilter.app_menu','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter','icon'=>'fas fa-filter'],
                 ['roleView'=>'config_newsletter','text'=> 'admin/newsletter.menu','url'=> 'config.NewsLetter.index','sel_routs'=> 'NewsLetter','icon'=>'fas fa-mail-bulk'],
-                ['roleView'=>'config_website','text'=> 'admin/config/cash.app_menu','url'=> 'config.update.UpdateData','sel_routs'=> 'update','icon'=>'fas fa-database'],
                 ['roleView'=>'sitemap_view','text'=> 'admin/config/sitemap.app_menu','url'=> 'config.SiteMap.index','sel_routs'=> 'SiteMap','icon'=>'fas fa-sitemap'],
             ],
         ],  #Setting
