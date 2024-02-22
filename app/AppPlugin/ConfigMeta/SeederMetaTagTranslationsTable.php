@@ -1,14 +1,11 @@
 <?php
 
-namespace Database\Seeders\config;
+namespace App\AppPlugin\ConfigMeta;
 
-
-use App\AppPlugin\ConfigMeta\MetaTagTranslation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class MetaTagTranslationsTableSeeder extends Seeder
-{
+class SeederMetaTagTranslationsTable extends Seeder{
 
     public function run(): void{
         MetaTagTranslation::unguard();
