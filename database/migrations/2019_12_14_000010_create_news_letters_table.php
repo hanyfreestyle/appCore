@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('config_news_letters', function (Blueprint $table) {
+        Schema::create('leads_news_letters', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
             $table->integer('export')->nullable();
@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('config_news_letters');
+        Schema::dropIfExists('leads_news_letters');
     }
 };

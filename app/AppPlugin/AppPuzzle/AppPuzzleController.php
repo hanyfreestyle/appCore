@@ -3,10 +3,7 @@
 namespace App\AppPlugin\AppPuzzle;
 
 use App\Helpers\AdminHelper;
-use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Route;
-use function Laravel\Prompts\select;
 
 class AppPuzzleController{
 
@@ -20,7 +17,8 @@ class AppPuzzleController{
         $this->mainFolder =  "D:\_AppPlugin/";
 
 //        $this->folderDate = date("Y-m-d@his");
-        $this->folderDate = date("Y-m-d");
+//        $this->folderDate = date("Y-m-d");
+        $this->folderDate = null;
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -53,8 +51,23 @@ class AppPuzzleController{
                 'seeder'=> ['data_countries.sql','data_country_translations.sql'],
                 'adminLang'=> "admin/data/",
                 'adminLangFile'=> "country.php",
-
             ],
+
+            'DataNewsLetter'=>[
+                'id'=>"DataNewsLetter",
+                'info'=>"DataNewsLetter.txt",
+                'CopyFolder'=>"DataNewsLetter",
+                'appFolder'=> "Leads/",
+                'app'=>'NewsLetter',
+                'view'=>'DataNewsLetter',
+                'routeFolder'=> "leads/",
+                'route'=>'newsLetter.php',
+                'migrations'=> ['2019_12_14_000010_create_news_letters_table.php'],
+                'seeder'=> ['leads_news_letters.sql'],
+                'adminLang'=> "admin/",
+                'adminLangFile'=> "newsletter.php",
+            ],
+
 
         ];
 
