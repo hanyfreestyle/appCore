@@ -31,9 +31,11 @@ class RouteServiceProvider extends ServiceProvider{
                 Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
                     Route::group(['prefix'=>'admin'],function(){
                         Route::middleware('web')->group(base_path('routes/admin.php'));
-                        Route::middleware('web')->group(base_path('routes/admin_data.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/siteMap.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/config/configMeta.php'));
+                        Route::middleware('web')->group(base_path('routes/AppPlugin/data/country.php'));
+                        Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
+                        Route::middleware('web')->group(base_path('routes/AppPlugin/leads/newsLetter.php'));
                         Route::middleware('web')->group(base_path('routes/admin_config.php'));
                         Route::middleware('web')->group(base_path('routes/admin_roles.php'));
 
