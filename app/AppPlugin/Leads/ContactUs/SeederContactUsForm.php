@@ -9,7 +9,7 @@ use Faker\Factory;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class ContactUsFormSeeder extends Seeder{
+class SeederContactUsForm extends Seeder{
 
 
     public function run(): void{

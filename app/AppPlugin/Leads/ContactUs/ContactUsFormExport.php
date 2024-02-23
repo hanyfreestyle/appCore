@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Exports;
+namespace App\AppPlugin\Leads\ContactUs;
 
-use App\AppPlugin\Leads\ContactUs\ContactUsForm;
 use App\Http\Controllers\AdminMainController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;

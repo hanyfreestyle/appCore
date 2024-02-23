@@ -1,0 +1,44 @@
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Route
+RouteServiceProvider.php
+Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Seeder
+DatabaseSeeder.php
+
+use App\AppPlugin\Leads\ContactUs\SeederContactUsForm;
+$this->call(SeederContactUsForm::class);
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Permission
+PermissionSeeder.php
+
+['cat_id'=> '5', 'name' => 'leads_view','name_ar'=>'عرض','name_en'=>'View'],
+['cat_id'=> '5', 'name' => 'leads_add','name_ar'=>'اضافة','name_en'=>'Add'],
+['cat_id'=> '5', 'name' => 'leads_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+['cat_id'=> '5', 'name' => 'leads_export','name_ar'=>'تصدير','name_en'=>'Export'],
+['cat_id'=> '5', 'name' => 'leads_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Menu
+        [
+            'view'=>  IsMenuView($MenuView,"LeadsFrom"),
+            'sel_routs'=>'LeadsFrom',
+            'type'=>'many',
+            'text'=> 'admin/config/leadForm.app_menu',
+            'icon'=>'fas fa-phone-volume',
+            'roleView'=>'leads_view',
+            'submenu'=>[
+                ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_requst','url'=> 'LeadsFrom.Request.index','sel_routs'=> 'Request','icon'=>'fas fa-phone-square'],
+                ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_meeting','url'=> 'LeadsFrom.Meeting.index','sel_routs'=> 'Meeting','icon'=>'fas fa-handshake'],
+                ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_conatct','url'=> 'LeadsFrom.ContactUs.index','sel_routs'=> 'ContactUs','icon'=>'fas fa-mail-bulk'],
+            ],
+        ],  #LeadsFrom
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Admin Lang
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    Web Lang

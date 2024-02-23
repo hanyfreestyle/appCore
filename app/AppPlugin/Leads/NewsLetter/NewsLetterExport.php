@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Exports;
+namespace App\AppPlugin\Leads\NewsLetter;
 
 
-use App\AppPlugin\Leads\NewsLetter\NewsLetter;
 use App\Http\Controllers\AdminMainController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;

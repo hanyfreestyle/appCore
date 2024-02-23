@@ -53,19 +53,35 @@ class AppPuzzleController{
                 'adminLangFile'=> "country.php",
             ],
 
-            'DataNewsLetter'=>[
-                'id'=>"DataNewsLetter",
-                'info'=>"DataNewsLetter.txt",
-                'CopyFolder'=>"DataNewsLetter",
+            'LeadsNewsLetter'=>[
+                'id'=>"LeadsNewsLetter",
+                'info'=>"LeadsNewsLetter.txt",
+                'CopyFolder'=>"LeadsNewsLetter",
                 'appFolder'=> "Leads/",
                 'app'=>'NewsLetter',
-                'view'=>'DataNewsLetter',
+                'view'=>'LeadsNewsLetter',
                 'routeFolder'=> "leads/",
                 'route'=>'newsLetter.php',
                 'migrations'=> ['2019_12_14_000010_create_news_letters_table.php'],
                 'seeder'=> ['leads_news_letters.sql'],
                 'adminLang'=> "admin/",
                 'adminLangFile'=> "newsletter.php",
+            ],
+
+
+            'LeadsContactUs'=>[
+                'id'=>"LeadsContactUs",
+                'info'=>"LeadsContactUs.txt",
+                 'CopyFolder'=>"LeadsContactUs",
+                'appFolder'=> "Leads/",
+                'app'=>'ContactUs',
+                'view'=>'LeadsContactUs',
+                'routeFolder'=> "leads/",
+                'route'=>'contactUs.php',
+                'migrations'=> ['2019_12_14_000013_create_contact_us_forms_table.php'],
+                'seeder'=> ['leads_contact_us.sql'],
+//                'adminLang'=> "admin/",
+//                'adminLangFile'=> "newsletter.php",
             ],
 
 

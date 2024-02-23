@@ -6,9 +6,10 @@ use App\AppPlugin\Config\Meta\SeederMetaTag;
 use App\AppPlugin\Config\Meta\SeederMetaTagTranslationsTable;
 use App\AppPlugin\Data\Country\SeederCountry;
 use App\AppPlugin\Data\Country\SeederCountryTranslation;
+use App\AppPlugin\Leads\ContactUs\SeederContactUsForm;
 use App\AppPlugin\Leads\NewsLetter\SeederNewsLetter;
 
-use Database\Seeders\data\ContactUsFormSeeder;
+
 
 use Database\Seeders\roles\AdminUserSeeder;
 use Database\Seeders\roles\PermissionSeeder;
@@ -42,7 +43,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SeederCountry::class);
         $this->call(SeederCountryTranslation::class);
         $this->call(SeederNewsLetter::class);
-        $this->call(ContactUsFormSeeder::class);
+        $this->call(SeederContactUsForm::class);
 
 
     }

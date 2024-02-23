@@ -2,7 +2,7 @@
 
 namespace App\AppPlugin\Leads\NewsLetter;
 
-use App\Exports\NewsLetterExport;
+
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
 
@@ -53,7 +53,7 @@ class NewsLetterController extends AdminMainController{
              $rowData = self::getSelectQuery(self::FilterQ(NewsLetter::query(),$session));
          }
 
-         return view('AppPlugin.DataNewsLetter.index',compact('pageData','rowData'));
+         return view('AppPlugin.LeadsNewsLetter.index',compact('pageData','rowData'));
      }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #

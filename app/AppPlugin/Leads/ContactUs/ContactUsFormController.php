@@ -1,7 +1,6 @@
 <?php
 namespace App\AppPlugin\Leads\ContactUs;
 
-use App\Exports\ContactUsFormExport;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
 
@@ -79,7 +78,7 @@ class ContactUsFormController extends AdminMainController{
             $rowData = self::getSelectQuery(self::FilterQ(ContactUsForm::where('request_type',$requestType),$session));
         }
 
-        return view('admin.data.leads.index',compact('pageData','rowData','requestType'));
+        return view('AppPlugin.LeadsContactUs.index',compact('pageData','rowData','requestType'));
 
     }
 
