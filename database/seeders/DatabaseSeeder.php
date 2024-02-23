@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\AppPlugin\ConfigMeta\SeederMetaTag;
-use App\AppPlugin\ConfigMeta\SeederMetaTagTranslationsTable;
+use App\AppPlugin\Config\Meta\SeederMetaTag;
+use App\AppPlugin\Config\Meta\SeederMetaTagTranslationsTable;
 use App\AppPlugin\Data\Country\SeederCountry;
 use App\AppPlugin\Data\Country\SeederCountryTranslation;
 

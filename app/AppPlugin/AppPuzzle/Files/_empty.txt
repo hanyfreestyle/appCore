@@ -1,25 +1,20 @@
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Route
 RouteServiceProvider.php
-Route::middleware('web')->group(base_path('routes/AppPlugin/config/configMeta.php'));
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Seeder
 DatabaseSeeder.php
 
-use App\AppPlugin\Config\Meta\SeederMetaTag;
-use App\AppPlugin\Config\Meta\SeederMetaTagTranslationsTable;
 
-$this->call(SeederMetaTag::class);
-$this->call(SeederMetaTagTranslationsTable::class);
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Permission
 PermissionSeeder.php
-['cat_id'=> '3', 'name' => 'config_meta_view','name_ar'=>'ميتا تاج','name_en'=>'Meta'],
+
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Menu
 
-['roleView'=>'config_meta_view','text'=> 'admin/config/core.app_menu_meta_tags','url'=> 'config.Meta.index','sel_routs'=> 'Meta','icon'=>'fab fa-html5'],

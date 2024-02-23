@@ -37,61 +37,18 @@ class PermissionSeeder extends Seeder
             ['cat_id'=> '3', 'name' => 'weblang_view','name_ar'=>'ملفات لغة الموقع','name_en'=>'Web Lang File'],
             ['cat_id'=> '3', 'name' => 'sitemap_view','name_ar'=>'SiteMap','name_en'=>'SiteMap'],
 
-            ['cat_id'=> '4', 'name' => 'amenity_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '4', 'name' => 'amenity_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '4', 'name' => 'amenity_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '4', 'name' => 'amenity_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-            ['cat_id'=> '4', 'name' => 'amenity_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
+            ['cat_id'=> '4', 'name' => 'data_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '4', 'name' => 'data_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '4', 'name' => 'data_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '4', 'name' => 'data_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+            ['cat_id'=> '4', 'name' => 'data_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
+            ['cat_id'=> '4', 'name' => 'country_view','name_ar'=>'الدول','name_en'=>'Country'],
 
-            ['cat_id'=> '5', 'name' => 'location_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '5', 'name' => 'location_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '5', 'name' => 'location_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '5', 'name' => 'location_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-
-
-            ['cat_id'=> '6', 'name' => 'developer_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '6', 'name' => 'developer_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '6', 'name' => 'developer_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '6', 'name' => 'developer_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-
-            ['cat_id'=> '7', 'name' => 'pages_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '7', 'name' => 'pages_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '7', 'name' => 'pages_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '7', 'name' => 'pages_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-            ['cat_id'=> '7', 'name' => 'pages_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
-
-            ['cat_id'=> '8', 'name' => 'post_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '8', 'name' => 'post_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '8', 'name' => 'post_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '8', 'name' => 'post_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-            ['cat_id'=> '8', 'name' => 'post_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
-
-            ['cat_id'=> '9', 'name' => 'project_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '9', 'name' => 'project_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '9', 'name' => 'project_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '9', 'name' => 'project_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-            ['cat_id'=> '9', 'name' => 'project_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
-
-            ['cat_id'=> '10', 'name' => 'forSale_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '10', 'name' => 'forSale_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '10', 'name' => 'forSale_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '10', 'name' => 'forSale_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-            ['cat_id'=> '10', 'name' => 'forSale_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
-
-            ['cat_id'=> '11', 'name' => 'leads_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '11', 'name' => 'leads_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '11', 'name' => 'leads_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '11', 'name' => 'leads_export','name_ar'=>'تصدير','name_en'=>'Export'],
-            ['cat_id'=> '11', 'name' => 'leads_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-
-
-            ['cat_id'=> '12', 'name' => 'data_view','name_ar'=>'عرض','name_en'=>'View'],
-            ['cat_id'=> '12', 'name' => 'data_add','name_ar'=>'اضافة','name_en'=>'Add'],
-            ['cat_id'=> '12', 'name' => 'data_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
-            ['cat_id'=> '12', 'name' => 'data_delete','name_ar'=>'حذف','name_en'=>'Delete'],
-            ['cat_id'=> '12', 'name' => 'data_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
-            ['cat_id'=> '12', 'name' => 'country_view','name_ar'=>'الدول','name_en'=>'Country'],
-
+            ['cat_id'=> '5', 'name' => 'leads_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '5', 'name' => 'leads_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '5', 'name' => 'leads_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '5', 'name' => 'leads_export','name_ar'=>'تصدير','name_en'=>'Export'],
+            ['cat_id'=> '5', 'name' => 'leads_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
         ];
 
