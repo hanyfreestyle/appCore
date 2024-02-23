@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\AppPlugin\Config\Meta\SeederMetaTag;
 use App\AppPlugin\Config\Meta\SeederMetaTagTranslationsTable;
+use App\AppPlugin\Config\Privacy\SeederWebPrivacy;
+use App\AppPlugin\Config\Privacy\SeederWebPrivacyTranslation;
 use App\AppPlugin\Data\Country\SeederCountry;
 use App\AppPlugin\Data\Country\SeederCountryTranslation;
 use App\AppPlugin\Leads\ContactUs\SeederContactUsForm;
@@ -39,7 +41,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DefPhotoSeeder::class);
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
-
+        $this->call(SeederWebPrivacy::class);
+        $this->call(SeederWebPrivacyTranslation::class);
         $this->call(SeederCountry::class);
         $this->call(SeederCountryTranslation::class);
         $this->call(SeederNewsLetter::class);
