@@ -336,7 +336,7 @@ class AppPuzzleController{
                 break;
 
             case "adminLang":
-                if($thisModel['adminLang'] != null and $thisModel['adminLang'] != null ){
+                if( isset($thisModel['adminLang']) and $thisModel['adminLang'] != null ){
                     $adminLangFile = $thisModel['adminLangFile'];
                     $adminLangFolder = $thisModel['adminLang'];
                     foreach ( config('app.web_lang') as $key=>$lang) {
