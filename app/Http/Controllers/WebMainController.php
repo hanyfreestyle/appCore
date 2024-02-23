@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\AdminHelper;
 use App\Helpers\Seo\SchemaTools;
-use App\Http\Controllers\admin\PageAdminController;
 use Illuminate\Support\Facades\View;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Phattarachai\LaravelMobileDetect\Agent;
@@ -12,7 +11,7 @@ use Phattarachai\LaravelMobileDetect\Agent;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\TwitterCard;
-use Artesaos\SEOTools\Facades\JsonLd;
+
 
 class WebMainController extends DefaultMainController {
 

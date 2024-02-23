@@ -11,6 +11,7 @@ class RouteNotFoundController extends Controller
     public function __invoke(){
 
         $Meta =  DefaultMainController::getMeatByCatId('err_404');
+
         $w = new WebMainController();
         $w->printSeoMeta($Meta);
 

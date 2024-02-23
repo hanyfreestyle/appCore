@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\DefaultMainController;
 use App\Http\Controllers\WebMainController;
 use App\Http\Requests\data\ContactUsFormRequest;
 use App\Http\Requests\data\ContactUsOnPageRequest;

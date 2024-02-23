@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\AppPlugin\ConfigMeta\MetaTag;
+use App\AppPlugin\Config\Meta\MetaTag;
+use App\AppPlugin\Data\Country\Country;
 use App\Models\admin\config\DefPhoto;
 use App\Models\admin\config\Setting;
-use App\Models\data\Country;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 
