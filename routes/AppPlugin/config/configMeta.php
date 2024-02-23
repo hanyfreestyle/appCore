@@ -1,7 +1,7 @@
 <?php
 
 
-use App\AppPlugin\ConfigMeta\MetaTagController;
+use App\AppPlugin\Config\Meta\MetaTagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/metaTags', [MetaTagController::class,'index'])->name('config.Meta.index');

@@ -2,6 +2,7 @@
 
 namespace App\AppPlugin\AppPuzzle;
 
+use App\Helpers\AdminHelper;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use function Laravel\Prompts\select;
@@ -15,7 +16,7 @@ class AppPuzzleController{
 
     )
     {
-        $this->mainFolder =  "D:\_AppTest/";
+        $this->mainFolder =  "D:\_AppPlugin/";
 
 //        $this->folderDate = date("Y-m-d@his");
         $this->folderDate = date("Y-m-d");
@@ -26,12 +27,25 @@ class AppPuzzleController{
     public function ModelTree(){
         $modelTree = [
             'ConfigMeta'=>[
-                'app'=>'ConfigMeta',
+                'CopyFolder'=>"ConfigMeta",
+                'appFolder'=> "Config/",
+                'app'=>'Meta',
                 'view'=>'ConfigMeta',
                 'routeFolder'=> "config/",
                 'route'=>'configMeta.php',
                 'migrations'=> ['2019_12_14_000003_create_meta_tags_table.php','2019_12_14_000004_create_meta_tag_translations_table.php'],
                 'seeder'=> ['config_meta_tags.sql','config_setting_translations.sql'],
+            ],
+
+            'DataCountry'=>[
+                'CopyFolder'=>"DataCountry",
+                'appFolder'=> "Data/",
+                'app'=>'Country',
+                'view'=>'DataCountry',
+                'routeFolder'=> "data/",
+                'route'=>'country.php',
+                'migrations'=> ['2019_12_14_000014_create_countries_table.php','2019_12_14_000015_create_country_translations_table.php'],
+                'seeder'=> ['data_countries.sql','data_country_translations.sql'],
             ],
 
         ];
@@ -40,50 +54,112 @@ class AppPuzzleController{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # CopyModel
+    public function CopyModel($model){
+        $modelTree = self::ModelTree();
+
+        if(isset($modelTree[$model])){
+            $thisModel = $modelTree[$model];
+            self::CopyAppFolder($thisModel);
+            self::CopyViewFolder($thisModel);
+            self::CopyRouteFile($thisModel);
+            self::CopyMigrations($thisModel);
+            self::CopySeeder($thisModel);
+        }
+
+
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # RemoveModel
     public function RemoveModel($model){
         $modelTree = self::ModelTree();
-        $thisModel = $modelTree[$model];
+        if(isset($modelTree[$model])){
+            $thisModel = $modelTree[$model];
 
 //        self::RemoveModelFile($thisModel,'AppFolder');
 //        self::RemoveModelFile($thisModel,'ViewFolder');
 //        self::RemoveModelFile($thisModel,'RouteFile');
 //        self::RemoveModelFile($thisModel,'Migrations');
 //        self::RemoveModelFile($thisModel,'Seeder');
+        }else{
 
-    }
+        }
 
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| # CopyModel
-    public function CopyModel($model){
-        $modelTree = self::ModelTree();
-
-        $thisModel = $modelTree[$model];
-        self::CopyAppFolder($thisModel);
-//        self::CopyViewFolder($thisModel);
-//        self::CopyRouteFile($thisModel);
-//        self::CopyMigrations($thisModel);
-//        self::CopySeeder($thisModel);
 
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
     public function CopyAppFolder($thisModel){
-        if($thisModel['app'] != null ){
+        if(isset($thisModel['app']) and $thisModel['app'] != null ){
+            $appFolder = AdminHelper::arrIsset($thisModel,'appFolder',null);
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
             $folderName = $thisModel['app'] ;
-            $thisDir = app_path("AppPlugin/".$thisModel['app']);
-
+            $thisDir = app_path("AppPlugin/".$appFolder.$folderName);
             if(File::isDirectory($thisDir)){
                 $filesList = File::files($thisDir);
-                $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/app/AppPlugin/'.$folderName."/";
+                $destinationFolder = $CopyFolder.'/app/AppPlugin/'.$appFolder.$folderName."/";
                 self::folderMakeDirectory($destinationFolder);
                 foreach ($filesList as $file){
                     $fileB = $file->getRealPath();
                     $getBasename = $file->getBasename() ;
                     $destination = $destinationFolder.$getBasename ;
                     File::copy($fileB,$destination);
+                }
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
+    public function CopyViewFolder($thisModel){
+        if(isset($thisModel['view']) and $thisModel['view'] != null ){
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
+            $folderName = $thisModel['view'] ;
+            $thisDir = resource_path("views/AppPlugin/".$folderName);
+            if(File::isDirectory($thisDir)){
+                $filesList = File::files($thisDir);
+                $destinationFolder = $CopyFolder.'/resources/views/AppPlugin/'.$folderName."/";
+                self::folderMakeDirectory($destinationFolder);
+                foreach ($filesList as $file){
+                    $fileB = $file->getRealPath();
+                    $getBasename = $file->getBasename() ;
+                    $destination = $destinationFolder.$getBasename ;
+                    File::copy($fileB,$destination);
+                }
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopyRouteFile
+    public function CopyRouteFile($thisModel){
+        if( isset($thisModel['route']) and $thisModel['route'] != null ){
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
+            $fileName = $thisModel['route'] ;
+            $routeFolder = $thisModel['routeFolder'] ;
+            $filePath = base_path('routes/AppPlugin/'.$routeFolder.$fileName);
+            if(File::isFile($filePath)){
+                $destinationFolder = $CopyFolder.'/routes/AppPlugin/'.$routeFolder;
+                self::folderMakeDirectory($destinationFolder);
+                File::copy($filePath,$destinationFolder.$fileName);
+            }
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopyMigrations
+    public function CopyMigrations($thisModel){
+        if(isset($thisModel['migrations']) and $thisModel['migrations'] != null ){
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
+            foreach ($thisModel['migrations'] as $migrations){
+                $filePath = base_path('database/migrations/'.$migrations);
+                if(File::isFile($filePath)){
+                    $destinationFolder = $CopyFolder.'/database/migrations/';
+                    self::folderMakeDirectory($destinationFolder);
+                    File::copy($filePath,$destinationFolder.$migrations);
                 }
             }
         }
@@ -93,12 +169,12 @@ class AppPuzzleController{
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CopySeeder
     public function CopySeeder($thisModel){
-        $folderName = $thisModel['app'] ;
-        if($thisModel['seeder'] != null ){
+        if(isset($thisModel['seeder']) and $thisModel['seeder'] != null ){
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
             foreach ($thisModel['seeder'] as $seeder){
                 $filePath = public_path('db/'.$seeder);
                 if(File::isFile($filePath)){
-                    $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/public/db/';
+                    $destinationFolder = $CopyFolder.'/public/db/';
                     self::folderMakeDirectory($destinationFolder);
                     File::copy($filePath,$destinationFolder.$seeder);
                 }
@@ -106,58 +182,11 @@ class AppPuzzleController{
         }
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyMigrations
-    public function CopyMigrations($thisModel){
-        $folderName = $thisModel['app'] ;
-        if($thisModel['migrations'] != null ){
-            foreach ($thisModel['migrations'] as $migrations){
-                $filePath = base_path('database/migrations/'.$migrations);
-                if(File::isFile($filePath)){
-                    $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/database/migrations/';
-                    self::folderMakeDirectory($destinationFolder);
-                    File::copy($filePath,$destinationFolder.$migrations);
-                }
-            }
-        }
-    }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyRouteFile
-    public function CopyRouteFile($thisModel){
-        if($thisModel['route'] != null ){
-            $folderName = $thisModel['app'] ;
-            $fileName = $thisModel['route'] ;
-            $routeFolder = $thisModel['routeFolder'] ;
-            $filePath = base_path('routes/AppPlugin/'.$routeFolder.$fileName);
 
-            if(File::isFile($filePath)){
-                $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/routes/AppPlugin/'.$routeFolder;
-                self::folderMakeDirectory($destinationFolder);
-                File::copy($filePath,$destinationFolder.$fileName);
-            }
-        }
-    }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
-    public function CopyViewFolder($thisModel){
-        if($thisModel['view'] != null ){
-            $folderName = $thisModel['view'] ;
-            $thisDir = resource_path("views/AppPlugin/".$thisModel['view']);
-            if(File::isDirectory($thisDir)){
-                $filesList = File::files($thisDir);
-                $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/resources/views/AppPlugin/'.$folderName."/";
-                self::folderMakeDirectory($destinationFolder);
-                foreach ($filesList as $file){
-                    $fileB = $file->getRealPath();
-                    $getBasename = $file->getBasename() ;
-                    $destination = $destinationFolder.$getBasename ;
-                    File::copy($fileB,$destination);
-                }
-            }
-        }
-    }
+
+
 
 
 

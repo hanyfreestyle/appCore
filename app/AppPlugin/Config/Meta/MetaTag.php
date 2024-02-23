@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AppPlugin\ConfigMeta;
+namespace App\AppPlugin\Config\Meta;
 
 
 use Illuminate\Database\Eloquent\Model;

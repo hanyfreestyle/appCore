@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AppPlugin\ConfigMeta;
+namespace App\AppPlugin\Config\Meta;
 
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
