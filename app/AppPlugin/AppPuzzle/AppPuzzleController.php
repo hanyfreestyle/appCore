@@ -72,7 +72,6 @@ class AppPuzzleController{
 #|||||||||||||||||||||||||||||||||||||| # CopyModel
     public function CopyModel($model){
         $modelTree = self::ModelTree();
-
         if(isset($modelTree[$model])){
             $thisModel = $modelTree[$model];
             self::CopyAppFolder($thisModel);
@@ -83,29 +82,8 @@ class AppPuzzleController{
             self::CopInfo($thisModel);
             return redirect()->back();
         }
-
-
     }
 
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| # RemoveModel
-    public function RemoveModel($model){
-        $modelTree = self::ModelTree();
-        if(isset($modelTree[$model])){
-            $thisModel = $modelTree[$model];
-
-//        self::RemoveModelFile($thisModel,'AppFolder');
-//        self::RemoveModelFile($thisModel,'ViewFolder');
-//        self::RemoveModelFile($thisModel,'RouteFile');
-//        self::RemoveModelFile($thisModel,'Migrations');
-//        self::RemoveModelFile($thisModel,'Seeder');
-        }else{
-
-        }
-
-
-    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
@@ -218,7 +196,23 @@ class AppPuzzleController{
 
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # RemoveModel
+    public function RemoveModel($model){
+        $modelTree = self::ModelTree();
+        if(isset($modelTree[$model])){
+            $thisModel = $modelTree[$model];
+            self::RemoveModelFile($thisModel,'AppFolder');
+            self::RemoveModelFile($thisModel,'ViewFolder');
+            self::RemoveModelFile($thisModel,'RouteFile');
+            self::RemoveModelFile($thisModel,'Migrations');
+            self::RemoveModelFile($thisModel,'Seeder');
+        }else{
 
+        }
+
+
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     RemoveModelFile
@@ -227,7 +221,8 @@ class AppPuzzleController{
         switch ($type) {
             case "AppFolder":
                 if($thisModel['app'] != null ){
-                    $thisDir = app_path("AppPlugin/".$thisModel['app']);
+                    $appFolder = AdminHelper::arrIsset($thisModel,'appFolder',null);
+                    $thisDir = app_path("AppPlugin/".$appFolder.$thisModel['app']);
                     if(File::isDirectory($thisDir)){
                         File::deleteDirectory($thisDir);
                     }
