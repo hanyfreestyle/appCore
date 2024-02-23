@@ -32,87 +32,25 @@ class AppPuzzleController{
                 'route'=>'configMeta.php',
                 'migrations'=> ['2019_12_14_000003_create_meta_tags_table.php','2019_12_14_000004_create_meta_tag_translations_table.php'],
                 'seeder'=> ['config_meta_tags.sql','config_setting_translations.sql'],
-
             ],
+
         ];
 
         return  $modelTree ;
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| # CopyModel
+#|||||||||||||||||||||||||||||||||||||| # RemoveModel
     public function RemoveModel($model){
         $modelTree = self::ModelTree();
-
         $thisModel = $modelTree[$model];
 
-        self::RemoveAppFolder($thisModel);
-        self::RemoveViewFolder($thisModel);
-        self::RemoveRouteFile($thisModel);
-        self::RemoveMigrations($thisModel);
-        self::RemoveSeeder($thisModel);
+//        self::RemoveModelFile($thisModel,'AppFolder');
+//        self::RemoveModelFile($thisModel,'ViewFolder');
+//        self::RemoveModelFile($thisModel,'RouteFile');
+//        self::RemoveModelFile($thisModel,'Migrations');
+//        self::RemoveModelFile($thisModel,'Seeder');
 
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function RemoveAppFolder($thisModel){
-        if($thisModel['app'] != null ){
-            $thisDir = app_path("AppPlugin/".$thisModel['app']);
-            if(File::isDirectory($thisDir)){
-                File::deleteDirectory($thisDir);
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function RemoveViewFolder($thisModel){
-        if($thisModel['view'] != null ){
-            $thisDir = resource_path("views/AppPlugin/".$thisModel['view']);
-            if(File::isDirectory($thisDir)){
-                File::deleteDirectory($thisDir);
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     RemoveRouteFile
-    public function RemoveRouteFile($thisModel){
-        if($thisModel['route'] != null ){
-            $fileName = $thisModel['route'] ;
-            $routeFolder = $thisModel['routeFolder'] ;
-            $filePath = base_path('routes/AppPlugin/'.$routeFolder.$fileName);
-            if(File::isFile($filePath)){
-                File::delete($filePath);
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     RemoveMigrations
-    public function RemoveMigrations($thisModel){
-        if($thisModel['migrations'] != null ){
-            foreach ($thisModel['migrations'] as $migrations){
-                $filePath = base_path('database/migrations/'.$migrations);
-                if(File::isFile($filePath)){
-                    File::delete($filePath);
-                }
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopySeeder
-    public function RemoveSeeder($thisModel){
-        if($thisModel['seeder'] != null ){
-            foreach ($thisModel['seeder'] as $seeder){
-                $filePath = public_path('db/'.$seeder);
-                if(File::isFile($filePath)){
-                    File::delete($filePath);
-                }
-            }
-        }
     }
 
 
@@ -123,13 +61,33 @@ class AppPuzzleController{
 
         $thisModel = $modelTree[$model];
         self::CopyAppFolder($thisModel);
-        self::CopyViewFolder($thisModel);
-        self::CopyRouteFile($thisModel);
-        self::CopyMigrations($thisModel);
-        self::CopySeeder($thisModel);
+//        self::CopyViewFolder($thisModel);
+//        self::CopyRouteFile($thisModel);
+//        self::CopyMigrations($thisModel);
+//        self::CopySeeder($thisModel);
 
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
+    public function CopyAppFolder($thisModel){
+        if($thisModel['app'] != null ){
+            $folderName = $thisModel['app'] ;
+            $thisDir = app_path("AppPlugin/".$thisModel['app']);
+
+            if(File::isDirectory($thisDir)){
+                $filesList = File::files($thisDir);
+                $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/app/AppPlugin/'.$folderName."/";
+                self::folderMakeDirectory($destinationFolder);
+                foreach ($filesList as $file){
+                    $fileB = $file->getRealPath();
+                    $getBasename = $file->getBasename() ;
+                    $destination = $destinationFolder.$getBasename ;
+                    File::copy($fileB,$destination);
+                }
+            }
+        }
+    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -201,27 +159,66 @@ class AppPuzzleController{
         }
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
-    public function CopyAppFolder($thisModel){
-        if($thisModel['app'] != null ){
-            $folderName = $thisModel['app'] ;
-            $thisDir = app_path("AppPlugin/".$thisModel['app']);
 
-            if(File::isDirectory($thisDir)){
-                $filesList = File::files($thisDir);
-                $destinationFolder = $this->mainFolder.$folderName.'/'.$this->folderDate.'/app/AppPlugin/'.$folderName."/";
-                self::folderMakeDirectory($destinationFolder);
-                foreach ($filesList as $file){
-                    $fileB = $file->getRealPath();
-                    $getBasename = $file->getBasename() ;
-                    $destination = $destinationFolder.$getBasename ;
-                    File::copy($fileB,$destination);
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     RemoveModelFile
+    public function RemoveModelFile($thisModel,$type){
+
+        switch ($type) {
+            case "AppFolder":
+                if($thisModel['app'] != null ){
+                    $thisDir = app_path("AppPlugin/".$thisModel['app']);
+                    if(File::isDirectory($thisDir)){
+                        File::deleteDirectory($thisDir);
+                    }
                 }
-            }
+                break;
+
+            case "ViewFolder":
+                if($thisModel['view'] != null ){
+                    $thisDir = resource_path("views/AppPlugin/".$thisModel['view']);
+                    if(File::isDirectory($thisDir)){
+                        File::deleteDirectory($thisDir);
+                    }
+                }
+                break;
+
+            case "RouteFile":
+                if($thisModel['route'] != null ){
+                    $fileName = $thisModel['route'] ;
+                    $routeFolder = $thisModel['routeFolder'] ;
+                    $filePath = base_path('routes/AppPlugin/'.$routeFolder.$fileName);
+                    if(File::isFile($filePath)){
+                        File::delete($filePath);
+                    }
+                }
+                break;
+
+            case "Migrations":
+                if($thisModel['migrations'] != null ){
+                    foreach ($thisModel['migrations'] as $migrations){
+                        $filePath = base_path('database/migrations/'.$migrations);
+                        if(File::isFile($filePath)){
+                            File::delete($filePath);
+                        }
+                    }
+                }
+                break;
+
+            case "Seeder":
+                if($thisModel['seeder'] != null ){
+                    foreach ($thisModel['seeder'] as $seeder){
+                        $filePath = public_path('db/'.$seeder);
+                        if(File::isFile($filePath)){
+                            File::delete($filePath);
+                        }
+                    }
+                }
+                break;
+            default:
         }
     }
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function folderMakeDirectory($destinationFolder){
