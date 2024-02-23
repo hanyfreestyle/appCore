@@ -3,10 +3,9 @@
 namespace App\Exports;
 
 
+use App\AppPlugin\Leads\NewsLetter\NewsLetter;
 use App\Http\Controllers\AdminMainController;
-use App\Models\data\NewsLetter;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;

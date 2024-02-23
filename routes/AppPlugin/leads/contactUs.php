@@ -1,5 +1,6 @@
 <?php
-use App\Http\Controllers\data\ContactUsFormController;
+
+use App\AppPlugin\Leads\ContactUs\ContactUsFormController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/LeadsFrom/Request',[ContactUsFormController::class,'indexAll'])->name('LeadsFrom.Request.index');

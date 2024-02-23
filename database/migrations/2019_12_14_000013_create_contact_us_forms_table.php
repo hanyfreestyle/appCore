@@ -9,7 +9,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('config_contact_us_forms', function (Blueprint $table) {
+        Schema::create('leads_contact_us', function (Blueprint $table) {
             $table->id();
             $table->integer('export')->nullable();
             $table->string('name')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('config_contact_us_forms');
+        Schema::dropIfExists('leads_contact_us');
     }
 
 };

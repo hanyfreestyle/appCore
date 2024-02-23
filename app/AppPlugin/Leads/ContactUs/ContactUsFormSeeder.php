@@ -1,10 +1,9 @@
 <?php
 
-namespace Database\Seeders\data;
+namespace App\AppPlugin\Leads\ContactUs;
 
-use App\Models\admin\Listing;
-use App\Models\data\ContactUsForm;
-use App\Models\data\Country;
+use App\AppPlugin\Data\Country\Country;
+
 use Illuminate\Database\Seeder;
 use Faker\Factory;
 use Illuminate\Support\Carbon;
@@ -18,7 +17,7 @@ class ContactUsFormSeeder extends Seeder{
 
         if($newData == 0){
             ContactUsForm::unguard();
-            $tablePath = public_path('db/config_contact_us_forms.sql');
+            $tablePath = public_path('db/leads_contact_us.sql');
             DB::unprepared(file_get_contents($tablePath));
         }else{
             for ($i = 0; $i < 500; $i++){

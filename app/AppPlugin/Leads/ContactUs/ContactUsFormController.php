@@ -1,10 +1,11 @@
 <?php
-namespace App\Http\Controllers\data;
+namespace App\AppPlugin\Leads\ContactUs;
 
 use App\Exports\ContactUsFormExport;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
-use App\Models\data\ContactUsForm;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;

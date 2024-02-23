@@ -2,10 +2,11 @@
 
 namespace App\Exports;
 
+use App\AppPlugin\Leads\ContactUs\ContactUsForm;
 use App\Http\Controllers\AdminMainController;
-use App\Models\data\ContactUsForm;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -14,7 +15,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class ContactUsFormExport implements FromQuery ,ShouldAutoSize ,WithMapping ,WithHeadings ,WithColumnFormatting {
-
+    use Exportable ;
     protected $request;
 
     public function __construct($request){
@@ -33,7 +34,7 @@ class ContactUsFormExport implements FromQuery ,ShouldAutoSize ,WithMapping ,Wit
 
         $session =  Session::get($this->request->input('formName'));
         $GetData = AdminMainController::FilterQ(ContactUsForm::query()
-            ->where('request_type',$requestType)->with('listinginfo')->with('projectinfo'),$session,'created_at|ASC') ;
+            ->where('request_type',$requestType),$session,'created_at|ASC') ;
         return $GetData;
     }
 

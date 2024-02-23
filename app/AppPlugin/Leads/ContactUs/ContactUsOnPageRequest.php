@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Requests\data;
+namespace App\AppPlugin\Leads\ContactUs;
 
-use App\Helpers\AdminHelper;
+
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 

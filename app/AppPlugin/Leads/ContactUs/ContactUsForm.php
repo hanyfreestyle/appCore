@@ -1,19 +1,16 @@
 <?php
 
-namespace App\Models\data;
-
-
+namespace App\AppPlugin\Leads\ContactUs;
 
 use App\AppPlugin\Data\Country\Country;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 class ContactUsForm extends Model{
-    use HasFactory;
-    protected $table = "config_contact_us_forms";
+
+    protected $table = "leads_contact_us";
     protected $primaryKey = 'id';
 
     public function getFormatteDate(){
