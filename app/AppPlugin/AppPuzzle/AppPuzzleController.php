@@ -51,6 +51,9 @@ class AppPuzzleController{
                 'route'=>'country.php',
                 'migrations'=> ['2019_12_14_000014_create_countries_table.php','2019_12_14_000015_create_country_translations_table.php'],
                 'seeder'=> ['data_countries.sql','data_country_translations.sql'],
+                'adminLang'=> "admin/data/",
+                'adminLangFile'=> "country.php",
+
             ],
 
         ];
@@ -79,11 +82,29 @@ class AppPuzzleController{
             self::CopyRouteFile($thisModel);
             self::CopyMigrations($thisModel);
             self::CopySeeder($thisModel);
-            self::CopInfo($thisModel);
-            return redirect()->back();
+            self::CopyAdminLang($thisModel);
+            self::CopyInfo($thisModel);
+           // return redirect()->back();
         }
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopyAdminLang
+    public function CopyAdminLang($thisModel){
+        if(isset($thisModel['adminLang']) and $thisModel['adminLang'] != null ){
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
+            $adminLangFile = $thisModel['adminLangFile'];
+            $adminLangFolder = $thisModel['adminLang'];
+            foreach ( config('app.web_lang') as $key=>$lang) {
+                $filePath = resource_path('lang/'.$key.'/'.$adminLangFolder.$adminLangFile);
+                if(File::isFile($filePath)){
+                    $destinationFolder = $CopyFolder.'/resources/lang/'.$key.'/'.$adminLangFolder;
+                    self::folderMakeDirectory($destinationFolder);
+                    File::copy($filePath,$destinationFolder.$adminLangFile);
+                }
+            }
+        }
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
@@ -179,7 +200,7 @@ class AppPuzzleController{
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   CopInfo
-    public function CopInfo($thisModel){
+    public function CopyInfo($thisModel){
         if(isset($thisModel['info']) and $thisModel['info'] != null ){
             $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
             $fileName = $thisModel['info'];
@@ -207,6 +228,7 @@ class AppPuzzleController{
             self::RemoveModelFile($thisModel,'RouteFile');
             self::RemoveModelFile($thisModel,'Migrations');
             self::RemoveModelFile($thisModel,'Seeder');
+            self::RemoveModelFile($thisModel,'adminLang');
         }else{
 
         }
@@ -270,6 +292,21 @@ class AppPuzzleController{
                     }
                 }
                 break;
+
+            case "adminLang":
+                if($thisModel['adminLang'] != null and $thisModel['adminLang'] != null ){
+                    $adminLangFile = $thisModel['adminLangFile'];
+                    $adminLangFolder = $thisModel['adminLang'];
+                    foreach ( config('app.web_lang') as $key=>$lang) {
+                        $filePath = resource_path('lang/'.$key.'/'.$adminLangFolder.$adminLangFile);
+                        if(File::isFile($filePath)){
+                            File::delete($filePath);
+                        }
+                    }
+                }
+
+                break;
+
             default:
         }
     }
