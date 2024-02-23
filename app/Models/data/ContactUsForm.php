@@ -3,7 +3,8 @@
 namespace App\Models\data;
 
 
-use App\Models\admin\Listing;
+
+use App\AppPlugin\Data\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,12 +28,12 @@ class ContactUsForm extends Model{
         return $this->hasOne(Country::class,'iso2','country');
     }
 
-    public function listinginfo(): HasOne{
-        return $this->hasOne(Listing::class,'id','listing_id')->select('id')->with('tablename');
-    }
-    public function projectinfo(): HasOne{
-        return $this->hasOne(Listing::class,'id','project_id')->select('id')->with('tablename');
-    }
+//    public function listinginfo(): HasOne{
+//        return $this->hasOne(Listing::class,'id','listing_id')->select('id')->with('tablename');
+//    }
+//    public function projectinfo(): HasOne{
+//        return $this->hasOne(Listing::class,'id','project_id')->select('id')->with('tablename');
+//    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # Relations Web

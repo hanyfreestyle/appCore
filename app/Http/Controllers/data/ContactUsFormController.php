@@ -43,9 +43,6 @@ class ContactUsFormController extends AdminMainController{
         $CashCountryList = self::CashCountryList();
         View::share('CashCountryList', $CashCountryList);
 
-        $CashCompoundList = self::CashCompoundList();
-        View::share('CashCompoundList', $CashCompoundList);
-
     }
 
 
@@ -75,12 +72,10 @@ class ContactUsFormController extends AdminMainController{
         $session = self::getSessionData($request);
 
         if($session == null){
-            $rowData = self::getSelectQuery(ContactUsForm::where('request_type',$requestType)
-                ->with('listinginfo')->with('projectinfo'));
+            $rowData = self::getSelectQuery(ContactUsForm::where('request_type',$requestType));
         }else{
 
-            $rowData = self::getSelectQuery(self::FilterQ(ContactUsForm::where('request_type',$requestType)
-                ->with('listinginfo')->with('projectinfo'),$session));
+            $rowData = self::getSelectQuery(self::FilterQ(ContactUsForm::where('request_type',$requestType),$session));
         }
 
         return view('admin.data.leads.index',compact('pageData','rowData','requestType'));

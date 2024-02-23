@@ -8,7 +8,7 @@
     <x-admin.hmtl.section>
 
         @can($PrefixRole."_export")
-            <x-admin.main.filter-form form-name="{{$formName}}" :row="$rowData" :country="true" :project="true" />
+            <x-admin.main.filter-form form-name="{{$formName}}" :row="$rowData" :country="true" :project="false" />
         @endcan
 
         <x-admin.card.def :page-data="$pageData">

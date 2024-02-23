@@ -43,13 +43,8 @@ class AdminMainController extends DefaultMainController
             "10"=> ['id'=>'10','name'=>__('admin/config/roles.model_10')],
             "11"=> ['id'=>'11','name'=>__('admin/config/roles.model_11')],
             "12"=> ['id'=>'12','name'=>__('admin/config/roles.model_12')],
-
-//            "13"=> ['id'=>'13','name'=>__('admin/config/roles.model_13')],
-//            "14"=> ['id'=>'14','name'=>__('admin/config/roles.model_14')],
-//            "15"=> ['id'=>'15','name'=>__('admin/config/roles.model_15')],
-
-
         ];
+
         View::share('modelsNameArr', $modelsNameArr);
 
         $FilterTypeArr = [

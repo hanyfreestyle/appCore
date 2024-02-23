@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\data;
+namespace App\AppPlugin\Leads\NewsLetter;
 
 
 use Carbon\Carbon;

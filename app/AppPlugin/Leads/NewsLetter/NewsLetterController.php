@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\data;
+namespace App\AppPlugin\Leads\NewsLetter;
 
 use App\Exports\NewsLetterExport;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
-use App\Models\data\NewsLetter;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
@@ -53,7 +53,7 @@ class NewsLetterController extends AdminMainController{
              $rowData = self::getSelectQuery(self::FilterQ(NewsLetter::query(),$session));
          }
 
-         return view('admin.data.newsLetter.index',compact('pageData','rowData'));
+         return view('AppPlugin.DataNewsLetter.index',compact('pageData','rowData'));
      }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #

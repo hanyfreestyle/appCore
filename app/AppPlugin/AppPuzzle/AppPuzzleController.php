@@ -84,7 +84,7 @@ class AppPuzzleController{
             self::CopySeeder($thisModel);
             self::CopyAdminLang($thisModel);
             self::CopyInfo($thisModel);
-           // return redirect()->back();
+            return redirect()->back();
         }
     }
 

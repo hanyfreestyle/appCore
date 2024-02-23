@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\data\NewsLetterController;
+
+use App\AppPlugin\Leads\NewsLetter\NewsLetterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/config/NewsLetter', [NewsLetterController::class, 'index'])->name('config.NewsLetter.index');
