@@ -10,5 +10,6 @@ Route::get('/testpdf',[DashboardController::class,'testpdf'])->name('admin.testp
 Route::get('/adminTest/{model}',[DashboardController::class,'adminTest'])->name('admin.adminTest');
 
 Route::get('/AppPuzzle/List',[AppPuzzleController::class,'IndexModel'])->name('AppPuzzle.IndexModel');
+Route::get('/AppPuzzle/Info/{model}',[AppPuzzleController::class,'InfoModel'])->name('AppPuzzle.InfoModel');
 Route::get('/AppPuzzle/Copy/{model}',[AppPuzzleController::class,'CopyModel'])->name('AppPuzzle.Copy');
 Route::get('/AppPuzzle/Remove/{model}',[AppPuzzleController::class,'RemoveModel'])->name('AppPuzzle.Remove');

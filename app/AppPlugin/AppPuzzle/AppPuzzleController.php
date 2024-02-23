@@ -3,6 +3,7 @@
 namespace App\AppPlugin\AppPuzzle;
 
 use App\Helpers\AdminHelper;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use function Laravel\Prompts\select;
@@ -27,6 +28,8 @@ class AppPuzzleController{
     public function ModelTree(){
         $modelTree = [
             'ConfigMeta'=>[
+                'id'=>"ConfigMeta",
+                'info'=>"ConfigMeta.txt",
                 'CopyFolder'=>"ConfigMeta",
                 'appFolder'=> "Config/",
                 'app'=>'Meta',
@@ -38,6 +41,8 @@ class AppPuzzleController{
             ],
 
             'DataCountry'=>[
+                'id'=>"DataCountry",
+                'info'=>"DataCountry.txt",
                 'CopyFolder'=>"DataCountry",
                 'appFolder'=> "Data/",
                 'app'=>'Country',
@@ -54,6 +59,16 @@ class AppPuzzleController{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   IndexModel
+    public function IndexModel(){
+        $rowData = self::ModelTree();
+        return view('AppPlugin.AppPuzzle.index',compact('rowData'));
+    }
+
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # CopyModel
     public function CopyModel($model){
         $modelTree = self::ModelTree();
@@ -65,6 +80,8 @@ class AppPuzzleController{
             self::CopyRouteFile($thisModel);
             self::CopyMigrations($thisModel);
             self::CopySeeder($thisModel);
+            self::CopInfo($thisModel);
+            return redirect()->back();
         }
 
 
@@ -182,7 +199,20 @@ class AppPuzzleController{
         }
     }
 
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   CopInfo
+    public function CopInfo($thisModel){
+        if(isset($thisModel['info']) and $thisModel['info'] != null ){
+            $CopyFolder = $this->mainFolder.$thisModel['CopyFolder'].'/'.$this->folderDate ;
+            $fileName = $thisModel['info'];
+            $filePath = app_path('AppPlugin/AppPuzzle/Files/'.$fileName);
+            if(File::isFile($filePath)){
+                $destinationFolder = $CopyFolder;
+                self::folderMakeDirectory($destinationFolder);
+                File::copy($filePath,$destinationFolder."/".$fileName);
+            }
+        }
+    }
 
 
 
@@ -255,6 +285,7 @@ class AppPuzzleController{
             File::makeDirectory($destinationFolder, 0777, true, true);
         }
     }
+
 
 
 }
