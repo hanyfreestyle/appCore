@@ -26,4 +26,14 @@ PermissionSeeder.php
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Menu
-
+        [
+            'view'=>  IsMenuView($MenuView,"Data"),
+            'sel_routs'=>'data',
+            'type'=>'many',
+            'text'=> 'admin/config/core.app_menu_data',
+            'icon'=>'fas fa-server',
+            'roleView'=>'data_view',
+            'submenu'=>[
+                ['roleView'=>'country_view','text'=> 'admin/data/country.menu','url'=> 'data.Country.index','sel_routs'=> 'Country','icon'=>'fas fa-globe-americas'],
+            ],
+        ],  #Data
