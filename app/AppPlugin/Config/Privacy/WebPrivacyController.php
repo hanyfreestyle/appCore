@@ -46,7 +46,7 @@ class WebPrivacyController extends AdminMainController{
         $pageData['Trashed'] = WebPrivacy::onlyTrashed()->count();
 
         $rowData = self::getSelectQuery(WebPrivacy::defquery());
-        return view('AppPlugin.WebPrivacy.index',compact('pageData','rowData'));
+        return view('AppPlugin.ConfigPrivacy.index',compact('pageData','rowData'));
     }
 
 
@@ -56,7 +56,7 @@ class WebPrivacyController extends AdminMainController{
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $rowData = new WebPrivacy();
-        return view('AppPlugin.WebPrivacy.form',compact('rowData','pageData'));
+        return view('AppPlugin.ConfigPrivacy.form',compact('rowData','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -65,7 +65,7 @@ class WebPrivacyController extends AdminMainController{
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
         $rowData = WebPrivacy::findOrFail($id);
-        return view('AppPlugin.WebPrivacy.form',compact('rowData','pageData'));
+        return view('AppPlugin.ConfigPrivacy.form',compact('rowData','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -97,7 +97,7 @@ class WebPrivacyController extends AdminMainController{
         $pageData = $this->pageData;
         $pageData['ViewType'] = "deleteList";
         $rowData = self::getSelectQuery(WebPrivacy::onlyTrashed());
-        return view('AppPlugin.WebPrivacy.index',compact('pageData','rowData'));
+        return view('AppPlugin.ConfigPrivacy.index',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -110,7 +110,7 @@ class WebPrivacyController extends AdminMainController{
         $WebPrivacy = WebPrivacy::with('translation')
             ->orderBy('postion','asc')
             ->get();
-        return view('AppPlugin.WebPrivacy.sort',compact('WebPrivacy','pageData'));
+        return view('AppPlugin.ConfigPrivacy.sort',compact('WebPrivacy','pageData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
