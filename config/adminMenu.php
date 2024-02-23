@@ -88,6 +88,18 @@ $MenuView = [
             ],
         ],  #Setting
 
+        [
+            'view'=> IsMenuView($MenuView,"AdminLang"),
+            'sel_routs'=>'AppPuzzle',
+            'type'=>'one',
+            'text'=> 'AppPuzzle',
+            'url'=> 'AppPuzzle.IndexModel',
+            'icon'=>'fas fa-puzzle-piece',
+            'roleView'=>'adminlang_view',
+        ],  #Admin Lang
+
+
     ],
 
 ];
+

@@ -14,7 +14,7 @@
                         <thead>
                         <tr>
                             <th class="TD_100">CatId</th>
-                            <th class="TD_100"></th>
+{{--                            <th class="TD_100"></th>--}}
                             <th class="TD_100"></th>
                             <th class="TD_100"></th>
 
@@ -24,7 +24,7 @@
                         @foreach($rowData as $row)
                             <tr>
                                 <td>{{$row['id']}}</td>
-                                <td class="td_action"><x-admin.form.action-button url="{{route('AppPuzzle.InfoModel',$row['id'])}}" print-lable="Update Code" :tip="false" icon="fas fa-search" /></td>
+{{--                                <td class="td_action"><x-admin.form.action-button url="{{route('AppPuzzle.InfoModel',$row['id'])}}" print-lable="Update Code" :tip="false" icon="fas fa-search" /></td>--}}
                                 <td class="td_action"><x-admin.form.action-button url="{{route('AppPuzzle.Copy',$row['id'])}}" print-lable="Copy Files"  :tip="false" bg="dark" icon="fas fa-file-import"/></td>
                                 <td class="td_action"><x-admin.form.action-button url="{{route('AppPuzzle.Remove',$row['id'])}}" print-lable="Delete Files"  :tip="false" bg="d" icon="fas fa-trash-alt"/></td>
                             </tr>
