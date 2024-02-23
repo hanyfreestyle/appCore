@@ -1,17 +1,14 @@
 <?php
-namespace App\Http\Controllers\data;
+namespace App\AppPlugin\Data\Country;
 
 use App\Http\Controllers\AdminMainController;
-use App\Http\Requests\admin\data\CountryRequest;
 use App\Http\Traits\CrudTraits;
-use App\Models\data\Country;
-use App\Models\data\CountryTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class CountryController extends AdminMainController{
-     use CrudTraits;
+    use CrudTraits;
 
     function __construct(Country $model){
         parent::__construct();
@@ -59,7 +56,7 @@ class CountryController extends AdminMainController{
             $rowData = self::getSelectQuery(self::FilterQ(Country::query(),$session));
         }
 
-        return view('admin.data.country.index',compact('pageData','rowData'));
+        return view('AppPlugin.DataCountry.index',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -68,7 +65,7 @@ class CountryController extends AdminMainController{
         $pageData = $this->pageData;
         $pageData['ViewType'] = "deleteList";
         $rowData = self::getSelectQuery(Country::onlyTrashed());
-        return view('admin.data.country.index',compact('pageData','rowData'));
+        return view('AppPlugin.DataCountry.index',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -77,7 +74,7 @@ class CountryController extends AdminMainController{
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $rowData = Country::findOrNew(0);
-        return view('admin.data.country.form',compact('pageData','rowData'));
+        return view('AppPlugin.DataCountry.form',compact('pageData','rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -86,7 +83,7 @@ class CountryController extends AdminMainController{
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
         $rowData = Country::where('id','=',$id)->firstOrFail();
-        return view('admin.data.country.form',compact('pageData','rowData'));
+        return view('AppPlugin.DataCountry.form',compact('pageData','rowData'));
     }
 
 
@@ -112,7 +109,7 @@ class CountryController extends AdminMainController{
                 $saveData->area_km = $request->input('area_km');
                 $saveData->save();
 
-               foreach ( config('app.admin_lang') as $key=>$lang) {
+                foreach ( config('app.admin_lang') as $key=>$lang) {
                     $saveTranslation = CountryTranslation::where('country_id',$saveData->id)->where('locale',$key)->firstOrNew();
                     $saveTranslation->name = $request->input($key.'.name');
                     $saveTranslation->capital = $request->input($key.'.capital');

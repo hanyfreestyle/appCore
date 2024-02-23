@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Requests\admin\data;
+namespace App\AppPlugin\Data\Country;
 
-use App\Helpers\AdminHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 

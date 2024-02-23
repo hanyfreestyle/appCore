@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\data\CountryController;
+
+use App\AppPlugin\Data\Country\CountryController;
 use Illuminate\Support\Facades\Route;
 
 
