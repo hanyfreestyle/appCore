@@ -13,8 +13,6 @@ $MenuView = [
  return [
     'menu' => [
 
-
-
         [
             'view'=>  IsMenuView($MenuView,"LeadsFrom"),
             'sel_routs'=>'LeadsFrom',
@@ -90,7 +88,6 @@ $MenuView = [
 
             ],
         ],  #Setting
-
         [
             'view'=> IsMenuView($MenuView,"AdminLang"),
             'sel_routs'=>'AppPuzzle',
