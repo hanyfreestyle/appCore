@@ -51,6 +51,21 @@ class AppPuzzleController{
                 'seeder'=> ['config_meta_tags.sql','config_setting_translations.sql'],
             ],
 
+            'ConfigBranch'=>[
+                'id'=>"ConfigBranch",
+                'info'=>"ConfigBranch.txt",
+                'CopyFolder'=>"ConfigBranch",
+                'appFolder'=> "Config/",
+                'app'=>'Branche',
+                'view'=>'ConfigBranch',
+                'routeFolder'=> "config/",
+                'route'=>'Branch.php',
+                'migrations'=> ['2019_12_14_000017_create_branches_table.php','2019_12_14_000018_create_branch_translations_table.php'],
+                'seeder'=> ['config_branches.sql','config_branch_translations.sql'],
+                'adminLang'=> "admin/config/",
+                'adminLangFile'=> "branch.php",
+            ],
+
             'DataCountry'=>[
                 'id'=>"DataCountry",
                 'info'=>"DataCountry.txt",
