@@ -80,8 +80,8 @@ class AppPuzzleController{
                 'route'=>'contactUs.php',
                 'migrations'=> ['2019_12_14_000013_create_contact_us_forms_table.php'],
                 'seeder'=> ['leads_contact_us.sql'],
-//                'adminLang'=> "admin/",
-//                'adminLangFile'=> "newsletter.php",
+                'adminLang'=> "admin/config/",
+                'adminLangFile'=> "leadForm.php",
             ],
 
 
