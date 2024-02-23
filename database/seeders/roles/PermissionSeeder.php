@@ -37,6 +37,7 @@ class PermissionSeeder extends Seeder
             ['cat_id'=> '3', 'name' => 'weblang_view','name_ar'=>'ملفات لغة الموقع','name_en'=>'Web Lang File'],
             ['cat_id'=> '3', 'name' => 'config_web_privacy','name_ar'=>'سياسية الاستخدام','name_en'=>'Web Privacy'],
             ['cat_id'=> '3', 'name' => 'sitemap_view','name_ar'=>'SiteMap','name_en'=>'SiteMap'],
+            ['cat_id'=> '3', 'name' => 'config_branch','name_ar'=>'الفروع','name_en'=>'Branch'],
 
             ['cat_id'=> '4', 'name' => 'data_view','name_ar'=>'عرض','name_en'=>'View'],
             ['cat_id'=> '4', 'name' => 'data_add','name_ar'=>'اضافة','name_en'=>'Add'],

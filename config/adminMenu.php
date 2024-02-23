@@ -86,6 +86,8 @@ $MenuView = [
                 ['roleView'=>'config_web_privacy','text'=> 'admin/config/core.app_menu_web_privacy','url'=> 'config.WebPrivacy.index','sel_routs'=> 'WebPrivacy','icon'=>'fas fa-file-alt'],
                 ['roleView'=>'config_newsletter','text'=> 'admin/newsletter.menu','url'=> 'config.NewsLetter.index','sel_routs'=> 'NewsLetter','icon'=>'fas fa-mail-bulk'],
                 ['roleView'=>'sitemap_view','text'=> 'admin/config/sitemap.app_menu','url'=> 'config.SiteMap.index','sel_routs'=> 'SiteMap','icon'=>'fas fa-sitemap'],
+                ['roleView'=>'config_branch','text'=> 'admin/config/branch.app_menu','url'=> 'config.Branch.index','sel_routs'=> 'Branch','icon'=>'fas fa-map-signs'],
+
             ],
         ],  #Setting
 

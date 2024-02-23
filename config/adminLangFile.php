@@ -2,6 +2,7 @@
 return [
    'adminFile' => [
        'core'=> ['id'=> 'core' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'core','name'=>'Admin Core' ],
+       'Branch'=> ['id'=> 'Branch' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'branch','name'=>'Branch' ],
        'filter'=> ['id'=> 'filter' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'filter','name'=>'Filter Form' ],
        'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'leadForm','name'=>'Lead Form' ],
        'sitemap'=> ['id'=> 'sitemap' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'sitemap','name'=>'SiteMap' ],
@@ -17,6 +18,7 @@ return [
        'Menu'=> ['id'=> 'Menu' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'menu','name'=>'Admin Menu' ],
        'newsletter'=> ['id'=> 'newsletter' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'newsletter','name'=>'Newsletter'],
        'country'=> ['id'=> 'country' , 'group'=>'admin' , 'sub_dir'=> 'data' , 'file_name'=> 'country','name'=>'Country' ],
+
 
 //       'dataTable'=> ['id'=> 'dataTable' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'dataTable','name'=>'dataTable' ],
     ],
