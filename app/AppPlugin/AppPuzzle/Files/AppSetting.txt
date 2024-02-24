@@ -9,6 +9,7 @@ DatabaseSeeder.php
 use App\AppPlugin\Config\Apps\SeederAppMenu;
 use App\AppPlugin\Config\Apps\SeederAppMenuTranslation;
 use App\AppPlugin\Config\Apps\SeederAppSetting;
+use App\AppPlugin\Config\Apps\SeederAppSettingTranslation;
 
 $this->call(SeederAppSetting::class);
 $this->call(SeederAppSettingTranslation::class);
@@ -27,7 +28,7 @@ PermissionSeeder.php
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Menu
-[
+ [
             'view'=> IsMenuView($MenuView,"AppSetting"),
             'sel_routs'=>'App',
             'type'=>'many',
@@ -50,8 +51,8 @@ PermissionSeeder.php
                     'icon'=>'fas fa-camera-retro'
                 ],
                 [
-                    'sel_routs'=> 'AppMenuList',
-                    'url'=> 'App.AppMenuList.index',
+                    'sel_routs'=> 'AppMenu',
+                    'url'=> 'App.AppMenu.index',
                     'roleView'=>'AppSetting_view',
                     'text'=> 'admin/config/apps.menu_app_menu',
                     'icon'=>'fas fa-list-ul'
@@ -76,7 +77,7 @@ PermissionSeeder.php
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Admin Lang
-
+'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'apps','name'=>'AppSetting' ],
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #    Web Lang

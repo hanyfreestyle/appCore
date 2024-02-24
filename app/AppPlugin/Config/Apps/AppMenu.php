@@ -8,15 +8,15 @@ use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AppMenu extends Model implements TranslatableContract{
+class AppMenu extends Model implements TranslatableContract {
 
-    use Translatable;
-    use SoftDeletes;
+  use Translatable;
+  use SoftDeletes;
 
-    protected $table = "config_app_menus";
-    public $translatedAttributes = ['url','label','icon','title'];
-    protected $fillable = ['id','type'];
-    protected $primaryKey = 'id';
-    protected $translationForeignKey = 'menu_id';
-    public $timestamps = false;
+  protected $table = "config_app_menus";
+  public $translatedAttributes = ['url', 'label', 'icon', 'title'];
+  protected $fillable = ['id', 'type'];
+  protected $primaryKey = 'id';
+  protected $translationForeignKey = 'menu_id';
+  public $timestamps = false;
 }

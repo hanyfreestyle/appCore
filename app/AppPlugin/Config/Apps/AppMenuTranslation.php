@@ -6,8 +6,8 @@ namespace App\AppPlugin\Config\Apps;
 use Illuminate\Database\Eloquent\Model;
 
 class AppMenuTranslation extends Model {
-    public $timestamps = false;
-    protected $table = "config_app_menu_translations";
-    protected $fillable = ['url','label','icon','title'];
+  public $timestamps = false;
+  protected $table = "config_app_menu_translations";
+  protected $fillable = ['url', 'label', 'icon', 'title'];
 
 }

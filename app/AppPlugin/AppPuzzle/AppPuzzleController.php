@@ -25,6 +25,28 @@ class AppPuzzleController{
 #|||||||||||||||||||||||||||||||||||||| #   ModelTree
     public function ModelTree(){
         $modelTree = [
+
+            'ConfigApps'=>[
+                'id'=>"ConfigApps",
+                'info'=>"AppSetting.txt",
+                'CopyFolder'=>"ConfigApps",
+                'appFolder'=> "Config/",
+                'app'=>'Apps',
+                'view'=>'ConfigApp',
+                'routeFolder'=> "config/",
+                'route'=>'appSetting.php',
+                'migrations'=> [
+                    '2019_12_14_000019_create_app_settings_table.php',
+                    '2019_12_14_000020_create_app_setting_translations_table.php',
+                    '2019_12_14_000021_create_app_menus_table.php',
+                    '2019_12_14_000022_create_app_menu_translations_table.php',
+                ],
+                'seeder'=> ['config_app_menu_translations.sql','config_app_menus.sql','config_app_setting_translations.sql','config_app_settings.sql'],
+                'adminLang'=> "admin/config/",
+                'adminLangFile'=> "apps.php",
+            ],
+
+
             'ConfigMeta'=>[
                 'id'=>"ConfigMeta",
                 'info'=>"ConfigMeta.txt",
