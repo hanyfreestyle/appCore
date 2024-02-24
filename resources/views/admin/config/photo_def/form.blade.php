@@ -1,22 +1,20 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
+  <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
 
-    <x-admin.hmtl.section>
-        <x-admin.card.def :page-data="$pageData">
+  <x-admin.hmtl.section>
+    <x-admin.card.def :page-data="$pageData">
 
-            <form action="{{route('config.defPhoto.storeUpdate',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
-                @csrf
-                <x-admin.form.input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-3"
-                              value="{{old('cat_id',$rowData->cat_id)}}" inputclass="dir_en"/>
+      <form action="{{route('config.defPhoto.storeUpdate',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
+        @csrf
+        <x-admin.form.input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-3"
+                            value="{{old('cat_id',$rowData->cat_id)}}" inputclass="dir_en"/>
+        <hr>
+        <x-admin.form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false"/>
 
-
-                <hr>
-                <x-admin.form.upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData" :multiple="false" />
-
-                <x-admin.form.submit-role-back :page-data="$pageData" />
-            </form>
-        </x-admin.card.def>
-   </x-admin.hmtl.section>
+        <x-admin.form.submit-role-back :page-data="$pageData"/>
+      </form>
+    </x-admin.card.def>
+  </x-admin.hmtl.section>
 @endsection

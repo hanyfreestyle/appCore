@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/app/setting', [AppSettingController::class, 'AppSetting'])->name('App.AppSetting.form');
 Route::post('/app/settingUpdate', [AppSettingController::class, 'AppSettingUpdate'])->name('App.AppSetting.AppSettingUpdate');
 Route::get('/app/photo', [AppSettingController::class, 'AppPhotos'])->name('App.AppPhotos.form');
+Route::post('/app/photoUpdate', [AppSettingController::class, 'photoUpdate'])->name('App.photoUpdate');
 
 Route::get('/app/MenuList', [AppMenuController::class, 'index'])->name('App.AppMenu.index');
 Route::get('/app/Menu/create',[AppMenuController::class,'create'])->name('App.AppMenu.create');

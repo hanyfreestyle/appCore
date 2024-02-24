@@ -17,21 +17,4 @@ class AppSetting extends Model implements TranslatableContract{
     public $translatedAttributes = ['AppName','whatsAppMessage'];
     protected $translationForeignKey = 'setting_id';
 
-
-
-
-//    protected $fillable = [
-//        'status','baseUrl','mobilePrefix','prefix','logo','SideLogo', 'AppName', 'ColorDark', 'ColorLight',
-//        'AppBarIconColor', 'BackGroundColor',
-//        'SplashColor', 'PreloadingColor','StatueBArColor', 'AppBarColor', 'AppBarColorText', 'sideMenuText', 'sideMenuColor',
-//        'mainScreenScale', 'sideMenuAngle','sideMenuStyle', 'AppTheme',
-//        'facebook', 'twitter', 'youtube', 'instagram', 'linkedin',
-//        'whatsAppMessage','whatsAppNumber','whatsapp_key',
-//        'whatsAppKey', 'telegram_key', 'telegram_group', 'telegram_phone',
-//    ];
-
-
-
-
-
 }

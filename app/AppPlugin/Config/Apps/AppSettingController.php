@@ -2,8 +2,14 @@
 
 namespace App\AppPlugin\Config\Apps;
 
+
+use App\Helpers\AdminHelper;
+use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 class AppSettingController extends AdminMainController{
@@ -49,7 +55,6 @@ class AppSettingController extends AdminMainController{
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function AppSettingUpdate(AppSettingRequest $request){
-
 
         $saveData= AppSetting::findorfail('1');
         $saveData->status = intval((bool) $request->input( 'status'));
@@ -109,6 +114,32 @@ class AppSettingController extends AdminMainController{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    public function photoUpdate (AppPhotoRequest $request,$id='0'){
+
+        $saveData = AppSetting::findOrFail(1);
+        $fildeName = $request->input('cat_id');
+
+        $saveImgData = new PuzzleUploadProcess();
+        $saveImgData->setCountOfUpload('1');
+        $saveImgData->setUploadDirIs('app-photo');
+        $saveImgData->setnewFileName($request->cat_id);
+        $saveImgData->UploadOne($request);
+
+        if(count( $saveImgData->sendSaveData) != 0){
+            if(File::exists($saveData->$fildeName)){
+                File::delete($saveData->$fildeName);
+            }
+            $saveData->$fildeName = $saveImgData->sendSaveData['photo']['file_name'];
+            $saveData->save();
+            self::ClearCash();
+        }
+
+
+        return redirect()->back();
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   AppProfile
     public function AppProfile(){
         $pageData = $this->pageData;
@@ -121,7 +152,6 @@ class AppSettingController extends AdminMainController{
             $pageData['card'] = __('admin/config/apps.menu_app_cart');
             $menu = AppMenu::where('type','cart')->firstOrFail();
         }
-
 
         return view('AppPlugin.ConfigApp.form')->with(compact('pageData','menu'));
     }
@@ -145,133 +175,5 @@ class AppSettingController extends AdminMainController{
         }
         return redirect()->back();
     }
-
-
-
-
-
-/*
-
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     AppProfile
-    public function AppMenuList()
-    {
-        $menus = AppMenu::where('type','side')->orderBy('postion')->paginate(20);
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.app_setting'),
-            'cardTitle'=>__('admin/menu.app_menu'),
-        ];
-        return view('admin.app.menu_index')->with(compact('pageData','menus'));
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     create
-    public function create()
-    {
-        $menu = AppMenu::findOrNew(0);
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.app_setting'),
-            'cardTitle'=>__('admin/menu.app_menu'),
-            'route'=> route('App.AppMenuList.update',intval($menu->id)),
-        ];
-        return view('admin.app.profile_form')->with(compact('pageData','menu'));
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     create
-    public function edit($id)
-    {
-        $menu = AppMenu::findOrNew($id);
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.app_setting'),
-            'cardTitle'=>__('admin/menu.app_menu'),
-            'route'=> route('App.AppMenuList.update',intval($menu->id)),
-        ];
-        return view('admin.app.profile_form')->with(compact('pageData','menu'));
-    }
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function storeUpdate(AppMenuRequest $request)
-    {
-
-        $id = $request->input('id');
-        $menu = AppMenu::findOrNew($id);
-        $menu->type = 'side';
-        $menu->save();
-
-        foreach ( config('app.shop_lang') as $key=>$lang) {
-            $saveTranslation = AppMenuTranslation::where('menu_id',$menu->id)->where('locale',$key)->firstOrNew();
-            $saveTranslation->menu_id = $menu->id;
-            $saveTranslation->locale = $key;
-            $saveTranslation->url = $request->input($key.'.url');
-            $saveTranslation->label  = $request->input($key.'.label');
-            $saveTranslation->icon = $request->input($key.'.icon');
-            $saveTranslation->title = intval((bool) $request->input( 'title'));
-            $saveTranslation->save();
-        }
-
-        return redirect()->route('App.AppMenuList.index');
-
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     destroy
-    public function destroy($id)
-    {
-        $deleteRow = AppMenu::findOrFail($id);
-        $deleteRow->delete();
-        return back()->with('confirmDelete',"");
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CategorySort
-    public function Sort()
-    {
-
-        $menus = AppMenu::where('type','side')->orderBy('postion')->get();
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.app_setting'),
-            'cardTitle'=>__('admin/menu.app_menu'),
-        ];
-
-        return view('admin.app.menu_sort',compact('pageData','menus'));
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CategorySaveSort
-    public function SaveSort(Request $request){
-        $positions = $request->positions;
-        foreach($positions as $position) {
-            $id = $position[0];
-            $newPosition = $position[1];
-            $saveData =  AppMenu::findOrFail($id) ;
-            $saveData->postion = $newPosition;
-            $saveData->save();
-        }
-
-        return response()->json(['success'=>$positions]);
-    }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

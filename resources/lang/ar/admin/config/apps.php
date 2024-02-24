@@ -16,4 +16,6 @@ return
 	'menu_app_setting' => 'اعدادات التطبيق',
 	'set_app_name' => 'أسم التطبيق',
 	'set_status' => 'حالة التطبيق',
+	'photo_logo' => 'الشعار',
+	'photo_side_logo' => 'شعار القائمة',
 ];

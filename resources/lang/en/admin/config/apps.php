@@ -14,6 +14,8 @@ return
 	'menu_app_photos' => 'Logo &amp; Photos',
 	'menu_app_profile' => 'Profile Url',
 	'menu_app_setting' => 'App Setting',
-	'set_app_name' => '',
-	'set_status' => '',
+	'set_app_name' => 'Application name',
+	'set_status' => 'Application status',
+	'photo_logo' => 'Logo',
+	'photo_side_logo' => 'Side Logo',
 ];
