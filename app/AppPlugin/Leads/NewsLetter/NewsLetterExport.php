@@ -13,36 +13,36 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
 
-class NewsLetterExport implements FromQuery , ShouldAutoSize ,WithMapping ,WithHeadings {
-     use Exportable ;
-    protected $request;
+class NewsLetterExport implements FromQuery, ShouldAutoSize, WithMapping, WithHeadings {
+  use Exportable;
 
-    public function __construct($request){
-        $this->request = $request;
-    }
+  protected $request;
 
-    public function query(){
-        $session =  Session::get($this->request->input('formName'));
-        $GetData = AdminMainController::FilterQ(NewsLetter::query(),$session,'created_at|ASC') ;
-        return $GetData ;
-    }
+  public function __construct($request) {
+    $this->request = $request;
+  }
 
-    public function map($GetData) :array{
+  public function query() {
+    $session = Session::get($this->request->input('formName'));
+    $GetData = AdminMainController::FilterQ(NewsLetter::query(), $session, 'created_at|ASC');
+    return $GetData;
+  }
 
-        return [
-            $GetData->id,
-            $GetData->email,
-            Carbon::parse($GetData->created_at)->format("d-m-Y"),
-        ];
-    }
+  public function map($GetData): array {
 
-    public function headings(): array{
+    return [
+      $GetData->id,
+      $GetData->email,
+      Carbon::parse($GetData->created_at)->format("d-m-Y"),
+    ];
+  }
 
-        return [
-            '#',
-            __('admin/newsletter.t_email'),
-            __('admin/newsletter.t_date_add'),
-        ];
-    }
+  public function headings(): array {
+    return [
+      '#',
+      __('admin/newsletter.t_email'),
+      __('admin/newsletter.t_date_add'),
+    ];
+  }
 
 }
