@@ -52,6 +52,12 @@ class PermissionSeeder extends Seeder
             ['cat_id'=> '5', 'name' => 'leads_export','name_ar'=>'تصدير','name_en'=>'Export'],
             ['cat_id'=> '5', 'name' => 'leads_delete','name_ar'=>'حذف','name_en'=>'Delete'],
 
+            ['cat_id'=> '6', 'name' => 'AppSetting_view','name_ar'=>'عرض','name_en'=>'View'],
+            ['cat_id'=> '6', 'name' => 'AppSetting_add','name_ar'=>'اضافة','name_en'=>'Add'],
+            ['cat_id'=> '6', 'name' => 'AppSetting_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+            ['cat_id'=> '6', 'name' => 'AppSetting_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+            ['cat_id'=> '6', 'name' => 'AppSetting_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
+
         ];
 
         $countData =  Permission::all()->count();

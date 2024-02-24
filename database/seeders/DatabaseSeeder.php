@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\AppPlugin\Config\Apps\SeederAppMenu;
+use App\AppPlugin\Config\Apps\SeederAppMenuTranslation;
+use App\AppPlugin\Config\Apps\SeederAppSetting;
+use App\AppPlugin\Config\Apps\SeederAppSettingTranslation;
 use App\AppPlugin\Config\Branche\SeederBranch;
 use App\AppPlugin\Config\Branche\SeederBranchTranslation;
 use App\AppPlugin\Config\Meta\SeederMetaTag;
@@ -51,6 +55,11 @@ class DatabaseSeeder extends Seeder
         $this->call(SeederContactUsForm::class);
         $this->call(SeederBranch::class);
         $this->call(SeederBranchTranslation::class);
+
+        $this->call(SeederAppSetting::class);
+        $this->call(SeederAppSettingTranslation::class);
+        $this->call(SeederAppMenu::class);
+        $this->call(SeederAppMenuTranslation::class);
 
     }
 }

@@ -17,6 +17,9 @@ class Input extends Component
     public $colrow;
     public $dir;
     public $labelview;
+    public $row;
+    public $col;
+    public $tdir;
 
     public function __construct(
         $type = 'text', $id = null, $name = null,
@@ -25,10 +28,13 @@ class Input extends Component
         $value = null, $disabled = false, $required = false,
         $step = null, $max = null, $maxlength = null, $pattern = null,
         $requiredSpan = true,
-        $colrow ="",
+        $colrow = " col-lg-12 ",
         $horizontalLabel =false,
         $dir ="",
         $labelview= true,
+        $row = null,
+        $col = null,
+        $tdir = null,
     )
     {
         $this->type = $type;
@@ -41,7 +47,7 @@ class Input extends Component
         $this->placeholder = $placeholder;
         $this->topclass = $topclass;
         $this->inputclass = $inputclass;
-        $this->value = $value;
+
         $this->required = $required;
         $this->disabled = $disabled;
         $this->step = $step;
@@ -53,6 +59,25 @@ class Input extends Component
         $this->colrow = $colrow;
         $this->dir = $dir;
         $this->labelview = $labelview;
+
+        if($row != null){
+            $printName = $this->name ;
+            $this->value = old($printName,$row->$printName);
+        }else{
+            $this->value = $value;
+        }
+
+        if($col != null){
+            $this->colrow = " col-lg-".$col ;
+        }else{
+            $this->colrow = $colrow;
+        }
+
+        if($tdir != null){
+            $this->tdir = "dir_".$tdir;
+        }
+
+
     }
 
     public function render(): View|Closure|string

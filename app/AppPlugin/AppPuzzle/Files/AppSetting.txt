@@ -1,0 +1,81 @@
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Route
+RouteServiceProvider.php
+Route::middleware('web')->group(base_path('routes/AppPlugin/config/appSetting.php'));
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Seeder
+DatabaseSeeder.php
+use App\AppPlugin\Config\Apps\SeederAppMenu;
+use App\AppPlugin\Config\Apps\SeederAppMenuTranslation;
+use App\AppPlugin\Config\Apps\SeederAppSetting;
+
+$this->call(SeederAppSetting::class);
+$this->call(SeederAppMenu::class);
+$this->call(SeederAppMenuTranslation::class);
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Permission
+PermissionSeeder.php
+['cat_id'=> '6', 'name' => 'AppSetting_view','name_ar'=>'عرض','name_en'=>'View'],
+['cat_id'=> '6', 'name' => 'AppSetting_add','name_ar'=>'اضافة','name_en'=>'Add'],
+['cat_id'=> '6', 'name' => 'AppSetting_edit','name_ar'=>'تعديل','name_en'=>'Edit'],
+['cat_id'=> '6', 'name' => 'AppSetting_delete','name_ar'=>'حذف','name_en'=>'Delete'],
+['cat_id'=> '6', 'name' => 'AppSetting_restore','name_ar'=>'استعادة المحذوف','name_en'=>'Restore'],
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Menu
+[
+            'view'=> IsMenuView($MenuView,"AppSetting"),
+            'sel_routs'=>'App',
+            'type'=>'many',
+            'text'=> 'admin/config/apps.menu_app_setting',
+            'icon'=>'fab fa-apple',
+            'roleView'=>'AppSetting_view',
+            'submenu'=>[
+                [
+                    'sel_routs'=> 'AppSetting',
+                    'url'=> 'App.AppSetting.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_config',
+                    'icon'=>'fas fa-cogs'
+                ],
+                [
+                    'sel_routs'=> 'AppPhotos',
+                    'url'=> 'App.AppPhotos.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_photos',
+                    'icon'=>'fas fa-camera-retro'
+                ],
+                [
+                    'sel_routs'=> 'AppMenuList',
+                    'url'=> 'App.AppMenuList.index',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_menu',
+                    'icon'=>'fas fa-list-ul'
+                ],
+                [
+                    'sel_routs'=> 'AppProfile',
+                    'url'=> 'App.AppProfile.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_profile',
+                    'icon'=>'fas fa-user-tie'
+                ],
+                [
+                    'sel_routs'=> 'AppCart',
+                    'url'=> 'App.AppCart.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_cart',
+                    'icon'=>'fas fa-shopping-cart'
+                ],
+
+            ],
+        ], #App Setting
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Admin Lang
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    Web Lang

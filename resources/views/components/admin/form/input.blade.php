@@ -10,7 +10,7 @@
     @endif
 
     <div class="{{($horizontalLabel) ? 'col-sm-6' : '' }}">
-        <input type="{{$type}}" class="{{$inputclass}} form-control @error($name) is-invalid @enderror"
+        <input type="{{$type}}" class="{{$inputclass}} {{$tdir}} form-control @error($name) is-invalid @enderror"
                id="{{$id}}" name="{{$name}}"  @if($placeholder) placeholder="{{$label}}" @endif
                @if(!is_null($step))
                step="{{$step}}"

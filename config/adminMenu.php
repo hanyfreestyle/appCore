@@ -8,10 +8,58 @@ $MenuView = [
 //    'WebLang'=>false,
 //    'Setting'=>false,
 //    'LeadsFrom'=>false,
+//    'AppSetting'=>false,
 ];
 
- return [
+return [
     'menu' => [
+        [
+            'view'=> IsMenuView($MenuView,"AppSetting"),
+            'sel_routs'=>'App',
+            'type'=>'many',
+            'text'=> 'admin/config/apps.menu_app_setting',
+            'icon'=>'fab fa-apple',
+            'roleView'=>'AppSetting_view',
+            'submenu'=>[
+                [
+                    'sel_routs'=> 'AppSetting',
+                    'url'=> 'App.AppSetting.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_config',
+                    'icon'=>'fas fa-cogs'
+                ],
+                [
+                    'sel_routs'=> 'AppPhotos',
+                    'url'=> 'App.AppPhotos.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_photos',
+                    'icon'=>'fas fa-camera-retro'
+                ],
+                [
+                    'sel_routs'=> 'AppMenuList',
+                    'url'=> 'App.AppMenuList.index',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_menu',
+                    'icon'=>'fas fa-list-ul'
+                ],
+                [
+                    'sel_routs'=> 'AppProfile',
+                    'url'=> 'App.AppProfile.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_profile',
+                    'icon'=>'fas fa-user-tie'
+                ],
+                [
+                    'sel_routs'=> 'AppCart',
+                    'url'=> 'App.AppCart.form',
+                    'roleView'=>'AppSetting_view',
+                    'text'=> 'admin/config/apps.menu_app_cart',
+                    'icon'=>'fas fa-shopping-cart'
+                ],
+
+            ],
+        ], #App Setting
+
 
         [
             'view'=>  IsMenuView($MenuView,"LeadsFrom"),

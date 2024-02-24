@@ -3,6 +3,7 @@ return [
    'adminFile' => [
        'core'=> ['id'=> 'core' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'core','name'=>'Admin Core' ],
        'Branch'=> ['id'=> 'Branch' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'branch','name'=>'Branch' ],
+       'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'apps','name'=>'AppSetting' ],
        'filter'=> ['id'=> 'filter' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'filter','name'=>'Filter Form' ],
        'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'leadForm','name'=>'Lead Form' ],
        'sitemap'=> ['id'=> 'sitemap' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'sitemap','name'=>'SiteMap' ],
