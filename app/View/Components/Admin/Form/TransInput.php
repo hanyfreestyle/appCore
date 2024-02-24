@@ -18,6 +18,7 @@ class TransInput extends Component
     public $reqspan ;
     public $placeholder ;
     public $placeholderPrint ;
+    public $tdir ;
     public function __construct(
         $label = null,
         $name,
@@ -28,6 +29,7 @@ class TransInput extends Component
         $placeholderPrint = "",
         $placeholder = false,
         $reqspan = true,
+        $tdir = null,
     )
     {
         $this->label = $label;
@@ -42,6 +44,12 @@ class TransInput extends Component
         $this->placeholder = $placeholder;
         if($this->placeholder == true){
             $this->placeholderPrint = $this->label;
+        }
+
+        if($tdir != null){
+            $this->tdir = $tdir ;
+        }else{
+            $this->tdir = $dir ;
         }
 
 

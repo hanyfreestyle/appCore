@@ -3,11 +3,8 @@
 namespace App\AppPlugin\Config\Apps;
 
 use App\Http\Controllers\AdminMainController;
-
-
-use App\Models\admin\config\Setting;
-use App\Models\admin\config\SettingTranslation;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 
 class AppSettingController extends AdminMainController{
 
@@ -102,86 +99,61 @@ class AppSettingController extends AdminMainController{
         return redirect()->back();
     }
 
-
-
-/*
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function AppSetting()
-    {
-        $setting = AppSetting::findOrFail(1);
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.setting_web'),
-        ];
-        return view('admin.app.setting_form')->with(compact('pageData','setting'));
-    }
-
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     AppPhotos
-    public function AppPhotos()
-    {
+    public function AppPhotos(){
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
         $setting = AppSetting::findOrFail(1);
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.setting_web'),
-        ];
-        return view('admin.app.photos_form')->with(compact('pageData','setting'));
+        return view('AppPlugin.ConfigApp.app_photo')->with(compact('pageData','setting'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   AppProfile
-    public function AppProfile()
-    {
-        $menu = AppMenu::where('type','user')->firstOrFail();
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.app_setting'),
-            'cardTitle'=>__('admin/menu.app_profile'),
-            'route'=> route('App.AppProfileUpdate'),
-        ];
-        return view('admin.app.profile_form')->with(compact('pageData','menu'));
-    }
+    public function AppProfile(){
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| # AppCart
-    public function AppCart()
-    {
-        $menu = AppMenu::where('type','cart')->firstOrFail();
-        $pageData =[
-            'ViewType'=>"Page",
-            'TitlePage'=>__('admin/menu.app_setting'),
-            'cardTitle'=>__('admin/menu.app_cart'),
-            'route'=> route('App.AppProfileUpdate'),
-        ];
-        return view('admin.app.profile_form')->with(compact('pageData','menu'));
+        if( Route::currentRouteName() == 'App.AppProfile.form'){
+            $pageData['card'] = __('admin/config/apps.menu_app_profile');
+            $menu = AppMenu::where('type','user')->firstOrFail();
+        }elseif(Route::currentRouteName() == 'App.AppCart.form'){
+            $pageData['card'] = __('admin/config/apps.menu_app_cart');
+            $menu = AppMenu::where('type','cart')->firstOrFail();
+        }
+
+
+        return view('AppPlugin.ConfigApp.form')->with(compact('pageData','menu'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
-    public function AppProfileUpdate(AppMenuRequest $request)
-    {
-        // $menu = AppMenu::where('type','profile')->firstOrFail();
-
+    public function AppProfileUpdate(AppMenuRequest $request){
         $id = $request->input('id');
         $menu = AppMenu::findOrFail($id);
+        $menu->is_active = intval((bool) $request->input( 'is_active'));
+        $menu->save();
 
-        foreach ( config('app.shop_lang') as $key=>$lang) {
+        foreach ( config('app.web_lang') as $key=>$lang) {
             $saveTranslation = AppMenuTranslation::where('menu_id',$menu->id)->where('locale',$key)->firstOrNew();
             $saveTranslation->menu_id = $menu->id;
             $saveTranslation->locale = $key;
             $saveTranslation->url = $request->input($key.'.url');
             $saveTranslation->label  = $request->input($key.'.label');
             $saveTranslation->icon = $request->input($key.'.icon');
-            $saveTranslation->title = intval((bool) $request->input( 'title'));
             $saveTranslation->save();
         }
-
         return redirect()->back();
-
     }
+
+
+
+
+
+/*
+
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     AppProfile

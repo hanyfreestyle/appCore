@@ -11,6 +11,7 @@ use App\AppPlugin\Config\Apps\SeederAppMenuTranslation;
 use App\AppPlugin\Config\Apps\SeederAppSetting;
 
 $this->call(SeederAppSetting::class);
+$this->call(SeederAppSettingTranslation::class);
 $this->call(SeederAppMenu::class);
 $this->call(SeederAppMenuTranslation::class);
 

@@ -11,6 +11,7 @@ return new class extends Migration{
             $table->bigIncrements('id');
             $table->enum("type", ['side','user','cart'])->nullable();
             $table->integer('postion')->default(0);
+            $table->integer('is_active')->default(1);
             $table->softDeletes();
         });
     }

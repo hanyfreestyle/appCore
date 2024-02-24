@@ -36,8 +36,8 @@ return [
                     'icon'=>'fas fa-camera-retro'
                 ],
                 [
-                    'sel_routs'=> 'AppMenuList',
-                    'url'=> 'App.AppMenuList.index',
+                    'sel_routs'=> 'AppMenu',
+                    'url'=> 'App.AppMenu.index',
                     'roleView'=>'AppSetting_view',
                     'text'=> 'admin/config/apps.menu_app_menu',
                     'icon'=>'fas fa-list-ul'
