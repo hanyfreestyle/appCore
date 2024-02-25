@@ -1,14 +1,15 @@
 <?php
 
 $MenuView = [
-//    'Permissions'=>false,
-//    'Update'=>false,
-//    'Data'=>false,
+    'Permissions'=>false,
+    'Update'=>false,
+    'Data'=>false,
 //    'AdminLang'=>false,
-//    'WebLang'=>false,
-//    'Setting'=>false,
-//    'LeadsFrom'=>false,
-//    'AppSetting'=>false,
+    'WebLang'=>false,
+    'Setting'=>false,
+    'LeadsFrom'=>false,
+    'AppSetting'=>false,
+    'AppPuzzle'=>false,
 ];
 
 return [
@@ -59,8 +60,6 @@ return [
 
             ],
         ], #App Setting
-
-
         [
             'view'=>  IsMenuView($MenuView,"LeadsFrom"),
             'sel_routs'=>'LeadsFrom',
@@ -137,14 +136,14 @@ return [
             ],
         ],  #Setting
         [
-            'view'=> IsMenuView($MenuView,"AdminLang"),
+            'view'=> IsMenuView($MenuView,"AppPuzzle"),
             'sel_routs'=>'AppPuzzle',
             'type'=>'one',
             'text'=> 'AppPuzzle',
             'url'=> 'AppPuzzle.IndexModel',
             'icon'=>'fas fa-puzzle-piece',
             'roleView'=>'adminlang_view',
-        ],  #Admin Lang
+        ],  #AppPuzzle
 
 
     ],
