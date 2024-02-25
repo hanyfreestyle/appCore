@@ -12,12 +12,14 @@
         <div class="row">
           <div class="col-9">
             <x-admin.form.select-arr :send-arr="config('adminLangFile.adminFile')" name="selectfile" :sendvalue="$selId"
-                                     label="{{__('admin/config/core.lang_select_file')}}" :labelview="false"/>
+                                     label="{{__('admin.lang_select_file')}}" :labelview="false"/>
           </div>
-          <div class="col-3 dir_button">
-            <x-admin.form.action-button url="{{route('adminlang.edit')}}" print-lable="{{__('admin/config/core.lang_add_new_key')}}"
-                                        size="m" :tip="false" bg="dark"/>
-          </div>
+          @if(config('app.development'))
+            <div class="col-3 dir_button">
+              <x-admin.form.action-button url="{{route('adminlang.edit')}}" print-lable="{{__('admin.lang_add_new_key')}}" size="m"
+                                          :tip="false" bg="dark"/>
+            </div>
+          @endif
         </div>
       </div>
     </div>
@@ -53,7 +55,10 @@
                   <th class="TD_300">{!! $row['name_'.$key] !!}</th>
                 @endforeach
 
-                <td class="TD_20"><x-admin.form.action-button url="{!! route($PrefixRoute.'.edit', ['id'=>$row['filekey'],'key'=>$row['keyVar']] ) !!}" type="edit"/></td>
+                <td class="TD_20">
+                  <x-admin.form.action-button url="{!! route($PrefixRoute.'.edit', ['id'=>$row['filekey'],'key'=>$row['keyVar']] ) !!}"
+                                              type="edit"/>
+                </td>
 
                 <td class="TD_20">
                   <input value="__('{{$row['prefixCopy']}}')" id="custmid_{{$loop->index}}" type="hidden">

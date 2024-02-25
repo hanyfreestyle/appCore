@@ -1,0 +1,30 @@
+<?php
+
+return
+[
+	'button_add' => 'اضافة',
+	'button_add_anther' => 'حفظ و اضافة جديدة',
+	'button_back' => 'للخلف',
+	'button_delete' => 'حذف',
+	'button_delete_all' => 'حذف الكل',
+	'button_delete_content' => 'حذف كل المحتوى',
+	'button_edit' => 'تعديل',
+	'button_edit_back' => 'حفظ والعودة لنفس المحتوى',
+	'button_more_photo' => 'المزيد من الصور',
+	'button_old_photo' => 'البوم الصور السابقة',
+	'button_serach' => 'بحث',
+	'button_sort' => 'ترتيب',
+	'button_update' => 'تحديث',
+	'check_all' => 'تحديد الكل',
+	'check_is_published' => 'منشور',
+	'sel_category' => 'القسم',
+	'text_content' => 'المحتوى',
+	'text_des' => 'الوصف',
+	'text_faq_answer' => 'الاجابة',
+	'text_faq_question' => 'السؤال',
+	'text_g_des' => 'وصف الصفحة',
+	'text_g_title_ar' => 'عنوان الصفحة',
+	'text_password' => 'كلمة المرور',
+	'text_password_confirm' => 'تاكيد كلمة المرور',
+	'text_title' => 'العنوان',
+];

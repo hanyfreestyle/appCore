@@ -4,7 +4,7 @@
   <x-admin.hmtl.breadcrumb :page-data="$pageData"/>
   <x-admin.hmtl.section>
     <x-admin.form.select-arr :send-arr="config('adminLangFile.adminFile')" name="selectfile" :sendvalue="$selId"
-                             label="{{__('admin/config/core.lang_select_file')}}" :labelview="false"/>
+                             label="{{__('admin.lang_select_file')}}" :labelview="false"/>
     <x-admin.card.def :page-data="$pageData">
       @if($ViewData == 1)
         @if(isset($_GET['id']))
@@ -47,7 +47,7 @@
             @if(config('app.development'))
               <div id="newinput"></div>
               <div class="row">
-                <button id="rowAdder" type="button" class="btn btn-dark">{{__('admin/config/core.lang_add_new_key')}}</button>
+                <button id="rowAdder" type="button" class="btn btn-dark">{{__('admin.lang_add_new_key')}}</button>
               </div>
             @endif
             @can('adminlang_view')

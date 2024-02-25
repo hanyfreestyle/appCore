@@ -1,0 +1,30 @@
+<?php
+
+return
+[
+	'button_add' => 'Add',
+	'button_add_anther' => 'Save &amp; Add New',
+	'button_back' => 'Back',
+	'button_delete' => 'Delete',
+	'button_delete_all' => 'Delete All',
+	'button_delete_content' => 'Delete all content',
+	'button_edit' => 'Edit',
+	'button_edit_back' => 'Update &amp; Go Back',
+	'button_more_photo' => 'More Photo',
+	'button_old_photo' => 'Previous Photos',
+	'button_serach' => 'Search',
+	'button_sort' => 'Sort',
+	'button_update' => 'Update',
+	'check_all' => 'Check All',
+	'check_is_published' => 'Published',
+	'sel_category' => 'Category',
+	'text_content' => 'Content',
+	'text_des' => 'Description',
+	'text_faq_answer' => 'Answer',
+	'text_faq_question' => 'Question',
+	'text_g_des' => 'Page Description',
+	'text_g_title_ar' => 'Page Title',
+	'text_password' => 'Password',
+	'text_password_confirm' => 'Confirm Password',
+	'text_title' => 'Title',
+];
