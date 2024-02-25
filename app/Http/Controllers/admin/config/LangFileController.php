@@ -19,7 +19,7 @@ class LangFileController extends AdminMainController {
         $this->PrefixRole = 'adminlang';
         $this->selMenu = "";
         $this->PrefixCatRoute = "";
-        $this->PageTitle = __('admin/config/core.app_menu_lang_admin');
+        $this->PageTitle = __('admin.app_menu_lang_admin');
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
 
         $sendArr = [

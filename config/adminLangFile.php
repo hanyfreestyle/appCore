@@ -1,7 +1,7 @@
 <?php
 return [
    'adminFile' => [
-       'admin'=> ['id'=> 'admin' , 'group'=>null , 'sub_dir'=> null , 'file_name'=> 'core','name'=>'Admin Core' ],
+         'admin'=> ['id'=> 'admin' , 'group'=>null , 'sub_dir'=> null , 'file_name'=> 'admin', 'name'=>'Admin Core' ],
 //       'core'=> ['id'=> 'core' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'core','name'=>'Admin Core' ],
 //       'Branch'=> ['id'=> 'Branch' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'branch','name'=>'Branch' ],
 //       'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'apps','name'=>'AppSetting' ],

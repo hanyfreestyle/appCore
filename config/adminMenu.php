@@ -91,7 +91,7 @@ return [
             'view'=> IsMenuView($MenuView,"AdminLang"),
             'sel_routs'=>'adminlang',
             'type'=>'one',
-            'text'=> 'admin/config/core.app_menu_lang_admin',
+            'text'=> 'admin.app_menu_lang_admin',
             'url'=> 'adminlang.index',
             'icon'=>'fas fa-language',
             'roleView'=>'adminlang_view',
