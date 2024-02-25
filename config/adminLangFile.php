@@ -13,6 +13,7 @@ return [
        'upFilter'=> ['id'=> 'upFilter' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'upFilter','name'=>'Photo Filter' ],
        'settings'=> ['id'=> 'settings' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'settings','name'=>'Settings' ],
        'roles'=> ['id'=> 'roles' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles','name'=>'Permissions' ],
+       'roleName'=> ['id'=> 'roleName' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles_name','name'=>'roleName' ],
        'cash'=> ['id'=> 'cash' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'cash','name'=>'Cash Mass' ],
        'deleteMass'=> ['id'=> 'deleteMass','group'=>'admin', 'sub_dir'=> null ,'file_name'=>'deleteMass','name'=>'Delete Mass' ],
        'webConfig'=> ['id'=> 'webConfig' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'webConfig','name'=>'web Config' ],

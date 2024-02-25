@@ -11,7 +11,7 @@
                     <div class="col-lg-12 mb-3">
                         <div class="row col-lg-12 permission_row">
                             <div class="alert alert-dark alert-dismissible">
-                                {{$modelsNameArr[$groupIndex]['name'] }}
+                                {{$modelsNameArr[$groupIndex]['name'] ?? '' }}
                             </div>
 
                             @foreach($permissions as $permission)

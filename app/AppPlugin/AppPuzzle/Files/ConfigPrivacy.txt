@@ -17,7 +17,7 @@ $this->call(SeederWebPrivacyTranslation::class);
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Permission
 PermissionSeeder.php
-['cat_id'=> '3', 'name' => 'config_web_privacy','name_ar'=>'سياسية الاستخدام','name_en'=>'Web Privacy'],
+['cat_id' => 'config', 'name' => 'config_web_privacy', 'name_ar' => 'سياسية الاستخدام', 'name_en' => 'Web Privacy'],
 
 
 
