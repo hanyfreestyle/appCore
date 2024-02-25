@@ -206,4 +206,12 @@ font-size: 15px;
 
 }
 
+.ThisSelectLang {
 
+
+}
+
+.ThisSelectLang input {
+    background:rgba(255, 0, 0, .3);
+    border: 1px solid rgba(255, 0, 0, .3);
+}

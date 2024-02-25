@@ -223,7 +223,7 @@ return [
 
 
     //'development' => env('APP_DEVELOPMENT'),
-    'development' => true,
+    'development' => env('APP_DEVELOPMENT', true),
     'upload_photo_notes' => true,
     'model_settings_name' => 'model_settings.json',
 

@@ -46,5 +46,5 @@ Route::group(['middleware' => ['UnderConstruction','MinifyHtml','localeSessionRe
     });
 });
 
-
+Route::fallback(RouteNotFoundController::class);
 
