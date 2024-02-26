@@ -5,6 +5,7 @@ namespace App\AppPlugin\AppPuzzle;
 use App\Helpers\AdminHelper;
 use Illuminate\Support\Facades\File;
 
+
 class AppPuzzleController{
 
     public $folderDate;
