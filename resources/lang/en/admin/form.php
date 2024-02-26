@@ -27,4 +27,5 @@ return
 	'text_password' => 'Password',
 	'text_password_confirm' => 'Confirm Password',
 	'text_title' => 'Title',
+	'text_name' => 'Name',
 ];

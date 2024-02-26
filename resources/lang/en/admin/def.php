@@ -2,12 +2,14 @@
 
 return
 [
+	'delete_date' => 'Delete Date',
+	'delete_force' => 'Force Delete',
+	'delete_restor' => 'Restore',
+	'delete_restor_view' => 'View Delete',
 	'form_button_add' => 'Add New',
 	'form_button_edit' => 'Edit',
 	'form_button_submit' => 'Submit',
 	'form_current_photo' => 'Current Photo',
-	'form_name_ar' => 'Name',
-	'form_name_en' => 'Name',
 	'form_photo_upload' => 'Upload Photo',
 	'icon' => 'Icon',
 	'new_new' => 'New Page',
@@ -19,8 +21,4 @@ return
 	'status' => 'Status',
 	'status_active' => 'Active',
 	'status_unactive' => 'UnActive',
-	'delete_restor_view' => 'View Delete',
-	'delete_restor' => 'Restore',
-	'delete_force' => 'Force Delete',
-	'delete_date' => 'Delete Date',
 ];

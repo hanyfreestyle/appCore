@@ -27,4 +27,5 @@ return
 	'text_password' => 'كلمة المرور',
 	'text_password_confirm' => 'تاكيد كلمة المرور',
 	'text_title' => 'العنوان',
+	'text_name' => 'الاسم',
 ];

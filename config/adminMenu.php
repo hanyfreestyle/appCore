@@ -3,7 +3,7 @@
 $MenuView = [
     'Permissions'=>false,
     'Update'=>false,
-    'Data'=>false,
+//    'Data'=>false,
 //    'AdminLang'=>false,
     'WebLang'=>false,
     'Setting'=>false,
@@ -100,7 +100,7 @@ return [
             'view'=> IsMenuView($MenuView,"WebLang"),
             'sel_routs'=>'weblang',
             'type'=>'one',
-            'text'=> 'admin/config/core.app_menu_lang_web',
+            'text'=> 'admin.app_menu_lang_web',
             'url'=> 'weblang.index',
             'icon'=>'fas fa-language',
             'roleView'=>'weblang_view',
@@ -109,11 +109,11 @@ return [
             'view'=>  IsMenuView($MenuView,"Data"),
             'sel_routs'=>'data',
             'type'=>'many',
-            'text'=> 'admin/config/core.app_menu_data',
+            'text'=> 'admin.app_menu_data',
             'icon'=>'fas fa-server',
             'roleView'=>'data_view',
             'submenu'=>[
-                ['roleView'=>'country_view','text'=> 'admin/data/country.menu','url'=> 'data.Country.index','sel_routs'=> 'Country','icon'=>'fas fa-globe-americas'],
+                ['roleView'=>'country_view','text'=> 'admin/dataCountry.app_menu','url'=> 'data.Country.index','sel_routs'=> 'Country','icon'=>'fas fa-globe-americas'],
             ],
         ],  #Data
         [

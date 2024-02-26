@@ -14,4 +14,5 @@ return
 	'multiple_lang_menu_ar' => 'Add Arabic language',
 	'multiple_lang_menu_en' => 'Add English language',
 	'multiple_lang_menu_h1' => 'Add language',
+	'app_menu_data' => 'Manage Data',
 ];

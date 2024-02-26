@@ -14,4 +14,5 @@ return
 	'multiple_lang_menu_ar' => 'اضافة اللغة العربية',
 	'multiple_lang_menu_en' => 'اضافة اللغة الانجليزية',
 	'multiple_lang_menu_h1' => 'اضافة اللغات',
+	'app_menu_data' => 'ادارة البيانات',
 ];

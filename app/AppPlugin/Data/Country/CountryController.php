@@ -17,7 +17,7 @@ class CountryController extends AdminMainController {
     $this->PrefixRole = 'data';
     $this->selMenu = "data.";
     $this->PrefixCatRoute = "";
-    $this->PageTitle = __('admin/data/country.menu');
+    $this->PageTitle = __('admin/dataCountry.app_menu');
     $this->PrefixRoute = $this->selMenu . $this->controllerName;
     $this->model = $model;
     $this->UploadDirIs = 'UploadDirIs';
@@ -57,7 +57,7 @@ class CountryController extends AdminMainController {
       $rowData = self::getSelectQuery(self::FilterQ(Country::query(), $session));
     }
 
-    return view('AppPlugin.DataCountry.index', compact('pageData', 'rowData'));
+    return view('AppPlugin.dataCountry.index', compact('pageData', 'rowData'));
   }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
