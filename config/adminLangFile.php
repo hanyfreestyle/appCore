@@ -2,6 +2,7 @@
 return [
     'adminFile' => [
         'admin'=> ['id'=> 'admin' , 'group'=>null ,'file_name'=> 'admin', 'name_en'=> "Admin Core" ,'name_ar'=> "لوحة التحكم " ],
+        'webConfig'=> ['id'=> 'webConfig' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'webConfig','name'=>'web Config','name_ar'=>'اعدادات الموقع' ],
         'upFilter'=> ['id'=> 'upFilter' , 'group'=>'admin','sub_dir'=> 'config','file_name'=> 'upFilter','name'=>'Photo Filter','name_ar'=>'فلاتر الصور' ],
         'settings'=> ['id'=> 'settings' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'settings','name'=>'Settings','name_ar'=>'اعدادات الاقسام' ],
         'dataTable'=> ['id'=> 'dataTable' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'dataTable','name'=>'dataTable','name_ar'=>'dataTable' ],
@@ -20,7 +21,7 @@ return [
 //       'roles'=> ['id'=> 'roles' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles','name'=>'Permissions','name_ar'=>'' ],
 //       'roleName'=> ['id'=> 'roleName' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles_name','name'=>'roleName','name_ar'=>'' ],
 //       'cash'=> ['id'=> 'cash' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'cash','name'=>'Cash Mass','name_ar'=>'' ],
-//       'webConfig'=> ['id'=> 'webConfig' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'webConfig','name'=>'web Config','name_ar'=>'' ],
+//
 //       'Menu'=> ['id'=> 'Menu' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'menu','name'=>'Admin Menu','name_ar'=>'' ],
 //       'newsletter'=> ['id'=> 'newsletter' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'newsletter','name'=>'Newsletter','name_ar'=>''],
     ],

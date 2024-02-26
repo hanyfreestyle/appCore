@@ -12,6 +12,7 @@ class SelectArr extends Component {
     public $label;
     public $sendvalue;
     public $requiredSpan;
+    public $col;
     public $colrow;
     public $sendArr;
     public $selectType;
@@ -26,7 +27,9 @@ class SelectArr extends Component {
         $label = "",
         $sendvalue = "",
         $requiredSpan = true,
-        $colrow = "col-lg-4",
+        $col = "4",
+        $colrow = null,
+
         $sendArr = array(),
         $selectType = 'normal',
         $printValName = 'name',
@@ -42,6 +45,8 @@ class SelectArr extends Component {
         $this->sendvalue = $sendvalue;
         $this->requiredSpan = $requiredSpan;
         $this->colrow = $colrow;
+        $this->col = "col-lg-".$col;
+
         $this->sendArr = $sendArr;
         $this->selectType = $selectType;
 
@@ -54,10 +59,6 @@ class SelectArr extends Component {
         } else {
             $this->changelang = 'ar';
         }
-
-
-
-
 
     }
 

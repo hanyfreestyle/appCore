@@ -15,6 +15,7 @@ class TransInput extends Component {
     public $newreqname;
     public $value;
 
+    public $addClass;
     public $col;
     public $labelView;
     public $label;
@@ -26,6 +27,7 @@ class TransInput extends Component {
     public $placeholder;
 
     public function __construct(
+        $addClass = null,
         $row = null,
         $key = null,
         $name = '',
@@ -42,6 +44,7 @@ class TransInput extends Component {
         $placeholder = null,
 
     ) {
+        $this->addClass = $addClass;
         $this->row = $row;
         $this->key = $key;
         $this->name = $name;

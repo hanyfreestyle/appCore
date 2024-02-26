@@ -2,6 +2,7 @@
 
 return
 [
+	'app_menu_data' => 'Manage Data',
 	'app_menu_lang_admin' => 'Admin Lang File',
 	'app_menu_lang_web' => 'Web Lang File',
 	'footer_copyright' => 'Copy Right',
@@ -14,5 +15,5 @@ return
 	'multiple_lang_menu_ar' => 'Add Arabic language',
 	'multiple_lang_menu_en' => 'Add English language',
 	'multiple_lang_menu_h1' => 'Add language',
-	'app_menu_data' => 'Manage Data',
+	'app_menu_setting' => 'Settings',
 ];
