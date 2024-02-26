@@ -16,10 +16,14 @@ $this->call(SeederMetaTagTranslationsTable::class);
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Permission
 PermissionSeeder.php
-['cat_id' => 'config', 'name' => 'config_meta_view', 'name_ar' => 'ميتا تاج', 'name_en' => 'Meta'],
+ ['cat_id' => 'config', 'name' => 'config_meta_view', 'name_ar' => 'ميتا تاج', 'name_en' => 'Meta'],
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Menu
+['roleView'=>'config_meta_view','text'=> 'admin/configMeta.app_menu','url'=> 'config.Meta.index','sel_routs'=> 'Meta','icon'=>'fab fa-html5'],
 
-['roleView'=>'config_meta_view','text'=> 'admin/config/core.app_menu_meta_tags','url'=> 'config.Meta.index','sel_routs'=> 'Meta','icon'=>'fab fa-html5'],
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     Lang
+'Meta'=> ['id'=> 'Meta','group'=>'admin', 'file_name'=> 'configMeta','name'=>'Meta Tage','name_ar'=>'ميتا تاج' ],

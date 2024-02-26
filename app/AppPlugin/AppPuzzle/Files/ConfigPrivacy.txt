@@ -1,7 +1,6 @@
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Route
 RouteServiceProvider.php
-
 Route::middleware('web')->group(base_path('routes/AppPlugin/config/webPrivacy.php'));
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -23,11 +22,12 @@ PermissionSeeder.php
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Menu
-['roleView'=>'config_web_privacy','text'=> 'admin/config/core.app_menu_web_privacy','url'=> 'config.WebPrivacy.index','sel_routs'=> 'WebPrivacy','icon'=>'fas fa-file-alt'],
+['roleView'=>'config_web_privacy','text'=> 'admin/configPrivacy.app_menu','url'=> 'config.WebPrivacy.index','sel_routs'=> 'WebPrivacy','icon'=>'fas fa-file-alt'],
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Admin Lang
-
+'Privacy'=> ['id'=> 'Privacy','group'=>'admin', 'file_name'=> 'configPrivacy','name'=>'Privacy','name_ar'=>'سياسية الاستخدام' ],
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #    Web Lang
