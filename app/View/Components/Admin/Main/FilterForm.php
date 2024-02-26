@@ -55,7 +55,7 @@ class FilterForm extends Component
 
         $this->exportBut = $exportBut;
         $this->newRoute = $newRoute;
-        $this->expText = __('admin/config/filter.but_export') ;
+        $this->expText = __('admin/formFilter.but_export') ;
 
         if($newRouteTxt){
             $this->newRouteTxt =  $newRouteTxt;

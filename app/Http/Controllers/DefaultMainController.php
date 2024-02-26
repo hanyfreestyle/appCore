@@ -17,13 +17,13 @@ class DefaultMainController extends Controller{
     public function __construct(){
 
         $Continent_Arr = [
-            "1"=> ['id'=>'AS','name'=> __('admin/data/country.continent_as') ],
-            "2"=> ['id'=>'EU','name'=> __('admin/data/country.continent_eu') ],
-            "3"=> ['id'=>'AF','name'=> __('admin/data/country.continent_af') ],
-            "4"=> ['id'=>'OC','name'=> __('admin/data/country.continent_oc')],
-            "5"=> ['id'=>'NA','name'=> __('admin/data/country.continent_na') ],
-            "6"=> ['id'=>'AN','name'=> __('admin/data/country.continent_an') ],
-            "7"=> ['id'=>'SA','name'=> __('admin/data/country.continent_sa') ],
+            "1"=> ['id'=>'AS','name'=> __('admin/dataCountry.continent_as') ],
+            "2"=> ['id'=>'EU','name'=> __('admin/dataCountry.continent_eu') ],
+            "3"=> ['id'=>'AF','name'=> __('admin/dataCountry.continent_af') ],
+            "4"=> ['id'=>'OC','name'=> __('admin/dataCountry.continent_oc')],
+            "5"=> ['id'=>'NA','name'=> __('admin/dataCountry.continent_na') ],
+            "6"=> ['id'=>'AN','name'=> __('admin/dataCountry.continent_an') ],
+            "7"=> ['id'=>'SA','name'=> __('admin/dataCountry.continent_sa') ],
         ];
         View::share('Continent_Arr', $Continent_Arr);
 

@@ -33,12 +33,12 @@ class Date extends Component{
 
         if($type == 'fromDate'){
             $this->name = 'from_date';
-            $this->label = __('admin/config/filter.fr_date_from');
+            $this->label = __('admin/formFilter.fr_date_from');
             $this->reqspan = false;
 
         }elseif ($type == 'toDate'){
             $this->name = 'to_date';
-            $this->label = __('admin/config/filter.fr_date_to');
+            $this->label = __('admin/formFilter.fr_date_to');
             $this->reqspan = false;
         }else{
             $this->name = $name ;

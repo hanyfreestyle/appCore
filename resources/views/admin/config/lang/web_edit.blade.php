@@ -6,7 +6,7 @@
   <x-admin.hmtl.breadcrumb :page-data="$pageData"/>
   <x-admin.hmtl.section>
     <x-admin.form.select-arr :send-arr="config('adminLangFile.webFile')" name="selectfile" :sendvalue="$selId"
-                             label="{{__('admin.lang_select_file')}}" :labelview="false"/>
+                             :label="__('admin.lang_select_file')" print-val-name="name_{{thisCurrentLocale()}}" :labelview="false"/>
     <x-admin.card.def :page-data="$pageData">
 
       @if($ViewData == 1)

@@ -143,7 +143,7 @@ class LangFileController extends AdminMainController {
             $groupFolder = "";
         }
 
-        if($row['sub_dir'] != null) {
+        if(isset($row['sub_dir']) and  $row['sub_dir'] != null) {
             $subDirFolder = $row['sub_dir'] . "/";
 
             $fullPathSubDir = resource_path("lang/$key/" . $row['group'] . "/" . $row['sub_dir']);
@@ -172,7 +172,7 @@ class LangFileController extends AdminMainController {
         if($row['group'] != null) {
             $line .= $row['group'] . "/";
         }
-        if($row['sub_dir'] != null) {
+        if(isset($row['sub_dir']) and $row['sub_dir'] != null) {
             $line .= $row['sub_dir'] . "/";
         }
         $line .= $row['file_name'] . ".";

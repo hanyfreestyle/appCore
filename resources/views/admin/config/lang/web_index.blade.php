@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-9">
             <x-admin.form.select-arr :send-arr="config('adminLangFile.webFile')" name="selectfile" :sendvalue="$selId"
-                                     label="{{__('admin.lang_select_file')}}" :labelview="false"/>
+                                     :label="__('admin.lang_select_file')"  print-val-name="name_{{thisCurrentLocale()}}" :labelview="false"/>
           </div>
 
           @if(config('app.development'))
