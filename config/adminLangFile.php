@@ -16,18 +16,17 @@ return [
         'Branch'=> ['id'=> 'Branch','group'=>'admin', 'file_name'=> 'configBranch','name'=>'Branch','name_ar'=>'الفروع' ],
         'Privacy'=> ['id'=> 'Privacy','group'=>'admin', 'file_name'=> 'configPrivacy','name'=>'Privacy','name_ar'=>'سياسية الاستخدام' ],
         'Meta'=> ['id'=> 'Meta','group'=>'admin', 'file_name'=> 'configMeta','name'=>'Meta Tage','name_ar'=>'ميتا تاج' ],
-
-//       'core'=> ['id'=> 'core' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'core','name'=>'Admin Core','name_ar'=>'' ],
-
+        'newsletter'=> ['id'=> 'newsletter','group'=>'admin','file_name'=> 'leadsNewsLetter','name'=>'Newsletter','name_ar'=>'القائمة البريدية'],
+        'sitemap'=> ['id'=> 'sitemap','group'=>'admin','file_name'=> 'configSitemap','name'=>'SiteMap' ,'name_ar'=>'خريطة الموقع'],
 //       'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'apps','name'=>'AppSetting','name_ar'=>'' ],
 //       'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'leadForm','name'=>'Lead Form','name_ar'=>'' ],
-//       'sitemap'=> ['id'=> 'sitemap' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'sitemap','name'=>'SiteMap' ,'name_ar'=>''],
+//
 //       'roles'=> ['id'=> 'roles' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles','name'=>'Permissions','name_ar'=>'' ],
 //       'roleName'=> ['id'=> 'roleName' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles_name','name'=>'roleName','name_ar'=>'' ],
 //       'cash'=> ['id'=> 'cash' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'cash','name'=>'Cash Mass','name_ar'=>'' ],
 //
 //       'Menu'=> ['id'=> 'Menu' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'menu','name'=>'Admin Menu','name_ar'=>'' ],
-//       'newsletter'=> ['id'=> 'newsletter' , 'group'=>'admin' , 'sub_dir'=> null , 'file_name'=> 'newsletter','name'=>'Newsletter','name_ar'=>''],
+//
     ],
 
     'webFile' => [

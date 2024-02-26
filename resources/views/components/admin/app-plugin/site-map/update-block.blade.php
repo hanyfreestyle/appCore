@@ -9,7 +9,7 @@
             <table class="table table-striped table-valign-middle">
                 <tbody>
                 <tr>
-                    <td>{{__('admin/config/sitemap.f_last_update')}}</td>
+                    <td>{{__('admin/configSitemap.f_last_update')}}</td>
                     @if(isset($row[$catid]))
                         <td>{{$row[$catid]['updated_at']}} </td>
                     @else
@@ -23,7 +23,7 @@
                         <form action="{{route('config.SiteMap.'.$route)}}" method="post">
                             @csrf
                             <input type="hidden" name="cat_id" value="{{$catid}}">
-                            <button type="submit" class="btn btn-block btn-primary">{{__('admin/config/sitemap.f_but_update')}}</button>
+                            <button type="submit" class="btn btn-block btn-primary">{{__('admin/configSitemap.f_but_update')}}</button>
                         </form>
                     </td>
                 </tr>
