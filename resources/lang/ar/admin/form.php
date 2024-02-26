@@ -23,9 +23,9 @@ return
 	'text_faq_answer' => 'الاجابة',
 	'text_faq_question' => 'السؤال',
 	'text_g_des' => 'وصف الصفحة',
-	'text_g_title_ar' => 'عنوان الصفحة',
+	'text_g_title' => 'عنوان الصفحة',
+	'text_name' => 'الاسم',
 	'text_password' => 'كلمة المرور',
 	'text_password_confirm' => 'تاكيد كلمة المرور',
 	'text_title' => 'العنوان',
-	'text_name' => 'الاسم',
 ];

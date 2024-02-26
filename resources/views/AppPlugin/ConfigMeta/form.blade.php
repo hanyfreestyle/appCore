@@ -7,8 +7,7 @@
             <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($oldData->id))}}" method="post"  enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <x-admin.form.input label="# CatId" name="cat_id" :requiredSpan="true" colrow="col-lg-4"
-                                        value="{{old('cat_id',$oldData->cat_id)}}" inputclass="dir_en"/>
+                    <x-admin.form.input :row="$oldData" label="# CatId" name="cat_id" col="4" tdir="en"/>
                 </div>
                 <x-admin.main.meta-tage :old-data="$oldData" :placeholder="false" />
                 <hr>

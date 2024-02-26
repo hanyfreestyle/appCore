@@ -15,9 +15,9 @@
                         <tr>
                             <th class="TD_20">#</th>
                             <th class="TD_20"></th>
-                            <th>CatId</th>
-                            <th>{{__('admin/form.meta_g_title_'.thisCurrentLocale())}}</th>
-                            <th>{{__('admin/form.meta_g_des_'.thisCurrentLocale())}}</th>
+                            <th class="TD_100">CatId</th>
+                            <th class="TD_250">{{__('admin/form.text_g_title')}}</th>
+                            <th class="TD_250">{{__('admin/form.text_g_des')}}</th>
                             @if($pageData['ViewType'] == 'deleteList')
                                 <x-admin.table.soft-delete />
                             @else

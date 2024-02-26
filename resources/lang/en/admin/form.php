@@ -23,9 +23,9 @@ return
 	'text_faq_answer' => 'Answer',
 	'text_faq_question' => 'Question',
 	'text_g_des' => 'Page Description',
-	'text_g_title_ar' => 'Page Title',
+	'text_g_title' => 'Page Title',
+	'text_name' => 'Name',
 	'text_password' => 'Password',
 	'text_password_confirm' => 'Confirm Password',
 	'text_title' => 'Title',
-	'text_name' => 'Name',
 ];

@@ -15,6 +15,7 @@ return [
 
         'Branch'=> ['id'=> 'Branch','group'=>'admin', 'file_name'=> 'configBranch','name'=>'Branch','name_ar'=>'الفروع' ],
         'Privacy'=> ['id'=> 'Privacy','group'=>'admin', 'file_name'=> 'configPrivacy','name'=>'Privacy','name_ar'=>'سياسية الاستخدام' ],
+        'Meta'=> ['id'=> 'Meta','group'=>'admin', 'file_name'=> 'configMeta','name'=>'Meta Tage','name_ar'=>'ميتا تاج' ],
 
 //       'core'=> ['id'=> 'core' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'core','name'=>'Admin Core','name_ar'=>'' ],
 
