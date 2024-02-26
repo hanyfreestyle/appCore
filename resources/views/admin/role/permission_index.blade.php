@@ -14,9 +14,9 @@
                         <tr>
                             <th>ID</th>
                             <th>{{__('admin/config/roles.permission_frname')}}</th>
-                            <th>{{__('admin/config/roles.model_name')}}</th>
-                            <th>{{__('admin/def.form_name_ar')}}</th>
-                            <th>{{__('admin/def.form_name_en')}}</th>
+{{--                            <th>{{__('admin/config/roles.model_name')}}</th>--}}
+                            <th>{{__('admin/form.text_name')}}</th>
+                            <th>{{__('admin/form.text_name')}}</th>
                             <x-admin.table.action-but po="top" type="edit"/>
                             <x-admin.table.action-but po="top" type="delete"/>
                         </tr>
@@ -27,7 +27,7 @@
                             <tr>
                                 <td >{{$permission->id}}</td>
                                 <td>{{$permission->name}}</td>
-                                <td >{{ $modelsNameArr[$permission->cat_id]['name'] }}</td>
+{{--                                <td >{{ $modelsNameArr[$permission->cat_id]['name'] }}</td>--}}
                                 <td>{{$permission->name_ar}}</td>
                                 <td>{{$permission->name_en}}</td>
                                 <x-admin.table.action-but type="edit" :row="$permission" />

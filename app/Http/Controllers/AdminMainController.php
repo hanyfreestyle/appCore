@@ -30,12 +30,12 @@ class AdminMainController extends DefaultMainController {
     View::share('filterTypes', UploadFilter::cash_UploadFilter());
 
     $modelsNameArr = [
-      "users" => [ 'name' => __('admin/config/roles_name.001_users')],
-      "roles" => [ 'name' => __('admin/config/roles_name.002_roles')],
-      "config" => [ 'name' => __('admin/config/roles_name.003_config')],
-      "data" => [ 'name' => __('admin/config/roles_name.004_data')],
-      "leads" => ['name' => __('admin/config/roles_name.006_leads')],
-      "app_setting" => ['name' => __('admin/config/roles_name.005_app_setting')],
+      "users" => [ 'name' => __('admin/config/roles.menu_roles_users')],
+      "roles" => [ 'name' => __('admin/config/roles.menu_roles_role')],
+      "config" => [ 'name' => __('admin.app_menu_setting')],
+      "data" => [ 'name' => __('admin.app_menu_data')],
+      "leads" => ['name' => __('admin/leadsContactUs.app_menu')],
+      "app_setting" => ['name' => __('admin/configApp.app_menu')],
     ];
 
 

@@ -17,22 +17,22 @@
                     <table {!!Table_Style($viewDataTable,$yajraTable) !!} >
                         <thead>
                         <tr>
-                            <th class="TD_120">{{__('admin/config/leadForm.t_date_add')}}</th>
-                            <th class="TD_200">{{__('admin/config/leadForm.t_name')}}</th>
-                            <th class="TD_20">{{__('admin/config/leadForm.t_country')}}</th>
+                            <th class="TD_120">{{__('admin/leadsContactUs.t_date_add')}}</th>
+                            <th class="TD_200">{{__('admin/leadsContactUs.t_name')}}</th>
+                            <th class="TD_20">{{__('admin/leadsContactUs.t_country')}}</th>
 
-                            <th class="TD_150">{{__('admin/config/leadForm.t_full_number')}}</th>
+                            <th class="TD_150">{{__('admin/leadsContactUs.t_full_number')}}</th>
                             @if($requestType == 1 )
-                                <th class="TD_200">{{__('admin/config/leadForm.t_subject')}}</th>
+                                <th class="TD_200">{{__('admin/leadsContactUs.t_subject')}}</th>
                             @endif
 
                             @if($requestType == 3 )
-                                <th class="TD_120">{{__('admin/config/leadForm.t_meeting_date')}}</th>
-                                <th class="TD_120">{{__('admin/config/leadForm.t_meeting_time')}}</th>
+                                <th class="TD_120">{{__('admin/leadsContactUs.t_meeting_date')}}</th>
+                                <th class="TD_120">{{__('admin/leadsContactUs.t_meeting_time')}}</th>
                             @endif
 
                             @if($requestType == 2 or $requestType == 3)
-                                <th class="TD_250">{{__('admin/config/leadForm.t_listing')}}</th>
+                                <th class="TD_250">{{__('admin/leadsContactUs.t_listing')}}</th>
                             @endif
                             <th class="td_action"></th>
                             <x-admin.table.action-but po="top" type="delete"/>

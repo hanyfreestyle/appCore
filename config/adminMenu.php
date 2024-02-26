@@ -1,13 +1,13 @@
 <?php
 
 $MenuView = [
-    'Permissions'=>false,
+//    'Permissions'=>false,
     'Update'=>false,
-    'Data'=>false,
+//    'Data'=>false,
 //    'AdminLang'=>false,
-    'WebLang'=>false,
+//    'WebLang'=>false,
 //    'Setting'=>false,
-    'LeadsFrom'=>false,
+//    'LeadsFrom'=>false,
 //    'AppSetting'=>false,
     'AppPuzzle'=>false,
 ];
@@ -64,13 +64,13 @@ return [
             'view'=>  IsMenuView($MenuView,"LeadsFrom"),
             'sel_routs'=>'LeadsFrom',
             'type'=>'many',
-            'text'=> 'admin/config/leadForm.app_menu',
+            'text'=> 'admin/leadsContactUs.app_menu',
             'icon'=>'fas fa-phone-volume',
             'roleView'=>'leads_view',
             'submenu'=>[
-                ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_requst','url'=> 'LeadsFrom.Request.index','sel_routs'=> 'Request','icon'=>'fas fa-phone-square'],
-                ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_meeting','url'=> 'LeadsFrom.Meeting.index','sel_routs'=> 'Meeting','icon'=>'fas fa-handshake'],
-                ['roleView'=>'leads_view','text'=> 'admin/config/leadForm.app_menu_conatct','url'=> 'LeadsFrom.ContactUs.index','sel_routs'=> 'ContactUs','icon'=>'fas fa-mail-bulk'],
+                ['roleView'=>'leads_view','text'=> 'admin/leadsContactUs.app_menu_requst','url'=> 'LeadsFrom.Request.index','sel_routs'=> 'Request','icon'=>'fas fa-phone-square'],
+                ['roleView'=>'leads_view','text'=> 'admin/leadsContactUs.app_menu_meeting','url'=> 'LeadsFrom.Meeting.index','sel_routs'=> 'Meeting','icon'=>'fas fa-handshake'],
+                ['roleView'=>'leads_view','text'=> 'admin/leadsContactUs.app_menu_conatct','url'=> 'LeadsFrom.ContactUs.index','sel_routs'=> 'ContactUs','icon'=>'fas fa-mail-bulk'],
             ],
         ], #LeadsFrom
         [

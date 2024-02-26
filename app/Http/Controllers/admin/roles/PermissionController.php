@@ -72,10 +72,8 @@ class PermissionController extends AdminMainController{
         $saveData->name = $request->name;
         $saveData->name_ar =  $request->name_ar;
         $saveData->name_en =  $request->name_en;
-        $saveData->cat_id =  $request->cat_id;
-
+//        $saveData->cat_id =  $request->cat_id;
         $saveData->save();
-
         if($id == '0'){
             return redirect(route('users.permissions.index'))->with('Add.Done',"");
         }else{

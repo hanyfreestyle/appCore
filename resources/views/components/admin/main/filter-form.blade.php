@@ -31,7 +31,7 @@
 
           @if($country)
             <x-admin.form.select-arr name="country" :sendvalue="old('country',issetArr($getSessionData,'country'))" sendid="iso2"
-                                     :send-arr="$CashCountryList" label="{{__('admin/config/leadForm.t_country')}}" :required-span="false"
+                                     :send-arr="$CashCountryList" label="{{__('admin/leadsContactUs.t_country')}}" :required-span="false"
                                      colrow="col-lg-3 "/>
           @endif
 
