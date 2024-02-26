@@ -12,7 +12,8 @@
         <div class="row">
           <div class="col-9">
             <x-admin.form.select-arr :send-arr="config('adminLangFile.adminFile')" name="selectfile" :sendvalue="$selId"
-                                     :label="__('admin.lang_select_file')"  print-val-name="name_{{thisCurrentLocale()}}" :labelview="false"/>
+                                     :label="__('admin.lang_select_file')" print-val-name="name_{{thisCurrentLocale()}}"
+                                     :labelview="false"/>
           </div>
           @if(config('app.development'))
             <div class="col-3 dir_button">
@@ -48,18 +49,15 @@
             <tbody>
             @foreach($rowData as $row)
               <tr>
-
                 <td class="TD_100">{{$row['keyVar']}}</td>
                 <td class="TD_100">{{$row['filekey']}}</td>
                 @foreach(config('app.admin_lang') as $key =>$lang)
                   <th class="TD_300">{!! $row['name_'.$key] !!}</th>
                 @endforeach
-
                 <td class="TD_20">
                   <x-admin.form.action-button url="{!! route($PrefixRoute.'.edit', ['id'=>$row['filekey'],'key'=>$row['keyVar']] ) !!}"
                                               type="edit"/>
                 </td>
-
                 <td class="TD_20">
                   <input value="__('{{$row['prefixCopy']}}')" id="custmid_{{$loop->index}}" type="hidden">
                   <button onclick="copyToClipboard('custmid_{{$loop->index}}')" class="btn btn-sm btn-primary">
@@ -71,7 +69,6 @@
                   <button onclick="copyToClipboard('Newcustmid_{{$loop->index}}')" class="btn btn-sm btn-dark">
                     <i class="fa fas fa-copy"></i></button>
                 </td>
-
               </tr>
             @endforeach
             </tbody>
@@ -105,6 +102,5 @@
       });
   </script>
   <x-admin.data-table.plugins :jscode="true" :is-active="true" :page-length="25"/>
-  {{--  <x-admin.jave.copy-this-text/>--}}
 @endpush
 

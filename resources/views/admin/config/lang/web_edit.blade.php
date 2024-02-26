@@ -1,8 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-
   <x-admin.hmtl.breadcrumb :page-data="$pageData"/>
   <x-admin.hmtl.section>
     <x-admin.form.select-arr :send-arr="config('adminLangFile.webFile')" name="selectfile" :sendvalue="$selId"
@@ -16,7 +14,7 @@
             <input type="hidden" value="{{$_GET['id']}}" name="file_id">
 
             @foreach($mergeData as $key=>$val)
-              <div class="row">
+              <div class="row {{isSetKeyForLang($key)}}">
                 <div class="col-3">
                   @if(config('app.development'))
                     <input type="text" class="form-control dir_en" value="{{$key}}" name="key[]">

@@ -12,7 +12,8 @@
         <div class="row">
           <div class="col-9">
             <x-admin.form.select-arr :send-arr="config('adminLangFile.webFile')" name="selectfile" :sendvalue="$selId"
-                                     :label="__('admin.lang_select_file')"  print-val-name="name_{{thisCurrentLocale()}}" :labelview="false"/>
+                                     :label="__('admin.lang_select_file')" print-val-name="name_{{thisCurrentLocale()}}"
+                                     :labelview="false"/>
           </div>
 
           @if(config('app.development'))
@@ -38,9 +39,11 @@
             <thead>
             <tr>
               <th>Key</th>
+              <th>File</th>
               @foreach(config('app.admin_lang') as $key =>$lang)
                 <th>{{$lang}}</th>
               @endforeach
+              <th></th>
               <th></th>
               <th></th>
             </tr>
@@ -49,19 +52,26 @@
             @foreach($rowData as $row)
               <tr>
                 <td class="TD_100">{{$row['keyVar']}}</td>
+                <td class="TD_100">{{$row['filekey']}}</td>
                 @foreach(config('app.admin_lang') as $key =>$lang)
                   <th class="TD_300">{!! $row['name_'.$key] !!}</th>
                 @endforeach
+
                 <td class="TD_20">
-                  <a href="#" thisid="custmid_{{$loop->index}}" class="btn btn-sm btn-primary copyThisText"><i
-                     class="fa fas fa-copy"></i></a>
-                  <input value="__('{{$row['prefixCopy']}}')" id="custmid_{{$loop->index}}" type="hidden">
+                  <x-admin.form.action-button url="{!! route($PrefixRoute.'.edit', ['id'=>$row['filekey'],'key'=>$row['keyVar']] ) !!}"
+                                              type="edit"/>
                 </td>
 
                 <td class="TD_20">
-                  <a href="#" thisid="Newcustmid_{{$loop->index}}" class="btn btn-sm btn-dark copyThisText"><i
-                     class="fa fas fa-copy"></i></a>
+                  <input value="__('{{$row['prefixCopy']}}')" id="custmid_{{$loop->index}}" type="hidden">
+                  <button onclick="copyToClipboard('custmid_{{$loop->index}}')" class="btn btn-sm btn-primary">
+                    <i class="fa fas fa-copy"></i></button>
+                </td>
+
+                <td class="TD_20">
                   <input value="{{$row['prefixCopy']}}" id="Newcustmid_{{$loop->index}}" type="hidden">
+                  <button onclick="copyToClipboard('Newcustmid_{{$loop->index}}')" class="btn btn-sm btn-dark">
+                    <i class="fa fas fa-copy"></i></button>
                 </td>
 
               </tr>
@@ -79,12 +89,21 @@
 
 @push('JsCode')
   <script>
+      function copyToClipboard(element) {
+          var copyText = document.getElementById(element);
+          copyText.readOnly = true;
+          copyText.type = 'text';
+          copyText.select();
+          copyText.setSelectionRange(0, 99999); /* For mobile devices */
+          navigator.clipboard.writeText(copyText.value);
+          copyText.type = 'hidden';
+      }
+
       $('#selectfile').change(function () {
           var idSel = this.value;
           window.location = "{{ route('weblang.index','id=') }}" + idSel;
       });
   </script>
   <x-admin.data-table.plugins :jscode="true" :is-active="true" :page-length="25"/>
-  <x-admin.jave.copy-this-text/>
 @endpush
 
