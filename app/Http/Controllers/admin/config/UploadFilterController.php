@@ -10,11 +10,11 @@ use App\Models\admin\config\UploadFilterSize;
 use Illuminate\Support\Facades\Cache;
 
 
-class UploadFilterController extends AdminMainController{
+class UploadFilterController extends AdminMainController {
 
     use CrudTraits;
 
-    function __construct(UploadFilter $model){
+    function __construct(UploadFilter $model) {
 
         parent::__construct();
         $this->controllerName = "upFilter";
@@ -22,49 +22,49 @@ class UploadFilterController extends AdminMainController{
         $this->selMenu = "config.";
         $this->PrefixCatRoute = "";
         $this->PageTitle = __('admin/config/upFilter.app_menu');
-        $this->PrefixRoute = $this->selMenu.$this->controllerName ;
-        $this->model = $model ;
+        $this->PrefixRoute = $this->selMenu . $this->controllerName;
+        $this->model = $model;
 
         $sendArr = [
-            'TitlePage' =>  $this->PageTitle ,
-            'PrefixRoute'=>  $this->PrefixRoute,
-            'PrefixRole'=> $this->PrefixRole ,
-            'AddConfig'=> true ,
-            'configArr'=> ["filterid"=>0],
-             'restore'=> 1 ,
+            'TitlePage' => $this->PageTitle,
+            'PrefixRoute' => $this->PrefixRoute,
+            'PrefixRole' => $this->PrefixRole,
+            'AddConfig' => true,
+            'configArr' => ["filterid" => 0],
+            'restore' => 1,
         ];
         self::loadConstructData($sendArr);
-        $this->middleware('permission:'.$this->PrefixRole.'_meta_view', ['only' => ['index']]);
+        $this->middleware('permission:' . $this->PrefixRole . '_meta_view', ['only' => ['index']]);
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # ClearCash
-    public function ClearCash(){
+    public function ClearCash() {
         Cache::forget('upload_filter_list_cash');
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
-    public function index(){
+    public function index() {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "List";
         $pageData['Trashed'] = UploadFilter::onlyTrashed()->count();
-        $rowData = self::getSelectQuery(UploadFilter::where('id','!=',0));
-        return view('admin.config.photo_filter.index',compact('pageData','rowData'));
+        $rowData = self::getSelectQuery(UploadFilter::where('id', '!=', 0));
+        return view('admin.config.photo_filter.index', compact('pageData', 'rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
-    public function SoftDeletes(){
+    public function SoftDeletes() {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "deleteList";
         $rowData = self::getSelectQuery(UploadFilter::onlyTrashed());
-        return view('admin.config.photo_filter.index',compact('pageData','rowData'));
+        return view('admin.config.photo_filter.index', compact('pageData', 'rowData'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
-    public function create(){
+    public function create() {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
 
@@ -79,29 +79,29 @@ class UploadFilterController extends AdminMainController{
         $rowData['watermark_state'] = '0';
         $rowDataSize = [];
 
-        return view('admin.config.photo_filter.form',compact('pageData','rowData','rowDataSize'));
+        return view('admin.config.photo_filter.form', compact('pageData', 'rowData', 'rowDataSize'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
-    public function edit($id){
+    public function edit($id) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
 
         $rowData = UploadFilter::findOrFail($id);
-        $rowDataSize = UploadFilterSize::where('filter_id',$id)->get();
-        return view('admin.config.photo_filter.form',compact('pageData','rowData','rowDataSize'));
+        $rowDataSize = UploadFilterSize::where('filter_id', $id)->get();
+        return view('admin.config.photo_filter.form', compact('pageData', 'rowData', 'rowDataSize'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(UploadFilterRequest $request,$id){
+    public function storeUpdate(UploadFilterRequest $request, $id) {
 
-        $request['convert_state'] = (isset($request->convert_state)) ? 1 : 0 ;
-        $request['greyscale'] = (isset($request->greyscale)) ? 1 : 0 ;
-        $request['flip_state'] = (isset($request->flip_state)) ? 1 : 0 ;
-        $request['flip_v'] = (isset($request->flip_v)) ? 1 : 0 ;
-        $request['blur'] = (isset($request->blur)) ? 1 : 0 ;
-        $request['pixelate'] = (isset($request->pixelate)) ? 1 : 0 ;
+        $request['convert_state'] = (isset($request->convert_state)) ? 1 : 0;
+        $request['greyscale'] = (isset($request->greyscale)) ? 1 : 0;
+        $request['flip_state'] = (isset($request->flip_state)) ? 1 : 0;
+        $request['flip_v'] = (isset($request->flip_v)) ? 1 : 0;
+        $request['blur'] = (isset($request->blur)) ? 1 : 0;
+        $request['pixelate'] = (isset($request->pixelate)) ? 1 : 0;
 
         $saveData = UploadFilter::findOrNew($id);
 
@@ -133,14 +133,14 @@ class UploadFilterController extends AdminMainController{
         $saveData->watermark_img = $request->watermark_img;
         $saveData->watermark_position = $request->watermark_position;
 
-        foreach (config('app.admin_lang') as $key=>$lang){
-            $SaveName = "notes_".$key;
-            $saveData->$SaveName =  $request->$SaveName;
+        foreach (config('app.admin_lang') as $key => $lang) {
+            $SaveName = "notes_" . $key;
+            $saveData->$SaveName = $request->$SaveName;
         }
 
         $saveData->save();
         self::ClearCash();
-        return  self::redirectWhere($request,$id,$this->PrefixRoute.'.index');
+        return self::redirectWhere($request, $id, $this->PrefixRoute . '.index');
     }
 
 }

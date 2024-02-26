@@ -126,8 +126,8 @@ return [
             'submenu'=>[
                 ['roleView'=>'config_website','text'=> 'admin/config/webConfig.app_menu','url'=> 'config.web.index','sel_routs'=> 'web','icon'=>'fas fa-cog'],
 //                ['roleView'=>'config_meta_view','text'=> 'Meta','url'=> 'config.Meta.index','sel_routs'=> 'Meta','icon'=>'fab fa-html5'],
-//                ['roleView'=>'config_defPhoto_view','text'=> 'admin/config/upFilter.app_menu_def_photo','url'=> 'config.defPhoto.index','sel_routs'=> 'defPhoto','icon'=>'fas fa-image'],
-//                ['roleView'=>'config_upFilter_view','text'=> 'admin/config/upFilter.app_menu','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter','icon'=>'fas fa-filter'],
+                ['roleView'=>'config_defPhoto_view','text'=> 'admin/config/upFilter.app_menu_def_photo','url'=> 'config.defPhoto.index','sel_routs'=> 'defPhoto','icon'=>'fas fa-image'],
+                ['roleView'=>'config_upFilter_view','text'=> 'admin/config/upFilter.app_menu','url'=> 'config.upFilter.index','sel_routs'=> 'upFilter','icon'=>'fas fa-filter'],
 //                ['roleView'=>'config_web_privacy','text'=> 'privacy','url'=> 'config.WebPrivacy.index','sel_routs'=> 'WebPrivacy','icon'=>'fas fa-file-alt'],
 //                ['roleView'=>'config_newsletter','text'=> 'newsletter','url'=> 'config.NewsLetter.index','sel_routs'=> 'NewsLetter','icon'=>'fas fa-mail-bulk'],
 //                ['roleView'=>'sitemap_view','text'=> 'sitemap','url'=> 'config.SiteMap.index','sel_routs'=> 'SiteMap','icon'=>'fas fa-sitemap'],

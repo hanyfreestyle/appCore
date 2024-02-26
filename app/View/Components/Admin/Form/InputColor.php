@@ -8,10 +8,12 @@ use Illuminate\View\Component;
 
 class InputColor extends Component
 {
+    public $row;
     public $name;
     public $label;
     public $value;
     public function __construct(
+        $row =null,
         $name ="",
         $label = "",
         $value = "",
@@ -21,6 +23,13 @@ class InputColor extends Component
         $this->name = $name;
         $this->label = $label;
         $this->value = $value;
+        $this->row = $row;
+        if($this->row != null) {
+            $this->value = old($name,$row->$name);
+        }else{
+
+        }
+
     }
 
 
