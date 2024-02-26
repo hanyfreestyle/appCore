@@ -41,6 +41,7 @@ class AppPuzzleController {
             self::CopyAdminLang($thisModel);
             self::CopyInfo($thisModel);
             self::CopyPhotoFolder($thisModel);
+            self::CopyAssetsFolder($thisModel);
             return redirect()->back();
         }
     }
@@ -59,6 +60,21 @@ class AppPuzzleController {
             }
         }
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
+    public function CopyAssetsFolder($thisModel) {
+        if(isset($thisModel['assetsFolder']) and $thisModel['assetsFolder'] != null) {
+            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
+            $folderName = $thisModel['assetsFolder'];
+            $thisDir = public_path("assets/" . $folderName);
+            if(File::isDirectory($thisDir)) {
+                $destinationFolder = $CopyFolder . 'public/assets/' . $folderName;
+                self::recursive_files_copy($thisDir, $destinationFolder);
+            }
+        }
+    }
+
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -15,16 +15,16 @@ $this->call(SeederBranchTranslation::class);
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Permission
 PermissionSeeder.php
-['cat_id' => 'config', 'name' => 'config_branch', 'name_ar' => 'الفروع', 'name_en' => 'Branch'],
+ ['cat_id' => 'config', 'name' => 'config_branch', 'name_ar' => 'الفروع', 'name_en' => 'Branch'],
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Menu
-['roleView'=>'config_branch','text'=> 'admin/config/branch.app_menu','url'=> 'config.Branch.index','sel_routs'=> 'Branch','icon'=>'fas fa-map-signs'],
+['roleView'=>'config_branch','text'=> 'admin/configBranch.app_menu','url'=> 'config.Branch.index','sel_routs'=> 'Branch','icon'=>'fas fa-map-signs'],
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     Admin Lang
-'Branch'=> ['id'=> 'Branch' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'branch','name'=>'Branch' ],
+'Branch'=> ['id'=> 'Branch','group'=>'admin', 'file_name'=> 'configBranch','name'=>'Branch','name_ar'=>'الفروع' ],
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #    Web Lang
