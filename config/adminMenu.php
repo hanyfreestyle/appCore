@@ -9,7 +9,7 @@ $MenuView = [
 //    'Setting'=>false,
 //    'LeadsFrom'=>false,
 //    'AppSetting'=>false,
-    'AppPuzzle'=>false,
+//    'AppPuzzle'=>false,
 ];
 
 return [

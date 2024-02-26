@@ -24,8 +24,6 @@ return [
 
 
 //       'cash'=> ['id'=> 'cash' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'cash','name'=>'Cash Mass','name_ar'=>'' ],
-
-
     ],
 
     'webFile' => [
