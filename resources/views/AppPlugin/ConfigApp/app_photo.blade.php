@@ -7,7 +7,7 @@
   <x-admin.hmtl.section>
     <div class="row">
 
-      <x-admin.card.normal col="col-lg-6" :title="__('admin/config/apps.photo_logo')">
+      <x-admin.card.normal col="col-lg-6" :title="__('admin/configApp.photo_logo')">
         <form action="{{route('App.photoUpdate')}}" method="post" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="cat_id" value="logo">
@@ -19,7 +19,7 @@
         </form>
       </x-admin.card.normal>
 
-      <x-admin.card.normal col="col-lg-6" :title="__('admin/config/apps.photo_side_logo')">
+      <x-admin.card.normal col="col-lg-6" :title="__('admin/configApp.photo_side_logo')">
         <form action="{{route('App.photoUpdate')}}" method="post" enctype="multipart/form-data">
           @csrf
           <input type="hidden" name="cat_id" value="SideLogo">

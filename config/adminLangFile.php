@@ -18,7 +18,7 @@ return [
         'Meta'=> ['id'=> 'Meta','group'=>'admin', 'file_name'=> 'configMeta','name'=>'Meta Tage','name_ar'=>'ميتا تاج' ],
         'newsletter'=> ['id'=> 'newsletter','group'=>'admin','file_name'=> 'leadsNewsLetter','name'=>'Newsletter','name_ar'=>'القائمة البريدية'],
         'sitemap'=> ['id'=> 'sitemap','group'=>'admin','file_name'=> 'configSitemap','name'=>'SiteMap' ,'name_ar'=>'خريطة الموقع'],
-//       'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'apps','name'=>'AppSetting','name_ar'=>'' ],
+        'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'file_name'=> 'configApp','name'=>'AppSetting','name_ar'=>'اعدادات التطبيق' ],
 //       'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'leadForm','name'=>'Lead Form','name_ar'=>'' ],
 //
 //       'roles'=> ['id'=> 'roles' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'roles','name'=>'Permissions','name_ar'=>'' ],

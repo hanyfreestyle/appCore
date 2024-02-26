@@ -8,7 +8,7 @@ $MenuView = [
     'WebLang'=>false,
 //    'Setting'=>false,
     'LeadsFrom'=>false,
-    'AppSetting'=>false,
+//    'AppSetting'=>false,
     'AppPuzzle'=>false,
 ];
 
@@ -18,7 +18,7 @@ return [
             'view'=> IsMenuView($MenuView,"AppSetting"),
             'sel_routs'=>'App',
             'type'=>'many',
-            'text'=> 'admin/config/apps.menu_app_setting',
+            'text'=> 'admin/configApp.app_menu',
             'icon'=>'fab fa-apple',
             'roleView'=>'AppSetting_view',
             'submenu'=>[
@@ -26,35 +26,35 @@ return [
                     'sel_routs'=> 'AppSetting',
                     'url'=> 'App.AppSetting.form',
                     'roleView'=>'AppSetting_view',
-                    'text'=> 'admin/config/apps.menu_app_config',
+                    'text'=> 'admin/configApp.app_menu_config',
                     'icon'=>'fas fa-cogs'
                 ],
                 [
                     'sel_routs'=> 'AppPhotos',
                     'url'=> 'App.AppPhotos.form',
                     'roleView'=>'AppSetting_view',
-                    'text'=> 'admin/config/apps.menu_app_photos',
+                    'text'=> 'admin/configApp.app_menu_photos',
                     'icon'=>'fas fa-camera-retro'
                 ],
                 [
                     'sel_routs'=> 'AppMenu',
                     'url'=> 'App.AppMenu.index',
                     'roleView'=>'AppSetting_view',
-                    'text'=> 'admin/config/apps.menu_app_menu',
+                    'text'=> 'admin/configApp.app_menu_list',
                     'icon'=>'fas fa-list-ul'
                 ],
                 [
                     'sel_routs'=> 'AppProfile',
                     'url'=> 'App.AppProfile.form',
                     'roleView'=>'AppSetting_view',
-                    'text'=> 'admin/config/apps.menu_app_profile',
+                    'text'=> 'admin/configApp.app_menu_profile',
                     'icon'=>'fas fa-user-tie'
                 ],
                 [
                     'sel_routs'=> 'AppCart',
                     'url'=> 'App.AppCart.form',
                     'roleView'=>'AppSetting_view',
-                    'text'=> 'admin/config/apps.menu_app_cart',
+                    'text'=> 'admin/configApp.app_menu_cart',
                     'icon'=>'fas fa-shopping-cart'
                 ],
 

@@ -19,8 +19,8 @@
                         <thead>
                         <tr>
                             <th class="TD_20">#</th>
-                            <th>{{__('admin/config/apps.form_name')}}</th>
-                            <th>{{__('admin/config/apps.form_url')}}</th>
+                            <th>{{__('admin/configApp.form_name')}}</th>
+                            <th>{{__('admin/configApp.form_url')}}</th>
                             @if($pageData['ViewType'] == 'deleteList')
                                 <x-admin.table.soft-delete />
                             @else
