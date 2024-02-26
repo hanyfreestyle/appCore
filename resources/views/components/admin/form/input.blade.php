@@ -2,7 +2,7 @@
     @if ($labelview)
         <div class="{{($horizontalLabel) ? 'col-sm-6' : '' }}">
             <label class="def_form_label col-form-label label_{{$dir}} font-weight-light {{($horizontalLabel) ? 'font-weight-normal' : '' }}" for="{{$id}}">{{$label}}
-                @if($requiredSpan)
+                @if($req)
                     <span class="required_Span">*</span>
                 @endif
             </label>

@@ -19,13 +19,13 @@
                         <thead>
                         <tr>
                             <th class="TD_20">#</th>
-                            <th>{{__('admin/config/branch.title')}}</th>
+                            <th>{{__('admin/configBranch.title')}}</th>
                             @if($pageData['ViewType'] == 'deleteList')
                                 <x-admin.table.soft-delete />
                             @else
-                                <th>{{__('admin/config/branch.address')}}</th>
-                                <th>{{__('admin/config/branch.phone')}}</th>
-                                <th>{{__('admin/config/branch.work_hours')}}</th>
+                                <th>{{__('admin/configBranch.address')}}</th>
+                                <th>{{__('admin/configBranch.phone')}}</th>
+                                <th>{{__('admin/configBranch.work_hours')}}</th>
                                 <th></th>
                                 <x-admin.table.action-but po="top" type="edit"/>
                                 <x-admin.table.action-but po="top" type="delete"/>

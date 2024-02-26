@@ -6,14 +6,13 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Input extends Component
-{
+class Input extends Component {
     public $type, $id, $name, $label, $placeholder;
     public $topclass, $inputclass;
     public $value, $disabled, $required;
     public $step, $max, $maxlength, $pattern;
-    public $requiredSpan ;
-    public $horizontalLabel ;
+    public $req;
+    public $horizontalLabel;
     public $colrow;
     public $dir;
     public $labelview;
@@ -27,20 +26,19 @@ class Input extends Component
         $topclass = null, $inputclass = null,
         $value = null, $disabled = false, $required = false,
         $step = null, $max = null, $maxlength = null, $pattern = null,
-        $requiredSpan = true,
+        $req = true,
         $colrow = " col-lg-12 ",
-        $horizontalLabel =false,
-        $dir ="",
-        $labelview= true,
+        $horizontalLabel = false,
+        $dir = "",
+        $labelview = true,
         $row = null,
         $col = null,
         $tdir = null,
-    )
-    {
+    ) {
         $this->type = $type;
         $this->id = $id;
-        if($this->id == null){
-            $this->id =  $name ;
+        if($this->id == null) {
+            $this->id = $name;
         }
         $this->name = $name;
         $this->label = $label;
@@ -54,34 +52,33 @@ class Input extends Component
         $this->max = $max;
         $this->maxlength = $maxlength;
         $this->pattern = $pattern;
-        $this->requiredSpan = $requiredSpan;
+        $this->req = $req;
         $this->horizontalLabel = $horizontalLabel;
         $this->colrow = $colrow;
         $this->dir = $dir;
         $this->labelview = $labelview;
 
-        if($row != null){
-            $printName = $this->name ;
-            $this->value = old($printName,$row->$printName);
-        }else{
+        if($row != null) {
+            $printName = $this->name;
+            $this->value = old($printName, $row->$printName);
+        } else {
             $this->value = $value;
         }
 
-        if($col != null){
-            $this->colrow = " col-lg-".$col ;
-        }else{
+        if($col != null) {
+            $this->colrow = " col-lg-" . $col;
+        } else {
             $this->colrow = $colrow;
         }
 
-        if($tdir != null){
-            $this->tdir = "dir_".$tdir;
+        if($tdir != null) {
+            $this->tdir = "dir_" . $tdir;
         }
 
 
     }
 
-    public function render(): View|Closure|string
-    {
+    public function render(): View|Closure|string {
         return view('components.admin.form.input');
     }
 }

@@ -13,8 +13,8 @@ class BranchRequest extends FormRequest {
 
   public function rules(): array {
     $rules = [
-      'lat' => 'required|numeric',
-      'long' => 'required|numeric',
+      'lat' => 'nullable|numeric',
+      'long' => 'nullable|numeric',
       'direction' => 'nullable|url',
 
     ];
