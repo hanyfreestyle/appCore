@@ -16,7 +16,7 @@ class LangFileController extends AdminMainController {
     function __construct() {
         parent::__construct();
         $this->controllerName = "adminlang";
-        $this->PrefixRole = 'adminlang';
+        $this->PrefixRole = 'config';
         $this->selMenu = "";
         $this->PrefixCatRoute = "";
         $this->PageTitle = __('admin.app_menu_lang_admin');
@@ -29,7 +29,8 @@ class LangFileController extends AdminMainController {
             'AddButToCard' => false,
         ];
         self::loadConstructData($sendArr);
-        $this->middleware('permission:' . $this->PrefixRole . '_view', ['only' => ['index', 'updateFile', 'EditLang']]);
+        $this->middleware('permission:weblang_view', ['only' => ['index']]);
+        $this->middleware('permission:config_edit', ['only' => ['EditLang', 'updateFile']]);
 
         $selId = AdminHelper::arrIsset($_GET, 'id', '');
         View::share('selId', $selId);
@@ -44,7 +45,6 @@ class LangFileController extends AdminMainController {
         $LangMenu = config('adminLangFile.adminFile');
         $AppLang = config('app.admin_lang');
         $rowData = self::getDataTableLang($LangMenu, $AppLang);
-        // dd($rowData);
         return view('admin.config.lang.admin_index')->with(
             [
                 'pageData' => $pageData,
@@ -143,7 +143,7 @@ class LangFileController extends AdminMainController {
             $groupFolder = "";
         }
 
-        if(isset($row['sub_dir']) and  $row['sub_dir'] != null) {
+        if(isset($row['sub_dir']) and $row['sub_dir'] != null) {
             $subDirFolder = $row['sub_dir'] . "/";
 
             $fullPathSubDir = resource_path("lang/$key/" . $row['group'] . "/" . $row['sub_dir']);
@@ -193,7 +193,7 @@ class LangFileController extends AdminMainController {
                 $GetData = File::getRequire($FullPathToFile);
                 $GetData[$key] = File::getRequire($FullPathToFile);
                 foreach ($GetData[$key] as $keyVar => $tran) {
-                    array_push($rowData[$key], ['filekey'=>$id ,"name_" . $key => $tran, 'keyVar' => $keyVar, 'prefixCopy' => $prefixCopy . $keyVar]);
+                    array_push($rowData[$key], ['filekey' => $id, "name_" . $key => $tran, 'keyVar' => $keyVar, 'prefixCopy' => $prefixCopy . $keyVar]);
                 }
             } else {
                 foreach ($listFile as $filekey => $fileVall) {
@@ -201,7 +201,7 @@ class LangFileController extends AdminMainController {
                     $FullPathToFile = LangFileController::getFullPathToFileArr($listFile[$filekey], $key);
                     $GetData[$key] = File::getRequire($FullPathToFile);
                     foreach ($GetData[$key] as $keyVar => $tran) {
-                        array_push($rowData[$key], ['filekey'=>$filekey ,  "name_" . $key => $tran, 'keyVar' => $keyVar, 'prefixCopy' => $prefixCopy . $keyVar]);
+                        array_push($rowData[$key], ['filekey' => $filekey, "name_" . $key => $tran, 'keyVar' => $keyVar, 'prefixCopy' => $prefixCopy . $keyVar]);
                     }
                 }
             }

@@ -14,7 +14,7 @@ class LangFileWebController extends AdminMainController {
     function __construct() {
         parent::__construct();
         $this->controllerName = "weblang";
-        $this->PrefixRole = 'weblang';
+        $this->PrefixRole = 'config';
         $this->selMenu = "";
         $this->PrefixCatRoute = "";
         $this->PageTitle = __('admin.app_menu_lang_web');
@@ -29,7 +29,8 @@ class LangFileWebController extends AdminMainController {
         self::loadConstructData($sendArr);
 
 
-        $this->middleware('permission:' . $this->PrefixRole . '_view', ['only' => ['index', 'updateFile']]);
+        $this->middleware('permission:weblang_view', ['only' => ['index']]);
+        $this->middleware('permission:config_edit', ['only' => ['EditLang','updateFile']]);
         $selId = AdminHelper::arrIsset($_GET, 'id', '');
         View::share('selId', $selId);
     }

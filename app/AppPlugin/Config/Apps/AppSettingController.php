@@ -29,6 +29,7 @@ class AppSettingController extends AdminMainController {
             'AddButToCard' => false,
         ];
         self::loadConstructData($sendArr);
+        $this->middleware('permission:' . $this->PrefixRole . '_edit', ['only' => ['AppSettingUpdate', 'photoUpdate', 'AppProfileUpdate']]);
 
     }
 

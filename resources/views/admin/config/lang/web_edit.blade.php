@@ -31,6 +31,7 @@
                   </div>
                 @endforeach
 
+                @if(config('app.development'))
                 <div class="col-1">
                   <a href="#" thisid="custmid_{{$loop->index}}" class="btn btn-sm btn-primary copyThisText"><i
                      class="fa fas fa-copy"></i></a>
@@ -40,6 +41,9 @@
                      class="fa fas fa-copy"></i></a>
                   <input value="{{$prefixCopy.$key}}" id="Newcustmid_{{$loop->index}}" type="hidden">
                 </div>
+                @endif
+
+
               </div>
               <hr>
             @endforeach

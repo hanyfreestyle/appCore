@@ -16,10 +16,12 @@
                                      :labelview="false"/>
           </div>
           @if(config('app.development'))
-            <div class="col-3 dir_button">
-              <x-admin.form.action-button url="{{route('adminlang.edit')}}" print-lable="{{__('admin.lang_add_new_key')}}" size="m"
-                                          :tip="false" bg="dark"/>
-            </div>
+            @can('config_edit')
+              <div class="col-3 dir_button">
+                <x-admin.form.action-button url="{{route('adminlang.edit')}}" print-lable="{{__('admin.lang_add_new_key')}}" size="m"
+                                            :tip="false" bg="dark"/>
+              </div>
+            @endcan
           @endif
         </div>
       </div>
@@ -41,9 +43,13 @@
               @foreach(config('app.admin_lang') as $key =>$lang)
                 <th>{{$lang}}</th>
               @endforeach
-              <th></th>
-              <th></th>
-              <th></th>
+              @can('config_edit')
+                <th></th>
+              @endcan
+              @if(config('app.development'))
+                <th></th>
+                <th></th>
+              @endif
             </tr>
             </thead>
             <tbody>
@@ -54,21 +60,28 @@
                 @foreach(config('app.admin_lang') as $key =>$lang)
                   <th class="TD_300">{!! $row['name_'.$key] !!}</th>
                 @endforeach
-                <td class="TD_20">
-                  <x-admin.form.action-button url="{!! route($PrefixRoute.'.edit', ['id'=>$row['filekey'],'key'=>$row['keyVar']] ) !!}"
-                                              type="edit"/>
-                </td>
-                <td class="TD_20">
-                  <input value="__('{{$row['prefixCopy']}}')" id="custmid_{{$loop->index}}" type="hidden">
-                  <button onclick="copyToClipboard('custmid_{{$loop->index}}')" class="btn btn-sm btn-primary">
-                    <i class="fa fas fa-copy"></i></button>
-                </td>
 
-                <td class="TD_20">
-                  <input value="{{$row['prefixCopy']}}" id="Newcustmid_{{$loop->index}}" type="hidden">
-                  <button onclick="copyToClipboard('Newcustmid_{{$loop->index}}')" class="btn btn-sm btn-dark">
-                    <i class="fa fas fa-copy"></i></button>
-                </td>
+                @can('config_edit')
+                  <td class="TD_20">
+                    <x-admin.form.action-button url="{!! route($PrefixRoute.'.edit', ['id'=>$row['filekey'],'key'=>$row['keyVar']] ) !!}"
+                                                type="edit"/>
+                  </td>
+                @endcan
+                @if(config('app.development'))
+                  <td class="TD_20">
+                    <input value="__('{{$row['prefixCopy']}}')" id="custmid_{{$loop->index}}" type="hidden">
+                    <button onclick="copyToClipboard('custmid_{{$loop->index}}')" class="btn btn-sm btn-primary">
+                      <i class="fa fas fa-copy"></i></button>
+                  </td>
+
+                  <td class="TD_20">
+                    <input value="{{$row['prefixCopy']}}" id="Newcustmid_{{$loop->index}}" type="hidden">
+                    <button onclick="copyToClipboard('Newcustmid_{{$loop->index}}')" class="btn btn-sm btn-dark">
+                      <i class="fa fas fa-copy"></i></button>
+                  </td>
+                @endif
+
+
               </tr>
             @endforeach
             </tbody>

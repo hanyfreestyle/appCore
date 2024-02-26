@@ -31,7 +31,7 @@ class SettingsController extends AdminMainController{
         ];
         self::loadConstructData($sendArr);
 
-        $this->middleware('permission:config_website', ['only' => ['webConfigEdit','webConfigUpdate']]);
+        $this->middleware('permission:config_edit', ['only' => ['webConfigUpdate']]);
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
