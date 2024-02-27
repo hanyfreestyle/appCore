@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider{
                         Route::middleware('web')->group(base_path('routes/AppPlugin/data/country.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/leads/newsLetter.php'));
+                        Route::middleware('web')->group(base_path('routes/AppPlugin/proProduct.php'));
                         Route::middleware('web')->group(base_path('routes/admin_config.php'));
                         Route::middleware('web')->group(base_path('routes/admin_roles.php'));
 

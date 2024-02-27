@@ -10,10 +10,37 @@ $MenuView = [
 //    'LeadsFrom'=>false,
 //    'AppSetting'=>false,
 //    'AppPuzzle'=>false,
+//    'Product'=>false,
 ];
 
 return [
     'menu' => [
+        [
+            'view'=> IsMenuView($MenuView,"Product"),
+            'sel_routs'=>'Shop',
+            'type'=>'many',
+            'text'=> 'admin/proProduct.app_menu',
+            'icon'=>'fas fa-shopping-cart',
+            'roleView'=>'Product_view',
+            'submenu'=>[
+                [
+                    'sel_routs'=> 'Category',
+                    'url'=> 'Shop.Category.index',
+                    'roleView'=>'Product_view',
+                    'text'=> 'admin/proProduct.app_menu_category',
+                    'icon'=>'fas fa-sitemap'
+                ],
+                [
+                    'sel_routs'=> 'ShopProduct',
+                    'url'=> 'Shop.Product.index',
+                    'roleView'=>'Product_viewX',
+                    'text'=> 'admin/proProduct.app_menu_product',
+                    'icon'=>'fas fa-shopping-cart'
+                ],
+
+            ],
+        ], #Product
+
         [
             'view'=> IsMenuView($MenuView,"AppSetting"),
             'sel_routs'=>'App',
