@@ -18,7 +18,12 @@ use App\AppPlugin\Leads\ContactUs\SeederContactUsForm;
 use App\AppPlugin\Leads\NewsLetter\SeederNewsLetter;
 
 
-
+use App\AppPlugin\Product\Seeder\CategoryProductSeeder;
+use App\AppPlugin\Product\Seeder\CategorySeeder;
+use App\AppPlugin\Product\Seeder\CategoryTranslationSeeder;
+use App\AppPlugin\Product\Seeder\ProductPhotoSeeder;
+use App\AppPlugin\Product\Seeder\ProductSeeder;
+use App\AppPlugin\Product\Seeder\ProductTranslationSeeder;
 use Database\Seeders\roles\AdminUserSeeder;
 use Database\Seeders\roles\PermissionSeeder;
 use Database\Seeders\roles\RoleSeeder;
@@ -60,6 +65,13 @@ class DatabaseSeeder extends Seeder
         $this->call(SeederAppSettingTranslation::class);
         $this->call(SeederAppMenu::class);
         $this->call(SeederAppMenuTranslation::class);
+
+        $this->call(CategorySeeder::class);
+        $this->call(CategoryTranslationSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(ProductTranslationSeeder::class);
+        $this->call(ProductPhotoSeeder::class);
+        $this->call(CategoryProductSeeder::class);
 
     }
 }
