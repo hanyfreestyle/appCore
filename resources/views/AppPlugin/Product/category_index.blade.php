@@ -39,7 +39,7 @@
                 <td>{{$row->id}}</td>
                 <td class="tc">{!! TablePhoto($row,'photo') !!} </td>
                 @foreach(config('app.web_lang') as $key => $lang)
-                  <td>{{optional($row->translate($key))->name }}</td>
+                  <td>{!! printCategoryName($key,$row,$PrefixRoute.".SubCategory") !!}</td>
                 @endforeach
 
                 <td >{!! is_active($row->is_active) !!}</td>

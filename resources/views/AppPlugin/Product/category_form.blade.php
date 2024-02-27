@@ -23,7 +23,7 @@
 
         <hr>
         <div class="row">
-          <x-admin.form.check-active :row="$rowData" :lable="__('admin/form.check_is_published')" name="is_published"
+          <x-admin.form.check-active :row="$rowData" :lable="__('admin/form.check_is_published')" name="is_active"
                                      page-view="{{$pageData['ViewType']}}"/>
 
         </div>

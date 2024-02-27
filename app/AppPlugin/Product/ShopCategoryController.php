@@ -3,6 +3,7 @@
 namespace App\AppPlugin\Product;
 
 use App\AppPlugin\Product\Models\Category;
+use App\AppPlugin\Product\Models\CategoryTranslation;
 use App\AppPlugin\Product\Request\CategoryRequest;
 use App\Helpers\AdminHelper;
 
@@ -38,7 +39,7 @@ class ShopCategoryController extends AdminMainController {
             'PrefixRoute' => $this->PrefixRoute,
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
-            'configArr' => ["editor"=>1],
+            'configArr' => ["editor" => 1],
             'yajraTable' => false,
             'AddLang' => true,
         ];
@@ -60,48 +61,47 @@ class ShopCategoryController extends AdminMainController {
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = false;
         $pageData['Trashed'] = Category::onlyTrashed()->count();
+        $trees = [];
 
         if(Route::currentRouteName() == 'Shop.Category.index_Main') {
             $rowData = self::getSelectQuery(Category::def()->where('parent_id', null));
-        } elseif(Route::currentRouteName() == 'Shop.shopCategory.SubCategory') {
+        } elseif(Route::currentRouteName() == 'Shop.Category.SubCategory') {
             $rowData = self::getSelectQuery(Category::def()->where('parent_id', $id));
             $trees = Category::find($id)->ancestorsAndSelf()->orderBy('depth', 'asc')->get();
             $pageData['SubView'] = true;
         } else {
             $rowData = self::getSelectQuery(Category::def());
         }
-        return view('AppPlugin.Product.category_index', compact('pageData', 'rowData'));
+        return view('AppPlugin.Product.category_index', compact('pageData', 'rowData','trees'));
 
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
-    public function create(){
+    public function create() {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $LangAdd = self::getAddLangForAdd();
         $Categories = Category::tree()->with('translation')->get()->toTree();
         $rowData = Category::findOrNew(0);
-        return view('AppPlugin.Product.category_form',compact('pageData','rowData','LangAdd','Categories'));
+        return view('AppPlugin.Product.category_form', compact('pageData', 'rowData', 'LangAdd', 'Categories'));
     }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
-    public function edit($id){
+    public function edit($id) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
         $Categories = Category::tree()->with('translation')->get()->toTree();
         $rowData = Category::with('translations')->findOrFail($id);
         $LangAdd = self::getAddLangForEdit($rowData);
-        return view('AppPlugin.Product.category_form',compact('pageData','rowData','LangAdd','Categories'));
+        return view('AppPlugin.Product.category_form', compact('pageData', 'rowData', 'LangAdd', 'Categories'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(CategoryRequest $request,$id=0) {
-
-    dd('hi');
+    public function storeUpdate(CategoryRequest $request, $id = 0) {
 
         $saveData = Category::findOrNew($id);
         if($request->input('parent_id') != 0 and $request->input('parent_id') != $saveData->id) {
@@ -111,13 +111,7 @@ class ShopCategoryController extends AdminMainController {
         $saveData->is_active = intval((bool)$request->input('is_active'));
         $saveData->save();
 
-        $saveImgData = new PuzzleUploadProcess();
-        $saveImgData->setCountOfUpload('2');
-        $saveImgData->setUploadDirIs('category/' . $saveData->id);
-        $saveImgData->setnewFileName($request->input('en.slug'));
-        $saveImgData->UploadOne($request);
-        $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
-        $saveData->save();
+        self::SaveAndUpdateDefPhoto($saveData,$request,'category','en.slug');
 
         $saveImgData_icon = new PuzzleUploadProcess();
         $saveImgData_icon->setUploadDirIs('category/' . $saveData->id);
@@ -127,13 +121,12 @@ class ShopCategoryController extends AdminMainController {
         $saveData = AdminHelper::saveAndDeletePhotoByOne($saveData, $saveImgData_icon, 'icon');
         $saveData->save();
 
-        foreach (config('app.shop_lang') as $key => $lang) {
+        $addLang = json_decode($request->add_lang);
+        foreach ($addLang as $key => $lang) {
             $saveTranslation = CategoryTranslation::where('category_id', $saveData->id)->where('locale', $key)->firstOrNew();
             $saveTranslation->category_id = $saveData->id;
-            $saveTranslation->locale = $key;
-            $saveTranslation->name = $request->input($key . '.name');
             $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
-            $saveTranslation->des = $request->input($key . '.des');
+            $saveTranslation = self::saveTranslationMain($saveTranslation,$key,$request);
             $saveTranslation->save();
         }
 
@@ -148,18 +141,8 @@ class ShopCategoryController extends AdminMainController {
         }
 
         self::ClearCash();
+        return  self::redirectWhere($request,$id,$this->PrefixRoute.'.index');
 
-        if($id == '0') {
-
-            if($request->input('AddNewSet') !== null) {
-                return redirect()->back();
-            } else {
-                return redirect(route($this->PrefixRoute . '.index'))->with('Add.Done', "");
-            }
-
-        } else {
-            return redirect(route($this->PrefixRoute . '.index'))->with('Edit.Done', "");
-        }
     }
 
     /*

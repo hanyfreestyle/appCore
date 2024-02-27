@@ -157,7 +157,20 @@ if (!function_exists('isSetKeyForLang')) {
     }
 }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
+#|||||||||||||||||||||||||||||||||||||| # printCategoryName
+if (!function_exists('printCategoryName')) {
+    function printCategoryName($key,$row,$url){
+        if($row->children_count > 0){
+            if(isset($row->translate($key)->name)){
+                return '<a href="'.route($url,$row->id).'">'.$row->translate($key)->name.' ('.$row->children_count.')</a>' ;
+            }else{
+                return null;
+            }
+        }else{
+            return $row->translate($key)->name ?? '';
+        }
+    }
+}
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

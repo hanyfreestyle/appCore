@@ -19,7 +19,7 @@
       @foreach ($sendArr as  $category)
         <option value="{{ $category->id }}" @if ($category->id == $sendvalue) selected @endif>{{ $category->$printValName }}</option>
         @if (count($category->children) > 0)
-          @include('admin.form_loop.subcategories', ['subcategories' => $category->children, 'parent' => $category->name])
+          @include('admin.mainView.subcategories', ['subcategories' => $category->children, 'parent' => $category->name])
         @endif
       @endforeach
     </select>

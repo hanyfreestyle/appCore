@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/Category',[ShopCategoryController::class,'index'])->name('Shop.Category.index');
 Route::get('/Category/Main',[ShopCategoryController::class,'index'])->name('Shop.Category.index_Main');
+Route::get('/Category/SubCategory/{id}',[ShopCategoryController::class,'index'])->name('Shop.Category.SubCategory');
 Route::get('/Category/DataTable',[ShopCategoryController::class,'DataTable'])->name('Shop.Category.DataTable');
 Route::get('/Category/create',[ShopCategoryController::class,'create'])->name('Shop.Category.create');
 Route::get('/Category/create/ar',[ShopCategoryController::class,'create'])->name('Shop.Category.create_ar');
