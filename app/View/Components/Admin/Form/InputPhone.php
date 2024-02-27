@@ -2,8 +2,8 @@
 
 namespace App\View\Components\Admin\Form;
 
-use App\Models\admin\Location;
-use App\Models\data\Country;
+
+use App\AppPlugin\Data\Country\Country;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cache;

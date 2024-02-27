@@ -27,11 +27,13 @@ return [
     ],
 
     'webFile' => [
-        'menu'=> ['id'=> 'menu' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'menu','name_en'=>'Menu','name_ar'=>'القائمة' ],
+        'menu'=> ['id'=> 'menu' , 'group'=>'web','file_name'=> 'menu','name_en'=>'Menu','name_ar'=>'القائمة' ],
+        'newsletter'=> ['id'=> 'newsletter' , 'group'=>'web' ,'file_name'=> 'newsletter','name_en'=>'Newsletter' ,'name_ar'=>'القائمة البريدية' ],
+
 //        'def'=> ['id'=> 'def' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'def','name_en'=>'Default Variables','name_ar'=>'المتغيرات الاساسية' ],
 //        'layout'=> ['id'=> 'layout' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'layout','name'=>'Web Layout' ],
 //        'contact'=> ['id'=> 'contact' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'contact','name'=>'Contact Us' ],
-//        'newsletter'=> ['id'=> 'newsletter' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'newsletter','name'=>'Newsletter' ],
+//
 
 //        'search'=> ['id'=> 'search' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'search','name'=>'Search' ],
 //        'home'=> ['id'=> 'home' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'home','name'=>'Home Page' ],

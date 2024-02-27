@@ -38,7 +38,6 @@
 {!! (new \App\Helpers\MinifyTools)->MinifyJs('js/customs.js',"Seo",$cssReBuild) !!}
 {!! (new \App\Helpers\MinifyTools)->MinifyJs('share/share-buttons.js',"Seo",$cssReBuild) !!}
 <x-site.js.load-web-font/>
-<x-site.js.show-more-show-less/>
 @livewireScripts
 {{--<script>--}}
 {{--    document.addEventListener('livewire:load', () => {--}}

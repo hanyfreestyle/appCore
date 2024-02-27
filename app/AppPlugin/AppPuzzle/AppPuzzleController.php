@@ -33,16 +33,44 @@ class AppPuzzleController {
         $modelTree = AppPuzzleModelTree::ModelTree();
         if(isset($modelTree[$model])) {
             $thisModel = $modelTree[$model];
-            self::CopyAppFolder($thisModel);
-            self::CopyViewFolder($thisModel);
-            self::CopyRouteFile($thisModel);
-            self::CopyMigrations($thisModel);
-            self::CopySeeder($thisModel);
-            self::CopyAdminLang($thisModel);
-            self::CopyInfo($thisModel);
-            self::CopyPhotoFolder($thisModel);
-            self::CopyAssetsFolder($thisModel);
+//            self::CopyAppFolder($thisModel);
+//            self::CopyViewFolder($thisModel);
+//            self::CopyRouteFile($thisModel);
+//            self::CopyMigrations($thisModel);
+//            self::CopySeeder($thisModel);
+//            self::CopyAdminLang($thisModel);
+//            self::CopyWebLang($thisModel);
+//            self::CopyInfo($thisModel);
+//            self::CopyPhotoFolder($thisModel);
+//            self::CopyAssetsFolder($thisModel);
+              self::CopyLivewire($thisModel);
             return redirect()->back();
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopyAdminLang
+    public function CopyLivewire($thisModel) {
+        $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
+        if(isset($thisModel['LivewireClass']) and is_array($thisModel['LivewireClass'])) {
+            foreach ($thisModel['LivewireClass'] as $folder => $file){
+                $filePath = app_path('Http/Livewire/'.$folder.'/'.$file);
+                if(File::isFile($filePath)) {
+                    $destinationFolder = $CopyFolder . 'app/Http/Livewire/'.$folder."/";
+                    self::folderMakeDirectory($destinationFolder);
+                    File::copy($filePath, $destinationFolder . $file);
+                }
+            }
+        }
+        if(isset($thisModel['LivewireView']) and is_array($thisModel['LivewireView'])) {
+            foreach ($thisModel['LivewireView'] as $folder => $file){
+                $filePath = resource_path('views/livewire/'.$folder.'/'.$file);
+                if(File::isFile($filePath)) {
+                    $destinationFolder = $CopyFolder . 'resources/views/livewire/'.$folder."/";
+                    self::folderMakeDirectory($destinationFolder);
+                    File::copy($filePath, $destinationFolder . $file);
+                }
+            }
         }
     }
 
@@ -121,6 +149,26 @@ class AppPuzzleController {
             }
         }
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopyAdminLang
+    public function CopyWebLang($thisModel) {
+        if(isset($thisModel['webLang']) and $thisModel['webLang'] != null) {
+            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
+            $webLangFile = $thisModel['webLangFile'];
+            $webLangFolder = $thisModel['webLang'];
+            foreach (config('app.web_lang') as $key => $lang) {
+                $filePath = resource_path('lang/' . $key . '/' . $webLangFolder . $webLangFile);
+                if(File::isFile($filePath)) {
+                    $destinationFolder = $CopyFolder . '/resources/lang/' . $key . '/' . $webLangFolder;
+                    self::folderMakeDirectory($destinationFolder);
+                    File::copy($filePath, $destinationFolder . $webLangFile);
+                }
+            }
+        }
+    }
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
