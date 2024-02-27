@@ -13,8 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->integer('export')->nullable();
-            $table->dateTime('created_at');
-//            $table->timestamps();
+            $table->timestamps();
         });
     }
 

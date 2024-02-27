@@ -6,6 +6,7 @@
 <meta name="robots" content="index, follow">
     {!! SEO::generate() !!}
     <x-site.def.fav-icon/>
+    {!! (new \App\Helpers\MinifyTools)->MinifyCss('css/bootstrap.min.css',$cssMinifyType,$cssReBuild) !!}
     {!! (new \App\Helpers\MinifyTools)->MinifyCss('css/style.css',$cssMinifyType,$cssReBuild) !!}
     {!! (new \App\Helpers\MinifyTools)->MinifyCss('fontawesome/all.css',$cssMinifyType,$cssReBuild) !!}
     {!! (new \App\Helpers\MinifyTools)->MinifyCss('css/style_footer.css',$cssMinifyType,$cssReBuild) !!}
@@ -33,6 +34,7 @@
 
 {!! (new \App\Helpers\MinifyTools)->MinifyJs('js/jquery-3.7.1.min.js',"Web",false) !!}
 {!! (new \App\Helpers\MinifyTools)->MinifyJs('js/lazy/jquery.lazy.min.js',"SeoWeb",$cssReBuild) !!}
+{!! (new \App\Helpers\MinifyTools)->MinifyJs('js/lazy/lazy_fun.js',"Seo",$cssReBuild) !!}
 {!! (new \App\Helpers\MinifyTools)->MinifyJs('js/customs.js',"Seo",$cssReBuild) !!}
 {!! (new \App\Helpers\MinifyTools)->MinifyJs('share/share-buttons.js',"Seo",$cssReBuild) !!}
 <x-site.js.load-web-font/>

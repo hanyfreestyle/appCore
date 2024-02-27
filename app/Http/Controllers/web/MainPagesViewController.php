@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\WebMainController;
-use App\Http\Requests\data\ContactUsFormRequest;
-use App\Http\Requests\data\ContactUsOnPageRequest;
-use App\Models\data\ContactUsForm;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +14,7 @@ class MainPagesViewController extends WebMainController{
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
     public function index(){
+
         $Meta = parent::getMeatByCatId('home');
         parent::printSeoMeta($Meta,'page_index');
 

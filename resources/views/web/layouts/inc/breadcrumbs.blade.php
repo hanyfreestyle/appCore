@@ -18,7 +18,6 @@
                     <meta itemprop="position" content=" {{$loop->index+1}}" />
                 </li>
             @endif
-
         @endforeach
     </ol>
 @endunless

@@ -2,23 +2,22 @@
 
 namespace App\Http\Livewire\Site;
 
-use App\Models\data\NewsLetter;
+
+use App\AppPlugin\Leads\NewsLetter\NewsLetter;
 use Livewire\Component;
 
-class NewsLetterForm extends Component
-{
+class NewsLetterForm extends Component {
+
     public $email;
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.site.news-letter-form');
     }
 
-    public function addNew()
-    {
+    public function addNew() {
 
         $validatedData = $this->validate(
-            ['email' => 'required|email|unique:config_news_letters'],
+            ['email' => 'required|email|unique:leads_news_letters'],
             [
                 'email.required' => __('web/newsletter.err_email'),
                 'email.email' => __('web/newsletter.err_email'),
@@ -27,6 +26,6 @@ class NewsLetterForm extends Component
         );
 
         NewsLetter::create($validatedData);
-        session()->flash('SaveToNewsLetter', __('web/newsletter.err_confirm') );
+        session()->flash('SaveToNewsLetter', __('web/newsletter.err_confirm'));
     }
 }

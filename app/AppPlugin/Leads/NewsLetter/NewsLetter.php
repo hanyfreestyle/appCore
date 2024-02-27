@@ -10,9 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class NewsLetter extends Model {
 
   protected $table = "leads_news_letters";
-  protected $fillable = ['email'];
+  protected $fillable = ['email','created_at'];
   protected $primaryKey = 'id';
-  public $timestamps = false;
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
