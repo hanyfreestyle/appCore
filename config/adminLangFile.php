@@ -21,6 +21,7 @@ return [
         'Apps'=> ['id'=> 'Apps' , 'group'=>'admin' , 'file_name'=> 'configApp','name'=>'AppSetting','name_ar'=>'اعدادات التطبيق' ],
         'newsletter'=> ['id'=> 'newsletter','group'=>'admin','file_name'=> 'leadsNewsLetter','name'=>'Newsletter','name_ar'=>'القائمة البريدية'],
         'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin','file_name'=> 'leadsContactUs','name'=>'Lead Form','name_ar'=>'الاتصاللات' ],
+        'product'=> ['id'=> 'product' , 'group'=>'admin','file_name'=> 'proProduct','name'=>'Product','name_ar'=>'المنتجات' ],
 
 
 //       'cash'=> ['id'=> 'cash' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'cash','name'=>'Cash Mass','name_ar'=>'' ],
@@ -29,6 +30,7 @@ return [
     'webFile' => [
         'menu'=> ['id'=> 'menu' , 'group'=>'web','file_name'=> 'menu','name_en'=>'Menu','name_ar'=>'القائمة' ],
         'newsletter'=> ['id'=> 'newsletter' , 'group'=>'web' ,'file_name'=> 'newsletter','name_en'=>'Newsletter' ,'name_ar'=>'القائمة البريدية' ],
+        'product'=> ['id'=> 'product','group'=>'web','file_name'=> 'proProduct','name'=>'Product','name_ar'=>'المنتجات' ],
 
 //        'def'=> ['id'=> 'def' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'def','name_en'=>'Default Variables','name_ar'=>'المتغيرات الاساسية' ],
 //        'layout'=> ['id'=> 'layout' , 'group'=>'web' , 'sub_dir'=> null , 'file_name'=> 'layout','name'=>'Web Layout' ],

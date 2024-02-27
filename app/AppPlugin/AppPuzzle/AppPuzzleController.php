@@ -12,7 +12,7 @@ class AppPuzzleController {
     public $mainFolder;
 
     function __construct() {
-        $this->mainFolder = "D:\_AppPlugin/";
+        $this->mainFolder = "D:\_AppPluginTest/";
         $this->folderDate = null;
     }
 
@@ -33,17 +33,18 @@ class AppPuzzleController {
         $modelTree = AppPuzzleModelTree::ModelTree();
         if(isset($modelTree[$model])) {
             $thisModel = $modelTree[$model];
-//            self::CopyAppFolder($thisModel);
-//            self::CopyViewFolder($thisModel);
-//            self::CopyRouteFile($thisModel);
-//            self::CopyMigrations($thisModel);
-//            self::CopySeeder($thisModel);
-//            self::CopyAdminLang($thisModel);
-//            self::CopyWebLang($thisModel);
-//            self::CopyInfo($thisModel);
-//            self::CopyPhotoFolder($thisModel);
-//            self::CopyAssetsFolder($thisModel);
-              self::CopyLivewire($thisModel);
+
+            self::CopyAppFolder($thisModel);
+            self::CopyViewFolder($thisModel);
+            self::CopyRouteFile($thisModel);
+            self::CopyMigrations($thisModel);
+            self::CopySeeder($thisModel);
+            self::CopyAdminLang($thisModel);
+            self::CopyWebLang($thisModel);
+            self::CopyInfo($thisModel);
+            self::CopyPhotoFolder($thisModel);
+            self::CopyAssetsFolder($thisModel);
+            self::CopyLivewire($thisModel);
             return redirect()->back();
         }
     }
@@ -80,11 +81,12 @@ class AppPuzzleController {
     public function CopyPhotoFolder($thisModel) {
         if(isset($thisModel['photoFolder']) and $thisModel['photoFolder'] != null) {
             $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $folderName = $thisModel['photoFolder'];
-            $thisDir = public_path("images/" . $folderName);
-            if(File::isDirectory($thisDir)) {
-                $destinationFolder = $CopyFolder . 'public/images/' . $folderName;
-                self::recursive_files_copy($thisDir, $destinationFolder);
+            foreach ($thisModel['photoFolder'] as $folderName ){
+                $thisDir = public_path("images/" . $folderName);
+                if(File::isDirectory($thisDir)) {
+                    $destinationFolder = $CopyFolder . 'public/images/' . $folderName;
+                    self::recursive_files_copy($thisDir, $destinationFolder);
+                }
             }
         }
     }
@@ -169,28 +171,41 @@ class AppPuzzleController {
     }
 
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
+#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
     public function CopyAppFolder($thisModel) {
         if(isset($thisModel['app']) and $thisModel['app'] != null) {
-            $appFolder = AdminHelper::arrIsset($thisModel, 'appFolder', null);
             $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
             $folderName = $thisModel['app'];
-            $thisDir = app_path("AppPlugin/" . $appFolder . $folderName);
+            $thisDir = app_path("AppPlugin/" . $folderName);
             if(File::isDirectory($thisDir)) {
-                $filesList = File::files($thisDir);
-                $destinationFolder = $CopyFolder . '/app/AppPlugin/' . $appFolder . $folderName . "/";
-                self::folderMakeDirectory($destinationFolder);
-                foreach ($filesList as $file) {
-                    $fileB = $file->getRealPath();
-                    $getBasename = $file->getBasename();
-                    $destination = $destinationFolder . $getBasename;
-                    File::copy($fileB, $destination);
-                }
+                $destinationFolder = $CopyFolder . 'app/AppPlugin/' . $folderName;
+                self::recursive_files_copy($thisDir, $destinationFolder);
             }
         }
     }
+
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
+//    public function CopyAppFolder($thisModel) {
+//        if(isset($thisModel['app']) and $thisModel['app'] != null) {
+//            $appFolder = AdminHelper::arrIsset($thisModel, 'appFolder', null);
+//            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
+//            $folderName = $thisModel['app'];
+//            $thisDir = app_path("AppPlugin/" . $appFolder . $folderName);
+//            if(File::isDirectory($thisDir)) {
+//                $filesList = File::files($thisDir);
+//                $destinationFolder = $CopyFolder . '/app/AppPlugin/' . $appFolder . $folderName . "/";
+//                self::folderMakeDirectory($destinationFolder);
+//                foreach ($filesList as $file) {
+//                    $fileB = $file->getRealPath();
+//                    $getBasename = $file->getBasename();
+//                    $destination = $destinationFolder . $getBasename;
+//                    File::copy($fileB, $destination);
+//                }
+//            }
+//        }
+//    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
