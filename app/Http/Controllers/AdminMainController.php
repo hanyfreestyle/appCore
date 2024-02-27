@@ -192,7 +192,8 @@ class AdminMainController extends DefaultMainController {
     } elseif(Route::currentRouteName() == $this->PrefixRoute . '.create_en') {
       $LangAdd = ['en' => 'English'];
     } else {
-      $LangAdd = ['ar' => 'Arabic', 'en' => 'English'];
+//      $LangAdd = ['ar' => 'Arabic', 'en' => 'English'];
+      $LangAdd = config('app.web_lang');
     }
     return $LangAdd;
   }

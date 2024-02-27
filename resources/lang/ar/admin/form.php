@@ -17,7 +17,9 @@ return
 	'button_update' => 'تحديث',
 	'check_all' => 'تحديد الكل',
 	'check_is_published' => 'منشور',
+	'sel_categories' => 'قائمة المجموعات',
 	'sel_category' => 'القسم',
+	'sel_category_main' => 'المجموعات الرئيسية',
 	'text_content' => 'المحتوى',
 	'text_des' => 'الوصف',
 	'text_faq_answer' => 'الاجابة',
@@ -28,4 +30,5 @@ return
 	'text_password' => 'كلمة المرور',
 	'text_password_confirm' => 'تاكيد كلمة المرور',
 	'text_title' => 'العنوان',
+	'text_g_slug' => 'رابط الصفحة',
 ];

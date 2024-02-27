@@ -12,11 +12,20 @@ class MetaTageFilde extends Component
     public $row;
     public $reqspan;
     public $viewtype;
+    public $slug;
+    public $labelView;
+    public $holder;
+    public $keyLang;
+
     public function __construct(
         $key = null,
         $row = array(),
         $reqspan = true,
         $viewtype = "Add",
+        $slug = true,
+        $labelView = true,
+        $holder = false,
+        $keyLang = null,
     )
     {
         $this->key = $key ;
@@ -26,6 +35,17 @@ class MetaTageFilde extends Component
         }else{
             $this->reqspan = $reqspan ;
         }
+        $this->slug = $slug ;
+        $this->labelView = $labelView ;
+        $this->holder = $holder ;
+        if($labelView == false){
+            $this->holder = true ;
+        }
+
+
+        $this->keyLang = __('admin.multiple_lang_key_'.$this->key) ;
+
+
 
     }
 

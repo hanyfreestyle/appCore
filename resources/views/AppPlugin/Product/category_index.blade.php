@@ -25,9 +25,10 @@
               <th class="TD_20">#</th>
               <th class="TD_20"></th>
               @foreach(config('app.web_lang') as $key => $lang)
-                <th>{{__('admin/proProduct.cat_text_name')}} ({{$key}})</th>
+                <th>{{__('admin/proProduct.cat_text_name')}}  {{printLableKey($key)}}</th>
               @endforeach
               <th class="TD_20"></th>
+              <x-admin.table.action-but po="top" type="addLang"/>
               <x-admin.table.action-but po="top" type="edit"/>
               <x-admin.table.action-but po="top" type="delete"/>
             </tr>
@@ -42,6 +43,7 @@
                 @endforeach
 
                 <td >{!! is_active($row->is_active) !!}</td>
+                <x-admin.table.action-but type="addLang" :row="$row" />
                 <x-admin.table.action-but type="edit" :row="$row" />
                 <x-admin.table.action-but type="delete" :row="$row" />
               </tr>

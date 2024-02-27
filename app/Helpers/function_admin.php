@@ -131,6 +131,20 @@ if (!function_exists('getColLang')) {
 }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     getRoleName
+if (!function_exists('printLableKey')) {
+    function printLableKey($key){
+        if(count(config('app.web_lang')) > 1){
+            $send = '('.$key.')' ;
+        }else{
+            $send = "" ;
+        }
+        return  $send ;
+    }
+}
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #    defAdminAssets
 if (!function_exists('isSetKeyForLang')) {
     function isSetKeyForLang($key){

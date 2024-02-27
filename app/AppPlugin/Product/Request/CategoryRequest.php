@@ -34,6 +34,7 @@ class CategoryRequest extends FormRequest {
 
         foreach (config('app.web_lang') as $key => $lang) {
             $rules[$key . ".name"] = 'required';
+            $rules[$key . ".des"] = 'required';
             if($id == '0') {
                 $rules[$key . ".slug"] = 'required|unique:pro_category_translations,slug';
             } else {

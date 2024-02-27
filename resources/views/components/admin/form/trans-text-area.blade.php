@@ -5,7 +5,7 @@
         </label>
     @endif
 
-    <textarea class="form-control dir_{{$tdir}} @error($reqname) is-invalid is_invalid_area_{{$key}} @enderror" rows="5"
+    <textarea class="form-control  dir_{{$tdir}} @error($reqname) is-invalid is_invalid_area_{{$key}} @enderror" rows="5"
               name="{{$key}}[{{$name}}]" @if($holder) placeholder="{{$placeholder}}" @endif>{{$value}}</textarea>
 
     @if($errors->has($reqname))

@@ -3,6 +3,13 @@
         @can($PrefixRole.'_edit')
             <th class="td_action"></th>
         @endcan
+
+    @elseif($type == 'addLang')
+        @if(count(config('app.web_lang')) > 1 )
+            @can($PrefixRole.'_edit')
+                <th class="td_action"></th>
+            @endcan
+        @endif
     @elseif($type == 'delete')
         @can($PrefixRole.'_delete')
             <th class="td_action"></th>

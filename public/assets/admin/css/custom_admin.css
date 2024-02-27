@@ -215,3 +215,25 @@ font-size: 15px;
     background:rgba(255, 0, 0, .3);
     border: 1px solid rgba(255, 0, 0, .3);
 }
+.bigTextArea textarea{
+    height: 315px;
+}
+
+.LangLine{
+    float: right;
+    width: 100%;
+    height: 2px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.LangHeader{
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 5px;
+    padding: 8px 20px;
+}
