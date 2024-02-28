@@ -394,12 +394,12 @@ class AdminHelper{
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     saveAndDeletePhoto
-    static function saveAndDeletePhotoByOne($saveData,$saveImgData,$FildName){
+    static function saveAndDeletePhotoByOne($saveData,$saveImgData,$dbName){
         if(isset($saveImgData->sendSaveData['photo']['file_name'])){
-            if(File::exists($saveData->$FildName)){
-                File::delete($saveData->$FildName);
+            if(File::exists($saveData->$dbName)){
+                File::delete($saveData->$dbName);
             }
-            $saveData->$FildName = $saveImgData->sendSaveData['photo']['file_name'];
+            $saveData->$dbName = $saveImgData->sendSaveData['photo']['file_name'];
         }
         return $saveData ;
     }

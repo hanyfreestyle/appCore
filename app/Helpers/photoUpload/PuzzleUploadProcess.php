@@ -110,11 +110,11 @@ class PuzzleUploadProcess extends PuzzleImageUpload {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     UploadImage
-    public function UploadOne($request,$filterName="filter_id") {
+    public function UploadOne($request,$filterInputName="filter_id") {
 
         if(request()->hasFile($this->fileUploadName)) {
 
-            $filter_Id = $request->input($filterName);
+            $filter_Id = $request->input($filterInputName);
             $file = $request->file($this->fileUploadName);
 
             /// بيانات الفلتر

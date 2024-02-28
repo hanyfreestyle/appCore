@@ -294,15 +294,21 @@ class AdminMainController extends DefaultMainController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
-  public function SaveAndUpdateDefPhoto($saveData, $request, $dir, $slug = "slug") {
-    $saveImgData = new PuzzleUploadProcess();
-    $saveImgData->setCountOfUpload('2');
-    $saveImgData->setUploadDirIs($dir . '/' . $saveData->id);
-    $saveImgData->setnewFileName($request->input($slug));
-    $saveImgData->UploadOne($request);
-    $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
-    $saveData->save();
-  }
+    public function SaveAndUpdateDefPhoto($saveData, $request, $dir, $slug = "slug",$sendArr=array()) {
+
+        $filterInputName = AdminHelper::arrIsset($sendArr,'filter','filter_id');
+        $setCountOfUpload = AdminHelper::arrIsset($sendArr,'count',2);
+        $setfileUploadName = AdminHelper::arrIsset($sendArr,'file','image');
+
+        $saveImgData = new PuzzleUploadProcess();
+        $saveImgData->setCountOfUpload($setCountOfUpload);
+        $saveImgData->setUploadDirIs($dir . '/' . $saveData->id);
+        $saveImgData->setnewFileName($request->input($slug));
+        $saveImgData->setfileUploadName($setfileUploadName);
+        $saveImgData->UploadOne($request,$filterInputName);
+        $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
+        $saveData->save();
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #  redirectWhere

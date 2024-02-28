@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\admin\config\UploadFilter;
 use Illuminate\Support\Facades\File;
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -171,6 +173,19 @@ if (!function_exists('printCategoryName')) {
         }
     }
 }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   printUploadNotes
+if (!function_exists('printUploadNotes')) {
+    function printUploadNotes($thisfilterid){
+        if(config('app.upload_photo_notes') == true and intval($thisfilterid) != 0) {
+            $notesSend = UploadFilter::where('id', $thisfilterid)->first();
+            $printName = "notes_" . thisCurrentLocale();
+            return $notesSend->$printName;
+        }
+    }
+}
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

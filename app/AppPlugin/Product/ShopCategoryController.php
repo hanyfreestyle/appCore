@@ -12,9 +12,6 @@ use App\Http\Controllers\AdminMainController;
 
 use App\Http\Traits\CrudTraits;
 
-use App\Models\admin\Listing;
-use App\Models\admin\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -111,7 +108,7 @@ class ShopCategoryController extends AdminMainController {
         $saveData->is_active = intval((bool)$request->input('is_active'));
         $saveData->save();
 
-        self::SaveAndUpdateDefPhoto($saveData,$request,'category','en.slug');
+        self::SaveAndUpdateDefPhoto($saveData,$request,'category','en.name');
 
         $saveImgData_icon = new PuzzleUploadProcess();
         $saveImgData_icon->setUploadDirIs('category/' . $saveData->id);
