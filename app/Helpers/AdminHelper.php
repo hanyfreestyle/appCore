@@ -427,7 +427,7 @@ class AdminHelper{
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
-    static function DeleteAllPhotos($deleteRow,$emptyTable=false,$Names=['photo','photo_thum_1','photo_thum_1']){
+    static function DeleteAllPhotos($deleteRow,$emptyTable=false,$Names=['photo','photo_thum_1','icon']){
         foreach ($Names as $name){
             if(File::exists($deleteRow->$name)){
                 File::delete($deleteRow->$name);
@@ -438,6 +438,17 @@ class AdminHelper{
         }
         return $deleteRow ;
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
+    static function DeleteDir($dir,$id){
+        $thisDir = public_path('images/'.$dir."/".$id);
+        if(File::isDirectory($thisDir)) {
+             File::deleteDirectory($thisDir);
+        }
+    }
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     seoDesClean
     static function seoDesClean($getDes):string{

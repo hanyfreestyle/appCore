@@ -3,6 +3,9 @@
 namespace App\AppPlugin\Product\Models;
 
 
+use App\Models\admin\Listing;
+use App\Models\admin\Page;
+use App\Models\admin\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -49,7 +52,7 @@ class Category extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function recursive_product_shop() {
-        return $this->belongsToManyOfDescendantsAndSelf(Product::class, 'category_product')
+        return $this->belongsToManyOfDescendantsAndSelf(Product::class, 'pro_category_product')
             ->with('translation')
             ->with('categories')
             ->where('is_active', true)
@@ -60,11 +63,25 @@ class Category extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #  products
     public function products() {
-        return $this->belongsToMany(Product::class, 'category_product', 'category_id', 'product_id')
+        return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')
             ->where('is_active', true)
             ->where('is_archived', false)
             ->with('translation');
     }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #  Delete Counts
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    public function del_category(): HasMany{
+        return $this->hasMany(Category::class,'parent_id')->withTrashed();
+    }
+    public function del_product(){
+         return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')
+            ->withTrashed();
+    }
+
 
 
 }

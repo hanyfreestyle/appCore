@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 use App\Helpers\AdminHelper;
 use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Requests\admin\MorePhotosRequest;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -14,6 +13,7 @@ trait CrudTraits {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroy
     public function destroy($id) {
+
         $deleteRow = $this->model->where('id', $id)->firstOrFail();
         $deleteRow->delete();
         self::ClearCash();
@@ -62,7 +62,6 @@ trait CrudTraits {
         return back();
     }
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     config
     public function config() {
@@ -74,7 +73,6 @@ trait CrudTraits {
             return view("admin.mainView.config", compact('pageData'));
         }
     }
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     ListMorePhoto
@@ -117,6 +115,7 @@ trait CrudTraits {
         self::ClearCash();
         return back()->with('confirmDelete', "");
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     sortDefPhotoList
     public function sortPhotoSave(Request $request) {
@@ -129,23 +128,6 @@ trait CrudTraits {
             $saveData->save();
         }
         return response()->json(['success' => $positions]);
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     ListOldPhoto
-    public function ListOldPhoto(Request $request) {
-        $pageData = $this->pageData;
-        //dd($pageData);
-
-        $pageData['ViewType'] = "Edit";
-        $Project = Listing::findOrFail($request->route()->parameter('id'));
-        $folderPath = public_path("ckfinder/userfiles/" . $Project->slider_images_dir);
-        if(File::isDirectory($folderPath)) {
-            $ProjectPhotos = File::files($folderPath);
-        } else {
-            $ProjectPhotos = [];
-        }
-        return view('admin.mainView.old_photos', compact('ProjectPhotos', 'pageData', 'Project'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

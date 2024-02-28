@@ -18,9 +18,12 @@ Route::get('/Category/emptyPhoto/{id}', [ShopCategoryController::class,'emptyPho
 Route::get('/Category/DeleteLang/{id}',[ShopCategoryController::class,'DeleteLang'])->name('Shop.Category.DeleteLang');
 Route::post('/Category/update/{id}',[ShopCategoryController::class,'storeUpdate'])->name('Shop.Category.update');
 Route::get('/Category/destroy/{id}',[ShopCategoryController::class,'destroyException'])->name('Shop.Category.destroy');
-Route::get('/Category/photos/{id}',[ShopCategoryController::class,'ListMorePhoto'])->name('Shop.Category.More_Photos');
-Route::post('/Category/saveSort', [ShopCategoryController::class,'sortPhotoSave'])->name('Shop.Category.sortPhotoSave');
-Route::post('/Category/AddMore',[ShopCategoryController::class,'AddMorePhotos'])->name('Shop.Category.More_PhotosAdd');
-Route::get('/Category/PhotoDel/{id}',[ShopCategoryController::class,'More_PhotosDestroy'])->name('Shop.Category.More_PhotosDestroy');
 Route::get('/Category/config', [ShopCategoryController::class,'config'])->name('Shop.Category.config');
 Route::get('/Category/emptyIcon/{id}', [ShopCategoryController::class,'emptyIcon'])->name('Shop.Category.emptyIcon');
+
+
+
+//Route::get('/Category/photos/{id}',[ShopCategoryController::class,'ListMorePhoto'])->name('Shop.Category.More_Photos');
+//Route::post('/Category/saveSort', [ShopCategoryController::class,'sortPhotoSave'])->name('Shop.Category.sortPhotoSave');
+//Route::post('/Category/AddMore',[ShopCategoryController::class,'AddMorePhotos'])->name('Shop.Category.More_PhotosAdd');
+//Route::get('/Category/PhotoDel/{id}',[ShopCategoryController::class,'More_PhotosDestroy'])->name('Shop.Category.More_PhotosDestroy');
