@@ -23,3 +23,4 @@ Route::post('/Category/saveSort', [ShopCategoryController::class,'sortPhotoSave'
 Route::post('/Category/AddMore',[ShopCategoryController::class,'AddMorePhotos'])->name('Shop.Category.More_PhotosAdd');
 Route::get('/Category/PhotoDel/{id}',[ShopCategoryController::class,'More_PhotosDestroy'])->name('Shop.Category.More_PhotosDestroy');
 Route::get('/Category/config', [ShopCategoryController::class,'config'])->name('Shop.Category.config');
+Route::get('/Category/emptyIcon/{id}', [ShopCategoryController::class,'emptyIcon'])->name('Shop.Category.emptyIcon');

@@ -42,6 +42,14 @@
                                :send-arr="$filterTypes"/>
     @endif
 
+    @if($iconfilterid)
+      <x-admin.form.select-arr label="{{ __('admin/config/settings.set_iconfilter_id') }}" name="{{$modelname}}_iconfilterid" col="3"
+                               sendvalue="{{old($modelname.'_iconfilterid',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_iconfilterid',0))}}"
+                               :send-arr="$filterTypes"/>
+    @endif
+
+
+
     @if($morePhotoFilterid)
       <x-admin.form.select-arr label="{{ __('admin/config/settings.set_filter_filter_more_photo') }}"
                                name="{{$modelname}}_morephoto_filterid" col="3"

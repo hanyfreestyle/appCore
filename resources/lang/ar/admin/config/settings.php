@@ -15,4 +15,5 @@ return
 	'sort_name_asc' => 'التريب بالاسم تنازلى',
 	'sort_name_desc' => 'التريب بالاسم تصاعدى',
 	'sort_postion' => 'الترتيب',
+	'set_iconfilter_id' => 'فلتر رفع الايكون',
 ];

@@ -39,6 +39,13 @@ class PuzzleImageUpload{
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     setfileUploadName
+    public function setfileUploadName($setfileUploadName){
+        $this->fileUploadName = $setfileUploadName;
+        return $this ;
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     setnewFileName
     public function setCountOfUpload($setCountOfUpload){
         $this->setCountOfUpload = $setCountOfUpload;

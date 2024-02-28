@@ -16,7 +16,7 @@
         <div class="row">
           <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
           @foreach ( $LangAdd as $key=>$lang )
-            <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="false" />
+            <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="false"/>
           @endforeach
 
         </div>
@@ -28,7 +28,42 @@
 
         </div>
         <hr>
-        <x-admin.form.upload-model-photo :page-data="$pageData" :row="$rowData"/>
+        <div class="row">
+          <x-admin.form.upload-model-photo :page-data="$pageData" :row="$rowData" col="7"/>
+          <x-admin.form.upload-model-photo :page-data="$pageData" :row="$rowData" col='5' file="icon" filde="icon" filter="_iconfilterid"
+                                           route=".emptyIcon" filter-name="IconFilter" />
+        </div>
+
+
+        {{--        <div class="row">--}}
+
+        {{--          <div class="col-lg-8">--}}
+        {{--            <x-admin.form.upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData"--}}
+        {{--                                       :multiple="false"--}}
+        {{--                                       thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,$controllerName.'_filterid',0) }}"--}}
+        {{--                                       :emptyphotourl="$PrefixRoute.'.emptyPhoto'"  />--}}
+
+        {{--          </div>--}}
+
+
+        {{--          <div class="col-lg-4">--}}
+        {{--            <x-admin.form.upload-file  view-type="{{$pageData['ViewType']}}" :row-data="$rowData"--}}
+        {{--                                       :multiple="false"--}}
+        {{--                                       file-name="icon"--}}
+        {{--                                       fild-name="icon"--}}
+        {{--                                       thisfilterid="{{ \App\Helpers\AdminHelper::arrIsset($modelSettings,$controllerName.'_iconfilterid',0) }}"--}}
+        {{--                                       :emptyphotourl="$PrefixRoute.'.emptyPhoto'"  />--}}
+
+        {{--          </div>--}}
+        {{--        </div>--}}
+
+        {{--            <x-admin.form.upload-file view-type="{{$pageData['ViewType']}}" :row-data="$rowData"--}}
+        {{--                                      :multiple="false"--}}
+        {{--                                      label="Icon"--}}
+        {{--                                      :req="false"--}}
+        {{--                                      fild-name="icon"--}}
+        {{--                                      :add-filter-list="false"--}}
+        {{--                                      :emptyphotourl="$PrefixRoute.'.emptyIcon'"  />--}}
 
 
         <x-admin.form.submit-role-back :page-data="$pageData"/>

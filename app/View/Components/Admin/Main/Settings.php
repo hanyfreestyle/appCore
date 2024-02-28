@@ -14,6 +14,7 @@ class Settings extends Component
     public $datatable;
     public $orderby;
     public $filterid;
+    public $iconfilterid;
     public $morePhotoFilterid;
     public $orderbyDef;
     public $orderbyPostion;
@@ -37,6 +38,7 @@ class Settings extends Component
         $this->orderbyDef = $orderbyDef;
         $this->orderbyPostion = IsArr($configArr,'orderbyPostion',false);
         $this->filterid = IsArr($configArr,'filterid');
+        $this->iconfilterid = IsArr($configArr,'iconfilterid',false);
         $this->morePhotoFilterid = IsArr($configArr,'morePhotoFilterid',false);
         $this->orderbyDate = IsArr($configArr,'orderbyDate',false);
         $this->orderbyName = IsArr($configArr,'orderbyName',true);

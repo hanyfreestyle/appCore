@@ -22,9 +22,11 @@ class UploadFile extends Component
     public $thisfilterid;
     public $emptyphotourl;
     public $notes;
+    public $addFilterList;
+    public $filterName;
 
     public function __construct(
-        $rowCol = 'col-6',
+        $rowCol = 'col-12',
         $fileName = 'image',
         $label = '',
         $labelPhoto = null,
@@ -37,9 +39,12 @@ class UploadFile extends Component
         $acceptFile = "image/*",# image/*,.zip
         $thisfilterid = '',
         $emptyphotourl = '#',
+        $addFilterList = true,
+        $filterName = "filter_id",
 
     )
     {
+        $this->addFilterList = $addFilterList;
         $this->rowCol = $rowCol;
         $this->fileName = $fileName;
         $this->labelPhoto = __('admin/def.form_current_photo');
@@ -53,6 +58,7 @@ class UploadFile extends Component
         $this->thisfilterid = $thisfilterid;
         $this->emptyphotourl = $emptyphotourl;
         $this->notes = $notes;
+        $this->filterName = $filterName;
 
 
         if($this->viewType == 'Edit'){

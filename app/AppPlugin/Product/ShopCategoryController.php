@@ -39,7 +39,7 @@ class ShopCategoryController extends AdminMainController {
             'PrefixRoute' => $this->PrefixRoute,
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
-            'configArr' => ["editor" => 1],
+            'configArr' => ["editor" => 1,'iconfilterid'=>1],
             'yajraTable' => false,
             'AddLang' => true,
         ];
@@ -117,7 +117,7 @@ class ShopCategoryController extends AdminMainController {
         $saveImgData_icon->setUploadDirIs('category/' . $saveData->id);
         $saveImgData_icon->setnewFileName($request->input('en.slug'));
         $saveImgData_icon->setfileUploadName('icon');
-        $saveImgData_icon->UploadOneNofilter($request, '4', 60, 60);
+        $saveImgData_icon->UploadOne($request,"IconFilter");
         $saveData = AdminHelper::saveAndDeletePhotoByOne($saveData, $saveImgData_icon, 'icon');
         $saveData->save();
 
