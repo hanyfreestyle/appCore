@@ -11,9 +11,9 @@
       </div>
       <div class="col-lg-3 text-left">
         @if($thisRow == null)
-          <x-admin.form.action-button  url="{{route($PrefixRoute.'.index')}}"  type="back" :tip="false"/>
+          <x-admin.form.action-button url="{{route($PrefixRoute.'.index')}}" type="back" :tip="false"/>
         @else
-          <x-admin.form.action-button  url="{{route($PrefixRoute.'.CatSort',0)}}"  type="back" :tip="false"/>
+          <x-admin.form.action-button url="{{route($PrefixRoute.'.CatSort',0)}}" type="back" :tip="false"/>
         @endif
       </div>
     </div>
@@ -24,12 +24,12 @@
       @if(count($rowData)>0)
         <div class="col-lg-12 hanySort">
           @foreach($rowData as $row)
-            <div class="col-lg-12"  data-index="{{$row->id}}" data-position="{{$row->postion}}" >
+            <div class="col-lg-12" data-index="{{$row->id}}" data-position="{{$row->postion}}">
               <div class="ListItem-12">
                 {{$row->name}}
                 @if(count($row->children) > 0 )
                   <div class="subsort">
-                    <x-admin.form.action-button url="{{route($PrefixRoute.'.CatSort',$row->id)}}" type="sort"  />
+                    <x-admin.form.action-button url="{{route($PrefixRoute.'.CatSort',$row->id)}}" type="sort"/>
                   </div>
                 @endif
               </div>
@@ -38,7 +38,7 @@
         </div>
       @else
         <div class="col-lg-12">
-          <x-admin.hmtl.alert-massage type="nodata" />
+          <x-admin.hmtl.alert-massage type="nodata"/>
         </div>
       @endif
     </div>
@@ -49,7 +49,7 @@
 
 @push('JsCode')
   <script src="{{defAdminAssets('plugins/bootstrap/js/jquery-ui.min.js')}}"></script>
-  <x-admin.ajax.sort-code url="{{ route($PrefixRoute.'.SaveSort') }}" />
+  <x-admin.ajax.sort-code url="{{ route($PrefixRoute.'.SaveSort') }}"/>
 @endpush
 
 

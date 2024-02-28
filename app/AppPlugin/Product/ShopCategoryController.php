@@ -65,16 +65,16 @@ class ShopCategoryController extends AdminMainController {
         $pageData['Trashed'] = Category::onlyTrashed()->count();
         $trees = [];
 
-        if(Route::currentRouteName() == 'Shop.Category.index_Main') {
+        if(Route::currentRouteName() == $this->PrefixRoute.'.index_Main') {
             $rowData = self::getSelectQuery(Category::def()->where('parent_id', null));
-        } elseif(Route::currentRouteName() == 'Shop.Category.SubCategory') {
+        } elseif(Route::currentRouteName() == $this->PrefixRoute.'.SubCategory') {
             $rowData = self::getSelectQuery(Category::def()->where('parent_id', $id));
             $trees = Category::find($id)->ancestorsAndSelf()->orderBy('depth', 'asc')->get();
             $pageData['SubView'] = true;
         } else {
             $rowData = self::getSelectQuery(Category::def());
         }
-        return view('AppPlugin.Product.category_index', compact('pageData', 'rowData','trees'));
+        return view('admin.mainView.category.index', compact('pageData', 'rowData','trees'));
 
     }
 
@@ -86,7 +86,7 @@ class ShopCategoryController extends AdminMainController {
         $LangAdd = self::getAddLangForAdd();
         $Categories = Category::tree()->with('translation')->get()->toTree();
         $rowData = Category::findOrNew(0);
-        return view('AppPlugin.Product.category_form', compact('pageData', 'rowData', 'LangAdd', 'Categories'));
+        return view('admin.mainView.category.form', compact('pageData', 'rowData', 'LangAdd', 'Categories'));
     }
 
 
@@ -98,7 +98,7 @@ class ShopCategoryController extends AdminMainController {
         $Categories = Category::tree()->with('translation')->get()->toTree();
         $rowData = Category::with('translations')->findOrFail($id);
         $LangAdd = self::getAddLangForEdit($rowData);
-        return view('AppPlugin.Product.category_form', compact('pageData', 'rowData', 'LangAdd', 'Categories'));
+        return view('admin.mainView.category.form', compact('pageData', 'rowData', 'LangAdd', 'Categories'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
