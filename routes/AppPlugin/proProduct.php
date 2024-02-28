@@ -20,7 +20,8 @@ Route::post('/Category/update/{id}',[ShopCategoryController::class,'storeUpdate'
 Route::get('/Category/destroy/{id}',[ShopCategoryController::class,'destroyException'])->name('Shop.Category.destroy');
 Route::get('/Category/config', [ShopCategoryController::class,'config'])->name('Shop.Category.config');
 Route::get('/Category/emptyIcon/{id}', [ShopCategoryController::class,'emptyIcon'])->name('Shop.Category.emptyIcon');
-
+Route::get('/Category/CatSort/{id}',[ShopCategoryController::class,'CategorySort'])->name('Shop.Category.CatSort');
+Route::post('/Category/SaveSort',[ShopCategoryController::class,'CategorySaveSort'])->name('Shop.Category.SaveSort');
 
 
 //Route::get('/Category/photos/{id}',[ShopCategoryController::class,'ListMorePhoto'])->name('Shop.Category.More_Photos');

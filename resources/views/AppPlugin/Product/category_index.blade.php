@@ -6,6 +6,15 @@
 
 @section('content')
   <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
+
+  <x-admin.hmtl.section>
+    <div class="row mb-3">
+      <div class="col-12 dir_button">
+        <x-admin.form.action-button url="{{route('Shop.Category.CatSort',0)}}" type="sort" :tip="false" bg="dark" />
+      </div>
+    </div>
+  </x-admin.hmtl.section>
+
   <x-admin.hmtl.section>
     <ol class="breadcrumb breadcrumb_menutree">
       <li class="breadcrumb-item"><a href="{{route($PrefixRoute.'.index_Main')}}">{{__('admin/proProduct.cat_main_category')}}</a></li>

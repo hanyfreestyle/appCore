@@ -11,10 +11,8 @@ use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
 
 use App\Http\Traits\CrudTraits;
+use App\Http\Traits\CategoryTraits;
 
-
-use App\Models\admin\Developer;
-use App\Models\admin\DeveloperTranslation;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +21,9 @@ use Illuminate\Support\Facades\Route;
 class ShopCategoryController extends AdminMainController {
 
     use CrudTraits;
+    use CategoryTraits ;
 
-    function __construct(Category $model) {
+    function __construct(Category $model,CategoryTranslation $translation) {
         parent::__construct();
         $this->controllerName = "Category";
         $this->PrefixRole = 'Product';
@@ -34,13 +33,15 @@ class ShopCategoryController extends AdminMainController {
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
         $this->UploadDirIs = 'category';
+        $this->translation = $translation;
+        $this->translationdb = 'category_id';
 
         $sendArr = [
             'TitlePage' => $this->PageTitle,
             'PrefixRoute' => $this->PrefixRoute,
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
-            'configArr' => ["editor" => 1,'iconfilterid'=>1],
+            'configArr' => ["editor" => 1,'iconfilterid'=>1 ],
             'yajraTable' => false,
             'AddLang' => true,
         ];
@@ -166,81 +167,16 @@ class ShopCategoryController extends AdminMainController {
                     $deleteRow->forceDelete();
                 });
             }catch (\Exception $exception){
-                return back()->with(['confirmException'=>'','fromModel'=>'Project','deleteRow'=>$deleteRow]);
+                return back()->with(['confirmException'=>'','fromModel'=>'CategoryProduct','deleteRow'=>$deleteRow]);
             }
         }else{
-            return back()->with(['confirmException'=>'','fromModel'=>'Project','deleteRow'=>$deleteRow]);
+            return back()->with(['confirmException'=>'','fromModel'=>'CategoryProduct','deleteRow'=>$deleteRow]);
         }
 
         self::ClearCash();
         return back()->with('confirmDelete',"");
     }
 
-
-
-    /*
-
-
-
-
-
-
-
-
-
-
-
-    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #|||||||||||||||||||||||||||||||||||||| #     CategorySort
-        public function CategorySort($id) {
-            $sendArr = ['TitlePage' => $this->PageTitle, 'selMenu' => $this->selMenu];
-            $pageData = AdminHelper::returnPageDate($this->controllerName, $sendArr);
-            $pageData['ViewType'] = "List";
-            $Category = [];
-            if($id == 0) {
-                $Categories = self::getSelectQuery(Category::def()->where('parent_id', null)->orderBy('postion'));
-            } else {
-                $Category = Category::findOrNew($id);
-                $Categories = self::getSelectQuery(Category::def()->where('parent_id', $Category->id)->orderBy('postion'));
-            }
-            return view('admin.shop.category_sort', compact('pageData', 'Categories', 'Category'));
-        }
-
-    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #|||||||||||||||||||||||||||||||||||||| #     CategorySaveSort
-        public function CategorySaveSort(Request $request) {
-            $positions = $request->positions;
-            foreach ($positions as $position) {
-                $id = $position[0];
-                $newPosition = $position[1];
-                $saveData = Category::findOrFail($id);
-                $saveData->postion = $newPosition;
-                $saveData->save();
-            }
-            self::ClearCash();
-            return response()->json(['success' => $positions]);
-        }
-
-
-
-    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #|||||||||||||||||||||||||||||||||||||| #     Restore
-        public function restored($id) {
-            Category::onlyTrashed()->where('id', $id)->restore();
-            self::ClearCash();
-            return back()->with('restore', "");
-        }
-
-    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
-        public function ForceDeletes($id) {
-            $deleteRow = Category::onlyTrashed()->where('id', $id)->firstOrFail();
-            $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
-            $deleteRow->forceDelete();
-            self::ClearCash();
-            return back()->with('confirmDelete', "");
-        }
-    */
 
 
 }

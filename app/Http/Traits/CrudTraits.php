@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\AppPlugin\Product\Models\CategoryTranslation;
 use App\Helpers\AdminHelper;
 use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Requests\admin\MorePhotosRequest;
@@ -130,6 +131,20 @@ trait CrudTraits {
         return response()->json(['success' => $positions]);
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     DeleteLang
+    public function DeleteLang($id){
+        $dbName = $this->translationdb ;
+        $deleteRow = $this->translation->where('id',$id)->firstOrFail();
+        $countLang =  $this->translation->where($dbName,$deleteRow->$dbName)->count();
+        if($countLang > 1){
+            $deleteRow->delete();
+        }else{
+            abort(404);
+        }
+        self::ClearCash();
+        return redirect(route($this->PrefixRoute.'.edit',$deleteRow->$dbName))->with('confirmDelete',"");
+    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # ClearCash
     public function ClearCash() {
