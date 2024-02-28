@@ -35,11 +35,13 @@ class ShopCategoryController extends AdminMainController {
         $this->translation = $translation;
         $this->translationdb = 'category_id';
 
-        $this->categoryTree = false;
+        $this->categoryTree = true;
         View::share('categoryTree',$this->categoryTree);
 
         if( $this->categoryTree ){
             $this->Categories = Category::tree()->with('translation')->get()->toTree();
+//            dd($this->Categories);
+
         }else{
             $this->Categories = [];
         }

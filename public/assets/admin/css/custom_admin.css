@@ -238,3 +238,20 @@ font-size: 15px;
     border-radius: 5px;
     padding: 8px 20px;
 }
+
+.cat_table_name{
+    font-size: 12px;
+    padding: 4px 6px;
+    max-width: 100px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+
+    display: inline-block;
+
+    text-overflow: ellipsis;
+    white-space: nowrap!important;
+    overflow: hidden!important;
+    border-radius: 0.2rem;
+
+}

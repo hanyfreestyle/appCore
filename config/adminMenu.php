@@ -31,9 +31,9 @@ return [
                     'icon'=>'fas fa-sitemap'
                 ],
                 [
-                    'sel_routs'=> 'ShopProduct',
+                    'sel_routs'=> 'Product',
                     'url'=> 'Shop.Product.index',
-                    'roleView'=>'Product_viewX',
+                    'roleView'=>'Product_view',
                     'text'=> 'admin/proProduct.app_menu_product',
                     'icon'=>'fas fa-shopping-cart'
                 ],

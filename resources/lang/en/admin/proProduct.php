@@ -9,4 +9,9 @@ return
 	'cat_del_related_pro' => 'Product Related to the content',
 	'cat_main_category' => 'Main Category',
 	'cat_text_name' => 'Category Name',
+	'pro_text_discount' => 'Discount',
+	'pro_text_name' => 'Product Name',
+	'pro_text_price' => 'Price',
+	'pro_text_qty' => 'Quantity',
+	'pro_text_qty_max' => 'Maximum',
 ];

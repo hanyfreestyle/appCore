@@ -18,9 +18,12 @@
 
       @foreach ($sendArr as  $category)
         <option value="{{ $category->id }}" @if ($category->id == $sendvalue) selected @endif>{{ $category->$printValName }}</option>
-        @if (count($category->children) > 0)
-          @include('admin.mainView.subcategories', ['subcategories' => $category->children, 'parent' => $category->name])
-        @endif
+
+          @if (count($category->children) > 0  )
+{{--            @if (isset($category->children->parent_id) and $category->id > 0 and $category->children->parent_id != $category->id )--}}
+              @include('admin.mainView.subcategories', ['subcategories' => $category->children, 'parent' => $category->name])
+{{--            @endif--}}
+          @endif
       @endforeach
     </select>
     @error($name)
