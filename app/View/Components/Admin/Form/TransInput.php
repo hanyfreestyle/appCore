@@ -25,6 +25,7 @@ class TransInput extends Component {
 
     public $holder;
     public $placeholder;
+    public $id;
 
     public function __construct(
         $addClass = null,
@@ -42,6 +43,7 @@ class TransInput extends Component {
 
         $holder = false,
         $placeholder = null,
+        $id = null,
 
     ) {
         $this->addClass = $addClass;
@@ -73,6 +75,12 @@ class TransInput extends Component {
             $this->placeholder = $this->label;
         }else{
             $this->placeholder = $this->label;
+        }
+
+        if($id == null){
+            $this->id = $this->name."_".$this->key;
+        }else{
+            $this->id = $id;
         }
 
 

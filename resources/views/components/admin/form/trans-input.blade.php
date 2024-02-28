@@ -5,7 +5,7 @@
     </label>
   @endif
 
-  <input type="text" class="form-control dir_{{$tdir}} @error($reqname) is-invalid is_invalid_{{$key}} @enderror"
+  <input id="{{$id}}" type="text" class="form-control dir_{{$tdir}} @error($reqname) is-invalid is_invalid_{{$key}} @enderror"
          name="{{$key}}[{{$name}}]" @if($holder)  placeholder="{{$placeholder}}" @endif value="{{$value}}">
 
   @if($errors->has($reqname))

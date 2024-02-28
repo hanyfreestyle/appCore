@@ -30,7 +30,9 @@ class MetaTageFilde extends Component
     {
         $this->key = $key ;
         $this->row = $row ;
-        if($viewtype == 'Add'){
+        $this->viewtype = $viewtype ;
+
+        if($this->viewtype == 'Add'){
             $this->reqspan = false ;
         }else{
             $this->reqspan = $reqspan ;

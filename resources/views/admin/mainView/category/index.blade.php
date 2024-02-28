@@ -7,6 +7,7 @@
 @section('content')
   <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
 
+
   <x-admin.hmtl.section>
     <div class="row mb-3">
       <div class="col-12 dir_button">
@@ -15,15 +16,20 @@
     </div>
   </x-admin.hmtl.section>
 
+
+
   <x-admin.hmtl.section>
-    <ol class="breadcrumb breadcrumb_menutree">
-      <li class="breadcrumb-item"><a href="{{route($PrefixRoute.'.index_Main')}}">{{__('admin/proProduct.cat_main_category')}}</a></li>
-      @if($pageData['SubView'])
-        @foreach($trees as $tree)
-          <li class="breadcrumb-item"><a href="{{route($PrefixRoute.'.SubCategory',$tree->id)}}">{{ $tree->name }}</a></li>
-        @endforeach
-      @endif
-    </ol>
+    @if($categoryTree)
+      <ol class="breadcrumb breadcrumb_menutree">
+        <li class="breadcrumb-item"><a href="{{route($PrefixRoute.'.index_Main')}}">{{__('admin/proProduct.cat_main_category')}}</a></li>
+        @if($pageData['SubView'])
+          @foreach($trees as $tree)
+            <li class="breadcrumb-item"><a href="{{route($PrefixRoute.'.SubCategory',$tree->id)}}">{{ $tree->name }}</a></li>
+          @endforeach
+        @endif
+      </ol>
+    @endif
+
 
     <x-admin.card.def  :page-data="$pageData" >
       @if(count($rowData)>0)

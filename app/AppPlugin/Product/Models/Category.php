@@ -3,9 +3,6 @@
 namespace App\AppPlugin\Product\Models;
 
 
-use App\Models\admin\Listing;
-use App\Models\admin\Page;
-use App\Models\admin\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
@@ -33,8 +30,7 @@ class Category extends Model implements TranslatableContract {
 
 
     public function scopeDef(Builder $query): Builder {
-        return $query->with('translations')
-            ->withCount('children');
+        return $query->with('translations')->withCount('children');
 
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
