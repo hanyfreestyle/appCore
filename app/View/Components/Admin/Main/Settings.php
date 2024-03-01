@@ -22,6 +22,7 @@ class Settings extends Component
     public $orderbyName;
     public $editor;
     public $icon;
+    public $labelView;
 
     public function __construct(
         $modelname = "",
@@ -44,6 +45,7 @@ class Settings extends Component
         $this->orderbyName = IsArr($configArr,'orderbyName',true);
         $this->editor = IsArr($configArr,'editor',false);
         $this->icon = IsArr($configArr,'icon',false);
+        $this->labelView = IsArr($configArr,'labelView',false);
 
         $OrderByArr = [
             "1"=> ['id'=>'1','name'=> __('admin/config/settings.sort_id_desc')],

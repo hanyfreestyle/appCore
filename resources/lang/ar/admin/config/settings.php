@@ -6,6 +6,7 @@ return
 	'set_editor' => 'محرر النصوص',
 	'set_filter_filter_more_photo' => 'المزيد من الصور',
 	'set_filter_id' => 'فلتر رفع الصورة',
+	'set_iconfilter_id' => 'فلتر رفع الايكون',
 	'set_orderby' => 'ترتيب المحتوى',
 	'set_perpage' => 'عدد المحتوى فى الصفحة',
 	'sort_date_asc' => 'تاريخ النشر من الاحدث الى الاقدم',
@@ -15,5 +16,5 @@ return
 	'sort_name_asc' => 'التريب بالاسم تنازلى',
 	'sort_name_desc' => 'التريب بالاسم تصاعدى',
 	'sort_postion' => 'الترتيب',
-	'set_iconfilter_id' => 'فلتر رفع الايكون',
+	'set_label_view' => 'عرض عنوان الحقل',
 ];

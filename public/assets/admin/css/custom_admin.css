@@ -16,6 +16,9 @@
     font-size: 50px;
 }
 
+
+
+
 .filter_box_total .info-box-text{
     font-size: 18px;
 
@@ -35,11 +38,11 @@
 
 
 .card-body.p-0 .table tbody > tr > td:last-of-type {
-    /*padding-right: .75rem !important;*/
+
 }
 .uploadNotes{
     color: red;
-    font-size: 15px;
+    font-size: 14px!important;
     margin-bottom: 10px;
 }
 
@@ -52,7 +55,10 @@
 .def_h1{font-size: 20px; line-height: 25px}
 .def_h1_new{font-size: 20px; line-height: 25px}
 .mainForm{}
-.mainForm .def_form_label{font-size:15px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important; width:100%}
+.mainForm .form-group{
+    margin-bottom: 3px!important;
+}
+.mainForm .def_form_label{font-size:14px!important;margin-bottom:0!important;padding-top:8px;padding-bottom:7px;font-weight:700!important;color:rgba(0,0,0,.8)!important; width:100%}
 .error_mass{font-size: 80%;color: #dc3545;}
 .table td,.table th{padding:.75rem;vertical-align:middle;border-top:1px solid #dee2e6}
 .table .tbutaction{ text-align:center;}

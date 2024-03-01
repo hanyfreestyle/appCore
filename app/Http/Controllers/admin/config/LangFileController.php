@@ -45,6 +45,7 @@ class LangFileController extends AdminMainController {
         $LangMenu = config('adminLangFile.adminFile');
         $AppLang = config('app.admin_lang');
         $rowData = self::getDataTableLang($LangMenu, $AppLang);
+
         return view('admin.config.lang.admin_index')->with(
             [
                 'pageData' => $pageData,

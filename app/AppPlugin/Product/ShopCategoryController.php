@@ -40,14 +40,12 @@ class ShopCategoryController extends AdminMainController {
 
         if( $this->categoryTree ){
             $this->Categories = Category::tree()->with('translation')->get()->toTree();
-//            dd($this->Categories);
-
         }else{
             $this->Categories = [];
         }
         View::share('Categories',$this->Categories);
 
-        $this->categoryIcon = true;
+        $this->categoryIcon = false;
         View::share('categoryIcon',$this->categoryIcon);
 
 
@@ -56,7 +54,7 @@ class ShopCategoryController extends AdminMainController {
             'PrefixRoute' => $this->PrefixRoute,
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
-            'configArr' => ["editor" => 1,'iconfilterid'=>1 ],
+            'configArr' => ["editor" => 1,'iconfilterid'=>1 ,'labelView'=>1 ],
             'yajraTable' => false,
             'AddLang' => true,
         ];

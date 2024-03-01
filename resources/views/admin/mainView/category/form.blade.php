@@ -32,7 +32,7 @@
         <div class="row">
           <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
           @foreach ( $LangAdd as $key=>$lang )
-            <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="false"/>
+            <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="$viewLabel"/>
           @endforeach
 
         </div>

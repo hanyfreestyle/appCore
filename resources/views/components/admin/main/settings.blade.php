@@ -10,6 +10,11 @@
                         value="{{old($modelname.'_perpage',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_perpage',10))}}"
                         inputclass="dir_ar"/>
 
+    @if($labelView)
+      <x-admin.form.select-arr label="{{__('admin/config/settings.set_label_view')}}" name="{{$modelname}}_label_view" col="3"
+                               sendvalue="{{old($modelname.'_label_view',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_label_view',1))}}"
+                               select-type="selActive"/>
+    @endif
     @if($datatable)
       <x-admin.form.select-arr label="{{__('admin/config/settings.set_datatable')}}" name="{{$modelname}}_datatable" col="3"
                                sendvalue="{{old($modelname.'_datatable',\App\Helpers\AdminHelper::arrIsset($modelSettings,$modelname.'_datatable',1))}}"

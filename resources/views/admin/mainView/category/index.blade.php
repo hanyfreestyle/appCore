@@ -1,22 +1,21 @@
 @extends('admin.layouts.app')
 
 @section('StyleFile')
-  <x-admin.data-table.plugins :style="true" :is-active="$viewDataTable" />
+  <x-admin.data-table.plugins :style="true" :is-active="$viewDataTable"/>
 @endsection
 
 @section('content')
   <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
 
-
-  <x-admin.hmtl.section>
-    <div class="row mb-3">
-      <div class="col-12 dir_button">
-        <x-admin.form.action-button url="{{route('Shop.Category.CatSort',0)}}" type="sort" :tip="false" bg="dark" />
+  @can($PrefixRole."_edit")
+    <x-admin.hmtl.section>
+      <div class="row mb-3">
+        <div class="col-12 dir_button">
+          <x-admin.form.action-button url="{{route('Shop.Category.CatSort',0)}}" type="sort" :tip="false" bg="dark"/>
+        </div>
       </div>
-    </div>
-  </x-admin.hmtl.section>
-
-
+    </x-admin.hmtl.section>
+  @endcan
 
   <x-admin.hmtl.section>
     @if($categoryTree)
@@ -31,7 +30,7 @@
     @endif
 
 
-    <x-admin.card.def  :page-data="$pageData" >
+    <x-admin.card.def :page-data="$pageData">
       @if(count($rowData)>0)
         <div class="card-body table-responsive p-0">
           <table {!! Table_Style($viewDataTable,$yajraTable)  !!} >
@@ -57,26 +56,26 @@
                   <td>{!! printCategoryName($key,$row,$PrefixRoute.".SubCategory") !!}</td>
                 @endforeach
 
-                <td >{!! is_active($row->is_active) !!}</td>
-                <x-admin.table.action-but type="addLang" :row="$row" />
-                <x-admin.table.action-but type="edit" :row="$row" />
-                <x-admin.table.action-but type="delete" :row="$row" />
+                <td>{!! is_active($row->is_active) !!}</td>
+                <x-admin.table.action-but type="addLang" :row="$row"/>
+                <x-admin.table.action-but type="edit" :row="$row"/>
+                <x-admin.table.action-but type="delete" :row="$row"/>
               </tr>
             @endforeach
             </tbody>
           </table>
         </div>
       @else
-        <x-admin.hmtl.alert-massage type="nodata" />
+        <x-admin.hmtl.alert-massage type="nodata"/>
       @endif
     </x-admin.card.def>
-    <x-admin.hmtl.pages-link :row="$rowData" />
+    <x-admin.hmtl.pages-link :row="$rowData"/>
 
   </x-admin.hmtl.section>
 @endsection
 
 @push('JsCode')
   <x-admin.table.sweet-delete-js/>
-  <x-admin.data-table.plugins :jscode="true" :is-active="$viewDataTable" />
+  <x-admin.data-table.plugins :jscode="true" :is-active="$viewDataTable"/>
 @endpush
 
