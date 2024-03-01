@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2024 at 03:30 PM
+-- Generation Time: Mar 01, 2024 at 05:06 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,7 +29,11 @@ INSERT INTO `pro_categories` (`id`, `parent_id`, `deep`, `photo`, `photo_thum_1`
 (1, NULL, 0, NULL, NULL, NULL, 1, 0, '2024-03-01 12:20:36', '2024-03-01 12:20:36', NULL),
 (2, 1, 1, NULL, NULL, NULL, 1, 0, '2024-03-01 12:20:55', '2024-03-01 12:20:55', NULL),
 (3, 2, 2, NULL, NULL, NULL, 1, 0, '2024-03-01 12:21:07', '2024-03-01 12:21:07', NULL),
-(4, 3, 3, NULL, NULL, NULL, 1, 0, '2024-03-01 12:23:59', '2024-03-01 12:23:59', NULL);
+(4, 3, 3, NULL, NULL, NULL, 1, 0, '2024-03-01 12:23:59', '2024-03-01 12:23:59', NULL),
+(5, 3, 3, NULL, NULL, NULL, 1, 0, '2024-03-01 12:45:37', '2024-03-01 12:45:37', NULL),
+(6, 3, 3, NULL, NULL, NULL, 1, 0, '2024-03-01 14:00:34', '2024-03-01 14:02:23', NULL),
+(7, 2, 2, NULL, NULL, NULL, 1, 0, '2024-03-01 14:03:56', '2024-03-01 14:03:56', NULL),
+(8, 2, 2, NULL, NULL, NULL, 1, 0, '2024-03-01 14:04:47', '2024-03-01 14:04:47', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -27,12 +27,12 @@ class Category extends Model implements TranslatableContract {
 
 
 
-
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     scopeDef
     public function scopeDef(Builder $query): Builder {
         return $query->with('translations')->withCount('children');
-
     }
+    
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     children
     public function children(): hasMany {
@@ -70,14 +70,14 @@ class Category extends Model implements TranslatableContract {
 #|||||||||||||||||||||||||||||||||||||| #  Delete Counts
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    public function del_category(): HasMany{
-        return $this->hasMany(Category::class,'parent_id')->withTrashed();
-    }
-    public function del_product(){
-         return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')
-            ->withTrashed();
+    public function del_category(): HasMany {
+        return $this->hasMany(Category::class, 'parent_id')->withTrashed();
     }
 
+    public function del_product() {
+        return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')
+            ->withTrashed();
+    }
 
 
 }

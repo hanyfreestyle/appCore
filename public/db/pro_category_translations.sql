@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2024 at 03:30 PM
+-- Generation Time: Mar 01, 2024 at 05:06 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,7 +29,11 @@ INSERT INTO `pro_category_translations` (`id`, `category_id`, `locale`, `slug`, 
 (1, 1, 'ar', 'عتمان', 'عتمان', NULL, 'عتمان', ''),
 (2, 2, 'ar', 'عتمان-جروب', 'عتمان جروب', NULL, 'عتمان جروب', ''),
 (3, 3, 'ar', 'اسكوتش', 'اسكوتش', NULL, 'اسكوتش', ''),
-(4, 4, 'ar', 'اسكوتش-فاتح', 'اسكوتش فاتح', NULL, 'اسكوتش فاتح', '');
+(4, 4, 'ar', 'اسكوتش-فاتح', 'اسكوتش فاتح', NULL, 'اسكوتش فاتح', ''),
+(5, 5, 'ar', 'اسكوتش-غامق', 'اسكوتش غامق', NULL, 'اسكوتش غامق', ''),
+(6, 6, 'ar', 'dsfdsfdsf', 'اسكوتش برتقالى', NULL, 'dsfsdfds', ''),
+(7, 7, 'ar', 'ورق-تصوير', 'ورق تصوير', NULL, 'ورق تصوير', ''),
+(8, 8, 'ar', 'اكواب-ورقيه', 'اكواب ورقيه', NULL, 'اكواب ورقيه', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
