@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('pro_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->integer('deep')->default(0);
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->string("icon")->nullable();
