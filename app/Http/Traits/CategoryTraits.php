@@ -2,7 +2,6 @@
 
 namespace App\Http\Traits;
 
-use App\AppPlugin\Product\Models\Category;
 use App\Helpers\AdminHelper;
 use App\Helpers\photoUpload\PuzzleUploadProcess;
 use Illuminate\Http\Request;

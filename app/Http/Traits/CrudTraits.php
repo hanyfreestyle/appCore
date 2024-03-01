@@ -2,7 +2,6 @@
 
 namespace App\Http\Traits;
 
-use App\AppPlugin\Product\Models\CategoryTranslation;
 use App\Helpers\AdminHelper;
 use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Requests\admin\MorePhotosRequest;
@@ -99,8 +98,12 @@ trait CrudTraits {
         foreach ($saveImgData->sendSaveData as $newPhoto) {
             $saveData = $this->modelPhoto->findOrNew('0');
             $saveData->$modelPhotoColumn = $request->model_id;
-            $saveData->photo = $newPhoto['photo']['file_name'];
-            $saveData->photo_thum_1 = $newPhoto['photo_thum_1']['file_name'];
+            if(isset($newPhoto['photo']['file_name'])) {
+                $saveData->photo = $newPhoto['photo']['file_name'];
+            }
+            if(isset($newPhoto['photo_thum_1']['file_name'])) {
+                $saveData->photo_thum_1 = $newPhoto['photo_thum_1']['file_name'];
+            }
             $saveData->save();
         }
         self::ClearCash();
@@ -133,17 +136,17 @@ trait CrudTraits {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     DeleteLang
-    public function DeleteLang($id){
-        $dbName = $this->translationdb ;
-        $deleteRow = $this->translation->where('id',$id)->firstOrFail();
-        $countLang =  $this->translation->where($dbName,$deleteRow->$dbName)->count();
-        if($countLang > 1){
+    public function DeleteLang($id) {
+        $dbName = $this->translationdb;
+        $deleteRow = $this->translation->where('id', $id)->firstOrFail();
+        $countLang = $this->translation->where($dbName, $deleteRow->$dbName)->count();
+        if($countLang > 1) {
             $deleteRow->delete();
-        }else{
+        } else {
             abort(404);
         }
         self::ClearCash();
-        return redirect(route($this->PrefixRoute.'.edit',$deleteRow->$dbName))->with('confirmDelete',"");
+        return redirect(route($this->PrefixRoute . '.edit', $deleteRow->$dbName))->with('confirmDelete', "");
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # ClearCash

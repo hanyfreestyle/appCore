@@ -5,26 +5,22 @@ namespace App\AppPlugin\Product;
 
 use App\AppPlugin\Product\Models\Category;
 use App\AppPlugin\Product\Models\Product;
+use App\AppPlugin\Product\Models\ProductPhoto;
 use App\AppPlugin\Product\Models\ProductTranslation;
 use App\AppPlugin\Product\Request\ProductRequest;
 use App\Helpers\AdminHelper;
-
-use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
-
-
 use App\Http\Traits\CrudTraits;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
+
 
 class ShopProductController extends AdminMainController {
 
     use CrudTraits;
 
 
-    function __construct(Product $model, ProductTranslation $translation) {
+    function __construct(Product $model, ProductTranslation $translation,ProductPhoto $modelPhoto) {
         parent::__construct();
         $this->controllerName = "Product";
         $this->PrefixRole = 'Product';
@@ -33,6 +29,8 @@ class ShopProductController extends AdminMainController {
         $this->PageTitle = __('admin/proProduct.app_menu_product');
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
+        $this->modelPhoto = $modelPhoto;
+        $this->modelPhotoColumn = 'product_id';
 
         $this->UploadDirIs = 'product';
         $this->translation = $translation;
@@ -69,7 +67,6 @@ class ShopProductController extends AdminMainController {
         $rowData = self::getSelectQuery(Product::def());
         return view('AppPlugin.Product.index', compact('pageData', 'rowData'));
     }
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
@@ -171,84 +168,20 @@ class ShopProductController extends AdminMainController {
     }
 
 
-
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     ListMorePhoto
-//    public function ListMorePhoto($id) {
-//        $pageData = $this->pageData;
-//        $pageData['ViewType'] = "Edit";
-//
-//        $Product = Product::findOrFail($id);
-//        $ProductPhotos = ProductPhoto::where('product_id', '=', $id)->orderBy('position')->get();
-//        return view('admin.shop.product_photos', compact('ProductPhotos', 'pageData', 'Product'));
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     AddMorePhotos
-//    public function AddMorePhotos(ProductPhotoRequest $request) {
-//        $saveImgData = new PuzzleUploadProcess();
-//        $saveImgData->setCountOfUpload('2');
-//        $saveImgData->setUploadDirIs('product/' . $request->product_id);
-//        $saveImgData->setnewFileName($request->input('name'));
-//        $saveImgData->UploadMultiple($request);
-//
-//        foreach ($saveImgData->sendSaveData as $newPhoto) {
-//            $saveData = ProductPhoto::findOrNew('0');
-//            $saveData->product_id = $request->product_id;
-//            $saveData->photo = $newPhoto['photo']['file_name'];
-//            $saveData->photo_thum_1 = $newPhoto['photo_thum_1']['file_name'];
-//            $saveData->save();
-//        }
-//        self::ClearCash();
-//        return back()->with('Add.Done', "");
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     sortDefPhotoList
-//    public function sortPhotoSave(Request $request) {
-//        $positions = $request->positions;
-//        foreach ($positions as $position) {
-//            $id = $position[0];
-//            $newPosition = $position[1];
-//            $saveData = ProductPhoto::findOrFail($id);
-//            $saveData->position = $newPosition;
-//            $saveData->save();
-//        }
-//        self::ClearCash();
-//        return response()->json(['success' => $positions]);
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     More_PhotosDestroy
-//    public function More_PhotosDestroy($id) {
-//        $deleteRow = ProductPhoto::findOrFail($id);
-//        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
-//        $deleteRow->delete();
-//        self::ClearCash();
-//        return back()->with('confirmDelete', "");
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     Restore
-//    public function restored($id) {
-//        Product::onlyTrashed()->where('id', $id)->restore();
-//        self::ClearCash();
-//        return back()->with('restore', "");
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
-//    public function ForceDeletes($id) {
-//        $deleteRow = Product::onlyTrashed()->where('id', $id)->with('more_photos')->firstOrFail();
-//        if(count($deleteRow->more_photos) > 0) {
-//            foreach ($deleteRow->more_photos as $del_photo) {
-//                AdminHelper::DeleteAllPhotos($del_photo);
-//            }
-//        }
-//        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
-//        $deleteRow->forceDelete();
-//        self::ClearCash();
-//        return back()->with('confirmDelete', "");
-//    }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
+    public function ForceDeleteException($id) {
+        $deleteRow = Product::onlyTrashed()->where('id', $id)->with('more_photos')->firstOrFail();
+        if(count($deleteRow->more_photos) > 0) {
+            foreach ($deleteRow->more_photos as $del_photo) {
+                AdminHelper::DeleteAllPhotos($del_photo);
+            }
+        }
+        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
+        AdminHelper::DeleteDir($this->UploadDirIs, $id);
+        $deleteRow->forceDelete();
+        self::ClearCash();
+        return back()->with('confirmDelete', "");
+    }
 
 }
