@@ -3,17 +3,20 @@
 namespace App\AppPlugin\Product;
 
 
+use App\AppPlugin\Product\Models\Category;
 use App\AppPlugin\Product\Models\Product;
 use App\AppPlugin\Product\Models\ProductTranslation;
+use App\AppPlugin\Product\Request\ProductRequest;
 use App\Helpers\AdminHelper;
 
+use App\Helpers\photoUpload\PuzzleUploadProcess;
 use App\Http\Controllers\AdminMainController;
-
 
 
 use App\Http\Traits\CrudTraits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class ShopProductController extends AdminMainController {
@@ -21,7 +24,7 @@ class ShopProductController extends AdminMainController {
     use CrudTraits;
 
 
-    function __construct(Product $model,ProductTranslation $translation) {
+    function __construct(Product $model, ProductTranslation $translation) {
         parent::__construct();
         $this->controllerName = "Product";
         $this->PrefixRole = 'Product';
@@ -35,26 +38,15 @@ class ShopProductController extends AdminMainController {
         $this->translation = $translation;
         $this->translationdb = 'product_id';
 
-//        $this->categoryTree = false;
-//        View::share('categoryTree',$this->categoryTree);
-
-//        if( $this->categoryTree ){
-//            $this->Categories = Category::tree()->with('translation')->get()->toTree();
-//        }else{
-//            $this->Categories = [];
-//        }
-//        View::share('Categories',$this->Categories);
-
         $sendArr = [
             'TitlePage' => $this->PageTitle,
             'PrefixRoute' => $this->PrefixRoute,
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
-            'configArr' => ["editor" => 1,'morePhotoFilterid'=>1 ],
+            'configArr' => ["editor" => 1, 'morePhotoFilterid' => 1],
             'yajraTable' => false,
             'AddLang' => true,
-            'restore'=> 1 ,
-
+            'restore' => 1,
         ];
 
         self::loadConstructData($sendArr);
@@ -79,123 +71,107 @@ class ShopProductController extends AdminMainController {
     }
 
 
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
-//    public function SoftDeletes() {
-//        $pageData = $this->pageData;
-//        $pageData['ViewType'] = "deleteList";
-//        $pageData['SubView'] = false;
-//
-//        $Products = self::getSelectQuery(Product::onlyTrashed());
-//        return view('admin.shop.product_index', compact('pageData', 'Products'));
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     SubCategory
-//    public function ListCategory($id) {
-//        $pageData = $this->pageData;
-//        $pageData['ViewType'] = "List";
-//        $pageData['SubView'] = true;
-//        $Category = Category::findOrFail($id);
-//        $Products = Product::def()->whereHas('categories', function ($query) use ($id) {
-//            $query->where('category_id', $id);
-//        })->paginate(10);
-//        return view('admin.shop.product_index', compact('pageData', 'Products'));
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     create
-//    public function create() {
-//        $pageData = $this->pageData;
-//        $pageData['ViewType'] = "Add";
-//        $Categories = Category::all();
-//        $Product = Product::findOrNew(0);
-//        $selCat = [];
-//        return view('admin.shop.product_form', compact('pageData', 'Product', 'Categories', 'selCat'));
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     edit
-//    public function edit($id) {
-//        $pageData = $this->pageData;
-//        $pageData['ViewType'] = "Edit";
-//        $Categories = Category::all();
-//        $Product = Product::where('id', $id)->with('categories')->firstOrFail();
-//        $selCat = $Product->categories()->pluck('category_id')->toArray();
-//        return view('admin.shop.product_form', compact('Product', 'pageData', 'Categories', 'selCat'));
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-//    public function storeUpdate(ShopProductRequest $request, $id = 0) {
-//
-//        $categories = $request->input('categories');
-//        $saveData = Product::findOrNew($id);
-//
-//
-//        $saveData->is_active = intval((bool)$request->input('is_active'));
-//        $saveData->is_archived = intval((bool)$request->input('is_archived'));
-//
-//        $saveData->price = $request->input('price');
-//        $saveData->sale_price = $request->input('sale_price');
-//        $saveData->qty_left = $request->input('qty_left');
-//        $saveData->qty_max = $request->input('qty_max');
-//        $saveData->unit = $request->input('unit');
-//        $saveData->save();
-//
-//        $saveData->categories()->sync($categories);
-//
-//        $saveImgData = new PuzzleUploadProcess();
-//        $saveImgData->setCountOfUpload('2');
-//        $saveImgData->setUploadDirIs('product/' . $saveData->id);
-//        $saveImgData->setnewFileName($request->input('en.slug'));
-//        $saveImgData->UploadOne($request);
-//        $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
-//        $saveData->save();
-//
-//        foreach (config('app.shop_lang') as $key => $lang) {
-//            $saveTranslation = ProductTranslation::where('product_id', $saveData->id)->where('locale', $key)->firstOrNew();
-//            $saveTranslation->product_id = $saveData->id;
-//            $saveTranslation->locale = $key;
-//            $saveTranslation->name = $request->input($key . '.name');
-//            $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
-//            $saveTranslation->des = $request->input($key . '.des');
-//            $saveTranslation->save();
-//        }
-//
-//        self::ClearCash();
-//
-//
-//        if($id == '0') {
-//            if($request->input('AddNewSet') !== null) {
-//                return redirect()->back();
-//            } else {
-//                return redirect(route($this->PrefixRoute . '.index'))->with('Add.Done', "");
-//            }
-//        } else {
-//            return redirect()->back();
-//            // return redirect(route($this->PrefixRoute.'.index'))->with('Edit.Done',"");
-//        }
-//    }
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     destroy
-//    public function destroy($id) {
-//        $deleteRow = Product::where('id', $id)->firstOrFail();
-//        $deleteRow->delete();
-//        self::ClearCash();
-//        return back()->with('confirmDelete', "");
-//    }
-//
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #     EmptyPhoto
-//    public function emptyPhoto($id) {
-//        $rowData = Product::findOrFail($id);
-//        $rowData = AdminHelper::DeleteAllPhotos($rowData, true);
-//        $rowData->save();
-//        self::ClearCash();
-//        return back();
-//    }
-//
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
+    public function SoftDeletes() {
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "deleteList";
+        $pageData['SubView'] = false;
+        $rowData = self::getSelectQuery(Product::onlyTrashed());
+        return view('AppPlugin.Product.index', compact('pageData', 'rowData'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     SubCategory
+    public function ListCategory($id) {
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "List";
+        $pageData['SubView'] = true;
+        $Category = Category::findOrFail($id);
+        $rowData = Product::def()->whereHas('categories', function ($query) use ($id) {
+            $query->where('category_id', $id);
+        })->paginate(10);
+        return view('AppPlugin.Product.index', compact('pageData', 'rowData'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     create
+    public function create() {
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Add";
+        $Categories = Category::all();
+        $rowData = Product::findOrNew(0);
+        $LangAdd = self::getAddLangForAdd();
+        $selCat = [];
+        return view('AppPlugin.Product.form')->with([
+                'pageData' => $pageData,
+                'rowData' => $rowData,
+                'Categories' => $Categories,
+                'LangAdd' => $LangAdd,
+                'selCat' => $selCat,
+            ]
+        );
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
+    public function edit($id) {
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
+        $Categories = Category::all();
+        $rowData = Product::where('id', $id)->with('categories')->firstOrFail();
+        $selCat = $rowData->categories()->pluck('category_id')->toArray();
+        $LangAdd = self::getAddLangForEdit($rowData);
+        return view('AppPlugin.Product.form')->with([
+                'pageData' => $pageData,
+                'rowData' => $rowData,
+                'Categories' => $Categories,
+                'LangAdd' => $LangAdd,
+                'selCat' => $selCat,
+            ]
+        );
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     storeUpdate
+    public function storeUpdate(ProductRequest $request, $id = 0) {
+        $saveData = Product::findOrNew($id);
+        try {
+            DB::transaction(function () use ($request, $saveData) {
+                $categories = $request->input('categories');
+                $saveData->is_active = intval((bool)$request->input('is_active'));
+
+                $saveData->price = $request->input('price');
+                $saveData->sale_price = $request->input('sale_price');
+                $saveData->qty_left = $request->input('qty_left');
+                $saveData->qty_max = $request->input('qty_max');
+                $saveData->unit = $request->input('unit');
+                $saveData->save();
+
+                $saveData->categories()->sync($categories);
+                self::SaveAndUpdateDefPhoto($saveData, $request, $this->UploadDirIs, 'en.name');
+
+                $addLang = json_decode($request->add_lang);
+                foreach ($addLang as $key => $lang) {
+                    $dbName = $this->translationdb;
+                    $saveTranslation = $this->translation->where($dbName, $saveData->id)->where('locale', $key)->firstOrNew();
+                    $saveTranslation->$dbName = $saveData->id;
+                    $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
+                    $saveTranslation = self::saveTranslationMain($saveTranslation, $key, $request);
+                    $saveTranslation->save();
+                }
+            });
+        } catch (\Exception $exception) {
+            return back()->with('data_not_save', "");
+        }
+        self::ClearCash();
+        return self::redirectWhere($request, $id, $this->PrefixRoute . '.index');
+
+    }
+
+
+
 //#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //#|||||||||||||||||||||||||||||||||||||| #     ListMorePhoto
 //    public function ListMorePhoto($id) {

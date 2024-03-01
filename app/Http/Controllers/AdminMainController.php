@@ -412,4 +412,33 @@ class AdminMainController extends DefaultMainController {
             })
             ->rawColumns(["photo", "is_active", "is_published", 'Edit', "Delete", 'MorePhoto', 'AddLang', 'OldPhotos', 'ViewListing', 'ProjectUnits', 'ProjectFaq', 'ProjectPhoto']);
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   FormRequestSeo
+    static function FormRequestSeo($id,$addLang,$table){
+        foreach ($addLang as $key => $lang) {
+            $rules[$key . ".name"] = 'required';
+            $rules[$key . ".des"] = 'required';
+            if($id == '0') {
+                $rules[$key . ".slug"] = "required|unique:$table,slug";
+            } else {
+                $rules[$key . ".slug"] = "required|unique:$table,slug,$id,product_id,locale,$key";
+                $rules[$key.".g_des"] =   'required';
+                $rules[$key.".g_title"] =   'required';
+            }
+        }
+        return $rules ;
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    static function prepareSlug($data){
+        $addLang = json_decode($data['add_lang']);
+        foreach ($addLang as $key => $lang) {
+            data_set($data, $key . '.slug', AdminHelper::Url_Slug($data[$key]['slug']));
+        }
+        return $data ;
+    }
+
+
 }

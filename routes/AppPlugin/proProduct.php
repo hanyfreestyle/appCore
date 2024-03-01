@@ -50,7 +50,7 @@ Route::post('/Product/AddMore',[ShopProductController::class,'AddMorePhotos'])->
 Route::post('/Product/saveSort', [ShopProductController::class,'sortPhotoSave'])->name('Shop.Product.sortPhotoSave');
 Route::get('/Product/PhotoDel/{id}',[ShopProductController::class,'More_PhotosDestroy'])->name('Shop.Product.More_PhotosDestroy');
 Route::get('/Product/SoftDelete/',[ShopProductController::class,'SoftDeletes'])->name('Shop.Product.SoftDelete');
-Route::get('/Product/restore/{id}',[ShopProductController::class,'restored'])->name('Shop.Product.restore');
-Route::get('/Product/force/{id}',[ShopProductController::class,'ForceDeletes'])->name('Shop.Product.force');
+Route::get('/Product/restore/{id}',[ShopProductController::class,'Restore'])->name('Shop.Product.restore');
+Route::get('/Product/force/{id}',[ShopProductController::class,'ForceDeletesDDDDDDDDD'])->name('Shop.Product.force');
 
 Route::get('/Product/config', [ShopProductController::class,'config'])->name('Shop.Product.config');

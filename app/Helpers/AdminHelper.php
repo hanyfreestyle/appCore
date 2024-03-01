@@ -427,7 +427,7 @@ class AdminHelper{
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     onlyDeletePhotos
-    static function DeleteAllPhotos($deleteRow,$emptyTable=false,$Names=['photo','photo_thum_1','icon']){
+    static function DeleteAllPhotos($deleteRow,$emptyTable=false,$Names=['photo','photo_thum_1']){
         foreach ($Names as $name){
             if(File::exists($deleteRow->$name)){
                 File::delete($deleteRow->$name);

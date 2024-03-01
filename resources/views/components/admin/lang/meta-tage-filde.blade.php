@@ -1,5 +1,5 @@
 @if(count(config('app.web_lang')) > 1)
-  <div class="col-lg-12">
+  <div class="col-lg-12 mt-3">
     <div class="LangHeader">{{$keyLang}}</div>
   </div>
 @endif
