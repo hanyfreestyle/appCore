@@ -100,12 +100,9 @@ trait CategoryTraits {
 
                 if($this->categoryTree == true){
                     if($request->input('parent_id') != 0 and $request->input('parent_id') != $saveData->id) {
+                        $saveData->parent_id = $request->input('parent_id');
                         $saveData->deep = count($this->model->find($request->input('parent_id'))->ancestorsAndSelf()->pluck('id')->toArray());
                     }
-                }
-
-                if($request->input('parent_id') != 0 and $request->input('parent_id') != $saveData->id) {
-                    $saveData->parent_id = $request->input('parent_id');
                 }
 
                 $saveData->is_active = intval((bool)$request->input('is_active'));
