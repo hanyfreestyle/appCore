@@ -60,7 +60,7 @@ trait CategoryTraits {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   SetCatTree
-    public function SetCatTree($status,$deep) {
+    public function SetCatTree($status, $deep) {
         $this->categoryTree = $status;
         $this->categoryDeep = $deep;
 
@@ -82,13 +82,13 @@ trait CategoryTraits {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function TraitsCategoryStoreUpdate($request, $id) {
-        if(intval($id) == 0){
+        if(intval($id) == 0) {
             $saveData = $this->model->findOrNew($id);
-        }else{
+        } else {
             $saveData = $this->model->findOrFail($id);
-            if($this->categoryTree == true){
+            if($this->categoryTree == true) {
                 $trees = $this->model->find($saveData->id)->descendants()->pluck('id')->toArray();
-                if(in_array($request->input('parent_id') , $trees)){
+                if(in_array($request->input('parent_id'), $trees)) {
                     return back()->with('data_not_save', "");
                 }
             }
@@ -97,7 +97,7 @@ trait CategoryTraits {
         try {
             DB::transaction(function () use ($request, $saveData) {
 
-                if($this->categoryTree == true){
+                if($this->categoryTree == true) {
                     if($request->input('parent_id') != 0 and $request->input('parent_id') != $saveData->id) {
                         $saveData->parent_id = $request->input('parent_id');
                         $saveData->deep = count($this->model->find($request->input('parent_id'))->ancestorsAndSelf()->pluck('id')->toArray());

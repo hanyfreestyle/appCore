@@ -49,8 +49,4 @@ Route::get('/Product/photos/{id}',[ShopProductController::class,'ListMorePhoto']
 Route::post('/Product/AddMore',[ShopProductController::class,'AddMorePhotos'])->name('Shop.Product.More_PhotosAdd');
 Route::post('/Product/saveSort', [ShopProductController::class,'sortPhotoSave'])->name('Shop.Product.sortPhotoSave');
 Route::get('/Product/PhotoDel/{id}',[ShopProductController::class,'More_PhotosDestroy'])->name('Shop.Product.More_PhotosDestroy');
-
-
-
-
 Route::get('/Product/config', [ShopProductController::class,'config'])->name('Shop.Product.config');

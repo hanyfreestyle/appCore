@@ -42,7 +42,7 @@
             <tr>
               <th>Key</th>
               <th>File</th>
-              @foreach(config('app.admin_lang') as $key =>$lang)
+              @foreach(config('app.web_lang') as $key =>$lang)
                 <th>{{$lang}}</th>
               @endforeach
               @can('config_edit')
@@ -59,7 +59,7 @@
               <tr>
                 <td class="TD_100">{{$row['keyVar']}}</td>
                 <td class="TD_100">{{$row['filekey']}}</td>
-                @foreach(config('app.admin_lang') as $key =>$lang)
+                @foreach(config('app.web_lang') as $key =>$lang)
                   <th class="TD_300">{!! $row['name_'.$key] !!}</th>
                 @endforeach
 

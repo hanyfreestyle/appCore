@@ -65,26 +65,9 @@
 
 
 @push('JsCode')
+  <x-admin.java.update-slug :view-type="$pageData['ViewType']"/>
   <x-admin.table.sweet-delete-js/>
   @if($viewEditor)
     <x-admin.form.ckeditor-jave height="350"/>
   @endif
-  @if($pageData['ViewType'] == "Add")
-    <script type="text/javascript">
-        var input1 = document.getElementById('name_ar');
-        var input2 = document.getElementById('slug_ar');
-
-        input1.addEventListener('change', function () {
-            input2.value = input1.value;
-        });
-
-        var input3 = document.getElementById('name_en');
-        var input4 = document.getElementById('slug_en');
-
-        input3.addEventListener('change', function () {
-            input4.value = input3.value;
-        });
-    </script>
-  @endif
-
 @endpush
