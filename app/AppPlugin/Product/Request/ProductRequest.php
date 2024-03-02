@@ -30,10 +30,10 @@ class ProductRequest extends FormRequest {
 
         $rules = [
             'categories' => 'required|array|min:1',
-//            'price' => "required|numeric",
-//            'sale_price' => "nullable|numeric|lt:price",
-//            'qty_left' => "nullable|integer",
-//            'qty_max' => "required|integer",
+            'price' => "required|numeric",
+            'sale_price' => "nullable|numeric|lt:price",
+            'qty_left' => "nullable|integer",
+            'qty_max' => "required|integer",
         ];
 
         $rules += AdminMainController::FormRequestSeo($id,$addLang,'pro_product_translations');

@@ -32,15 +32,15 @@
                 @endforeach
 
                 @if(config('app.development'))
-                <div class="col-1">
-                  <a href="#" thisid="custmid_{{$loop->index}}" class="btn btn-sm btn-primary copyThisText"><i
-                     class="fa fas fa-copy"></i></a>
-                  <input value="__('{{$prefixCopy.$key}}')" id="custmid_{{$loop->index}}" type="hidden">
+                  <div class="col-1">
+                    <a href="#" thisid="custmid_{{$loop->index}}" class="btn btn-sm btn-primary copyThisText"><i
+                       class="fa fas fa-copy"></i></a>
+                    <input value="__('{{$prefixCopy.$key}}')" id="custmid_{{$loop->index}}" type="hidden">
 
-                  <a href="#" thisid="Newcustmid_{{$loop->index}}" class="btn btn-sm btn-dark copyThisText"><i
-                     class="fa fas fa-copy"></i></a>
-                  <input value="{{$prefixCopy.$key}}" id="Newcustmid_{{$loop->index}}" type="hidden">
-                </div>
+                    <a href="#" thisid="Newcustmid_{{$loop->index}}" class="btn btn-sm btn-dark copyThisText"><i
+                       class="fa fas fa-copy"></i></a>
+                    <input value="{{$prefixCopy.$key}}" id="Newcustmid_{{$loop->index}}" type="hidden">
+                  </div>
                 @endif
 
 
@@ -72,8 +72,8 @@
 @endsection
 
 @push('JsCode')
-  <x-admin.jave.copy-this-text/>
-  <x-admin.jave.add-new-lang-row type="web"/>
+  <x-admin.java.copy-this-text/>
+  <x-admin.java.add-new-lang-row type="web"/>
   <script>
       $('#selectfile').change(function () {
           var idSel = this.value;

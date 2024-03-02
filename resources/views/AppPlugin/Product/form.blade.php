@@ -31,6 +31,14 @@
           </x-admin.form.select-multiple>
         </div>
 
+        <div class="row">
+          <x-admin.form.input :row="$rowData" name="price" :label="__('admin/proProduct.pro_text_price')" col="3" tdir="en"/>
+          <x-admin.form.input :row="$rowData" name="sale_price" :label="__('admin/proProduct.pro_text_discount')" col="3" tdir="en"/>
+          <x-admin.form.input :row="$rowData" name="qty_left" :label="__('admin/proProduct.pro_text_qty')" col="3" tdir="en"/>
+          <x-admin.form.input :row="$rowData" name="qty_max" :label="__('admin/proProduct.pro_text_qty_max')" col="3" tdir="en"/>
+        </div>
+        <hr>
+
 
         <div class="row">
           <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
@@ -63,25 +71,8 @@
 
 @push('JsCode')
   <x-admin.table.sweet-delete-js/>
+  <x-admin.java.update-slug :view-type="$pageData['ViewType']"/>
   @if($viewEditor)
     <x-admin.form.ckeditor-jave height="350"/>
   @endif
-  @if($pageData['ViewType'] == "Add")
-    <script type="text/javascript">
-        var input1 = document.getElementById('name_ar');
-        var input2 = document.getElementById('slug_ar');
-
-        input1.addEventListener('change', function () {
-            input2.value = input1.value;
-        });
-
-        var input3 = document.getElementById('name_en');
-        var input4 = document.getElementById('slug_en');
-
-        input3.addEventListener('change', function () {
-            input4.value = input3.value;
-        });
-    </script>
-  @endif
-
 @endpush

@@ -66,8 +66,8 @@
 @endsection
 
 @push('JsCode')
-  <x-admin.jave.copy-this-text/>
-  <x-admin.jave.add-new-lang-row/>
+  <x-admin.java.copy-this-text/>
+  <x-admin.java.add-new-lang-row/>
   <script>
       $('#selectfile').change(function () {
           var idSel = this.value;
