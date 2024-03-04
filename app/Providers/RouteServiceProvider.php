@@ -31,16 +31,29 @@ class RouteServiceProvider extends ServiceProvider {
                 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
                     Route::group(['prefix' => 'admin'], function () {
                         Route::middleware('web')->group(base_path('routes/admin.php'));
+
                         Route::middleware('web')->group(base_path('routes/AppPlugin/siteMap.php'));
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/config/configMeta.php'));
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/config/webPrivacy.php'));
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/config/Branch.php'));
+
+                        if(File::isFile(base_path('routes/AppPlugin/config/configMeta.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/config/configMeta.php'));
+                        }
+
+                        if(File::isFile(base_path('routes/AppPlugin/config/webPrivacy.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/config/webPrivacy.php'));
+                        }
+
+                        if(File::isFile(base_path('routes/AppPlugin/config/Branch.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/config/Branch.php'));
+                        }
+
 
                         if(File::isFile(base_path('routes/AppPlugin/config/appSetting.php'))) {
                             Route::middleware('web')->group(base_path('routes/AppPlugin/config/appSetting.php'));
                         }
 
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/data/country.php'));
+                        if(File::isFile(base_path('routes/AppPlugin/data/country.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/data/country.php'));
+                        }
 
                         if(File::isFile(base_path('routes/AppPlugin/leads/contactUs.php'))) {
                             Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
@@ -49,7 +62,10 @@ class RouteServiceProvider extends ServiceProvider {
                             Route::middleware('web')->group(base_path('routes/AppPlugin/leads/newsLetter.php'));
                         }
 
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/proProduct.php'));
+                        if(File::isFile(base_path('routes/AppPlugin/proProduct.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/proProduct.php'));
+                        }
+
                         Route::middleware('web')->group(base_path('routes/admin_config.php'));
                         Route::middleware('web')->group(base_path('routes/admin_roles.php'));
 

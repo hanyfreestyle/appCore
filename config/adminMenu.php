@@ -16,7 +16,7 @@ $MenuView = [
 return [
     'menu' => [
         [
-            'view' => IsMenuView($MenuView, "Product"),
+            'view' => IsMenuView($MenuView, "Product",'proProduct.php'),
             'sel_routs' => 'Shop',
             'type' => 'many',
             'text' => 'admin/proProduct.app_menu',
@@ -147,7 +147,7 @@ return [
             'icon' => 'fas fa-server',
             'roleView' => 'data_view',
             'submenu' => [
-                ['roleView' => 'country_view', 'text' => 'admin/dataCountry.app_menu', 'url' => 'data.Country.index', 'sel_routs' => 'Country', 'icon' => 'fas fa-globe-americas', 'view' => true],
+                ['roleView' => 'country_view', 'text' => 'admin/dataCountry.app_menu', 'url' => 'data.Country.index', 'sel_routs' => 'Country', 'icon' => 'fas fa-globe-americas', 'view' => IsMenuView($MenuView, "Data",'data/country.php') ],
             ],
         ], #Data
         [
@@ -159,13 +159,13 @@ return [
             'roleView' => 'config_view',
             'submenu' => [
                 ['roleView' => 'config_website', 'text' => 'admin/config/webConfig.app_menu', 'url' => 'config.web.index', 'sel_routs' => 'web', 'icon' => 'fas fa-cog', 'view' => true],
-                ['roleView' => 'config_meta_view', 'text' => 'admin/configMeta.app_menu', 'url' => 'config.Meta.index', 'sel_routs' => 'Meta', 'icon' => 'fab fa-html5', 'view' => true],
+                ['roleView' => 'config_meta_view', 'text' => 'admin/configMeta.app_menu', 'url' => 'config.Meta.index', 'sel_routs' => 'Meta', 'icon' => 'fab fa-html5', 'view' => IsMenuView($MenuView, "Setting",'config/configMeta.php')],
                 ['roleView' => 'config_defPhoto_view', 'text' => 'admin/config/upFilter.app_menu_def_photo', 'url' => 'config.defPhoto.index', 'sel_routs' => 'defPhoto', 'icon' => 'fas fa-image', 'view' => true],
                 ['roleView' => 'config_upFilter_view', 'text' => 'admin/config/upFilter.app_menu', 'url' => 'config.upFilter.index', 'sel_routs' => 'upFilter', 'icon' => 'fas fa-filter', 'view' => true],
-                ['roleView' => 'config_web_privacy', 'text' => 'admin/configPrivacy.app_menu', 'url' => 'config.WebPrivacy.index', 'sel_routs' => 'WebPrivacy', 'icon' => 'fas fa-file-alt', 'view' => true],
+                ['roleView' => 'config_web_privacy', 'text' => 'admin/configPrivacy.app_menu', 'url' => 'config.WebPrivacy.index', 'sel_routs' => 'WebPrivacy', 'icon' => 'fas fa-file-alt', 'view' => IsMenuView($MenuView, "Setting",'config/webPrivacy.php')],
                 ['roleView' => 'config_newsletter', 'text' => 'admin/leadsNewsLetter.app_menu', 'url' => 'config.NewsLetter.index', 'sel_routs' => 'NewsLetter', 'icon' => 'fas fa-mail-bulk', 'view' => IsMenuView($MenuView, "Setting",'leads/newsLetter.php'),],
                 ['roleView' => 'sitemap_view', 'text' => 'admin/configSitemap.app_menu', 'url' => 'config.SiteMap.index', 'sel_routs' => 'SiteMap', 'icon' => 'fas fa-sitemap', 'view' => true],
-                ['roleView' => 'config_branch', 'text' => 'admin/configBranch.app_menu', 'url' => 'config.Branch.index', 'sel_routs' => 'Branch', 'icon' => 'fas fa-map-signs', 'view' => true],
+                ['roleView' => 'config_branch', 'text' => 'admin/configBranch.app_menu', 'url' => 'config.Branch.index', 'sel_routs' => 'Branch', 'icon' => 'fas fa-map-signs', 'view' => IsMenuView($MenuView, "Setting",'config/Branch.php')],
 
             ],
         ], #Setting
