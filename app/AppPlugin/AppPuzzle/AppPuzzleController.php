@@ -229,30 +229,22 @@ class AppPuzzleController {
     }
 
 
-
-
-
-
-
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # RemoveModel
     public function RemoveModel($model) {
         $modelTree = AppPuzzleModelTree::ModelTree();
         if(isset($modelTree[$model])) {
             $thisModel = $modelTree[$model];
-//            self::RemoveModelFile($thisModel,'AppFolder');
-//            self::RemoveModelFile($thisModel,'ViewFolder');
-//            self::RemoveModelFile($thisModel,'RouteFile');
-//            self::RemoveModelFile($thisModel,'Migrations');
-//            self::RemoveModelFile($thisModel,'Seeder');
-//            self::RemoveModelFile($thisModel,'adminLang');
+            self::RemoveModelFile($thisModel,'appFolder');
+            self::RemoveModelFile($thisModel,'viewFolder');
+            self::RemoveModelFile($thisModel,'routeFile');
+            self::RemoveModelFile($thisModel,'migrations');
+            self::RemoveModelFile($thisModel,'seeder');
+            self::RemoveModelFile($thisModel,'adminLangFiles');
+            return redirect()->back();
         } else {
-
+            return redirect()->back();
         }
-
-
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -260,29 +252,30 @@ class AppPuzzleController {
     public function RemoveModelFile($thisModel, $type) {
 
         switch ($type) {
-            case "AppFolder":
-                if($thisModel['app'] != null) {
-                    $appFolder = AdminHelper::arrIsset($thisModel, 'appFolder', null);
-                    $thisDir = app_path("AppPlugin/" . $appFolder . $thisModel['app']);
+            case "appFolder":
+                $appFolder = issetArr($thisModel,'appFolder',null);
+                if($appFolder != null) {
+                    $thisDir = app_path("AppPlugin/".$appFolder);
                     if(File::isDirectory($thisDir)) {
                         File::deleteDirectory($thisDir);
                     }
                 }
                 break;
 
-            case "ViewFolder":
-                if($thisModel['view'] != null) {
-                    $thisDir = resource_path("views/AppPlugin/" . $thisModel['view']);
+            case "viewFolder":
+                $viewFolder = issetArr($thisModel,'viewFolder',null);
+                if( $viewFolder != null) {
+                    $thisDir = resource_path("views/AppPlugin/".$viewFolder);
                     if(File::isDirectory($thisDir)) {
                         File::deleteDirectory($thisDir);
                     }
                 }
                 break;
 
-            case "RouteFile":
-                if($thisModel['route'] != null) {
-                    $fileName = $thisModel['route'];
-                    $routeFolder = $thisModel['routeFolder'];
+            case "routeFile":
+                $fileName = issetArr($thisModel,'routeFile',null);
+                $routeFolder = issetArr($thisModel,'routeFolder',null);
+                if($fileName != null) {
                     $filePath = base_path('routes/AppPlugin/' . $routeFolder . $fileName);
                     if(File::isFile($filePath)) {
                         File::delete($filePath);
@@ -290,10 +283,11 @@ class AppPuzzleController {
                 }
                 break;
 
-            case "Migrations":
-                if($thisModel['migrations'] != null) {
-                    foreach ($thisModel['migrations'] as $migrations) {
-                        $filePath = base_path('database/migrations/' . $migrations);
+            case "migrations":
+                $migrations = issetArr($thisModel,'migrations',null);
+                if($migrations != null and is_array($migrations)) {
+                    foreach ($migrations as $file) {
+                        $filePath = base_path('database/migrations/' . $file);
                         if(File::isFile($filePath)) {
                             File::delete($filePath);
                         }
@@ -301,10 +295,11 @@ class AppPuzzleController {
                 }
                 break;
 
-            case "Seeder":
-                if($thisModel['seeder'] != null) {
-                    foreach ($thisModel['seeder'] as $seeder) {
-                        $filePath = public_path('db/' . $seeder);
+            case "seeder":
+                $seeder = issetArr($thisModel,'seeder',null);
+                if($seeder != null and is_array($seeder)) {
+                    foreach ($seeder as $file) {
+                        $filePath = public_path('db/' . $file);
                         if(File::isFile($filePath)) {
                             File::delete($filePath);
                         }
@@ -312,19 +307,21 @@ class AppPuzzleController {
                 }
                 break;
 
-            case "adminLang":
-                if(isset($thisModel['adminLang']) and $thisModel['adminLang'] != null) {
-                    $adminLangFile = $thisModel['adminLangFile'];
-                    $adminLangFolder = $thisModel['adminLang'];
-                    foreach (config('app.web_lang') as $key => $lang) {
-                        $filePath = resource_path('lang/' . $key . '/' . $adminLangFolder . $adminLangFile);
-                        if(File::isFile($filePath)) {
-                            File::delete($filePath);
+            case "adminLangFiles":
+                $adminLangFiles = issetArr($thisModel,'adminLangFiles',null);
+                $adminLangFolder = issetArr($thisModel,'adminLangFolder',null);
+                if($adminLangFiles != null and is_array($adminLangFiles)) {
+                    foreach ($adminLangFiles as $file){
+                        foreach (config('app.admin_lang') as $key => $lang) {
+                            $filePath = resource_path('lang/' . $key . '/' . $adminLangFolder . $file);
+                            if(File::isFile($filePath)) {
+                                File::delete($filePath);
+                            }
                         }
                     }
                 }
-
                 break;
+
 
             default:
         }

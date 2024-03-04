@@ -6,6 +6,7 @@ use App\Http\Controllers\RouteNotFoundController;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -37,7 +38,11 @@ class RouteServiceProvider extends ServiceProvider{
                         Route::middleware('web')->group(base_path('routes/AppPlugin/config/Branch.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/config/appSetting.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/data/country.php'));
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
+
+                        if(File::isFile(base_path('routes/AppPlugin/leads/contactUs.php'))){
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
+                        }
+
                         Route::middleware('web')->group(base_path('routes/AppPlugin/leads/newsLetter.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/proProduct.php'));
                         Route::middleware('web')->group(base_path('routes/admin_config.php'));

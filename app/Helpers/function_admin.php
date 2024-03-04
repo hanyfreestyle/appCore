@@ -45,7 +45,13 @@ if (!function_exists('Update_createDirectory')) {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #  IsMenuView
 if (!function_exists('IsMenuView')) {
-    function IsMenuView($Arr,$Name,$DefVall=true){
+    function IsMenuView($Arr,$Name,$fileName=null,$DefVall=true){
+        if($fileName != null){
+            $filePath = base_path('routes/AppPlugin/'.$fileName);
+            if(!file_exists($filePath)) {
+                $DefVall = false ;
+            }
+        }
         if(isset($Arr[$Name])){
             $SendVal = $Arr[$Name] ;
         }else{

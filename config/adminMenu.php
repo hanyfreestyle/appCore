@@ -88,7 +88,7 @@ return [
             ],
         ], #App Setting
         [
-            'view'=>  IsMenuView($MenuView,"LeadsFrom"),
+            'view'=>  IsMenuView($MenuView,"LeadsFrom",'leads/contactUs.php'),
             'sel_routs'=>'LeadsFrom',
             'type'=>'many',
             'text'=> 'admin/leadsContactUs.app_menu',
