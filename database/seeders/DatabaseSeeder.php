@@ -14,6 +14,12 @@ use App\AppPlugin\Config\Privacy\SeederWebPrivacy;
 use App\AppPlugin\Config\Privacy\SeederWebPrivacyTranslation;
 use App\AppPlugin\Data\Country\SeederCountry;
 use App\AppPlugin\Data\Country\SeederCountryTranslation;
+use App\AppPlugin\Faq\Seeder\FaqCategorySeeder;
+use App\AppPlugin\Faq\Seeder\FaqCategoryTranslationSeeder;
+use App\AppPlugin\Faq\Seeder\FaqPhotoSeeder;
+use App\AppPlugin\Faq\Seeder\FaqPivotSeeder;
+use App\AppPlugin\Faq\Seeder\FaqSeeder;
+use App\AppPlugin\Faq\Seeder\FaqTranslationSeeder;
 use App\AppPlugin\Leads\ContactUs\SeederContactUsForm;
 use App\AppPlugin\Leads\NewsLetter\SeederNewsLetter;
 
@@ -72,6 +78,14 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductTranslationSeeder::class);
         $this->call(ProductPhotoSeeder::class);
         $this->call(CategoryProductSeeder::class);
+
+        $this->call(FaqCategorySeeder::class);
+        $this->call(FaqCategoryTranslationSeeder::class);
+        $this->call(FaqSeeder::class);
+        $this->call(FaqTranslationSeeder::class);
+        $this->call(FaqPivotSeeder::class);
+        $this->call(FaqPhotoSeeder::class);
+
 
     }
 }

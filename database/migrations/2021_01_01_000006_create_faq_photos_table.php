@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('faq_id')->unsigned();
 
+            $table->longText("des_en")->nullable();
+            $table->longText("des_es")->nullable();
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->string("photo_thum_2")->nullable();
