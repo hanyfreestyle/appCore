@@ -6,7 +6,7 @@
 
 <div class="col-lg-6">
   <div class="row">
-    <x-admin.form.trans-input name="name" :key="$key" :row="$row" :label="__('admin/proProduct.cat_text_name')" :tdir="$key"
+    <x-admin.form.trans-input name="name" :key="$key" :row="$row" :label="$defName" :tdir="$key"
                               :label-view="$labelView" :holder="$holder" />
     <x-admin.form.trans-input name="g_title" :key="$key" :row="$row" :label="__('admin/form.text_g_title')" :tdir="$key"
                               :label-view="$labelView" :holder="$holder" />

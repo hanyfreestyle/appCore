@@ -98,15 +98,15 @@
 
 @push('JsCode')
   <script>
-      function copyToClipboard(element) {
-          var copyText = document.getElementById(element);
-          copyText.readOnly = true;
-          copyText.type = 'text';
-          copyText.select();
-          copyText.setSelectionRange(0, 99999); /* For mobile devices */
-          navigator.clipboard.writeText(copyText.value);
-          copyText.type = 'hidden';
-      }
+      // function copyToClipboard(element) {
+      //     var copyText = document.getElementById(element);
+      //     copyText.readOnly = true;
+      //     copyText.type = 'text';
+      //     copyText.select();
+      //     copyText.setSelectionRange(0, 99999); /* For mobile devices */
+      //     navigator.clipboard.writeText(copyText.value);
+      //     copyText.type = 'hidden';
+      // }
 
       $('#selectfile').change(function () {
           var idSel = this.value;

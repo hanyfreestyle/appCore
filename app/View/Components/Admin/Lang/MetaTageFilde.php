@@ -6,8 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class MetaTageFilde extends Component
-{
+class MetaTageFilde extends Component {
     public $key;
     public $row;
     public $reqspan;
@@ -16,6 +15,7 @@ class MetaTageFilde extends Component
     public $labelView;
     public $holder;
     public $keyLang;
+    public $defName;
 
     public function __construct(
         $key = null,
@@ -26,33 +26,38 @@ class MetaTageFilde extends Component
         $labelView = true,
         $holder = false,
         $keyLang = null,
-    )
-    {
-        $this->key = $key ;
-        $this->row = $row ;
-        $this->viewtype = $viewtype ;
+        $defName = null,
+    ) {
+        $this->key = $key;
+        $this->row = $row;
+        $this->viewtype = $viewtype;
 
-        if($this->viewtype == 'Add'){
-            $this->reqspan = false ;
+        if($this->viewtype == 'Add') {
+            $this->reqspan = false;
+        } else {
+            $this->reqspan = $reqspan;
+        }
+        $this->slug = $slug;
+        $this->labelView = $labelView;
+        $this->holder = $holder;
+        if($labelView == false) {
+            $this->holder = true;
+        }
+
+        if($defName == null) {
+            $this->defName = __('admin/proProduct.cat_text_name');
         }else{
-            $this->reqspan = $reqspan ;
-        }
-        $this->slug = $slug ;
-        $this->labelView = $labelView ;
-        $this->holder = $holder ;
-        if($labelView == false){
-            $this->holder = true ;
+            $this->defName = $defName;
         }
 
 
-        $this->keyLang = __('admin.multiple_lang_key_'.$this->key) ;
 
+        $this->keyLang = __('admin.multiple_lang_key_' . $this->key);
 
 
     }
 
-    public function render(): View|Closure|string
-    {
+    public function render(): View|Closure|string {
         return view('components.admin.lang.meta-tage-filde');
     }
 }
