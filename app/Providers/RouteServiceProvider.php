@@ -11,14 +11,13 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class RouteServiceProvider extends ServiceProvider{
+class RouteServiceProvider extends ServiceProvider {
 
 
     public const HOME = '/';
 
 
-    public function boot(): void
-    {
+    public function boot(): void {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
@@ -28,22 +27,26 @@ class RouteServiceProvider extends ServiceProvider{
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::group(['middleware' => ['auth','status']], function() {
-                Route::group(['prefix' => LaravelLocalization::setLocale()], function(){
-                    Route::group(['prefix'=>'admin'],function(){
+            Route::group(['middleware' => ['auth', 'status']], function () {
+                Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
+                    Route::group(['prefix' => 'admin'], function () {
                         Route::middleware('web')->group(base_path('routes/admin.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/siteMap.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/config/configMeta.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/config/webPrivacy.php'));
                         Route::middleware('web')->group(base_path('routes/AppPlugin/config/Branch.php'));
-                        Route::middleware('web')->group(base_path('routes/AppPlugin/config/appSetting.php'));
+
+                        if(File::isFile(base_path('routes/AppPlugin/config/appSetting.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/config/appSetting.php'));
+                        }
+
                         Route::middleware('web')->group(base_path('routes/AppPlugin/data/country.php'));
 
-                        if(File::isFile(base_path('routes/AppPlugin/leads/contactUs.php'))){
+                        if(File::isFile(base_path('routes/AppPlugin/leads/contactUs.php'))) {
                             Route::middleware('web')->group(base_path('routes/AppPlugin/leads/contactUs.php'));
                         }
-                        if(File::isFile(base_path('routes/AppPlugin/leads/newsLetter.php'))){
-                             Route::middleware('web')->group(base_path('routes/AppPlugin/leads/newsLetter.php'));
+                        if(File::isFile(base_path('routes/AppPlugin/leads/newsLetter.php'))) {
+                            Route::middleware('web')->group(base_path('routes/AppPlugin/leads/newsLetter.php'));
                         }
 
                         Route::middleware('web')->group(base_path('routes/AppPlugin/proProduct.php'));

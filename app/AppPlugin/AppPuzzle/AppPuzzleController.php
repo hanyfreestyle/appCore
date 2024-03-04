@@ -341,6 +341,29 @@ class AppPuzzleController {
                 }
                 break;
 
+            case "photoFolder":
+                $photoFolder = issetArr($thisModel,'photoFolder',null);
+                if($photoFolder != null and is_array($photoFolder)) {
+                    foreach ($photoFolder as $folderName ){
+                        $thisDir = public_path("images/" . $folderName);
+                        if(File::isDirectory($thisDir)) {
+                            File::deleteDirectory($thisDir);
+                        }
+                    }
+                }
+                break;
+
+            case "assetsFolder":
+                $assetsFolder = issetArr($thisModel,'assetsFolder',null);
+                if($assetsFolder != null and is_array($assetsFolder)) {
+                    foreach ($assetsFolder as $folderName ){
+                        $thisDir = public_path("assets/" . $folderName);
+                        if(File::isDirectory($thisDir)) {
+                            File::deleteDirectory($thisDir);
+                        }
+                    }
+                }
+                break;
 
             default:
         }

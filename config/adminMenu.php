@@ -44,7 +44,7 @@ return [
         ], #Product
 
         [
-            'view' => IsMenuView($MenuView, "AppSetting"),
+            'view' => IsMenuView($MenuView, "AppSetting",'config/appSetting.php'),
             'sel_routs' => 'App',
             'type' => 'many',
             'text' => 'admin/configApp.app_menu',
