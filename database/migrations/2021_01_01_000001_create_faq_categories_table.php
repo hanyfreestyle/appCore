@@ -9,6 +9,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('faq_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->boolean("is_active")->default(true);

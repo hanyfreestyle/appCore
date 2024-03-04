@@ -9,16 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class FaqCategory extends Model implements TranslatableContract, LocalizedUrlRoutable {
 
     use Translatable;
+    use HasRecursiveRelationships;
 
     public $translatedAttributes = ['slug', 'name', 'des', 'g_title', 'g_des'];
     protected $fillable = [''];
     protected $table = "faq_categories";
     protected $primaryKey = 'id';
     protected $translationForeignKey = 'category_id';
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     scopeDef
+    public function scopeDef(Builder $query): Builder {
+        return $query->with('translations')->withCount('children');
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #

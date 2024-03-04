@@ -11,10 +11,40 @@ $MenuView = [
 //    'AppSetting'=>false,
 //    'AppPuzzle'=>false,
 //    'Product'=>false,
+//    'FAQ'=>false,
 ];
 
 return [
     'menu' => [
+
+        [
+            'view' => IsMenuView($MenuView, "FAQ",'faq.php'),
+            'sel_routs' => 'Faq',
+            'type' => 'many',
+            'text' => 'admin/faq.app_menu',
+            'icon' => 'fas fa-question-circle',
+            'roleView' => 'Faq_view',
+            'submenu' => [
+                [
+                    'sel_routs' => 'Category',
+                    'url' => 'Faq.Category.index',
+                    'roleView' => 'Faq_view',
+                    'text' => 'admin/faq.app_menu_category',
+                    'icon' => 'fas fa-sitemap',
+                    'view' => true
+                ],
+                [
+                    'sel_routs' => 'Question',
+                    'url' => 'Faq.Question.index',
+                    'roleView' => 'Faq_view',
+                    'text' => 'admin/faq.app_menu_faq',
+                    'icon' => 'fas fa-question',
+                    'view' => true
+                ],
+
+            ],
+        ], #FAQ
+
         [
             'view' => IsMenuView($MenuView, "Product",'proProduct.php'),
             'sel_routs' => 'Shop',
