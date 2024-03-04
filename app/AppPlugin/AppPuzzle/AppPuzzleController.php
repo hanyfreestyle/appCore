@@ -13,6 +13,7 @@ class AppPuzzleController {
 
     function __construct() {
         $this->mainFolder = "D:\_AppPluginTest/";
+        $this->mainFolder = "D:\_AppPlugin/";
         $this->folderDate = null;
     }
 
@@ -34,27 +35,179 @@ class AppPuzzleController {
         if(isset($modelTree[$model])) {
             $thisModel = $modelTree[$model];
 
-            self::CopyAppFolder($thisModel);
-            self::CopyViewFolder($thisModel);
-            self::CopyRouteFile($thisModel);
-            self::CopyMigrations($thisModel);
-            self::CopySeeder($thisModel);
-            self::CopyAdminLang($thisModel);
-            self::CopyWebLang($thisModel);
-            self::CopyInfo($thisModel);
-            self::CopyPhotoFolder($thisModel);
-            self::CopyAssetsFolder($thisModel);
+            self::CopyModelFile($thisModel,"infoFile");
+            self::CopyModelFile($thisModel,"appFolder");
+            self::CopyModelFile($thisModel,"viewFolder");
+            self::CopyModelFile($thisModel,"routeFile");
+            self::CopyModelFile($thisModel,"migrations");
+            self::CopyModelFile($thisModel,"seeder");
+            self::CopyModelFile($thisModel,"adminLangFiles");
+            self::CopyModelFile($thisModel,"webLangFiles");
+            self::CopyModelFile($thisModel,"photoFolder");
+            self::CopyModelFile($thisModel,"assetsFolder");
             self::CopyLivewire($thisModel);
+            return redirect()->back();
+        }else{
             return redirect()->back();
         }
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyAdminLang
+#|||||||||||||||||||||||||||||||||||||| #     RemoveModelFile
+    public function CopyModelFile($thisModel, $type) {
+        $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' ;
+        self::folderMakeDirectory($CopyFolder);
+
+        switch ($type) {
+            case "infoFile":
+                $fileName = issetArr($thisModel,'infoFile',null);
+                if( $fileName != null) {
+                    $filePath = app_path('AppPlugin/AppPuzzle/Files/' . $fileName);
+                    if(File::isFile($filePath)) {
+                        File::copy($filePath, $CopyFolder . "/" . $fileName);
+                    }
+                }
+                break;
+
+            case "appFolder":
+                $folderName = issetArr($thisModel,'appFolder',null);
+                if($folderName != null) {
+                    $thisDir = app_path("AppPlugin/" . $folderName);
+                    if(File::isDirectory($thisDir)) {
+                        $destinationFolder = $CopyFolder . 'app/AppPlugin/' . $folderName;
+                        self::recursive_files_copy($thisDir, $destinationFolder);
+                    }
+                }
+                break;
+
+            case "viewFolder":
+                $folderName = issetArr($thisModel,'viewFolder',null);
+                if($folderName != null) {
+                    $thisDir = resource_path("views/AppPlugin/" . $folderName);
+                    if(File::isDirectory($thisDir)) {
+                        $destinationFolder = $CopyFolder . '/resources/views/AppPlugin/' . $folderName . "/";
+                        self::recursive_files_copy($thisDir, $destinationFolder);
+                    }
+                }
+                break;
+
+            case "routeFile":
+                $fileName = issetArr($thisModel,'routeFile',null);
+                $routeFolder = issetArr($thisModel,'routeFolder',null);
+                if($fileName != null) {
+                    $filePath = base_path('routes/AppPlugin/' . $routeFolder . $fileName);
+                    if(File::isFile($filePath)) {
+                        $destinationFolder = $CopyFolder . '/routes/AppPlugin/' . $routeFolder;
+                        self::folderMakeDirectory($destinationFolder);
+                        File::copy($filePath, $destinationFolder . $fileName);
+                    }
+                }
+                break;
+
+            case "migrations":
+                $migrations = issetArr($thisModel,'migrations',null);
+                if($migrations != null and is_array($migrations)) {
+                    foreach ($migrations as $file) {
+                        $filePath = base_path('database/migrations/' . $file);
+                        if(File::isFile($filePath)) {
+                            $destinationFolder = $CopyFolder . '/database/migrations/';
+                            self::folderMakeDirectory($destinationFolder);
+                            File::copy($filePath, $destinationFolder . $file);
+                        }
+                    }
+                }
+                break;
+
+            case "seeder":
+                $seeders = issetArr($thisModel,'seeder',null);
+                if($seeders != null and is_array($seeders)) {
+                    foreach ($seeders as $file) {
+                        $filePath = public_path('db/' . $file);
+                        if(File::isFile($filePath)) {
+                            $destinationFolder = $CopyFolder . '/public/db/';
+                            self::folderMakeDirectory($destinationFolder);
+                            File::copy($filePath, $destinationFolder . $file);
+                        }
+                    }
+                }
+                break;
+
+            case "adminLangFiles":
+                $adminLangFiles = issetArr($thisModel,'adminLangFiles',null);
+                $adminLangFolder = issetArr($thisModel,'adminLangFolder',null);
+                if($adminLangFiles != null and is_array($adminLangFiles)) {
+                    foreach ($adminLangFiles as $file){
+                        foreach (config('app.admin_lang') as $key => $lang) {
+                            $filePath = resource_path('lang/' . $key . '/' . $adminLangFolder . $file);
+                            if(File::isFile($filePath)) {
+                                $destinationFolder = $CopyFolder . 'resources/lang/' . $key . '/' . $adminLangFolder;
+                                self::folderMakeDirectory($destinationFolder);
+                                File::copy($filePath, $destinationFolder . $file);
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case "webLangFiles":
+                $webLangFiles = issetArr($thisModel,'webLangFiles',null);
+                $webLangFolder = issetArr($thisModel,'webLangFolder',null);
+                if($webLangFiles != null and is_array($webLangFiles)) {
+                    foreach ($webLangFiles as $file){
+                        foreach (config('app.web_lang') as $key => $lang) {
+                            $filePath = resource_path('lang/' . $key . '/' . $webLangFolder . $file);
+                            if(File::isFile($filePath)) {
+                                $destinationFolder = $CopyFolder . 'resources/lang/' . $key . '/' . $webLangFolder;
+                                self::folderMakeDirectory($destinationFolder);
+                                File::copy($filePath, $destinationFolder . $file);
+                            }
+                        }
+                    }
+                }
+                break;
+
+            case "photoFolder":
+                $photoFolder = issetArr($thisModel,'photoFolder',null);
+                if($photoFolder != null and is_array($photoFolder)) {
+                    foreach ($photoFolder as $folderName ){
+                        $thisDir = public_path("images/" . $folderName);
+                        if(File::isDirectory($thisDir)) {
+                            $destinationFolder = $CopyFolder . 'public/images/' . $folderName;
+                            self::recursive_files_copy($thisDir, $destinationFolder);
+                        }
+                    }
+                }
+                break;
+
+            case "assetsFolder":
+                $assetsFolder = issetArr($thisModel,'assetsFolder',null);
+                if($assetsFolder != null and is_array($assetsFolder)) {
+                    foreach ($assetsFolder as $folderName ){
+                        $thisDir = public_path("assets/" . $folderName);
+                        if(File::isDirectory($thisDir)) {
+                            $destinationFolder = $CopyFolder . 'public/assets/' . $folderName;
+                            self::recursive_files_copy($thisDir, $destinationFolder);
+                        }
+                    }
+                }
+                break;
+
+                case "XXXr":
+//                dd($photoFolder);
+                break;
+
+            default:
+                dd('no');
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     CopyLivewire
     public function CopyLivewire($thisModel) {
-        $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-        if(isset($thisModel['LivewireClass']) and is_array($thisModel['LivewireClass'])) {
-            foreach ($thisModel['LivewireClass'] as $folder => $file){
+        $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/';
+
+        if(isset($thisModel['livewireClass']) and is_array($thisModel['livewireClass'])) {
+            foreach ($thisModel['livewireClass'] as $folder => $file){
                 $filePath = app_path('Http/Livewire/'.$folder.'/'.$file);
                 if(File::isFile($filePath)) {
                     $destinationFolder = $CopyFolder . 'app/Http/Livewire/'.$folder."/";
@@ -63,8 +216,8 @@ class AppPuzzleController {
                 }
             }
         }
-        if(isset($thisModel['LivewireView']) and is_array($thisModel['LivewireView'])) {
-            foreach ($thisModel['LivewireView'] as $folder => $file){
+        if(isset($thisModel['livewireView']) and is_array($thisModel['livewireView'])) {
+            foreach ($thisModel['livewireView'] as $folder => $file){
                 $filePath = resource_path('views/livewire/'.$folder.'/'.$file);
                 if(File::isFile($filePath)) {
                     $destinationFolder = $CopyFolder . 'resources/views/livewire/'.$folder."/";
@@ -76,221 +229,8 @@ class AppPuzzleController {
     }
 
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
-    public function CopyPhotoFolder($thisModel) {
-        if(isset($thisModel['photoFolder']) and $thisModel['photoFolder'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            foreach ($thisModel['photoFolder'] as $folderName ){
-                $thisDir = public_path("images/" . $folderName);
-                if(File::isDirectory($thisDir)) {
-                    $destinationFolder = $CopyFolder . 'public/images/' . $folderName;
-                    self::recursive_files_copy($thisDir, $destinationFolder);
-                }
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
-    public function CopyAssetsFolder($thisModel) {
-        if(isset($thisModel['assetsFolder']) and $thisModel['assetsFolder'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $folderName = $thisModel['assetsFolder'];
-            $thisDir = public_path("assets/" . $folderName);
-            if(File::isDirectory($thisDir)) {
-                $destinationFolder = $CopyFolder . 'public/assets/' . $folderName;
-                self::recursive_files_copy($thisDir, $destinationFolder);
-            }
-        }
-    }
 
 
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function recursive_files_copy($source_dir, $destination_dir) {
-        // Open the source folder / directory
-        $dir = opendir($source_dir);
-
-        // Create a destination folder / directory if not exist
-        if(!File::isDirectory($destination_dir)) {
-            self::folderMakeDirectory($destination_dir);
-        }
-        // Loop through the files in source directory
-        while ($file = readdir($dir)) {
-            // Skip . and ..
-            if(($file != '.') && ($file != '..')) {
-                // Check if it's folder / directory or file
-                if(is_dir($source_dir . '/' . $file)) {
-                    // Recursively calling this function for sub directory
-                    self::recursive_files_copy($source_dir . '/' . $file, $destination_dir . '/' . $file);
-                } else {
-                    // Copying the files
-                    // copy($source_dir.'/'.$file, $destination_dir.'/'.$file);
-                    File::copy($source_dir . '/' . $file, $destination_dir . '/' . $file);
-                }
-            }
-        }
-        closedir($dir);
-    }
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyAdminLang
-    public function CopyAdminLang($thisModel) {
-        if(isset($thisModel['adminLang']) and $thisModel['adminLang'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $adminLangFile = $thisModel['adminLangFile'];
-            $adminLangFolder = $thisModel['adminLang'];
-            foreach (config('app.web_lang') as $key => $lang) {
-                $filePath = resource_path('lang/' . $key . '/' . $adminLangFolder . $adminLangFile);
-                if(File::isFile($filePath)) {
-                    $destinationFolder = $CopyFolder . '/resources/lang/' . $key . '/' . $adminLangFolder;
-                    self::folderMakeDirectory($destinationFolder);
-                    File::copy($filePath, $destinationFolder . $adminLangFile);
-                }
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyAdminLang
-    public function CopyWebLang($thisModel) {
-        if(isset($thisModel['webLang']) and $thisModel['webLang'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $webLangFile = $thisModel['webLangFile'];
-            $webLangFolder = $thisModel['webLang'];
-            foreach (config('app.web_lang') as $key => $lang) {
-                $filePath = resource_path('lang/' . $key . '/' . $webLangFolder . $webLangFile);
-                if(File::isFile($filePath)) {
-                    $destinationFolder = $CopyFolder . '/resources/lang/' . $key . '/' . $webLangFolder;
-                    self::folderMakeDirectory($destinationFolder);
-                    File::copy($filePath, $destinationFolder . $webLangFile);
-                }
-            }
-        }
-    }
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
-    public function CopyAppFolder($thisModel) {
-        if(isset($thisModel['app']) and $thisModel['app'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $folderName = $thisModel['app'];
-            $thisDir = app_path("AppPlugin/" . $folderName);
-            if(File::isDirectory($thisDir)) {
-                $destinationFolder = $CopyFolder . 'app/AppPlugin/' . $folderName;
-                self::recursive_files_copy($thisDir, $destinationFolder);
-            }
-        }
-    }
-
-//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//#|||||||||||||||||||||||||||||||||||||| #   CopyAppFolder
-//    public function CopyAppFolder($thisModel) {
-//        if(isset($thisModel['app']) and $thisModel['app'] != null) {
-//            $appFolder = AdminHelper::arrIsset($thisModel, 'appFolder', null);
-//            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-//            $folderName = $thisModel['app'];
-//            $thisDir = app_path("AppPlugin/" . $appFolder . $folderName);
-//            if(File::isDirectory($thisDir)) {
-//                $filesList = File::files($thisDir);
-//                $destinationFolder = $CopyFolder . '/app/AppPlugin/' . $appFolder . $folderName . "/";
-//                self::folderMakeDirectory($destinationFolder);
-//                foreach ($filesList as $file) {
-//                    $fileB = $file->getRealPath();
-//                    $getBasename = $file->getBasename();
-//                    $destination = $destinationFolder . $getBasename;
-//                    File::copy($fileB, $destination);
-//                }
-//            }
-//        }
-//    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopyViewFolder
-    public function CopyViewFolder($thisModel) {
-        if(isset($thisModel['view']) and $thisModel['view'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $folderName = $thisModel['view'];
-            $thisDir = resource_path("views/AppPlugin/" . $folderName);
-            if(File::isDirectory($thisDir)) {
-                $filesList = File::files($thisDir);
-                $destinationFolder = $CopyFolder . '/resources/views/AppPlugin/' . $folderName . "/";
-                self::folderMakeDirectory($destinationFolder);
-                foreach ($filesList as $file) {
-                    $fileB = $file->getRealPath();
-                    $getBasename = $file->getBasename();
-                    $destination = $destinationFolder . $getBasename;
-                    File::copy($fileB, $destination);
-                }
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyRouteFile
-    public function CopyRouteFile($thisModel) {
-        if(isset($thisModel['route']) and $thisModel['route'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $fileName = $thisModel['route'];
-            $routeFolder = $thisModel['routeFolder'];
-            $filePath = base_path('routes/AppPlugin/' . $routeFolder . $fileName);
-            if(File::isFile($filePath)) {
-                $destinationFolder = $CopyFolder . '/routes/AppPlugin/' . $routeFolder;
-                self::folderMakeDirectory($destinationFolder);
-                File::copy($filePath, $destinationFolder . $fileName);
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopyMigrations
-    public function CopyMigrations($thisModel) {
-        if(isset($thisModel['migrations']) and $thisModel['migrations'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            foreach ($thisModel['migrations'] as $migrations) {
-                $filePath = base_path('database/migrations/' . $migrations);
-                if(File::isFile($filePath)) {
-                    $destinationFolder = $CopyFolder . '/database/migrations/';
-                    self::folderMakeDirectory($destinationFolder);
-                    File::copy($filePath, $destinationFolder . $migrations);
-                }
-            }
-        }
-    }
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     CopySeeder
-    public function CopySeeder($thisModel) {
-        if(isset($thisModel['seeder']) and $thisModel['seeder'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            foreach ($thisModel['seeder'] as $seeder) {
-                $filePath = public_path('db/' . $seeder);
-                if(File::isFile($filePath)) {
-                    $destinationFolder = $CopyFolder . '/public/db/';
-                    self::folderMakeDirectory($destinationFolder);
-                    File::copy($filePath, $destinationFolder . $seeder);
-                }
-            }
-        }
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   CopInfo
-    public function CopyInfo($thisModel) {
-        if(isset($thisModel['info']) and $thisModel['info'] != null) {
-            $CopyFolder = $this->mainFolder . $thisModel['CopyFolder'] . '/' . $this->folderDate;
-            $fileName = $thisModel['info'];
-            $filePath = app_path('AppPlugin/AppPuzzle/Files/' . $fileName);
-            if(File::isFile($filePath)) {
-                $destinationFolder = $CopyFolder;
-                self::folderMakeDirectory($destinationFolder);
-                File::copy($filePath, $destinationFolder . "/" . $fileName);
-            }
-        }
-    }
 
 
 
@@ -390,12 +330,39 @@ class AppPuzzleController {
         }
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
+#|||||||||||||||||||||||||||||||||||||| #   folderMakeDirectory
     public function folderMakeDirectory($destinationFolder) {
         if(!File::isDirectory($destinationFolder)) {
             File::makeDirectory($destinationFolder, 0777, true, true);
         }
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   recursive_files_copy
+    public function recursive_files_copy($source_dir, $destination_dir) {
+        // Open the source folder / directory
+        $dir = opendir($source_dir);
+
+        // Create a destination folder / directory if not exist
+        if(!File::isDirectory($destination_dir)) {
+            self::folderMakeDirectory($destination_dir);
+        }
+        // Loop through the files in source directory
+        while ($file = readdir($dir)) {
+            // Skip . and ..
+            if(($file != '.') && ($file != '..')) {
+                // Check if it's folder / directory or file
+                if(is_dir($source_dir . '/' . $file)) {
+                    // Recursively calling this function for sub directory
+                    self::recursive_files_copy($source_dir . '/' . $file, $destination_dir . '/' . $file);
+                } else {
+                    // Copying the files
+                    // copy($source_dir.'/'.$file, $destination_dir.'/'.$file);
+                    File::copy($source_dir . '/' . $file, $destination_dir . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
 
 }
