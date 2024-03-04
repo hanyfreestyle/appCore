@@ -241,6 +241,10 @@ class AppPuzzleController {
             self::RemoveModelFile($thisModel,'migrations');
             self::RemoveModelFile($thisModel,'seeder');
             self::RemoveModelFile($thisModel,'adminLangFiles');
+            self::RemoveModelFile($thisModel,'webLangFiles');
+            self::RemoveModelFile($thisModel,'photoFolder');
+            self::RemoveModelFile($thisModel,'assetsFolder');
+            self::RemoveLivewire($thisModel);
             return redirect()->back();
         } else {
             return redirect()->back();
@@ -322,10 +326,47 @@ class AppPuzzleController {
                 }
                 break;
 
+            case "webLangFiles":
+                $webLangFiles = issetArr($thisModel,'webLangFiles',null);
+                $webLangFolder = issetArr($thisModel,'webLangFolder',null);
+                if($webLangFiles != null and is_array($webLangFiles)) {
+                    foreach ($webLangFiles as $file){
+                        foreach (config('app.web_lang') as $key => $lang) {
+                            $filePath = resource_path('lang/' . $key . '/' . $webLangFolder . $file);
+                            if(File::isFile($filePath)) {
+                                File::delete($filePath);
+                            }
+                        }
+                    }
+                }
+                break;
+
 
             default:
         }
     }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     RemoveLivewire
+    public function RemoveLivewire($thisModel) {
+        if(isset($thisModel['livewireClass']) and is_array($thisModel['livewireClass'])) {
+            foreach ($thisModel['livewireClass'] as $folder => $file){
+                $filePath = app_path('Http/Livewire/'.$folder.'/'.$file);
+                if(File::isFile($filePath)) {
+                    File::delete($filePath);
+                }
+            }
+        }
+        if(isset($thisModel['livewireView']) and is_array($thisModel['livewireView'])) {
+            foreach ($thisModel['livewireView'] as $folder => $file){
+                $filePath = resource_path('views/livewire/'.$folder.'/'.$file);
+                if(File::isFile($filePath)) {
+                    File::delete($filePath);
+                }
+            }
+        }
+    }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   folderMakeDirectory
     public function folderMakeDirectory($destinationFolder) {

@@ -48,6 +48,7 @@ if (!function_exists('IsMenuView')) {
     function IsMenuView($Arr,$Name,$fileName=null,$DefVall=true){
         if($fileName != null){
             $filePath = base_path('routes/AppPlugin/'.$fileName);
+
             if(!file_exists($filePath)) {
                 $DefVall = false ;
             }

@@ -60,16 +60,18 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         @foreach($MenuList['submenu'] as $SubMenu)
-                                            @can($SubMenu['roleView'])
-                                            <li class="nav-item">
-                                                <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::is('*.'. $SubMenu['sel_routs'].'.*')) active @endif ">
-                                                    @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
-                                                    <p>
-                                                        {{__($SubMenu['text'])}}
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            @endcan
+                                            @if(isset($SubMenu['view']) and $SubMenu['view'] == true)
+                                                @can($SubMenu['roleView'])
+                                                    <li class="nav-item">
+                                                        <a href="{{ route($SubMenu['url']) }}" class="nav-link @if(Route::is('*.'. $SubMenu['sel_routs'].'.*')) active @endif ">
+                                                            @if(isset($SubMenu['icon']))<i class="nav-icon {{$SubMenu['icon']}}"></i>@endif
+                                                            <p>
+                                                                {{__($SubMenu['text'])}}
+                                                            </p>
+                                                        </a>
+                                                    </li>
+                                                @endcan
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </li>
