@@ -444,4 +444,35 @@ class AppPuzzleController {
         closedir($dir);
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     checkSoursFolder
+    static function checkSoursFolder($row) {
+        if(isset($row['appFolder'])) {
+            $thisDir = app_path("AppPlugin/" . $row['appFolder']);
+            if(File::isDirectory($thisDir)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   checkBackupFolder
+    static function checkBackupFolder($row) {
+        if(isset($row['CopyFolder'])) {
+            $xx = new AppPuzzleController();
+            $thisDir = $xx->mainFolder.$row['CopyFolder'];
+            if(File::isDirectory($thisDir)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
 }

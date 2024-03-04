@@ -26,21 +26,21 @@
                 <td>{{$row['id']}}</td>
 
                 <td class="td_action">
-                  @if(checkSoursFolder($row))
+                  @if(\App\AppPlugin\AppPuzzle\AppPuzzleController::checkSoursFolder($row))
                     <x-admin.form.action-button url="{{route('AppPuzzle.Export',$row['id'])}}" print-lable="Export Files " :tip="false"
                                                 bg="dark"
                                                 icon="fas fa-upload"/>
                   @endif
                 </td>
                 <td class="td_action">
-                  @if(checkSoursFolder($row))
+                  @if(\App\AppPlugin\AppPuzzle\AppPuzzleController::checkSoursFolder($row))
                     <x-admin.form.action-button url="{{route('AppPuzzle.Remove',$row['id'])}}" print-lable="Delete Files " :tip="false"
                                                 bg="d"
                                                 icon="fas fa-trash-alt"/>
                   @endif
                 </td>
                 <td class="td_action">
-                  @if( checkSoursFolder($row) == false and checkBackupFolder($row)  )
+                  @if( \App\AppPlugin\AppPuzzle\AppPuzzleController::checkSoursFolder($row) == false and  \App\AppPlugin\AppPuzzle\AppPuzzleController::checkBackupFolder($row)  )
                     <x-admin.form.action-button url="{{route('AppPuzzle.Import',$row['id'])}}" print-lable="Import Files " :tip="false"
                                                 bg="p"
                                                 icon="fas fa-file-import"/>

@@ -193,40 +193,6 @@ if(!function_exists('printUploadNotes')) {
 }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   checkSoursFolder
-if(!function_exists('checkSoursFolder')) {
-    function checkSoursFolder($row) {
-        if(isset($row['appFolder'])) {
-            $thisDir = app_path("AppPlugin/" . $row['appFolder']);
-            if(File::isDirectory($thisDir)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-}
-
-if(!function_exists('checkBackupFolder')) {
-    function checkBackupFolder($row) {
-        if(isset($row['CopyFolder'])) {
-            $thisDir = "D:\_AppPlugin/".$row['CopyFolder'];
-            if(File::isDirectory($thisDir)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-}
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
