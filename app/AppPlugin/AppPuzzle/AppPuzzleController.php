@@ -26,6 +26,24 @@ class AppPuzzleController {
     }
 
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # ImportModel
+    public function ImportModel($model){
+        $modelTree = AppPuzzleModelTree::ModelTree();
+        if(isset($modelTree[$model])) {
+            $thisModel = $modelTree[$model];
+            $BackFolder = $this->mainFolder . $thisModel['CopyFolder'] ;
+            $destinationFolder = base_path();
+            if(File::isDirectory($BackFolder)) {
+                self::recursive_files_copy($BackFolder, $destinationFolder);
+            }
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
+    }
+
+
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
