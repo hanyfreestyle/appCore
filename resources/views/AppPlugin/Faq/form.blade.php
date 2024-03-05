@@ -31,16 +31,7 @@
           </x-admin.form.select-multiple>
         </div>
 
-        <div class="row">
-          <x-admin.form.input :row="$rowData" name="price" :label="__('admin/proProduct.pro_text_price')" col="3" tdir="en"/>
-          <x-admin.form.input :row="$rowData" name="sale_price" :label="__('admin/proProduct.pro_text_discount')" col="3" tdir="en"/>
-          <x-admin.form.input :row="$rowData" name="qty_left" :label="__('admin/proProduct.pro_text_qty')" col="3" tdir="en"/>
-          <x-admin.form.input :row="$rowData" name="qty_max" :label="__('admin/proProduct.pro_text_qty_max')" col="3" tdir="en"/>
-        </div>
-        <hr>
-
-
-        <div class="row">
+       <div class="row">
           <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
           @foreach ( $LangAdd as $key=>$lang )
             <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="$viewLabel"

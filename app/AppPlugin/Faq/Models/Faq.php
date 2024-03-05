@@ -3,10 +3,12 @@
 
 namespace App\AppPlugin\Faq\Models;
 
+use App\AppPlugin\Product\Models\Category;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,20 +23,19 @@ class Faq extends Model implements TranslatableContract {
     protected $primaryKey = 'id';
     protected $translationForeignKey = 'faq_id';
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
-    public function FaqToCategories() {
+    public function scopeDef(Builder $query): Builder {
+        return $query->with('translations')
+            ->with('categories')
+            ->withCount('more_photos');
+    }
 
-        return $this->belongsToMany(FaqCategory::class, 'faqcategory_faq', 'faq_id', 'category_id')
-//            ->withPivot('postion')->orderBy('pivot_postion',"asc")
-            // ->withPivot(['postion','id'])->orderByPivot('postion')
-//             ->withPivot(['postion','id'])
-            ;
 
-//        return $this->belongsToMany(Faq::class,'faqcategory_faq','category_id','faq_id')
-//            ->withPivot('postion')->orderBy('postion');
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # categories
+    public function categories(): BelongsToMany {
+        return $this->belongsToMany(FaqCategory::class,'faqcategory_faq','faq_id', 'category_id');
     }
 
 

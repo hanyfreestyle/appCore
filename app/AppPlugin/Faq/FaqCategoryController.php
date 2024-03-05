@@ -24,21 +24,22 @@ class FaqCategoryController extends AdminMainController {
 
     function __construct(FaqCategory $model, FaqCategoryTranslation $translation) {
         parent::__construct();
-        $this->controllerName = "Category";
-        $this->PrefixRole = 'Product';
-        $this->selMenu = "Shop.";
+        $this->controllerName = "FaqCategory";
+        $this->PrefixRole = 'Faq';
+        $this->selMenu = "Faq.";
         $this->PrefixCatRoute = "";
-        $this->PageTitle = __('admin/proProduct.app_menu_category');
+        $this->PageTitle = __('admin/faq.app_menu_category');
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
 
-        $this->UploadDirIs = 'category';
+        $this->UploadDirIs = 'faq-cat';
         $this->translation = $translation;
         $this->translationdb = 'category_id';
 
 
-        self::SetCatTree(true, 2);
-        $this->categoryIcon = false;
+        self::SetCatTree(false, 2);
+
+        $this->categoryIcon = true;
         View::share('categoryIcon', $this->categoryIcon);
 
         $sendArr = [

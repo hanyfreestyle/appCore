@@ -12,7 +12,7 @@
       @if(count($rowData)>0)
         <div class="card-body table-responsive p-0">
           <table {!! Table_Style($viewDataTable,$yajraTable)  !!} >
-            @include('AppPlugin.Product.index_header')
+            @include('AppPlugin.Faq.index_header')
             <tbody>
             @foreach($rowData as $row)
               <tr>
@@ -31,9 +31,6 @@
                       </a>
                     @endforeach
                   </td>
-                  <td>{{$row->price}}</td>
-                  <td>{{$row->sale_price}}</td>
-                  <td>{{$row->qty_left}}</td>
                   <td>{!! is_active($row->is_active) !!}</td>
                   <x-admin.table.action-but type="Photos" :row="$row" />
                   <x-admin.table.action-but type="addLang" :row="$row"/>

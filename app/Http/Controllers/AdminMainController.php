@@ -37,6 +37,7 @@ class AdminMainController extends DefaultMainController {
             "leads" => ['name' => __('admin/leadsContactUs.app_menu')],
             "app_setting" => ['name' => __('admin/configApp.app_menu')],
             "Product" => ['name' => __('admin/proProduct.app_menu')],
+            "Faq" => ['name' => __('admin/faq.app_menu')],
         ];
 
 

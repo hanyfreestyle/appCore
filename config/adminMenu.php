@@ -26,8 +26,8 @@ return [
             'roleView' => 'Faq_view',
             'submenu' => [
                 [
-                    'sel_routs' => 'Category',
-                    'url' => 'Faq.Category.index',
+                    'sel_routs' => 'FaqCategory',
+                    'url' => 'Faq.FaqCategory.index',
                     'roleView' => 'Faq_view',
                     'text' => 'admin/faq.app_menu_category',
                     'icon' => 'fas fa-sitemap',
