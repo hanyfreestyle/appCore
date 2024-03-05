@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 
 use App\Helpers\AdminHelper;
 use App\Helpers\photoUpload\PuzzleUploadProcess;
+use App\Http\Requests\admin\MorePhotosEditRequest;
 use App\Http\Requests\admin\MorePhotosRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -152,6 +153,71 @@ trait CrudTraits {
 #|||||||||||||||||||||||||||||||||||||| # ClearCash
     public function ClearCash() {
 
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     More_PhotosEdit
+    public function More_PhotosEdit($id) {
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
+        $rowData = $this->modelPhoto::where('id', $id)->with('modelName')->firstOrFail();
+        return view('admin.mainView.MorePhoto_edit', compact('rowData', 'pageData'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     More_PhotosUpdate
+    public function More_PhotosUpdate(MorePhotosEditRequest $request, $id) {
+
+        $saveData = $this->modelPhoto::findOrNew($id);
+        $saveImgData = new PuzzleUploadProcess();
+        $saveImgData->setCountOfUpload('2');
+        $saveImgData->setUploadDirIs($this->UploadDirIs ."/". $request->input('model_id'));
+        $saveImgData->setnewFileName($request->input('name'));
+        $saveImgData->UploadOne($request);
+        $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
+        $saveData->save();
+
+        foreach (config('app.web_lang') as $key => $lang) {
+            $saveTranslation = $this->photoTranslation::where("photo_id", $saveData->id)->where('locale', $key)->firstOrNew();
+            $saveTranslation->photo_id = $saveData->id;
+            $saveTranslation->locale = $key;
+            $saveTranslation->des = $request->input($key . '.des');
+            $saveTranslation->save();
+        }
+
+        self::ClearCash();
+        return redirect()->back()->with('Edit.Done', "");
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     More_PhotosEditAll
+    public function More_PhotosEditAll($id) {
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
+        $thisModel = $this->model::findOrFail($id) ;
+        $rowData = $this->modelPhoto::where($this->modelPhotoColumn,'=',$id)->with('translations')->orderBy('position')->get();
+        return view('admin.mainView.MorePhoto_editAll', compact('rowData', 'pageData','thisModel'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   More_PhotosUpdateAll
+    public function More_PhotosUpdateAll(Request $request, $id){
+        foreach ($request->input('id') as $id){
+            $UpdatePhoto = $this->modelPhoto::findOrFail($id) ;
+            $UpdatePhoto->print_photo = $request->input('print_photo_'.$id) ?? 2;
+            $UpdatePhoto->save();
+
+            foreach (config('app.web_lang') as $key => $lang) {
+                $saveTranslation = $this->photoTranslation::where('photo_id', $UpdatePhoto->id)->where('locale', $key)->firstOrNew();
+                $saveTranslation->photo_id = $UpdatePhoto->id;
+                $saveTranslation->locale = $key;
+                $saveTranslation->des = $request->input('des_'.$key.'_'.$id);
+                $saveTranslation->save();
+            }
+        }
+        self::ClearCash();
+        return redirect()->back()->with('Edit.Done', "");
     }
 
 }

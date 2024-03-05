@@ -20,6 +20,7 @@ return
 	'sel_categories' => 'Categories List',
 	'sel_category' => 'Category',
 	'sel_category_main' => 'Main Category',
+	'text_category_name' => 'Category Name',
 	'text_content' => 'Content',
 	'text_des' => 'Description',
 	'text_g_des' => 'Page Description',
@@ -29,5 +30,5 @@ return
 	'text_password' => 'Password',
 	'text_password_confirm' => 'Confirm Password',
 	'text_title' => 'Title',
-	'text_category_name' => 'Category Name',
+	'more_photo_edit' => 'Edit Photo Content',
 ];

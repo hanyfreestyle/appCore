@@ -10,12 +10,9 @@ use App\AppPlugin\Faq\Models\FaqTranslation;
 
 use App\AppPlugin\Faq\Request\FaqRequest;
 use App\Helpers\AdminHelper;
-use App\Helpers\photoUpload\PuzzleUploadProcess;
-
 use App\Http\Controllers\AdminMainController;
 
 use App\Http\Traits\CrudTraits;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -26,7 +23,7 @@ class FaqController extends AdminMainController {
     use CrudTraits;
 
 
-    function __construct(Faq $model, FaqTranslation $translation, FaqPhoto $modelPhoto) {
+    function __construct(Faq $model, FaqTranslation $translation, FaqPhoto $modelPhoto , FaqPhotoTranslation $photoTranslation) {
         parent::__construct();
         $this->controllerName = "Question";
         $this->PrefixRole = 'Faq';
@@ -36,13 +33,14 @@ class FaqController extends AdminMainController {
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
         $this->modelPhoto = $modelPhoto;
+        $this->photoTranslation = $photoTranslation;
         $this->modelPhotoColumn = 'faq_id';
-        $this->modelPhotoEdit = true;
-        View::share('modelPhotoEdit', $this->modelPhotoEdit);
-
         $this->UploadDirIs = 'faq';
         $this->translation = $translation;
         $this->translationdb = 'faq_id';
+
+        $this->modelPhotoEdit = true;
+        View::share('modelPhotoEdit', $this->modelPhotoEdit);
 
         $sendArr = [
             'TitlePage' => $this->PageTitle,
@@ -59,79 +57,7 @@ class FaqController extends AdminMainController {
 
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     More_PhotosEdit    
-    public function More_PhotosEdit($id) {
-        $pageData = $this->pageData;
-        $pageData['ViewType'] = "Edit";
-        $rowData = FaqPhoto::where('id', $id)
-            ->with('faqName')
-            ->firstOrFail();
-        return view('admin.mainView.MorePhoto_edit', compact('rowData', 'pageData'));
-    }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     More_PhotosEdit
-    public function More_PhotosEditAll($id) {
-        $pageData = $this->pageData;
-        $pageData['ViewType'] = "Edit";
-
-        $thisModel = Faq::findOrFail($id) ;
-        $rowData = FaqPhoto::where('faq_id','=',$id)->with('translations')->orderBy('position')->get();
-
-        $FaqPhotosData = $rowData->toArray();
-
-        return view('admin.mainView.MorePhoto_editAll', compact('rowData', 'pageData','thisModel'));
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #   More_PhotosUpdateAll
-    public function More_PhotosUpdateAll(Request $request, $id){
-        foreach ($request->input('id') as $id){
-            $UpdatePhoto = FaqPhoto::findOrFail($id) ;
-            $UpdatePhoto->print_photo = $request->input('print_photo_'.$id) ?? 2;
-            $UpdatePhoto->save();
-
-            foreach (config('app.web_lang') as $key => $lang) {
-                $dbName = 'photo_id';
-                $saveTranslation = FaqPhotoTranslation::where($dbName, $UpdatePhoto->id)->where('locale', $key)->firstOrNew();
-                $saveTranslation->$dbName = $UpdatePhoto->id;
-                $saveTranslation->locale = $key;
-                $saveTranslation->des = $request->input('des_'.$key.'_'.$id);
-                $saveTranslation->save();
-            }
-        }
-
-        self::ClearCash();
-        return redirect()->back()->with('Edit.Done', "");
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function More_PhotosUpdate(Request $request, $id) {
-
-        $saveData = FaqPhoto::findOrNew($id);
-
-        $saveImgData = new PuzzleUploadProcess();
-        $saveImgData->setCountOfUpload('2');
-        $saveImgData->setUploadDirIs('faq/' . $saveData->faq_id);
-        $saveImgData->setnewFileName($saveData->name);
-        $saveImgData->UploadOne($request);
-        $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
-        $saveData->save();
-
-        foreach (config('app.web_lang') as $key => $lang) {
-            $dbName = 'photo_id';
-            $saveTranslation = FaqPhotoTranslation::where($dbName, $saveData->id)->where('locale', $key)->firstOrNew();
-            $saveTranslation->$dbName = $saveData->id;
-            $saveTranslation->locale = $key;
-            $saveTranslation->des = $request->input($key . '.des');
-            $saveTranslation->save();
-        }
-
-        self::ClearCash();
-        return redirect()->back()->with('Edit.Done', "");
-    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # ClearCash
     public function ClearCash() {
@@ -144,8 +70,8 @@ class FaqController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = false;
-        $pageData['Trashed'] = Faq::onlyTrashed()->count();
-        $rowData = self::getSelectQuery(Faq::def());
+        $pageData['Trashed'] = $this->model::onlyTrashed()->count();
+        $rowData = self::getSelectQuery($this->model::def());
         return view('AppPlugin.Faq.index', compact('pageData', 'rowData'));
     }
 
@@ -155,7 +81,7 @@ class FaqController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "deleteList";
         $pageData['SubView'] = false;
-        $rowData = self::getSelectQuery(Faq::onlyTrashed());
+        $rowData = self::getSelectQuery($this->model::onlyTrashed());
         return view('AppPlugin.Faq.index', compact('pageData', 'rowData'));
     }
 
@@ -166,7 +92,7 @@ class FaqController extends AdminMainController {
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = true;
         $Category = FaqCategory::findOrFail($id);
-        $rowData = Faq::def()->whereHas('categories', function ($query) use ($id) {
+        $rowData = $this->model::def()->whereHas('categories', function ($query) use ($id) {
             $query->where('category_id', $id);
         })->paginate(10);
         return view('AppPlugin.Faq.index', compact('pageData', 'rowData'));
@@ -178,7 +104,7 @@ class FaqController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $Categories = FaqCategory::all();
-        $rowData = Faq::findOrNew(0);
+        $rowData = $this->model::findOrNew(0);
         $LangAdd = self::getAddLangForAdd();
         $selCat = [];
         return view('AppPlugin.Faq.form')->with([
@@ -197,7 +123,7 @@ class FaqController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
         $Categories = FaqCategory::all();
-        $rowData = Faq::where('id', $id)->with('categories')->firstOrFail();
+        $rowData = $this->model::where('id', $id)->with('categories')->firstOrFail();
         $selCat = $rowData->categories()->pluck('category_id')->toArray();
         $LangAdd = self::getAddLangForEdit($rowData);
         return view('AppPlugin.Faq.form')->with([
@@ -214,7 +140,7 @@ class FaqController extends AdminMainController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
     public function storeUpdate(FaqRequest $request, $id = 0) {
-        $saveData = Faq::findOrNew($id);
+        $saveData = $this->model::findOrNew($id);
         try {
             DB::transaction(function () use ($request, $saveData) {
                 $categories = $request->input('categories');
@@ -246,7 +172,7 @@ class FaqController extends AdminMainController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
     public function ForceDeleteException($id) {
-        $deleteRow = Faq::onlyTrashed()->where('id', $id)->with('more_photos')->firstOrFail();
+        $deleteRow = $this->model::onlyTrashed()->where('id', $id)->with('more_photos')->firstOrFail();
         if(count($deleteRow->more_photos) > 0) {
             foreach ($deleteRow->more_photos as $del_photo) {
                 AdminHelper::DeleteAllPhotos($del_photo);

@@ -20,6 +20,7 @@ return
 	'sel_categories' => 'قائمة المجموعات',
 	'sel_category' => 'القسم',
 	'sel_category_main' => 'المجموعات الرئيسية',
+	'text_category_name' => 'اسم المجموعة',
 	'text_content' => 'المحتوى',
 	'text_des' => 'الوصف',
 	'text_g_des' => 'وصف الصفحة',
@@ -29,5 +30,5 @@ return
 	'text_password' => 'كلمة المرور',
 	'text_password_confirm' => 'تاكيد كلمة المرور',
 	'text_title' => 'العنوان',
-	'text_category_name' => 'اسم المجموعة',
+	'more_photo_edit' => 'تعديل محتوى الصور',
 ];
