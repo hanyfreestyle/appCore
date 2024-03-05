@@ -2,6 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\AppPlugin\BlogPost\Seeder\BlogCategorySeeder;
+use App\AppPlugin\BlogPost\Seeder\BlogCategoryTranslationSeeder;
+use App\AppPlugin\BlogPost\Seeder\BlogPhotoSeeder;
+use App\AppPlugin\BlogPost\Seeder\BlogPhotoTranslationSeeder;
+use App\AppPlugin\BlogPost\Seeder\BlogPivotSeeder;
+use App\AppPlugin\BlogPost\Seeder\BlogSeeder;
+use App\AppPlugin\BlogPost\Seeder\BlogTranslationSeeder;
 use App\AppPlugin\Config\Apps\SeederAppMenu;
 use App\AppPlugin\Config\Apps\SeederAppMenuTranslation;
 use App\AppPlugin\Config\Apps\SeederAppSetting;
@@ -87,6 +94,14 @@ class DatabaseSeeder extends Seeder
         $this->call(FaqPivotSeeder::class);
         $this->call(FaqPhotoSeeder::class);
         $this->call(FaqPhotoTranslationSeeder::class);
+
+        $this->call(BlogCategorySeeder::class);
+        $this->call(BlogCategoryTranslationSeeder::class);
+        $this->call(BlogSeeder::class);
+        $this->call(BlogTranslationSeeder::class);
+        $this->call(BlogPivotSeeder::class);
+        $this->call(BlogPhotoSeeder::class);
+        $this->call(BlogPhotoTranslationSeeder::class);
 
 
     }
