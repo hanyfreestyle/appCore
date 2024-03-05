@@ -10,8 +10,6 @@ return new class extends Migration {
         Schema::create('faq_photos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('faq_id')->unsigned();
-            $table->longText("des_en")->nullable();
-            $table->longText("des_es")->nullable();
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->string("photo_thum_2")->nullable();
@@ -19,7 +17,6 @@ return new class extends Migration {
             $table->integer("print_photo")->default(2);
             $table->integer("is_default")->default(0);
             $table->foreign('faq_id')->references('id')->on('faq_faqs')->onDelete('cascade');
-
         });
     }
 

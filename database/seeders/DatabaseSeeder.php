@@ -17,6 +17,7 @@ use App\AppPlugin\Data\Country\SeederCountryTranslation;
 use App\AppPlugin\Faq\Seeder\FaqCategorySeeder;
 use App\AppPlugin\Faq\Seeder\FaqCategoryTranslationSeeder;
 use App\AppPlugin\Faq\Seeder\FaqPhotoSeeder;
+use App\AppPlugin\Faq\Seeder\FaqPhotoTranslationSeeder;
 use App\AppPlugin\Faq\Seeder\FaqPivotSeeder;
 use App\AppPlugin\Faq\Seeder\FaqSeeder;
 use App\AppPlugin\Faq\Seeder\FaqTranslationSeeder;
@@ -84,7 +85,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FaqSeeder::class);
         $this->call(FaqTranslationSeeder::class);
         $this->call(FaqPivotSeeder::class);
-//        $this->call(FaqPhotoSeeder::class);
+        $this->call(FaqPhotoSeeder::class);
+        $this->call(FaqPhotoTranslationSeeder::class);
 
 
     }

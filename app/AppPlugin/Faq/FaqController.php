@@ -94,9 +94,9 @@ class FaqController extends AdminMainController {
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = true;
         $Category = $this->modelCategory::findOrFail($id);
-        $rowData = $this->model::def()->whereHas('categories', function ($query) use ($id) {
+        $rowData = self::getSelectQuery($this->model::def()->whereHas('categories', function ($query) use ($id) {
             $query->where('category_id', $id);
-        })->paginate(10);
+        }));
         return view('AppPlugin.Faq.index', compact('pageData', 'rowData'));
     }
 
@@ -109,14 +109,7 @@ class FaqController extends AdminMainController {
         $rowData = $this->model::findOrNew(0);
         $LangAdd = self::getAddLangForAdd();
         $selCat = [];
-        return view('AppPlugin.Faq.form')->with([
-                'pageData' => $pageData,
-                'rowData' => $rowData,
-                'Categories' => $Categories,
-                'LangAdd' => $LangAdd,
-                'selCat' => $selCat,
-            ]
-        );
+        return view('AppPlugin.Faq.form',compact('pageData','rowData','Categories','LangAdd','selCat'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -128,14 +121,8 @@ class FaqController extends AdminMainController {
         $rowData = $this->model::where('id', $id)->with('categories')->firstOrFail();
         $selCat = $rowData->categories()->pluck('category_id')->toArray();
         $LangAdd = self::getAddLangForEdit($rowData);
-        return view('AppPlugin.Faq.form')->with([
-                'pageData' => $pageData,
-                'rowData' => $rowData,
-                'Categories' => $Categories,
-                'LangAdd' => $LangAdd,
-                'selCat' => $selCat,
-            ]
-        );
+        return view('AppPlugin.Faq.form',compact('pageData','rowData','Categories','LangAdd','selCat'));
+
     }
 
 
@@ -171,7 +158,6 @@ class FaqController extends AdminMainController {
         return self::redirectWhere($request, $id, $this->PrefixRoute . '.index');
 
     }
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
