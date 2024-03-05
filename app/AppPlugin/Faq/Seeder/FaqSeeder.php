@@ -12,7 +12,7 @@ class FaqSeeder extends Seeder {
 
     public function run(): void {
         Faq::unguard();
-        $tablePath = public_path('db/faqs.sql');
+        $tablePath = public_path('db/faq_faqs.sql');
         DB::unprepared(file_get_contents($tablePath));
     }
 }

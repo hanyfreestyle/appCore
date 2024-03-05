@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2024 at 08:30 PM
+-- Generation Time: Mar 05, 2024 at 07:42 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,22 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `apptv_20240102`
+-- Database: `a_cart`
 --
 
 --
--- Dumping data for table `faqs`
+-- Dumping data for table `faq_faqs`
 --
 
 INSERT INTO `faq_faqs` (`id`, `is_active`, `photo`, `photo_thum_1`, `url_type`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL, 0, NULL, '2024-01-04 08:28:12', '2024-01-04 08:28:12'),
-(2, 1, NULL, NULL, 0, NULL, '2024-01-04 08:28:36', '2024-01-04 08:28:36'),
-(3, 1, NULL, NULL, 0, NULL, '2024-01-04 08:29:06', '2024-01-04 08:29:06'),
-(4, 1, NULL, NULL, 0, NULL, '2024-01-04 08:29:43', '2024-01-04 08:29:43'),
-(5, 1, NULL, NULL, 0, NULL, '2024-01-04 08:30:28', '2024-01-04 08:30:28'),
-(6, 1, NULL, NULL, 0, NULL, '2024-01-04 08:31:58', '2024-01-04 08:31:58'),
-(7, 1, NULL, NULL, 0, NULL, '2024-01-04 08:32:37', '2024-01-04 08:32:37'),
-(8, 1, NULL, NULL, 0, NULL, '2024-01-04 08:36:55', '2024-01-04 08:36:55');
+(1, 1, NULL, NULL, 0, NULL, '2024-03-05 04:41:03', '2024-03-05 04:41:03');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

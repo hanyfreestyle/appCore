@@ -79,11 +79,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductPhotoSeeder::class);
         $this->call(CategoryProductSeeder::class);
 
-//        $this->call(FaqCategorySeeder::class);
-//        $this->call(FaqCategoryTranslationSeeder::class);
-//        $this->call(FaqSeeder::class);
-//        $this->call(FaqTranslationSeeder::class);
-//        $this->call(FaqPivotSeeder::class);
+        $this->call(FaqCategorySeeder::class);
+        $this->call(FaqCategoryTranslationSeeder::class);
+        $this->call(FaqSeeder::class);
+        $this->call(FaqTranslationSeeder::class);
+        $this->call(FaqPivotSeeder::class);
 //        $this->call(FaqPhotoSeeder::class);
 
 
