@@ -30,7 +30,7 @@
 </div>
 <div class="col-lg-6">
   <div class="row">
-    <x-admin.form.trans-text-area name="des" :key="$key" :row="$row" :label="__('admin/form.text_content')" :tdir="$key"
+    <x-admin.form.trans-text-area name="des" :key="$key" :row="$row" :label="$defdes" :tdir="$key"
                                   add-class="bigTextArea" :label-view="$labelView" :holder="$holder" />
   </div>
 </div>

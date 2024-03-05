@@ -2,13 +2,12 @@
 
 namespace App\AppPlugin\Faq;
 
-
 use App\AppPlugin\Faq\Models\Faq;
 use App\AppPlugin\Faq\Models\FaqCategory;
 use App\AppPlugin\Faq\Models\FaqPhoto;
 use App\AppPlugin\Faq\Models\FaqTranslation;
 
-use App\AppPlugin\Product\Request\ProductRequest;
+use App\AppPlugin\Faq\Request\FaqRequest;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
@@ -31,11 +30,11 @@ class FaqController extends AdminMainController {
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
         $this->modelPhoto = $modelPhoto;
-        $this->modelPhotoColumn = 'product_id';
+        $this->modelPhotoColumn = 'faq_id';
 
-        $this->UploadDirIs = 'product';
+        $this->UploadDirIs = 'faq';
         $this->translation = $translation;
-        $this->translationdb = 'product_id';
+        $this->translationdb = 'faq_id';
 
         $sendArr = [
             'TitlePage' => $this->PageTitle,
@@ -133,7 +132,7 @@ class FaqController extends AdminMainController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(ProductRequest $request, $id = 0) {
+    public function storeUpdate(FaqRequest $request, $id = 0) {
         $saveData = Faq::findOrNew($id);
         try {
             DB::transaction(function () use ($request, $saveData) {

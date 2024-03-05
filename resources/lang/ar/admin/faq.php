@@ -7,4 +7,5 @@ return
 	'app_menu_faq' => 'الاسئلة المتكررة',
 	'cat_text_name' => 'اسم المجموعة',
 	'faq_text_name' => 'السؤال',
+	'faq_text_answer' => 'الاجابة',
 ];

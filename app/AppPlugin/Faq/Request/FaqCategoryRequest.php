@@ -1,13 +1,13 @@
 <?php
 
-namespace App\AppPlugin\Product\Request;
+namespace App\AppPlugin\Faq\Request;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class CategoryRequest extends FormRequest {
+class FaqCategoryRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;
@@ -35,11 +35,10 @@ class CategoryRequest extends FormRequest {
         $id = $this->route('id');
 
         $rules = [
-//            'parent_id' => "required",
+            'parent_id' => "nullable",
         ];
 
-
-        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'pro_category_translations');
+        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'faq_category_translations');
         return $rules;
     }
 }

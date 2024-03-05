@@ -7,4 +7,5 @@ return
 	'app_menu_faq' => 'Faq',
 	'cat_text_name' => 'Category Name',
 	'faq_text_name' => 'Question',
+	'faq_text_answer' => 'Answer',
 ];

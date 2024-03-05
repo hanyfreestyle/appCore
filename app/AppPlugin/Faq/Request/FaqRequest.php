@@ -1,33 +1,27 @@
 <?php
 
-namespace App\AppPlugin\Product\Request;
+namespace App\AppPlugin\Faq\Request;
 
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class CategoryRequest extends FormRequest {
+class FaqRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;
     }
 
     protected function prepareForValidation() {
-
         $data = $this->toArray();
-        $addLang = json_decode($data['add_lang']);
-
-        foreach ($addLang as $key => $lang) {
-            data_set($data, $key . '.slug', AdminHelper::Url_Slug($data[$key]['slug']));
-        }
+        $data = AdminMainController::prepareSlug($data);
         $this->merge($data);
     }
 
     public function rules(Request $request): array {
 
         $addLang = json_decode($request->add_lang);
-
         foreach ($addLang as $key => $lang) {
             $request->merge([$key . '.slug' => AdminHelper::Url_Slug($request[$key]['slug'])]);
         }
@@ -35,11 +29,11 @@ class CategoryRequest extends FormRequest {
         $id = $this->route('id');
 
         $rules = [
-//            'parent_id' => "required",
+            'categories' => 'required|array|min:1',
         ];
 
+        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'pro_product_translations');
 
-        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'pro_category_translations');
         return $rules;
     }
 }

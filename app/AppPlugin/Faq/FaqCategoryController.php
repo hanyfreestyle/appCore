@@ -5,7 +5,7 @@ namespace App\AppPlugin\Faq;
 
 use App\AppPlugin\Faq\Models\FaqCategory;
 use App\AppPlugin\Faq\Models\FaqCategoryTranslation;
-use App\AppPlugin\Product\Request\CategoryRequest;
+use App\AppPlugin\Faq\Request\FaqCategoryRequest;
 use App\Helpers\AdminHelper;
 
 use App\Http\Controllers\AdminMainController;
@@ -37,7 +37,7 @@ class FaqCategoryController extends AdminMainController {
         $this->translationdb = 'category_id';
 
 
-        self::SetCatTree(false, 2);
+        self::SetCatTree(true, 2);
 
         $this->categoryIcon = true;
         View::share('categoryIcon', $this->categoryIcon);
@@ -63,14 +63,14 @@ class FaqCategoryController extends AdminMainController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CategoryStoreUpdate
-    public function CategoryStoreUpdate(CategoryRequest $request, $id = 0) {
+    public function CategoryStoreUpdate(FaqCategoryRequest $request, $id = 0) {
         return self::TraitsCategoryStoreUpdate($request, $id);
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroyException
     public function destroyException($id) {
-        $deleteRow = Category::where('id', $id)
+        $deleteRow = FaqCategory::where('id', $id)
             ->withCount('del_category')
             ->withCount('del_product')
             ->firstOrFail();
