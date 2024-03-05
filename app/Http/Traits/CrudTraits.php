@@ -82,7 +82,7 @@ trait CrudTraits {
         $id = $request->route()->parameter('id');
         $Model = $this->model->where('id', $id)->firstOrFail();
         $ListPhotos = $this->modelPhoto->where($this->modelPhotoColumn, $id)->orderBy('position')->get();
-        return view('admin.mainView.photos', compact('ListPhotos', 'pageData', 'Model'));
+        return view('admin.mainView.MorePhoto_add', compact('ListPhotos', 'pageData', 'Model'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

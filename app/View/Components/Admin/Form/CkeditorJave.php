@@ -6,8 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CkeditorJave extends Component
-{
+class CkeditorJave extends Component {
     public $loadfile;
     public $arlang;
     public $arname;
@@ -22,19 +21,17 @@ class CkeditorJave extends Component
         $enlang = true,
         $enname = "en[des]",
         $height = 450,
-    )
-    {
-        $this->loadfile = $loadfile ;
-        $this->arlang = $arlang ;
-        $this->arname = $arname ;
-        $this->enlang = $enlang ;
-        $this->enname = $enname ;
-        $this->height = $height ;
+    ) {
+        $this->loadfile = $loadfile;
+        $this->arlang = $arlang;
+        $this->arname = $arname;
+        $this->enlang = $enlang;
+        $this->enname = $enname;
+        $this->height = $height;
 
     }
 
-    public function render(): View|Closure|string
-    {
+    public function render(): View|Closure|string {
         return view('components.admin.form.ckeditor-jave');
     }
 }

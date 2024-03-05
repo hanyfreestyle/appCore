@@ -49,4 +49,8 @@ Route::get('/Faq/photos/{id}',[FaqController::class,'ListMorePhoto'])->name('Faq
 Route::post('/Faq/AddMore',[FaqController::class,'AddMorePhotos'])->name('Faq.Question.More_PhotosAdd');
 Route::post('/Faq/saveSort', [FaqController::class,'sortPhotoSave'])->name('Faq.Question.sortPhotoSave');
 Route::get('/Faq/PhotoDel/{id}',[FaqController::class,'More_PhotosDestroy'])->name('Faq.Question.More_PhotosDestroy');
+Route::get('/Faq/PhotoEdit/{id}',[FaqController::class,'More_PhotosEdit'])->name('Faq.Question.More_PhotosEdit');
+Route::post('/Faq/PhotoUpdate/{id}',[FaqController::class,'More_PhotosUpdate'])->name('Faq.Question.More_PhotosUpdate');
+Route::get('/Faq/PhotosEdit/{id}',[FaqController::class,'More_PhotosEditAll'])->name('Faq.Question.More_PhotosEditAll');
+Route::post('/Faq/PhotoUpdateAll/{id}',[FaqController::class,'More_PhotosUpdateAll'])->name('Faq.Question.More_PhotosUpdateAll');
 Route::get('/Faq/config', [FaqController::class,'config'])->name('Faq.Question.config');

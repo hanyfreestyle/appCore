@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
-class FaqCategory extends Model implements TranslatableContract, LocalizedUrlRoutable {
+class FaqCategory extends Model implements TranslatableContract  {
 
     use Translatable;
     use HasRecursiveRelationships;

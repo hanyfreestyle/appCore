@@ -52,6 +52,11 @@ class AdminMainController extends DefaultMainController {
         ];
         View::share('filterTypeArr', $FilterTypeArr);
 
+        $PrintPhotoPosition = [
+            "1"=> ['id'=>'1','name'=>"Top"],
+            "2"=> ['id'=>'2','name'=> "Bottom"],
+        ];
+        View::share('PrintPhotoPosition', $PrintPhotoPosition);
 
         $BrokenUrl_Arr = [
             "1" => ['id' => 'Root', 'name' => __('admin/broken.list-Root')],
