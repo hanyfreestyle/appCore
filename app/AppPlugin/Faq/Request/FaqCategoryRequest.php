@@ -38,7 +38,7 @@ class FaqCategoryRequest extends FormRequest {
             'parent_id' => "nullable",
         ];
 
-        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'faq_category_translations');
+         $rules += AdminMainController::FormRequestSeo($id, $addLang, 'faq_category_translations','category_id');
         return $rules;
     }
 }

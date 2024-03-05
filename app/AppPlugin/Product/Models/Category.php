@@ -71,7 +71,7 @@ class Category extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public function del_category(): HasMany {
-        return $this->hasMany(Category::class, 'parent_id')->withTrashed();
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function del_product() {

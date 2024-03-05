@@ -32,7 +32,7 @@ class FaqRequest extends FormRequest {
             'categories' => 'required|array|min:1',
         ];
 
-        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'pro_product_translations');
+        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'faq_translations','faq_id');
 
         return $rules;
     }

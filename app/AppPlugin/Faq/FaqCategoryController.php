@@ -64,6 +64,7 @@ class FaqCategoryController extends AdminMainController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CategoryStoreUpdate
     public function CategoryStoreUpdate(FaqCategoryRequest $request, $id = 0) {
+
         return self::TraitsCategoryStoreUpdate($request, $id);
     }
 
@@ -72,10 +73,12 @@ class FaqCategoryController extends AdminMainController {
     public function destroyException($id) {
         $deleteRow = FaqCategory::where('id', $id)
             ->withCount('del_category')
-            ->withCount('del_product')
+            ->withCount('del_faq')
             ->firstOrFail();
 
-        if($deleteRow->del_category_count == 0 and $deleteRow->del_product_count == 0) {
+
+
+        if($deleteRow->del_category_count == 0 and $deleteRow->del_faq_count == 0) {
             try {
                 DB::transaction(function () use ($deleteRow, $id) {
                     $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
@@ -83,10 +86,10 @@ class FaqCategoryController extends AdminMainController {
                     $deleteRow->forceDelete();
                 });
             } catch (\Exception $exception) {
-                return back()->with(['confirmException' => '', 'fromModel' => 'CategoryProduct', 'deleteRow' => $deleteRow]);
+                return back()->with(['confirmException' => '', 'fromModel' => 'CategoryFaq', 'deleteRow' => $deleteRow]);
             }
         } else {
-            return back()->with(['confirmException' => '', 'fromModel' => 'CategoryProduct', 'deleteRow' => $deleteRow]);
+            return back()->with(['confirmException' => '', 'fromModel' => 'CategoryFaq', 'deleteRow' => $deleteRow]);
         }
 
         self::ClearCash();

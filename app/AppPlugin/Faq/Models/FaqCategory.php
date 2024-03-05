@@ -61,9 +61,27 @@ class FaqCategory extends Model implements TranslatableContract  {
 
 
 
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function getLocalizedRouteKey($locale) {
         return $this->slugs()->where('locale', $locale)->first()->slug;
     }
+
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #  Delete Counts
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    public function del_category(): HasMany {
+        return $this->hasMany(FaqCategory::class, 'parent_id');
+    }
+
+    public function del_faq() {
+        return $this->belongsToMany(Faq::class, 'faqcategory_faq', 'category_id', 'faq_id')
+            ->withTrashed();
+    }
+
+
 }

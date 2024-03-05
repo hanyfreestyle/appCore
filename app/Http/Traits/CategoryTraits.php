@@ -82,6 +82,7 @@ trait CategoryTraits {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function TraitsCategoryStoreUpdate($request, $id) {
+
         if(intval($id) == 0) {
             $saveData = $this->model->findOrNew($id);
         } else {
