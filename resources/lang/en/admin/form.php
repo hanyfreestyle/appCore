@@ -17,6 +17,7 @@ return
 	'button_update' => 'Update',
 	'check_all' => 'Check All',
 	'check_is_published' => 'Published',
+	'more_photo_edit' => 'Edit Photo Content',
 	'sel_categories' => 'Categories List',
 	'sel_category' => 'Category',
 	'sel_category_main' => 'Main Category',
@@ -30,5 +31,6 @@ return
 	'text_password' => 'Password',
 	'text_password_confirm' => 'Confirm Password',
 	'text_title' => 'Title',
-	'more_photo_edit' => 'Edit Photo Content',
+	'text_youtube' => 'Youtube Code',
+	'text_youtube_title' => 'Title',
 ];

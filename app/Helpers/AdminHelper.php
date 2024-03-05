@@ -59,6 +59,7 @@ class AdminHelper{
         $data['AddButToCard'] = AdminHelper::arrIsset($sendArr,'AddButToCard',true);
         $data['AddAction'] = AdminHelper::arrIsset($sendArr,'AddAction',true);
         $data['AddConfig'] = AdminHelper::arrIsset($sendArr,'AddConfig',false);
+        $data['AddMorePhoto'] = AdminHelper::arrIsset($sendArr,'AddMorePhoto',false);
 
         if($data['AddButToCard']){
 

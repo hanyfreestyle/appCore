@@ -17,6 +17,7 @@ return
 	'button_update' => 'تحديث',
 	'check_all' => 'تحديد الكل',
 	'check_is_published' => 'منشور',
+	'more_photo_edit' => 'تعديل محتوى الصور',
 	'sel_categories' => 'قائمة المجموعات',
 	'sel_category' => 'القسم',
 	'sel_category_main' => 'المجموعات الرئيسية',
@@ -30,5 +31,6 @@ return
 	'text_password' => 'كلمة المرور',
 	'text_password_confirm' => 'تاكيد كلمة المرور',
 	'text_title' => 'العنوان',
-	'more_photo_edit' => 'تعديل محتوى الصور',
+	'text_youtube' => 'كود يوتيوب',
+	'text_youtube_title' => 'العنوان',
 ];

@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->integer('url_type')->default(0);
+            $table->string('youtube')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

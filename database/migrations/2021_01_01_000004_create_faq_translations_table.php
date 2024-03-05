@@ -16,9 +16,9 @@ return new class extends Migration {
 
             $table->string('name')->nullable();
             $table->longText('des')->nullable();
-            $table->longText('other')->nullable();
             $table->string('g_title')->nullable();
             $table->text('g_des')->nullable();
+            $table->string('youtube_title')->nullable();
 
             $table->unique(['faq_id', 'locale']);
             $table->unique(['locale', 'slug']);

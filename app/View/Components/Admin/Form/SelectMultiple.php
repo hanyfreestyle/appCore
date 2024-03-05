@@ -17,6 +17,9 @@ class SelectMultiple extends Component {
     public $sendArr;
     public $selectType;
     public $printValName;
+    public $type;
+    public $categories;
+    public $selCat;
 
     public function __construct(
         $name = "",
@@ -28,6 +31,9 @@ class SelectMultiple extends Component {
         $sendArr = array(),
         $selectType = 'normal',
         $printValName = 'name',
+        $type = 'Main',
+        $categories =array(),
+        $selCat = array(),
     ) {
         $this->name = $name;
         $this->label = $label;
@@ -41,6 +47,9 @@ class SelectMultiple extends Component {
         $this->sendArr = $sendArr;
         $this->selectType = $selectType;
         $this->printValName = $printValName;
+        $this->type = $type;
+        $this->categories = $categories;
+        $this->selCat = $selCat;
     }
 
 

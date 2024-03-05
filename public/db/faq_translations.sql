@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2024 at 07:43 AM
+-- Generation Time: Mar 05, 2024 at 05:49 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -25,9 +25,9 @@ SET time_zone = "+00:00";
 -- Dumping data for table `faq_translations`
 --
 
-INSERT INTO `faq_translations` (`id`, `faq_id`, `locale`, `slug`, `name`, `des`, `other`, `g_title`, `g_des`) VALUES
-(1, 1, 'ar', 'السؤال-ar', 'السؤال (ar)', '<p>السؤال (ar)</p>', NULL, 'السؤال (ar)', 'السؤال'),
-(2, 1, 'en', 'السؤال-en', 'السؤال (en)', '<p>السؤال (en)</p>', NULL, 'السؤال (en)', 'السؤال');
+INSERT INTO `faq_translations` (`id`, `faq_id`, `locale`, `slug`, `name`, `des`, `g_title`, `g_des`) VALUES
+(1, 1, 'ar', 'السؤال-ar', 'السؤال (ar)', '<p>السؤال (ar)</p>', 'السؤال (ar)', 'السؤال'),
+(2, 1, 'en', 'السؤال-en', 'السؤال (en)', '<p>السؤال (en)</p>', 'السؤال (en)', 'السؤال');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

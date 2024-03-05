@@ -37,6 +37,12 @@
                     @can($PrefixRole.'_edit')
                       <x-admin.form.action-button url="{{route($PrefixRoute.'.More_PhotosEdit',$photo->id)}}" type="edit" :tip="false"/>
                     @endcan
+                    @can($PrefixRole.'_delete')
+
+                        <x-admin.form.action-button url="#" id="{{route($PrefixRoute.'.More_PhotosDestroy',$photo->id)}}" :tip="false" type="deleteSweet"/>
+
+                    @endcan
+
                   </div>
                   @foreach ( config('app.web_lang') as $key=>$lang )
                     <div class="col-lg-{{getColLang(5,10)}}">
@@ -64,6 +70,8 @@
 
 
 @push('JsCode')
+  <x-admin.table.sweet-delete-js/>
+
   @if($viewEditor)
     <script src="https://cdn.ckeditor.com/4.11.1/full/ckeditor.js"></script>
     @foreach($rowData as $photo)

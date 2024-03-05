@@ -39,7 +39,7 @@ class CategoryRequest extends FormRequest {
         ];
 
 
-        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'pro_category_translations');
+        $rules += AdminMainController::FormRequestSeo($id, $addLang, 'pro_category_translations','category_id');
         return $rules;
     }
 }

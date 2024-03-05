@@ -23,7 +23,7 @@ class FaqController extends AdminMainController {
     use CrudTraits;
 
 
-    function __construct(Faq $model, FaqTranslation $translation, FaqPhoto $modelPhoto , FaqPhotoTranslation $photoTranslation) {
+    function __construct(Faq $model, FaqTranslation $translation,FaqCategory $modelCategory, FaqPhoto $modelPhoto , FaqPhotoTranslation $photoTranslation ) {
         parent::__construct();
         $this->controllerName = "Question";
         $this->PrefixRole = 'Faq';
@@ -32,6 +32,7 @@ class FaqController extends AdminMainController {
         $this->PageTitle = __('admin/faq.app_menu_faq');
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
+        $this->modelCategory = $modelCategory;
         $this->modelPhoto = $modelPhoto;
         $this->photoTranslation = $photoTranslation;
         $this->modelPhotoColumn = 'faq_id';
@@ -50,6 +51,7 @@ class FaqController extends AdminMainController {
             'configArr' => ["editor" => 1, 'morePhotoFilterid' => 1],
             'yajraTable' => false,
             'AddLang' => true,
+            'AddMorePhoto' => true,
             'restore' => 1,
         ];
 
@@ -91,7 +93,7 @@ class FaqController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = true;
-        $Category = FaqCategory::findOrFail($id);
+        $Category = $this->modelCategory::findOrFail($id);
         $rowData = $this->model::def()->whereHas('categories', function ($query) use ($id) {
             $query->where('category_id', $id);
         })->paginate(10);
@@ -103,7 +105,7 @@ class FaqController extends AdminMainController {
     public function create() {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
-        $Categories = FaqCategory::all();
+        $Categories = $this->modelCategory::all();
         $rowData = $this->model::findOrNew(0);
         $LangAdd = self::getAddLangForAdd();
         $selCat = [];
@@ -122,7 +124,7 @@ class FaqController extends AdminMainController {
     public function edit($id) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
-        $Categories = FaqCategory::all();
+        $Categories = $this->modelCategory::all();
         $rowData = $this->model::where('id', $id)->with('categories')->firstOrFail();
         $selCat = $rowData->categories()->pluck('category_id')->toArray();
         $LangAdd = self::getAddLangForEdit($rowData);
@@ -145,6 +147,7 @@ class FaqController extends AdminMainController {
             DB::transaction(function () use ($request, $saveData) {
                 $categories = $request->input('categories');
                 $saveData->is_active = intval((bool)$request->input('is_active'));
+                $saveData->youtube = $request->input('youtube');
                 $saveData->save();
 
                 $saveData->categories()->sync($categories);
@@ -155,6 +158,7 @@ class FaqController extends AdminMainController {
                     $dbName = $this->translationdb;
                     $saveTranslation = $this->translation->where($dbName, $saveData->id)->where('locale', $key)->firstOrNew();
                     $saveTranslation->$dbName = $saveData->id;
+                    $saveTranslation->youtube_title = $request->input($key.'.youtube_title');
                     $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
                     $saveTranslation = self::saveTranslationMain($saveTranslation, $key, $request);
                     $saveTranslation->save();

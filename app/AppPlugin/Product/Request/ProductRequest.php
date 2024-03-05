@@ -36,7 +36,7 @@ class ProductRequest extends FormRequest {
             'qty_max' => "required|integer",
         ];
 
-        $rules += AdminMainController::FormRequestSeo($id,$addLang,'pro_product_translations');
+        $rules += AdminMainController::FormRequestSeo($id,$addLang,'pro_product_translations','product_id');
 
         return $rules;
     }

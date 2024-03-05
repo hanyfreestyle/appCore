@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->integer('postion')->default(0);
             $table->timestamps();
             $table->softDeletes();
-//            $table->foreign('parent_id')->references('id')->on('pro_categories')->onDelete('RESTRICT');
         });
     }
 

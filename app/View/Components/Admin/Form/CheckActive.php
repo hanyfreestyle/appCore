@@ -32,7 +32,7 @@ class CheckActive extends Component
         $this->defstatus = $defstatus ;
 
         if(!$lable){
-            $this->lable = __('admin/def.status') ;
+            $this->lable = __('admin/form.check_is_published') ;
         }
     }
     public function render(): View|Closure|string

@@ -8,7 +8,16 @@
     @endif
 
     <select class="select2 is-invalid" multiple="multiple" name="{{$name}}[]" data-placeholder="" style="width: 100%;">
-      {{$slot}}
+      @if($type == 'Main')
+        @foreach($categories as $category )
+          <option value="{{$category->id}}"
+           {{ (in_array($category->id,$selCat)) ? 'selected' : ''}}
+           {{ (collect(old('categories'))->contains($category->id)) ? 'selected':'' }}>{{ print_h1($category)}}</option>
+        @endforeach
+      @else
+        {{$slot}}
+      @endif
+
     </select>
 
     @error($name)
