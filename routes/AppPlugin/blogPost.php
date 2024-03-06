@@ -28,6 +28,7 @@ Route::post('/BlogCategory/SaveSort',[BlogCategoryController::class,'CategorySav
 
 
 Route::get('/Blog',[BlogPostController::class,'index'])->name('Blog.BlogPost.index');
+Route::get('/Blog/DataTable',[BlogPostController::class,'DataTable'])->name('Blog.BlogPost.DataTable');
 Route::get('/Blog/Category/{Categoryid}',[BlogPostController::class,'ListCategory'])->name('Blog.BlogPost.ListCategory');
 Route::get('/Blog/SoftDelete/',[BlogPostController::class,'SoftDeletes'])->name('Blog.BlogPost.SoftDelete');
 

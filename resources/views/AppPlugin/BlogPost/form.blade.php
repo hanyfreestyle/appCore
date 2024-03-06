@@ -10,14 +10,15 @@
       <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-          <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat"  />
+          <x-admin.form.date-form name="published_at" value="{{old('published_at',$rowData->published_at)}}" />
+          <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat" col="9" />
         </div>
 
         <div class="row">
           <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
           @foreach ( $LangAdd as $key=>$lang )
             <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="$viewLabel"
-                                          :def-name="__('admin/faq.faq_text_name')" :defdes="__('admin/faq.faq_text_answer')"/>
+                                          :def-name="__('admin/blogPost.blog_text_name')" />
           @endforeach
         </div>
 
@@ -31,17 +32,12 @@
             <x-admin.form.trans-input name="youtube_title" :key="$key" :row="$rowData" :label="__('admin/form.text_youtube_title')" col="4" :req="false" :tdir="$key"/>
           @endforeach
         </div>
-
-
         <hr>
         <x-admin.form.upload-model-photo :page="$pageData" :row="$rowData" col="6"/>
-
         <x-admin.form.submit-role-back :page-data="$pageData"/>
       </form>
-
     </x-admin.card.def>
   </x-admin.hmtl.section>
-
 
 @endsection
 

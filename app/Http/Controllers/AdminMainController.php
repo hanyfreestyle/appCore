@@ -180,6 +180,8 @@ class AdminMainController extends DefaultMainController {
             case 7:
                 $query->orderBy('created_at', 'ASC');
                 break;
+
+//                published_at
             default:
         }
 
@@ -404,6 +406,10 @@ class AdminMainController extends DefaultMainController {
             ->addColumn('is_published', function ($row) {
                 return is_active($row->is_published);
             })
+            ->addColumn('published', function ($row) {
+                return $row->published_at;
+            })
+
             ->addColumn('CatName', function ($row) {
                 return view('datatable.but')->with(['btype' => 'CatName', 'row' => $row])->render();
             })

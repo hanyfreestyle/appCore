@@ -4,8 +4,10 @@
 namespace App\AppPlugin\BlogPost\Models;
 
 
+use App\AppPlugin\Faq\Models\FaqTranslation;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -24,6 +26,11 @@ class Blog extends Model implements TranslatableContract {
     protected $translationForeignKey = 'blog_id';
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     tablename
+    public function tablename(): HasMany{
+        return $this->hasMany(BlogTranslation::class)->select('id','blog_id','name');
+    }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function scopeDef(Builder $query): Builder {
         return $query->with('translations')
@@ -31,6 +38,13 @@ class Blog extends Model implements TranslatableContract {
             ->withCount('more_photos');
     }
 
+    public function getFormatteDate(){
+        if($this->published_at){
+            return Carbon::parse($this->published_at)->format("Y-m-d") ;
+        }else{
+            return null ;
+        }
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # categories

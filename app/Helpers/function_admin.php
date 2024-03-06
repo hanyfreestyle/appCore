@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\admin\config\UploadFilter;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -191,6 +192,33 @@ if(!function_exists('printUploadNotes')) {
         }
     }
 }
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   CheckDateFormat
+if(!function_exists('CheckDateFormat')) {
+    function CheckDateFormat($value) {
+        if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$value)) {
+            $dateValue =  Carbon::parse($value)->format("Y-m-d");
+        } else {
+            $dateValue = $value ;
+        }
+        return $dateValue ;
+    }
+}
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   SaveDateFormat
+if(!function_exists('SaveDateFormat')) {
+    function SaveDateFormat($request,$name) {
+        if($request->input($name) == null){
+            $dateValue =  Carbon::parse(now())->format("Y-m-d");
+        }else{
+            $dateValue =  Carbon::parse($request->input($name))->format("Y-m-d");
+        }
+        return $dateValue ;
+    }
+}
+
+
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #

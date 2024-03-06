@@ -18,6 +18,7 @@
               <tr>
                 <td>{{$row->id}}</td>
                 <td class="tc">{!! TablePhoto($row,'photo') !!} </td>
+                <td class="tc">{{$row->getFormatteDate()}}</td>
                 @foreach(config('app.web_lang') as $key => $lang)
                   <td>{!! printCategoryName($key,$row,$PrefixRoute.".SubCategory") !!}</td>
                 @endforeach
@@ -32,8 +33,8 @@
                     @endforeach
                   </td>
                   <td>{!! is_active($row->is_active) !!}</td>
-                  <x-admin.table.action-but type="Photos" :row="$row" />
                   <x-admin.table.action-but type="addLang" :row="$row"/>
+                  <x-admin.table.action-but type="Photos" :row="$row" />
                   <x-admin.table.action-but type="edit" :row="$row"/>
                   <x-admin.table.action-but type="delete" :row="$row"/>
                 @endif

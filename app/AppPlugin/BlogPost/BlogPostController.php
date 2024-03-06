@@ -13,7 +13,9 @@ use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 
 use App\Http\Traits\CrudTraits;
+use Faker\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -50,7 +52,7 @@ class BlogPostController extends AdminMainController {
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
             'configArr' => ["editor" => 1, 'morePhotoFilterid' => 1],
-            'yajraTable' => false,
+            'yajraTable' => true,
             'AddLang' => true,
             'AddMorePhoto' => true,
             'restore' => 1,
@@ -81,13 +83,14 @@ class BlogPostController extends AdminMainController {
             $rowData = self::getSelectQuery($this->model::def());
             return view('AppPlugin.BlogPost.index', compact('pageData', 'rowData'));
         }
+
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   DataTable
     public function DataTable(Request $request){
         if ($request->ajax()) {
-            $data = $this->model::select(['blog_post.id','photo_thum_1','is_active'])->with('tablename');
+            $data = $this->model::select(['blog_post.id','photo_thum_1','is_active','published_at'])->with('tablename');
             return self::DataTableAddColumns($data)->make(true);
         }
     }
@@ -150,6 +153,7 @@ class BlogPostController extends AdminMainController {
 
                 $saveData->is_active = intval((bool)$request->input('is_active'));
                 $saveData->youtube = $request->input('youtube');
+                $saveData->published_at = SaveDateFormat($request,'published_at');
                 $saveData->save();
 
                 $saveData->categories()->sync($categories);

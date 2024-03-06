@@ -10,7 +10,7 @@
   <x-admin.hmtl.section>
     <x-admin.card.def :page-data="$pageData">
       <table {!! Table_Style($viewDataTable,$yajraTable)  !!} >
-        @include('AppPlugin.Faq.index_header')
+        @include('AppPlugin.BlogPost.index_header')
         <tbody>
         </tbody>
       </table>
@@ -35,8 +35,10 @@
               columns: [
                   {data: 'id', name: 'id'},
                   {data: 'photo', name: 'photo', orderable: false, searchable: false},
+                  {data: 'published', name: 'published', orderable: true, searchable: false},
                   {data: 'tablename.0.name', name: 'tablename.name'},
                   {data: 'tablename.1.name', name: 'tablename.name'},
+
 
 
                   {data: 'CatName', name: 'CatName', orderable: false, searchable: false},
@@ -49,9 +51,7 @@
                   @endcan
 
                   @can($PrefixRole.'_delete')
-                  {
-                      data: 'Delete', name: 'Delete', orderable: false, searchable: false
-                  },
+                  {data: 'Delete', name: 'Delete', orderable: false, searchable: false},
                 @endcan
               ]
           });

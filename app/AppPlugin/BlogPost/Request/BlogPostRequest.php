@@ -30,7 +30,14 @@ class BlogPostRequest extends FormRequest {
 
         $rules = [
             'categories' => 'required|array|min:1',
+
         ];
+        if($id == '0') {
+            $rules["published_at"] = "nullable|date_format:Y-m-d";
+        } else {
+            $rules["published_at"] = "required|date_format:Y-m-d";
+        }
+
 
         $rules += AdminMainController::FormRequestSeo($id, $addLang, 'blog_translations','blog_id');
 

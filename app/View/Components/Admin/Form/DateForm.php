@@ -7,12 +7,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Date extends Component {
+class DateForm extends Component {
 
     public $label;
     public $labelview;
     public $name;
-    public $reqspan;
+    public $req;
     public $id;
     public $col;
     public $value;
@@ -21,48 +21,38 @@ class Date extends Component {
         $name = null,
         $label = null,
         $labelview = true,
-        $reqspan = true,
+        $req = true,
         $id = null,
-        $col = 'col-lg-3',
+        $col = '3',
         $value = null,
-        $type = null,
+
     ) {
 
+        $this->labelview = $labelview;
+        $this->col = $col;
+        $this->req = $req;
+        $this->name = $name;
 
-        if($type == 'fromDate') {
-            $this->name = 'from_date';
-            $this->label = __('admin/formFilter.fr_date_from');
-            $this->reqspan = false;
-
-        } elseif($type == 'toDate') {
-            $this->name = 'to_date';
-            $this->label = __('admin/formFilter.fr_date_to');
-            $this->reqspan = false;
+        if($label == null) {
+            $this->label = __('admin/blogPost.blog_date');
         } else {
-            $this->name = $name;
             $this->label = $label;
-            $this->reqspan = $reqspan;
         }
-
-
         if($id == null) {
             $this->id = $this->name;
         } else {
             $this->id = $id;
         }
 
-        $this->labelview = $labelview;
-        $this->col = $col;
-
         if($value == null) {
             $this->value = '';
         } else {
-            $this->value = Carbon::parse($value)->format("Y-m-d");
+            $this->value = CheckDateFormat($value);
         }
 
     }
 
     public function render(): View|Closure|string {
-        return view('components.admin.form.date');
+        return view('components.admin.form.date-form');
     }
 }

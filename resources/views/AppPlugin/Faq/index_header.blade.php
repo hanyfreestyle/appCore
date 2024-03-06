@@ -2,6 +2,7 @@
 <tr>
   <th class="TD_20">#</th>
   <th class="TD_20"></th>
+
   @foreach(config('app.web_lang') as $key => $lang)
     <th>{{__('admin/faq.faq_text_name')}}  {{printLableKey($key)}}</th>
   @endforeach

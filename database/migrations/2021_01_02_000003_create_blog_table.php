@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string("photo_thum_1")->nullable();
             $table->integer('url_type')->nullable()->default(0);
             $table->string('youtube')->nullable();
+            $table->date('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
