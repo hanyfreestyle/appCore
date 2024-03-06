@@ -22,12 +22,15 @@ class Faq extends Model implements TranslatableContract {
     protected $primaryKey = 'id';
     protected $translationForeignKey = 'faq_id';
 
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     tablename
     public function tablename(): HasMany{
         return $this->hasMany(FaqTranslation::class)->select('id','faq_id','name');
     }
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
+#|||||||||||||||||||||||||||||||||||||| #   scopeDef
     public function scopeDef(Builder $query): Builder {
         return $query->with('translations')
             ->with('categories')
@@ -54,8 +57,6 @@ class Faq extends Model implements TranslatableContract {
     public function scopeDefquery(Builder $query): Builder {
         return $query->with('translations');
     }
-
-
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # more_photos
