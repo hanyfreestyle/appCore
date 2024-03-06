@@ -23,6 +23,7 @@ return [
         'leadForm'=> ['id'=> 'leadForm' , 'group'=>'admin','file_name'=> 'leadsContactUs','name'=>'Lead Form','name_ar'=>'الاتصاللات' ],
         'product'=> ['id'=> 'product' , 'group'=>'admin','file_name'=> 'proProduct','name'=>'Product','name_ar'=>'المنتجات' ],
         'faq'=> ['id'=> 'faq' , 'group'=>'admin','file_name'=> 'faq','name'=>'Faq','name_ar'=>'الاسئلة المتكررة' ],
+        'blogPost'=> ['id'=> 'blogPost' , 'group'=>'admin','file_name'=> 'blogPost','name'=>'Blog Post','name_ar'=>'المقالات' ],
 
 
 //       'cash'=> ['id'=> 'cash' , 'group'=>'admin' , 'sub_dir'=> 'config' , 'file_name'=> 'cash','name'=>'Cash Mass','name_ar'=>'' ],

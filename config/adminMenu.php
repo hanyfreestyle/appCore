@@ -12,10 +12,39 @@ $MenuView = [
 //    'AppPuzzle'=>false,
 //    'Product'=>false,
 //    'FAQ'=>false,
+//    'BlogPost'=>false,
 ];
 
 return [
     'menu' => [
+
+        [
+            'view' => IsMenuView($MenuView, "BlogPost",'blogPost.php'),
+            'sel_routs' => 'Blog',
+            'type' => 'many',
+            'text' => 'admin/blogPost.app_menu',
+            'icon' => 'fab fa-blogger',
+            'roleView' => 'Blog_view',
+            'submenu' => [
+                [
+                    'sel_routs' => 'BlogCategory',
+                    'url' => 'Blog.BlogCategory.index',
+                    'roleView' => 'Blog_view',
+                    'text' => 'admin/blogPost.app_menu_category',
+                    'icon' => 'fas fa-sitemap',
+                    'view' => true
+                ],
+                [
+                    'sel_routs' => 'Question',
+                    'url' => 'Faq.Question.index',
+                    'roleView' => 'Blog_view',
+                    'text' => 'admin/blogPost.app_menu_blog',
+                    'icon' => 'fas fa-rss',
+                    'view' => true
+                ],
+
+            ],
+        ], #BlogPost
 
         [
             'view' => IsMenuView($MenuView, "FAQ",'faq.php'),

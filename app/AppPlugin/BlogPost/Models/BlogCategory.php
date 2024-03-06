@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
-class BlogCategory extends Model implements TranslatableContract  {
+class BlogCategory extends Model implements TranslatableContract {
 
     use Translatable;
     use HasRecursiveRelationships;
@@ -28,60 +28,32 @@ class BlogCategory extends Model implements TranslatableContract  {
         return $query->with('translations')->withCount('children');
     }
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function faqs() {
-        return $this->belongsToMany(Faq::class, 'faqcategory_faq', 'category_id', 'faq_id')->with('more_photos')
-            ->withPivot('postion')->orderBy('postion');
-    }
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function scopeDefquery(Builder $query): Builder {
-        return $query->with('translations');
-    }
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-
-    public function scopeDefWeb(Builder $query): Builder {
-        return $query->where('is_active', true)
-            ->with('translation')
-            ->with('faqs')
-            ->withCount('faqs')
-            ->orderBy('faqs_count', 'desc');
-    }
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function slugs(): HasMany {
-        return $this->hasMany(FaqCategoryTranslation::class, 'category_id', 'id');
-    }
-
-
-
-
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function getLocalizedRouteKey($locale) {
-        return $this->slugs()->where('locale', $locale)->first()->slug;
-    }
-
-
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#|||||||||||||||||||||||||||||||||||||| #
+//    public function faqs() {
+//        return $this->belongsToMany(Faq::class, 'faqcategory_faq', 'category_id', 'faq_id')->with('more_photos')
+//            ->withPivot('postion')->orderBy('postion');
+//    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #  Delete Counts
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     public function del_category(): HasMany {
-        return $this->hasMany(FaqCategory::class, 'parent_id');
+        return $this->hasMany(BlogCategory::class, 'parent_id');
     }
 
-    public function del_faq() {
-        return $this->belongsToMany(Faq::class, 'faqcategory_faq', 'category_id', 'faq_id')
+    public function del_blog() {
+        return $this->belongsToMany(Blog::class, 'blogcategory_blog', 'category_id', 'blog_id')
             ->withTrashed();
     }
 
 
 }
+
+
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#|||||||||||||||||||||||||||||||||||||| #
+//public function slugs(): HasMany {
+//    return $this->hasMany(FaqCategoryTranslation::class, 'category_id', 'id');
+//}
