@@ -389,25 +389,41 @@ class AdminMainController extends DefaultMainController {
 
         return DataTables::eloquent($data)
             ->addIndexColumn()
-            ->addColumn('tablename.0.name', function ($row) {
-                return $row->tablename[0]->name ?? ' ';
+
+            ->editColumn('tablename.0.name', function ($row) {
+                return $row->tablename[0]->name ?? '';
             })
-            ->addColumn('tablename.1.name', function ($row) {
-                return $row->tablename[1]->name ?? ' ';
+            ->editColumn('tablename.1.name', function ($row) {
+                return $row->tablename[1]->name ?? '';
             })
+
+            ->editColumn('arName', function ($row) {
+                return $row->arName->name ?? '';
+            })
+            ->editColumn('enName', function ($row) {
+                return $row->enName->name ?? '';
+            })
+
             ->addColumn('photo', function ($row) use ($viewPhoto) {
                 if($viewPhoto) {
                     return TablePhoto($row);
                 }
             })
+
             ->addColumn('is_active', function ($row) {
                 return is_active($row->is_active);
             })
             ->addColumn('is_published', function ($row) {
                 return is_active($row->is_published);
             })
-            ->addColumn('published', function ($row) {
-                return $row->published_at;
+
+
+
+            ->editColumn('published_at', function ($row) {
+                return [
+                    'display' => date("Y-m-d",strtotime($row->published_at)),
+                    'timestamp' => strtotime($row->published_at)
+                ];
             })
 
             ->addColumn('CatName', function ($row) {

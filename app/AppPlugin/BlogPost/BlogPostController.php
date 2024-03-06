@@ -83,13 +83,13 @@ class BlogPostController extends AdminMainController {
             $rowData = self::getSelectQuery($this->model::def());
             return view('AppPlugin.BlogPost.index', compact('pageData', 'rowData'));
         }
-
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   DataTable
     public function DataTable(Request $request){
         if ($request->ajax()) {
+//            $data = $this->model::select(['blog_post.id','photo_thum_1','is_active','published_at'])->with('arName')->with('enName');
             $data = $this->model::select(['blog_post.id','photo_thum_1','is_active','published_at'])->with('tablename');
             return self::DataTableAddColumns($data)->make(true);
         }

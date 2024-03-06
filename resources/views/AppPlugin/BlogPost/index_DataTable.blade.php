@@ -28,16 +28,31 @@
           var table = $('.DataTableView').DataTable({
               processing: true,
               serverSide: true,
-              pageLength: 10,
+              pageLength: 25,
               order: [0, 'desc'],
+
             @include('datatable.lang')
             ajax: "{{ route($PrefixRoute.'.DataTable') }}",
+
+
               columns: [
                   {data: 'id', name: 'id'},
                   {data: 'photo', name: 'photo', orderable: false, searchable: false},
-                  {data: 'published', name: 'published', orderable: true, searchable: false},
+                  {
+                      'name': 'published_at',
+                      'data': {
+                          '_': 'published_at.display',
+                          'sort': 'published_at.timestamp'
+                      }
+                  },
+
+
+
                   {data: 'tablename.0.name', name: 'tablename.name'},
                   {data: 'tablename.1.name', name: 'tablename.name'},
+
+                  // {data: 'arName', name: 'arName.name'},
+                  // {data: 'enName', name: 'enName.name'},
 
 
 
@@ -53,7 +68,8 @@
                   @can($PrefixRole.'_delete')
                   {data: 'Delete', name: 'Delete', orderable: false, searchable: false},
                 @endcan
-              ]
+              ],
+
           });
       });
   </script>

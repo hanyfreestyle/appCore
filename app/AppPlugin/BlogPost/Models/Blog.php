@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model implements TranslatableContract {
@@ -30,6 +31,17 @@ class Blog extends Model implements TranslatableContract {
     public function tablename(): HasMany{
         return $this->hasMany(BlogTranslation::class)->select('id','blog_id','name');
     }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     tablename
+    public function arName(): HasOne{
+        return $this->hasOne(BlogTranslation::class)->select('id','blog_id','name')->where('locale','ar');
+    }
+    public function enName(): HasOne{
+        return $this->hasOne(BlogTranslation::class)->select('id','blog_id','name')->where('locale','en');
+    }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function scopeDef(Builder $query): Builder {
