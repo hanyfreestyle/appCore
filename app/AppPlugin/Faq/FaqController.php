@@ -133,6 +133,7 @@ class FaqController extends AdminMainController {
         try {
             DB::transaction(function () use ($request, $saveData) {
                 $categories = $request->input('categories');
+
                 $saveData->is_active = intval((bool)$request->input('is_active'));
                 $saveData->youtube = $request->input('youtube');
                 $saveData->save();
