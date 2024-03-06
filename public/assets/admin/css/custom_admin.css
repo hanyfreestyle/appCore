@@ -261,3 +261,11 @@ font-size: 15px;
     border-radius: 0.2rem;
 
 }
+
+tbody > tr > td {
+    padding-right: 10px!important;
+    padding-left: 10px!important;
+}
+tbody > tr > td:last-of-type {
+    padding-right: 10px!important;
+}

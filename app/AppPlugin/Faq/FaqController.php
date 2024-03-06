@@ -13,6 +13,8 @@ use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 
 use App\Http\Traits\CrudTraits;
+use App\Models\admin\Developer;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -49,7 +51,7 @@ class FaqController extends AdminMainController {
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
             'configArr' => ["editor" => 1, 'morePhotoFilterid' => 1],
-            'yajraTable' => false,
+            'yajraTable' => true,
             'AddLang' => true,
             'AddMorePhoto' => true,
             'restore' => 1,
@@ -73,8 +75,22 @@ class FaqController extends AdminMainController {
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = false;
         $pageData['Trashed'] = $this->model::onlyTrashed()->count();
-        $rowData = self::getSelectQuery($this->model::def());
-        return view('AppPlugin.Faq.index', compact('pageData', 'rowData'));
+
+        if ($this->viewDataTable and $this->yajraTable){
+            return view('AppPlugin.Faq.index_DataTable',compact('pageData'));
+        }else{
+            $rowData = self::getSelectQuery($this->model::def());
+            return view('AppPlugin.Faq.index', compact('pageData', 'rowData'));
+        }
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   DataTable
+    public function DataTable(Request $request){
+        if ($request->ajax()) {
+            $data = $this->model::select(['faq_faqs.id','photo_thum_1','is_active'])->with('tablename');
+            return self::DataTableAddColumns($data)->make(true);
+        }
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -122,7 +138,6 @@ class FaqController extends AdminMainController {
         $selCat = $rowData->categories()->pluck('category_id')->toArray();
         $LangAdd = self::getAddLangForEdit($rowData);
         return view('AppPlugin.Faq.form',compact('pageData','rowData','Categories','LangAdd','selCat'));
-
     }
 
 

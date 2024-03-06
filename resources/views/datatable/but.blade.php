@@ -10,6 +10,13 @@
     @elseif(!isset($row->translate('en')->name))
         <x-admin.form.action-button url="{{route($PrefixRoute.'.editEn',$row->id)}}"  icon="fa-solid fa-globe" :tip="true" print-lable="{{__('admin/config/core.multiple_lang_menu_en')}}" />
     @endif
+
+@elseif($btype == 'CatName')
+    @foreach($row->categories as $Category )
+        <a href="{{route($PrefixRoute.'.ListCategory',$Category->id)}}">
+            <span class="cat_table_name">{{ print_h1($Category)}}</span>
+        </a>
+    @endforeach
 @elseif($btype == 'OldPhotos')
     <x-admin.form.action-button url="{{route($PrefixRoute.'.Old_Photos',$row->id)}}" :viewbut="$row->slider_active" type="old"/>
 @elseif($btype == 'ViewListing')

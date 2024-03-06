@@ -3,7 +3,6 @@
 
 namespace App\AppPlugin\Faq\Models;
 
-use App\AppPlugin\Product\Models\Category;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,6 +22,10 @@ class Faq extends Model implements TranslatableContract {
     protected $primaryKey = 'id';
     protected $translationForeignKey = 'faq_id';
 
+
+    public function tablename(): HasMany{
+        return $this->hasMany(FaqTranslation::class)->select('id','faq_id','name');
+    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function scopeDef(Builder $query): Builder {

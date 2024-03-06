@@ -28,6 +28,7 @@ Route::post('/FaqCategory/SaveSort',[FaqCategoryController::class,'CategorySaveS
 
 
 Route::get('/Faq',[FaqController::class,'index'])->name('Faq.Question.index');
+Route::get('/Faq/DataTable',[FaqController::class,'DataTable'])->name('Faq.Question.DataTable');
 Route::get('/Faq/Category/{Categoryid}',[FaqController::class,'ListCategory'])->name('Faq.Question.ListCategory');
 Route::get('/Faq/SoftDelete/',[FaqController::class,'SoftDeletes'])->name('Faq.Question.SoftDelete');
 

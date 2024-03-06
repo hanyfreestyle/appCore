@@ -30,10 +30,10 @@ class AdminMainController extends DefaultMainController {
         View::share('filterTypes', UploadFilter::cash_UploadFilter());
 
         $modelsNameArr = [
-            "users" => [ 'name' => __('admin/config/roles.menu_roles_users')],
-            "roles" => [ 'name' => __('admin/config/roles.menu_roles_role')],
-            "config" => [ 'name' => __('admin.app_menu_setting')],
-            "data" => [ 'name' => __('admin.app_menu_data')],
+            "users" => ['name' => __('admin/config/roles.menu_roles_users')],
+            "roles" => ['name' => __('admin/config/roles.menu_roles_role')],
+            "config" => ['name' => __('admin.app_menu_setting')],
+            "data" => ['name' => __('admin.app_menu_data')],
             "leads" => ['name' => __('admin/leadsContactUs.app_menu')],
             "app_setting" => ['name' => __('admin/configApp.app_menu')],
             "Product" => ['name' => __('admin/proProduct.app_menu')],
@@ -53,8 +53,8 @@ class AdminMainController extends DefaultMainController {
         View::share('filterTypeArr', $FilterTypeArr);
 
         $PrintPhotoPosition = [
-            "1"=> ['id'=>'1','name'=>"Top"],
-            "2"=> ['id'=>'2','name'=> "Bottom"],
+            "1" => ['id' => '1', 'name' => "Top"],
+            "2" => ['id' => '2', 'name' => "Bottom"],
         ];
         View::share('PrintPhotoPosition', $PrintPhotoPosition);
 
@@ -251,10 +251,10 @@ class AdminMainController extends DefaultMainController {
 //       'configArr'=> [ "filterid"=>1,"morePhotoFilterid"=>1 ]
         $this->configArr = AdminHelper::arrIsset($sendArr, 'configArr', array());
 
-        $this->middleware('permission:' . $this->PrefixRole . '_view', ['only' => ['index','CategoryIndex']]);
-        $this->middleware('permission:' . $this->PrefixRole . '_add', ['only' => ['create','CategoryCreate']]);
-        $this->middleware('permission:' . $this->PrefixRole . '_edit', ['only' => ['edit', 'updateStatus', 'emptyPhoto', 'editRoleToPermission','CategoryEdit','CategoryStoreUpdate','CategorySort','CategorySaveSort']]);
-        $this->middleware('permission:' . $this->PrefixRole . '_delete', ['only' => ['destroy','destroyException']]);
+        $this->middleware('permission:' . $this->PrefixRole . '_view', ['only' => ['index', 'CategoryIndex']]);
+        $this->middleware('permission:' . $this->PrefixRole . '_add', ['only' => ['create', 'CategoryCreate']]);
+        $this->middleware('permission:' . $this->PrefixRole . '_edit', ['only' => ['edit', 'updateStatus', 'emptyPhoto', 'editRoleToPermission', 'CategoryEdit', 'CategoryStoreUpdate', 'CategorySort', 'CategorySaveSort']]);
+        $this->middleware('permission:' . $this->PrefixRole . '_delete', ['only' => ['destroy', 'destroyException']]);
         $this->middleware('permission:' . $this->PrefixRole . '_restore', ['only' => ['SoftDeletes', 'Restore', 'ForceDelete']]);
 
         $this->viewDataTable = AdminHelper::arrIsset($this->modelSettings, $this->controllerName . '_datatable', 0);
@@ -307,18 +307,18 @@ class AdminMainController extends DefaultMainController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
-    public function SaveAndUpdateDefPhoto($saveData, $request, $dir, $slug = "slug",$sendArr=array()) {
+    public function SaveAndUpdateDefPhoto($saveData, $request, $dir, $slug = "slug", $sendArr = array()) {
 
-        $filterInputName = AdminHelper::arrIsset($sendArr,'filter','filter_id');
-        $setCountOfUpload = AdminHelper::arrIsset($sendArr,'count',2);
-        $setfileUploadName = AdminHelper::arrIsset($sendArr,'file','image');
+        $filterInputName = AdminHelper::arrIsset($sendArr, 'filter', 'filter_id');
+        $setCountOfUpload = AdminHelper::arrIsset($sendArr, 'count', 2);
+        $setfileUploadName = AdminHelper::arrIsset($sendArr, 'file', 'image');
 
         $saveImgData = new PuzzleUploadProcess();
         $saveImgData->setCountOfUpload($setCountOfUpload);
         $saveImgData->setUploadDirIs($dir . '/' . $saveData->id);
         $saveImgData->setnewFileName($request->input($slug));
         $saveImgData->setfileUploadName($setfileUploadName);
-        $saveImgData->UploadOne($request,$filterInputName);
+        $saveImgData->UploadOne($request, $filterInputName);
         $saveData = AdminHelper::saveAndDeletePhoto($saveData, $saveImgData);
         $saveData->save();
     }
@@ -404,6 +404,9 @@ class AdminMainController extends DefaultMainController {
             ->addColumn('is_published', function ($row) {
                 return is_active($row->is_published);
             })
+            ->addColumn('CatName', function ($row) {
+                return view('datatable.but')->with(['btype' => 'CatName', 'row' => $row])->render();
+            })
             ->addColumn('AddLang', function ($row) {
                 return view('datatable.but')->with(['btype' => 'addLang', 'row' => $row])->render();
             })
@@ -416,12 +419,12 @@ class AdminMainController extends DefaultMainController {
             ->addColumn('Delete', function ($row) {
                 return view('datatable.but')->with(['btype' => 'Delete', 'row' => $row])->render();
             })
-            ->rawColumns(["photo", "is_active", "is_published", 'Edit', "Delete", 'MorePhoto', 'AddLang', 'OldPhotos', 'ViewListing', 'ProjectUnits', 'ProjectFaq', 'ProjectPhoto']);
+            ->rawColumns(["photo", "is_active", "is_published", 'Edit', "Delete", 'MorePhoto', 'AddLang', 'OldPhotos', 'ViewListing', 'CatName']);
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #   FormRequestSeo
-    static function FormRequestSeo($id,$addLang,$table,$filedName){
+    static function FormRequestSeo($id, $addLang, $table, $filedName) {
         foreach ($addLang as $key => $lang) {
             $rules[$key . ".name"] = 'required';
             $rules[$key . ".des"] = 'required';
@@ -429,21 +432,21 @@ class AdminMainController extends DefaultMainController {
                 $rules[$key . ".slug"] = "required|unique:$table,slug";
             } else {
                 $rules[$key . ".slug"] = "required|unique:$table,slug,$id,$filedName,locale,$key";
-                $rules[$key.".g_des"] =   'required';
-                $rules[$key.".g_title"] =   'required';
+                $rules[$key . ".g_des"] = 'required';
+                $rules[$key . ".g_title"] = 'required';
             }
         }
-        return $rules ;
+        return $rules;
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
-    static function prepareSlug($data){
+    static function prepareSlug($data) {
         $addLang = json_decode($data['add_lang']);
         foreach ($addLang as $key => $lang) {
             data_set($data, $key . '.slug', AdminHelper::Url_Slug($data[$key]['slug']));
         }
-        return $data ;
+        return $data;
     }
 
 
