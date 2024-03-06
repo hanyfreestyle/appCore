@@ -3,12 +3,10 @@
   <th class="TD_20">#</th>
   <th class="TD_20"></th>
   <th class="TD_100">{{__('admin/blogPost.blog_date')}}</th>
-  <th class="TD_100"> </th>
-  <th class="TD_100"> </th>
 
-{{--  @foreach(config('app.web_lang') as $key => $lang)--}}
-{{--    <th>{{__('admin/blogPost.blog_text_name')}}  {{printLableKey($key)}}</th>--}}
-{{--  @endforeach--}}
+  @foreach(config('app.web_lang') as $key => $lang)
+    <th>{{__('admin/blogPost.blog_text_name')}}  {{printLableKey($key)}}</th>
+  @endforeach
 
   @if($pageData['ViewType'] == 'deleteList')
     <x-admin.table.soft-delete/>

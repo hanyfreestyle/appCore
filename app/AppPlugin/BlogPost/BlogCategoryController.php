@@ -32,7 +32,7 @@ class BlogCategoryController extends AdminMainController {
         $this->PrefixRoute = $this->selMenu . $this->controllerName;
         $this->model = $model;
 
-        $this->UploadDirIs = 'BlogCat';
+        $this->UploadDirIs = 'blog-category';
         $this->translation = $translation;
         $this->translationdb = 'category_id';
 

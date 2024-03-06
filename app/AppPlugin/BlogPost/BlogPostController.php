@@ -39,7 +39,7 @@ class BlogPostController extends AdminMainController {
         $this->modelPhoto = $modelPhoto;
         $this->photoTranslation = $photoTranslation;
         $this->modelPhotoColumn = 'blog_id';
-        $this->UploadDirIs = 'blog_id';
+        $this->UploadDirIs = 'blog';
         $this->translation = $translation;
         $this->translationdb = 'blog_id';
 
