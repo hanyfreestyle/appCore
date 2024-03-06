@@ -97,11 +97,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(BlogCategorySeeder::class);
         $this->call(BlogCategoryTranslationSeeder::class);
-        $this->call(BlogSeeder::class);
-        $this->call(BlogTranslationSeeder::class);
-        $this->call(BlogPivotSeeder::class);
-        $this->call(BlogPhotoSeeder::class);
-        $this->call(BlogPhotoTranslationSeeder::class);
+//        $this->call(BlogSeeder::class);
+//        $this->call(BlogTranslationSeeder::class);
+//        $this->call(BlogPivotSeeder::class);
+//        $this->call(BlogPhotoSeeder::class);
+//        $this->call(BlogPhotoTranslationSeeder::class);
 
 
     }

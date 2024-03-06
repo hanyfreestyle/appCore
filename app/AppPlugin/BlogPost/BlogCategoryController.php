@@ -5,9 +5,7 @@ namespace App\AppPlugin\BlogPost;
 
 use App\AppPlugin\BlogPost\Models\BlogCategory;
 use App\AppPlugin\BlogPost\Models\BlogCategoryTranslation;
-
-
-use App\AppPlugin\Faq\Request\FaqCategoryRequest;
+use App\AppPlugin\BlogPost\Request\BlogCategoryRequest;
 use App\Helpers\AdminHelper;
 
 use App\Http\Controllers\AdminMainController;
@@ -65,7 +63,7 @@ class BlogCategoryController extends AdminMainController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CategoryStoreUpdate
-    public function CategoryStoreUpdate(FaqCategoryRequest $request, $id = 0) {
+    public function CategoryStoreUpdate(BlogCategoryRequest $request, $id = 0) {
 
         return self::TraitsCategoryStoreUpdate($request, $id);
     }
@@ -73,14 +71,14 @@ class BlogCategoryController extends AdminMainController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     destroyException
     public function destroyException($id) {
-        $deleteRow = FaqCategory::where('id', $id)
+        $deleteRow = BlogCategory::where('id', $id)
             ->withCount('del_category')
-            ->withCount('del_faq')
+            ->withCount('del_post')
             ->firstOrFail();
 
 
 
-        if($deleteRow->del_category_count == 0 and $deleteRow->del_faq_count == 0) {
+        if($deleteRow->del_category_count == 0 and $deleteRow->del_post_count == 0) {
             try {
                 DB::transaction(function () use ($deleteRow, $id) {
                     $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
@@ -88,10 +86,10 @@ class BlogCategoryController extends AdminMainController {
                     $deleteRow->forceDelete();
                 });
             } catch (\Exception $exception) {
-                return back()->with(['confirmException' => '', 'fromModel' => 'CategoryFaq', 'deleteRow' => $deleteRow]);
+                return back()->with(['confirmException' => '', 'fromModel' => 'CategoryBlog', 'deleteRow' => $deleteRow]);
             }
         } else {
-            return back()->with(['confirmException' => '', 'fromModel' => 'CategoryFaq', 'deleteRow' => $deleteRow]);
+            return back()->with(['confirmException' => '', 'fromModel' => 'CategoryBlog', 'deleteRow' => $deleteRow]);
         }
 
         self::ClearCash();

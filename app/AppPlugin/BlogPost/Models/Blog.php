@@ -35,16 +35,16 @@ class Blog extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # categories
     public function categories(): BelongsToMany {
-        return $this->belongsToMany(FaqCategory::class,'faqcategory_faq','faq_id', 'category_id');
+        return $this->belongsToMany(BlogCategory::class,'blogcategory_blog','blog_id', 'category_id');
     }
 
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    public function faqs() {
-        return $this->belongsToMany(Faq::class, 'faqcategory_faq', 'category_id', 'faq_id')
-            ->withPivot('postion')->orderBy('postion');
-    }
+//#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//#|||||||||||||||||||||||||||||||||||||| #
+//    public function faqs() {
+//        return $this->belongsToMany(Faq::class, 'faqcategory_faq', 'category_id', 'faq_id')
+//            ->withPivot('postion')->orderBy('postion');
+//    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
@@ -57,7 +57,7 @@ class Blog extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # more_photos
     public function more_photos(): HasMany {
-        return $this->hasMany(FaqPhoto::class, 'faq_id', 'id');
+        return $this->hasMany(BlogPhoto::class, 'blog_id', 'id');
     }
 
 

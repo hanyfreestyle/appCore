@@ -35,8 +35,8 @@ return [
                     'view' => true
                 ],
                 [
-                    'sel_routs' => 'Question',
-                    'url' => 'Faq.Question.index',
+                    'sel_routs' => 'BlogPost',
+                    'url' => 'Blog.BlogPost.index',
                     'roleView' => 'Blog_view',
                     'text' => 'admin/blogPost.app_menu_blog',
                     'icon' => 'fas fa-rss',
