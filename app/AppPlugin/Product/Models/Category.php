@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model implements TranslatableContract {
 
-    use SoftDeletes;
     use Translatable;
     use HasRecursiveRelationships;
 
@@ -22,8 +20,8 @@ class Category extends Model implements TranslatableContract {
     protected $table = "pro_categories";
     protected $primaryKey = 'id';
     protected $translationForeignKey = 'category_id';
-    public $translatedAttributes = ['name', 'slug', 'des', 'g_title', 'g_des', 'body_h1', 'breadcrumb'];
-    protected $fillable = ['parent_id', 'photo', 'photo_thum_1', 'is_active'];
+    public $translatedAttributes = ['name', 'slug', 'des', 'g_title', 'g_des'];
+    protected $fillable = [];
 
 
 
@@ -36,9 +34,9 @@ class Category extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     children
     public function children(): hasMany {
-        return $this->hasMany(Category::class, 'parent_id', 'id')
-            ->with('translations');
+        return $this->hasMany(Category::class, 'parent_id', 'id')->with('translations');
     }
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     scopeRoot
     public function scopeRoot(Builder $query): Builder {
@@ -75,8 +73,7 @@ class Category extends Model implements TranslatableContract {
     }
 
     public function del_product() {
-        return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')
-            ->withTrashed();
+        return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')->withTrashed();
     }
 
 

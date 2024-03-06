@@ -150,20 +150,20 @@ trait CategoryTraits {
 
     }
 
-
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CategorySort
     public function CategorySort($id) {
         $pageData = $this->pageData;
+
         $pageData['ViewType'] = "List";
         $thisRow = null;
         if($id == 0) {
-            $rowData = self::getSelectQuery($this->model->where('parent_id', null)->orderBy('postion'));
+            $rowData = $this->model->where('parent_id', null)->orderBy('postion')->get();
         } else {
             $thisRow = $this->model->findOrFail($id);
-            $rowData = self::getSelectQuery($this->model->where('parent_id', $thisRow->id)->orderBy('postion'));
+            $rowData = $this->model->where('parent_id',$thisRow->id)->orderBy('postion')->get();;
         }
+
         return view('admin.mainView.category.sort', compact('pageData', 'rowData', 'thisRow'));
     }
 

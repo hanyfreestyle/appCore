@@ -23,6 +23,7 @@ class FaqCategoryController extends AdminMainController {
     use CategoryTraits;
 
     function __construct(FaqCategory $model, FaqCategoryTranslation $translation) {
+
         parent::__construct();
         $this->controllerName = "FaqCategory";
         $this->PrefixRole = 'Faq';

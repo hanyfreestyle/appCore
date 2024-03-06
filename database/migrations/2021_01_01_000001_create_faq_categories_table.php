@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string("photo")->nullable();
             $table->string("photo_thum_1")->nullable();
             $table->boolean("is_active")->default(true);
+            $table->integer('postion')->default(0);
             $table->timestamps();
         });
     }
