@@ -3,7 +3,8 @@
 namespace App\AppPlugin\BlogPost\Seeder;
 
 
-use App\AppPlugin\Faq\Models\Faq;
+
+use App\AppPlugin\BlogPost\Models\Blog;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class BlogSeeder extends Seeder {
 
     public function run(): void {
-        Faq::unguard();
+        Blog::unguard();
         $tablePath = public_path('db/blog_post.sql');
         DB::unprepared(file_get_contents($tablePath));
     }

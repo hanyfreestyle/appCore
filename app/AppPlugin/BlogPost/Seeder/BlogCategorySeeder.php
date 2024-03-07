@@ -2,7 +2,9 @@
 
 namespace App\AppPlugin\BlogPost\Seeder;
 
-use App\AppPlugin\Faq\Models\FaqCategory;
+
+
+use App\AppPlugin\BlogPost\Models\BlogCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class BlogCategorySeeder extends Seeder {
 
     public function run(): void {
-        FaqCategory::unguard();
+        BlogCategory::unguard();
         $tablePath = public_path('db/blog_categories.sql');
         DB::unprepared(file_get_contents($tablePath));
     }

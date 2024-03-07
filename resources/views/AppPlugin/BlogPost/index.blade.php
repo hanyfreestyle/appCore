@@ -12,7 +12,7 @@
       @if(count($rowData)>0)
         <div class="card-body table-responsive p-0">
           <table {!! Table_Style($viewDataTable,$yajraTable)  !!} >
-            @include('AppPlugin.Faq.index_header')
+            @include('AppPlugin.BlogPost.index_header')
             <tbody>
             @foreach($rowData as $row)
               <tr>
