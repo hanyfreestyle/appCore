@@ -279,6 +279,7 @@ class AdminMainController extends DefaultMainController {
         View::share('PrefixCatRoute', $this->PrefixCatRoute);
         View::share('configArr', $this->configArr);
         View::share('PrintLocaleName', 'name_' . thisCurrentLocale());
+        View::share('DefCategoryTextName',null);
 
         $this->formName = AdminHelper::arrIsset($sendArr, 'formName', null);
         View::share('formName', $this->formName);

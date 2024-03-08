@@ -17,6 +17,42 @@ $MenuView = [
 
 return [
     'menu' => [
+        [
+            'view' => IsMenuView($MenuView, "Product",'proProduct.php'),
+            'sel_routs' => 'Shop',
+            'type' => 'many',
+            'text' => 'admin/proProduct.app_menu',
+            'icon' => 'fas fa-shopping-cart',
+            'roleView' => 'Product_view',
+            'submenu' => [
+                [
+                    'sel_routs' => 'Category',
+                    'url' => 'Shop.Category.index',
+                    'roleView' => 'Product_view',
+                    'text' => 'admin/proProduct.app_menu_category',
+                    'icon' => 'fas fa-sitemap',
+                    'view' => true
+                ],
+                [
+                    'sel_routs' => 'Brand',
+                    'url' => 'Shop.Brand.index',
+                    'roleView' => 'Product_view',
+                    'text' => 'admin/proProduct.app_menu_brand',
+                    'icon' => 'fas fa-copyright',
+                    'view' => true
+                ],
+
+                [
+                    'sel_routs' => 'Product',
+                    'url' => 'Shop.Product.index',
+                    'roleView' => 'Product_view',
+                    'text' => 'admin/proProduct.app_menu_product',
+                    'icon' => 'fas fa-shopping-cart',
+                    'view' => true
+                ],
+
+            ],
+        ], #Product
 
         [
             'view' => IsMenuView($MenuView, "BlogPost",'blogPost.php'),
@@ -74,33 +110,7 @@ return [
             ],
         ], #FAQ
 
-        [
-            'view' => IsMenuView($MenuView, "Product",'proProduct.php'),
-            'sel_routs' => 'Shop',
-            'type' => 'many',
-            'text' => 'admin/proProduct.app_menu',
-            'icon' => 'fas fa-shopping-cart',
-            'roleView' => 'Product_view',
-            'submenu' => [
-                [
-                    'sel_routs' => 'Category',
-                    'url' => 'Shop.Category.index',
-                    'roleView' => 'Product_view',
-                    'text' => 'admin/proProduct.app_menu_category',
-                    'icon' => 'fas fa-sitemap',
-                    'view' => true
-                ],
-                [
-                    'sel_routs' => 'Product',
-                    'url' => 'Shop.Product.index',
-                    'roleView' => 'Product_view',
-                    'text' => 'admin/proProduct.app_menu_product',
-                    'icon' => 'fas fa-shopping-cart',
-                    'view' => true
-                ],
 
-            ],
-        ], #Product
 
         [
             'view' => IsMenuView($MenuView, "AppSetting",'config/appSetting.php'),

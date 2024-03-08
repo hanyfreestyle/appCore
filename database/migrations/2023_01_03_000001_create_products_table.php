@@ -9,6 +9,7 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('pro_products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('brand_id')->nullable()->default(null);
             $table->integer('sku')->nullable()->default(null);
 
             $table->float('price')->nullable()->default(null);

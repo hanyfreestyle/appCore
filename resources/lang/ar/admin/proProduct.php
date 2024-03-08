@@ -3,6 +3,7 @@
 return
 [
 	'app_menu' => 'ادارة المنتجات',
+	'app_menu_brand' => 'العلامات التجارية',
 	'app_menu_category' => 'المجموعات',
 	'app_menu_product' => 'المنتجات',
 	'cat_del_related_cat' => 'مجموعات مرتبطة بالمحتوى',
@@ -14,4 +15,5 @@ return
 	'pro_text_price' => 'السعر',
 	'pro_text_qty' => 'الكمية',
 	'pro_text_qty_max' => 'الحد الاقصى',
+	'brand_text_name' => 'اسم العلامة التجارية',
 ];

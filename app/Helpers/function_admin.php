@@ -141,7 +141,7 @@ if(!function_exists('getColLang')) {
 }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     getRoleName
+#|||||||||||||||||||||||||||||||||||||| #     printLableKey
 if(!function_exists('printLableKey')) {
     function printLableKey($key) {
         if(count(config('app.web_lang')) > 1) {
@@ -152,6 +152,20 @@ if(!function_exists('printLableKey')) {
         return $send;
     }
 }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     DefCategoryTextName
+if(!function_exists('DefCategoryTextName')) {
+    function DefCategoryTextName($key) {
+        if($key) {
+            $send = $key;
+        } else {
+            $send = __('admin/proProduct.cat_text_name');
+        }
+        return $send;
+    }
+}
+
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

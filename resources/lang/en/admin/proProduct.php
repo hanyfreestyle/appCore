@@ -3,6 +3,7 @@
 return
 [
 	'app_menu' => 'Manage Product',
+	'app_menu_brand' => 'Brands',
 	'app_menu_category' => 'Category',
 	'app_menu_product' => 'Product',
 	'cat_del_related_cat' => 'Category Related to the content',
@@ -14,4 +15,5 @@ return
 	'pro_text_price' => 'Price',
 	'pro_text_qty' => 'Quantity',
 	'pro_text_qty_max' => 'Maximum',
+	'brand_text_name' => 'Brand Name',
 ];

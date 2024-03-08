@@ -1,5 +1,6 @@
 <?php
 
+use App\AppPlugin\Product\ShopBrandController;
 use App\AppPlugin\Product\ShopCategoryController;
 use App\AppPlugin\Product\ShopProductController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,27 @@ Route::get('/Category/emptyIcon/{id}', [ShopCategoryController::class,'emptyIcon
 Route::get('/Category/CatSort/{id}',[ShopCategoryController::class,'CategorySort'])->name('Shop.Category.CatSort');
 Route::post('/Category/SaveSort',[ShopCategoryController::class,'CategorySaveSort'])->name('Shop.Category.SaveSort');
 
+
+
+Route::get('/Brand',[ShopBrandController::class,'CategoryIndex'])->name('Shop.Brand.index');
+Route::get('/Brand/Main',[ShopBrandController::class,'CategoryIndex'])->name('Shop.Brand.index_Main');
+Route::get('/Brand/SubCategory/{id}',[ShopBrandController::class,'CategoryIndex'])->name('Shop.Brand.SubCategory');
+
+Route::get('/Brand/DataTable',[ShopBrandController::class,'DataTable'])->name('Shop.Brand.DataTable');
+Route::get('/Brand/create',[ShopBrandController::class,'CategoryCreate'])->name('Shop.Brand.create');
+Route::get('/Brand/create/ar',[ShopBrandController::class,'CategoryCreate'])->name('Shop.Brand.create_ar');
+Route::get('/Brand/create/en',[ShopBrandController::class,'CategoryCreate'])->name('Shop.Brand.create_en');
+Route::get('/Brand/edit/{id}',[ShopBrandController::class,'CategoryEdit'])->name('Shop.Brand.edit');
+Route::get('/Brand/editAr/{id}',[ShopBrandController::class,'CategoryEdit'])->name('Shop.Brand.editAr');
+Route::get('/Brand/editEn/{id}',[ShopBrandController::class,'CategoryEdit'])->name('Shop.Brand.editEn');
+Route::get('/Brand/emptyPhoto/{id}', [ShopBrandController::class,'emptyPhoto'])->name('Shop.Brand.emptyPhoto');
+Route::get('/Brand/DeleteLang/{id}',[ShopBrandController::class,'DeleteLang'])->name('Shop.Brand.DeleteLang');
+Route::post('/Brand/update/{id}',[ShopBrandController::class,'CategoryStoreUpdate'])->name('Shop.Brand.update');
+Route::get('/Brand/destroy/{id}',[ShopBrandController::class,'destroyException'])->name('Shop.Brand.destroy');
+Route::get('/Brand/config', [ShopBrandController::class,'config'])->name('Shop.Brand.config');
+Route::get('/Brand/emptyIcon/{id}', [ShopBrandController::class,'emptyIcon'])->name('Shop.Brand.emptyIcon');
+Route::get('/Brand/CatSort/{id}',[ShopBrandController::class,'CategorySort'])->name('Shop.Brand.CatSort');
+Route::post('/Brand/SaveSort',[ShopBrandController::class,'CategorySaveSort'])->name('Shop.Brand.SaveSort');
 
 
 Route::get('/Product',[ShopProductController::class,'index'])->name('Shop.Product.index');

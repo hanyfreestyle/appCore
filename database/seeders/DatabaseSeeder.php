@@ -32,6 +32,8 @@ use App\AppPlugin\Leads\ContactUs\SeederContactUsForm;
 use App\AppPlugin\Leads\NewsLetter\SeederNewsLetter;
 
 
+use App\AppPlugin\Product\Seeder\BrandSeeder;
+use App\AppPlugin\Product\Seeder\BrandTranslationSeeder;
 use App\AppPlugin\Product\Seeder\CategoryProductSeeder;
 use App\AppPlugin\Product\Seeder\CategorySeeder;
 use App\AppPlugin\Product\Seeder\CategoryTranslationSeeder;
@@ -82,18 +84,20 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategorySeeder::class);
         $this->call(CategoryTranslationSeeder::class);
+        $this->call(BrandSeeder::class);
+        $this->call(BrandTranslationSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(ProductTranslationSeeder::class);
         $this->call(ProductPhotoSeeder::class);
         $this->call(CategoryProductSeeder::class);
 
-//        $this->call(FaqCategorySeeder::class);
-//        $this->call(FaqCategoryTranslationSeeder::class);
-//        $this->call(FaqSeeder::class);
-//        $this->call(FaqTranslationSeeder::class);
-//        $this->call(FaqPivotSeeder::class);
-//        $this->call(FaqPhotoSeeder::class);
-//        $this->call(FaqPhotoTranslationSeeder::class);
+        $this->call(FaqCategorySeeder::class);
+        $this->call(FaqCategoryTranslationSeeder::class);
+        $this->call(FaqSeeder::class);
+        $this->call(FaqTranslationSeeder::class);
+        $this->call(FaqPivotSeeder::class);
+        $this->call(FaqPhotoSeeder::class);
+        $this->call(FaqPhotoTranslationSeeder::class);
 
         $this->call(BlogCategorySeeder::class);
         $this->call(BlogCategoryTranslationSeeder::class);
