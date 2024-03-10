@@ -6,6 +6,7 @@ return
 	'app_menu_brand' => 'العلامات التجارية',
 	'app_menu_category' => 'المجموعات',
 	'app_menu_product' => 'المنتجات',
+	'brand_text_name' => 'اسم العلامة التجارية',
 	'cat_del_related_cat' => 'مجموعات مرتبطة بالمحتوى',
 	'cat_del_related_pro' => 'منتجات مرتبط بالمحتوى',
 	'cat_main_category' => 'المجموعات الرئيسية',
@@ -15,5 +16,5 @@ return
 	'pro_text_price' => 'السعر',
 	'pro_text_qty' => 'الكمية',
 	'pro_text_qty_max' => 'الحد الاقصى',
-	'brand_text_name' => 'اسم العلامة التجارية',
+	'app_menu_attribute' => 'الخصائص',
 ];

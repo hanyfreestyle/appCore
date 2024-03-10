@@ -38,10 +38,17 @@ return [
                     'url' => 'Shop.Brand.index',
                     'roleView' => 'Product_view',
                     'text' => 'admin/proProduct.app_menu_brand',
-                    'icon' => 'fas fa-copyright',
+                    'icon' => 'fas fa-puzzle-piece',
                     'view' => true
                 ],
-
+                [
+                    'sel_routs' => 'ProAttribute',
+                    'url' => 'Shop.ProAttribute.index',
+                    'roleView' => 'Product_view',
+                    'text' => 'admin/proProduct.app_menu_attribute',
+                    'icon' => 'fas fa-puzzle-piece',
+                    'view' => true
+                ],
                 [
                     'sel_routs' => 'Product',
                     'url' => 'Shop.Product.index',
