@@ -13,8 +13,9 @@ return new class extends Migration {
             $table->string('locale')->index();
             $table->string('slug')->nullable();
             $table->string('name')->nullable();
+            $table->integer('count')->nullable();
             $table->unique(['option_id', 'locale']);
-            $table->unique(['locale', 'slug']);
+//            $table->unique(['locale', 'slug']);
             $table->foreign('option_id')->references('id')->on('pro_attribute_options')->onDelete('cascade');
         });
     }
