@@ -20,7 +20,7 @@
           @foreach ( config('app.web_lang') as $key=>$lang )
             <div class="col-lg-6">
               <x-admin.form.trans-input name="name" :key="$key" :row="$rowData" :label="__('admin/form.text_name')" :tdir="$key" col="12"/>
-              <x-admin.form.trans-input name="slug" :key="$key" :row="$rowData" label="Slug" :tdir="$key" col="12"/>
+              <x-admin.form.slug :viewtype="$pageData['ViewType']" :key="$key" :row="$rowData" />
             </div>
           @endforeach
         </div>

@@ -2,29 +2,16 @@
 
 @section('content')
   <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
-{{--  <x-admin.hmtl.section>--}}
-{{--    @if($pageData['ViewType'] == 'Edit')--}}
-{{--      <div class="row mb-2">--}}
-{{--        <div class="col-9">--}}
-{{--          <h1 class="def_h1_new">{!! print_h1($rowData) !!}</h1>--}}
-{{--        </div>--}}
-{{--        <div class="col-3 dir_button">--}}
-{{--          <x-admin.form.action-button url="{{route($PrefixRoute.'.More_Photos',$rowData->id)}}" type="morePhoto" :tip="false"/>--}}
-{{--          <x-admin.lang.delete-button :row="$rowData"/>--}}
-{{--        </div>--}}
-{{--      </div>--}}
-{{--    @endif--}}
-{{--  </x-admin.hmtl.section>--}}
-
-
   <x-admin.hmtl.section>
     <x-admin.card.def :page-data="$pageData">
       <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-
           @foreach ( config('app.web_lang') as $key=>$lang )
-            <x-admin.form.trans-input name="name" :key="$key" :row="$rowData" :label="__('admin/form.text_name')" :tdir="$key" col="6"/>
+            <div class="col-lg-6">
+              <x-admin.form.trans-input name="name" :key="$key" :row="$rowData" :label="__('admin/form.text_name')" :tdir="$key"/>
+              <x-admin.form.slug :viewtype="$pageData['ViewType']" :key="$key" :row="$rowData" />
+            </div>
           @endforeach
         </div>
 
@@ -36,7 +23,7 @@
         </div>
         <hr>
         <x-admin.form.submit-role-back :page-data="$pageData"/>
-     </form>
+      </form>
 
     </x-admin.card.def>
   </x-admin.hmtl.section>

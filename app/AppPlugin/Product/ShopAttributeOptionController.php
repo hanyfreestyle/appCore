@@ -94,7 +94,7 @@ class ShopAttributeOptionController extends AdminMainController {
                     $saveTranslation->locale = $key;
                     $saveTranslation->option_id = $saveData->id;
                     $saveTranslation->name = $request->input($key . '.name');
-                    $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.name'));
+                    $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
                     $saveTranslation->save();
                 }
             });

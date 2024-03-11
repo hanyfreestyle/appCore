@@ -64,11 +64,7 @@ class ShopAttributeController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $rowData = ProductAttribute::findOrNew(0);
-        return view('AppPlugin.Product.attribute_form')->with([
-                'pageData' => $pageData,
-                'rowData' => $rowData,
-            ]
-        );
+        return view('AppPlugin.Product.attribute_form' ,compact('pageData','rowData'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
@@ -76,11 +72,7 @@ class ShopAttributeController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
         $rowData = ProductAttribute::where('id', $id)->firstOrFail();
-        return view('AppPlugin.Product.attribute_form')->with([
-                'pageData' => $pageData,
-                'rowData' => $rowData,
-            ]
-        );
+        return view('AppPlugin.Product.attribute_form' ,compact('pageData','rowData'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
@@ -96,7 +88,7 @@ class ShopAttributeController extends AdminMainController {
                     $saveTranslation->locale = $key;
                     $saveTranslation->attribute_id = $saveData->id;
                     $saveTranslation->name = $request->input($key . '.name');
-                    $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.name'));
+                    $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
                     $saveTranslation->save();
                 }
             });
