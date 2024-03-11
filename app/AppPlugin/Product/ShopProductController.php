@@ -42,7 +42,7 @@ class ShopProductController extends AdminMainController {
             'PrefixRole' => $this->PrefixRole,
             'AddConfig' => true,
             'configArr' => ["editor" => 1, 'morePhotoFilterid' => 1],
-            'yajraTable' => false,
+            'yajraTable' => true,
             'AddLang' => true,
             'restore' => 1,
         ];
@@ -100,14 +100,7 @@ class ShopProductController extends AdminMainController {
         $rowData = Product::findOrNew(0);
         $LangAdd = self::getAddLangForAdd();
         $selCat = [];
-        return view('AppPlugin.Product.form')->with([
-                'pageData' => $pageData,
-                'rowData' => $rowData,
-                'Categories' => $Categories,
-                'LangAdd' => $LangAdd,
-                'selCat' => $selCat,
-            ]
-        );
+        return view('AppPlugin.Product.form',compact('pageData','rowData','Categories','LangAdd','selCat'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -119,14 +112,7 @@ class ShopProductController extends AdminMainController {
         $rowData = Product::where('id', $id)->with('categories')->firstOrFail();
         $selCat = $rowData->categories()->pluck('category_id')->toArray();
         $LangAdd = self::getAddLangForEdit($rowData);
-        return view('AppPlugin.Product.form')->with([
-                'pageData' => $pageData,
-                'rowData' => $rowData,
-                'Categories' => $Categories,
-                'LangAdd' => $LangAdd,
-                'selCat' => $selCat,
-            ]
-        );
+        return view('AppPlugin.Product.form',compact('pageData','rowData','Categories','LangAdd','selCat'));
     }
 
 

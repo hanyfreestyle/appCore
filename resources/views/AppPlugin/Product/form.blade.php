@@ -22,13 +22,7 @@
       <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-          <x-admin.form.select-multiple name="categories">
-            @foreach($Categories as $Category )
-              <option value="{{$Category->id}}"
-               {{ (in_array($Category->id,$selCat)) ? 'selected' : ''}}
-               {{ (collect(old('categories'))->contains($Category->id)) ? 'selected':'' }}>{{ print_h1($Category)}}</option>
-            @endforeach
-          </x-admin.form.select-multiple>
+          <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat"  />
         </div>
 
         <div class="row">
