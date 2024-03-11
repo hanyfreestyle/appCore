@@ -6,6 +6,7 @@
 /public/robots.txt
 /public/*.xml
 /public/storage
+/public/wp-content
 #/public/db
 /public/db/SQLDumpSplitterResult
 /public/ckfinder

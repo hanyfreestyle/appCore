@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 07:02 AM
+-- Generation Time: Mar 08, 2024 at 10:17 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -18,19 +18,42 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `a_cart`
+-- Database: `a_amr`
 --
 
 --
 -- Dumping data for table `pro_categories`
 --
 
-INSERT INTO `pro_categories` (`id`, `parent_id`, `deep`, `photo`, `photo_thum_1`, `icon`, `is_active`, `postion`, `created_at`, `updated_at`) VALUES
-(1, NULL, 0, 'images/category/1/1696769012_38xGZfq7uTYwlig_.webp', 'images/category/1/1696769013_qlxHOchJt6k2vY8_.webp', NULL, 1, 0, '2023-10-08 07:39:59', '2023-10-08 11:43:33'),
-(2, NULL, 0, 'images/category/2/1696769046_t4wxe39vomlh0DE_.webp', 'images/category/2/1696769046_ppwi3Y19ZvzkaCM_.webp', NULL, 1, 0, '2023-10-08 07:40:10', '2023-10-08 11:44:06'),
-(3, NULL, 0, 'images/category/3/1696769062_CG3Swekd9EA8JE1_.webp', 'images/category/3/1696769062_ATf46UjA6Jtm5fE_.webp', NULL, 1, 0, '2023-10-08 07:40:30', '2023-10-08 11:44:22'),
-(4, NULL, 0, 'images/category/4/1696769080_I2PTFsLPbyZMNuJ_.webp', 'images/category/4/1696769080_CablI9eIEAjbDQR_.webp', NULL, 1, 0, '2023-10-08 07:40:42', '2023-10-08 11:44:40'),
-(5, NULL, 0, 'images/category/5/1696769103_44TWzD4W0MtWICH_.webp', 'images/category/5/1696769103_08oOhMiMwumIzyJ_.webp', NULL, 1, 0, '2023-10-08 07:40:49', '2023-10-08 11:45:03');
+INSERT INTO `pro_categories` (`id`, `parent_id`, `old_id`, `old_parent`, `deep`, `photo`, `photo_thum_1`, `icon`, `is_active`, `postion`, `product_count`, `created_at`, `updated_at`) VALUES
+(1, NULL, 16, 0, 0, NULL, NULL, NULL, 1, 0, 236, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(2, NULL, 229, 0, 0, NULL, NULL, NULL, 1, 0, 9, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(3, NULL, 230, 0, 0, 'wp-content/uploads/2023/10/33.jpg', 'wp-content/uploads/2023/10/33.jpg', NULL, 1, 0, 66, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(4, NULL, 231, 0, 0, NULL, NULL, NULL, 1, 0, 10, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(5, NULL, 232, 0, 0, NULL, NULL, NULL, 1, 0, 131, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(6, NULL, 233, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(7, 1, 295, 16, 0, NULL, NULL, NULL, 1, 0, 49, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(8, 1, 296, 16, 0, NULL, NULL, NULL, 1, 0, 83, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(9, 1, 297, 16, 0, NULL, NULL, NULL, 1, 0, 152, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(10, 2, 298, 229, 0, NULL, NULL, NULL, 1, 0, 1, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(11, 2, 299, 229, 0, NULL, NULL, NULL, 1, 0, 3, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(12, 2, 300, 229, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(13, 3, 301, 230, 0, NULL, NULL, NULL, 1, 0, 8, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(14, 3, 302, 230, 0, NULL, NULL, NULL, 1, 0, 20, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(15, NULL, 323, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(16, NULL, 324, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(17, NULL, 325, 0, 0, NULL, NULL, NULL, 1, 0, 1, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(18, NULL, 326, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(19, NULL, 327, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(20, NULL, 469, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(21, NULL, 495, 0, 0, NULL, NULL, NULL, 1, 0, 0, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(22, NULL, 885, 0, 0, NULL, NULL, NULL, 1, 0, 3, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(23, NULL, 1011, 0, 0, NULL, NULL, NULL, 1, 0, 36, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(24, NULL, 1619, 0, 0, NULL, NULL, NULL, 1, 0, 9, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(25, NULL, 1818, 0, 0, NULL, NULL, NULL, 1, 0, 56, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(26, NULL, 2263, 0, 0, NULL, NULL, NULL, 1, 0, 10, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(27, NULL, 2370, 0, 0, NULL, NULL, NULL, 1, 0, 7, '2024-03-08 07:09:41', '2024-03-08 07:09:41'),
+(28, NULL, 2439, 0, 0, NULL, NULL, NULL, 1, 0, 1, '2024-03-08 07:09:41', '2024-03-08 07:09:41');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

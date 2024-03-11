@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('locale')->index();
             $table->string('slug')->nullable();
             $table->string('name')->nullable();
+            $table->longText('short_des')->nullable();
             $table->longText('des')->nullable();
 
             $table->string('g_title')->nullable();

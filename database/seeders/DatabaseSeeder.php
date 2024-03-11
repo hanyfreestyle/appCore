@@ -71,47 +71,49 @@ class DatabaseSeeder extends Seeder
         $this->call(DefPhotoSeeder::class);
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
-        $this->call(SeederWebPrivacy::class);
-        $this->call(SeederWebPrivacyTranslation::class);
-        $this->call(SeederCountry::class);
-        $this->call(SeederCountryTranslation::class);
-        $this->call(SeederNewsLetter::class);
-        $this->call(SeederContactUsForm::class);
-        $this->call(SeederBranch::class);
-        $this->call(SeederBranchTranslation::class);
+//        $this->call(SeederWebPrivacy::class);
+//        $this->call(SeederWebPrivacyTranslation::class);
+//        $this->call(SeederCountry::class);
+//        $this->call(SeederCountryTranslation::class);
+//        $this->call(SeederNewsLetter::class);
+//        $this->call(SeederContactUsForm::class);
+//        $this->call(SeederBranch::class);
+//        $this->call(SeederBranchTranslation::class);
 
-        $this->call(SeederAppSetting::class);
-        $this->call(SeederAppSettingTranslation::class);
-        $this->call(SeederAppMenu::class);
-        $this->call(SeederAppMenuTranslation::class);
+//        $this->call(SeederAppSetting::class);
+//        $this->call(SeederAppSettingTranslation::class);
+//        $this->call(SeederAppMenu::class);
+//        $this->call(SeederAppMenuTranslation::class);
 
         $this->call(CategorySeeder::class);
         $this->call(CategoryTranslationSeeder::class);
         $this->call(BrandSeeder::class);
         $this->call(BrandTranslationSeeder::class);
+        $this->call(ProductAttributeSeeder::class);
+        $this->call(ProductAttributeOptionSeeder::class);
+
         $this->call(ProductSeeder::class);
         $this->call(ProductTranslationSeeder::class);
         $this->call(ProductPhotoSeeder::class);
         $this->call(CategoryProductSeeder::class);
-        $this->call(ProductAttributeSeeder::class);
-        $this->call(ProductAttributeOptionSeeder::class);
 
 
-        $this->call(FaqCategorySeeder::class);
-        $this->call(FaqCategoryTranslationSeeder::class);
-        $this->call(FaqSeeder::class);
-        $this->call(FaqTranslationSeeder::class);
-        $this->call(FaqPivotSeeder::class);
-        $this->call(FaqPhotoSeeder::class);
-        $this->call(FaqPhotoTranslationSeeder::class);
 
-        $this->call(BlogCategorySeeder::class);
-        $this->call(BlogCategoryTranslationSeeder::class);
-        $this->call(BlogSeeder::class);
-        $this->call(BlogTranslationSeeder::class);
-        $this->call(BlogPivotSeeder::class);
-        $this->call(BlogPhotoSeeder::class);
-        $this->call(BlogPhotoTranslationSeeder::class);
+//        $this->call(FaqCategorySeeder::class);
+//        $this->call(FaqCategoryTranslationSeeder::class);
+//        $this->call(FaqSeeder::class);
+//        $this->call(FaqTranslationSeeder::class);
+//        $this->call(FaqPivotSeeder::class);
+//        $this->call(FaqPhotoSeeder::class);
+//        $this->call(FaqPhotoTranslationSeeder::class);
+//
+//        $this->call(BlogCategorySeeder::class);
+//        $this->call(BlogCategoryTranslationSeeder::class);
+//        $this->call(BlogSeeder::class);
+//        $this->call(BlogTranslationSeeder::class);
+//        $this->call(BlogPivotSeeder::class);
+//        $this->call(BlogPhotoSeeder::class);
+//        $this->call(BlogPhotoTranslationSeeder::class);
 
 
     }
