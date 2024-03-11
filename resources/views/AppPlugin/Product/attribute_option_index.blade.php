@@ -9,28 +9,29 @@
   @can($PrefixRole."_edit")
     <x-admin.hmtl.section>
       <div class="row mb-3">
-        <div class="col-12 dir_button">
-          <x-admin.form.action-button url="{{route($PrefixRoute.'.Sort')}}" type="sort" :tip="false" bg="dark"/>
+        <div class="col-7">
+          <h1 class="def_h1_new">{!! print_h1($Attribute) !!}</h1>
+        </div>
+        <div class="col-5 dir_button">
+          <x-admin.form.action-button url="{{route($PrefixRoute.'.Sort',$Attribute->id)}}" type="sort" :tip="false" bg="dark"/>
         </div>
       </div>
     </x-admin.hmtl.section>
   @endcan
 
   <x-admin.hmtl.section>
+
     <x-admin.card.def :page-data="$pageData">
+
       @if(count($rowData)>0)
         <div class="card-body table-responsive p-0">
           <table {!! Table_Style($viewDataTable,$yajraTable)  !!} >
             <thead>
             <tr>
               <th class="TD_20">#</th>
-              @can($PrefixRole.'_add')
-                <th class="TD_20"></th>
-              @endcan
               @foreach(config('app.web_lang') as $key => $lang)
                 <th class="TD_200">{{__('admin/form.text_name')}}  {{printLableKey($key)}}</th>
               @endforeach
-              <th class="TD_50"></th>
               <th class="TD_20"></th>
               <x-admin.table.action-but po="top" type="edit"/>
               <x-admin.table.action-but po="top" type="delete"/>
@@ -40,16 +41,9 @@
             @foreach($rowData as $row)
               <tr>
                 <td>{{$row->id}}</td>
-                <td>
-                  @can($PrefixRole.'_add')
-                    <x-admin.form.action-button url="{{route('Shop.ProAttributeOption.index',$row->id)}}"
-                                                :print-lable="__('admin/form.button_add')" icon="fas fa-plus-circle"/>
-                  @endcan
-                </td>
                 @foreach(config('app.web_lang') as $key => $lang)
                   <td>{!! printCategoryName($key,$row,$PrefixRoute.".SubCategory") !!}</td>
                 @endforeach
-                <td>{{$row->option_count}}</td>
                 <td>{!! is_active($row->is_active) !!}</td>
                 <x-admin.table.action-but type="edit" :row="$row"/>
                 <x-admin.table.action-but type="delete" :row="$row"/>

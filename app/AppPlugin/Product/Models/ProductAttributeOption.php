@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
-class ProductAttribute extends Model implements TranslatableContract {
+
+
+class ProductAttributeOption extends Model implements TranslatableContract {
 
     use Translatable;
-    protected $table = "pro_attributes";
+    protected $table = "pro_attribute_options";
     protected $primaryKey = 'id';
-    protected $translationForeignKey = 'attribute_id';
+    protected $translationForeignKey = 'option_id';
     public $translatedAttributes = ['name', 'slug'];
     protected $fillable = [];
     public $timestamps = false;
@@ -26,13 +27,10 @@ class ProductAttribute extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function scopeDef(Builder $query): Builder {
-        return $query->with('translations')->withCount('option');
+        return $query->with('translations');
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     children
-    public function option(): HasMany {
-        return $this->hasMany(ProductAttributeOption::class,'attribute_id');
-    }
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
