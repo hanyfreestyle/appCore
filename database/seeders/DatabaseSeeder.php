@@ -38,8 +38,8 @@ use App\AppPlugin\Product\Seeder\BrandTranslationSeeder;
 use App\AppPlugin\Product\Seeder\CategoryProductSeeder;
 use App\AppPlugin\Product\Seeder\CategorySeeder;
 use App\AppPlugin\Product\Seeder\CategoryTranslationSeeder;
-use App\AppPlugin\Product\Seeder\ProductAttributeOptionSeeder;
 use App\AppPlugin\Product\Seeder\ProductAttributeSeeder;
+use App\AppPlugin\Product\Seeder\ProductAttributeValueSeeder;
 use App\AppPlugin\Product\Seeder\ProductPhotoSeeder;
 use App\AppPlugin\Product\Seeder\ProductSeeder;
 use App\AppPlugin\Product\Seeder\ProductTranslationSeeder;
@@ -90,7 +90,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BrandSeeder::class);
         $this->call(BrandTranslationSeeder::class);
         $this->call(ProductAttributeSeeder::class);
-        $this->call(ProductAttributeOptionSeeder::class);
+        $this->call(ProductAttributeValueSeeder::class);
 
         $this->call(ProductSeeder::class);
         $this->call(ProductTranslationSeeder::class);

@@ -10,10 +10,10 @@ use Astrotomic\Translatable\Translatable;
 
 
 
-class ProductAttributeOption extends Model implements TranslatableContract {
+class ProductAttributeValue extends Model implements TranslatableContract {
 
     use Translatable;
-    protected $table = "pro_attribute_options";
+    protected $table = "pro_attribute_values";
     protected $primaryKey = 'id';
     protected $translationForeignKey = 'option_id';
     public $translatedAttributes = ['name', 'slug'];

@@ -3,10 +3,9 @@
 namespace App\AppPlugin\Product;
 
 use App\AppPlugin\Product\Models\ProductAttribute;
-use App\AppPlugin\Product\Models\ProductAttributeOption;
-use App\AppPlugin\Product\Models\ProductAttributeOptionTranslation;
-use App\AppPlugin\Product\Request\ProductAttributeOptionRequest;
-
+use App\AppPlugin\Product\Models\ProductAttributeValue;
+use App\AppPlugin\Product\Models\ProductAttributeValueTranslation;
+use App\AppPlugin\Product\Request\ProductAttributeValueRequest;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
@@ -15,12 +14,12 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 
-class ShopAttributeOptionController extends AdminMainController {
+class ShopAttributeValueController extends AdminMainController {
     use CrudTraits;
 
-    function __construct(Request $request,ProductAttributeOption $model) {
+    function __construct(Request $request,ProductAttributeValue $model) {
         parent::__construct();
-        $this->controllerName = "ProAttributeOption";
+        $this->controllerName = "ProAttributeValue";
         $this->PrefixRole = 'Product';
         $this->selMenu = "Shop.";
         $this->PrefixCatRoute = "";
@@ -58,8 +57,8 @@ class ShopAttributeOptionController extends AdminMainController {
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = false;
         $Attribute = ProductAttribute::with('translation')->where('id',$AttributeId)->firstOrFail();
-        $rowData = self::getSelectQuery(ProductAttributeOption::def()->where('attribute_id',$AttributeId));
-        return view('AppPlugin.Product.attribute_option_index', compact('pageData', 'rowData','Attribute'));
+        $rowData = self::getSelectQuery(ProductAttributeValue::def()->where('attribute_id',$AttributeId));
+        return view('AppPlugin.Product.attribute_value_index', compact('pageData', 'rowData','Attribute'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -68,31 +67,31 @@ class ShopAttributeOptionController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
         $Attribute = ProductAttribute::with('translation')->where('id',$AttributeId)->firstOrFail();
-        $rowData = ProductAttributeOption::findOrNew(0);
-        return view('AppPlugin.Product.attribute_option_form',compact('rowData','pageData','Attribute'));
+        $rowData = ProductAttributeValue::findOrNew(0);
+        return view('AppPlugin.Product.attribute_value_form',compact('rowData','pageData','Attribute'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
-        $rowData = ProductAttributeOption::where('id', $id)->firstOrFail();
+        $rowData = ProductAttributeValue::where('id', $id)->firstOrFail();
         $Attribute = ProductAttribute::with('translation')->where('id',$rowData->attribute_id)->firstOrFail();
-        return view('AppPlugin.Product.attribute_option_form',compact('rowData','pageData','Attribute'));
+        return view('AppPlugin.Product.attribute_value_form',compact('rowData','pageData','Attribute'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(ProductAttributeOptionRequest $request, $id = 0) {
-        $saveData = ProductAttributeOption::findOrNew($id);
+    public function storeUpdate(ProductAttributeValueRequest $request, $id = 0) {
+        $saveData = ProductAttributeValue::findOrNew($id);
         try {
             DB::transaction(function () use ($request, $saveData) {
                 $saveData->is_active = intval((bool)$request->input('is_active'));
                 $saveData->attribute_id = $request->input('attribute_id');
                 $saveData->save();
                 foreach (config('app.web_lang') as $key => $lang) {
-                    $saveTranslation = ProductAttributeOptionTranslation::where('option_id', $saveData->id)->where('locale', $key)->firstOrNew();
+                    $saveTranslation = ProductAttributeValueTranslation::where('value_id', $saveData->id)->where('locale', $key)->firstOrNew();
                     $saveTranslation->locale = $key;
-                    $saveTranslation->option_id = $saveData->id;
+                    $saveTranslation->value_id = $saveData->id;
                     $saveTranslation->name = $request->input($key . '.name');
                     $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
                     $saveTranslation->save();
@@ -112,8 +111,8 @@ class ShopAttributeOptionController extends AdminMainController {
         $Attribute = ProductAttribute::with('translation')->where('id',$AttributeId)->firstOrFail();
         $pageData = $this->pageData;
         $pageData['ViewType'] = "List";
-        $rowData = ProductAttributeOption::where('attribute_id',$Attribute->id)->orderBy('postion')->get();
-        return view('AppPlugin.Product.attribute_option_sort', compact('pageData', 'rowData', 'Attribute'));
+        $rowData = ProductAttributeValue::where('attribute_id',$Attribute->id)->orderBy('postion')->get();
+        return view('AppPlugin.Product.attribute_value_sort', compact('pageData', 'rowData', 'Attribute'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -123,7 +122,7 @@ class ShopAttributeOptionController extends AdminMainController {
         foreach ($positions as $position) {
             $id = $position[0];
             $newPosition = $position[1];
-            $saveData = ProductAttributeOption::findOrFail($id);
+            $saveData = ProductAttributeValue::findOrFail($id);
             $saveData->postion = $newPosition;
             $saveData->save();
         }

@@ -31,7 +31,7 @@ class ProductAttribute extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     children
     public function option(): HasMany {
-        return $this->hasMany(ProductAttributeOption::class,'attribute_id');
+        return $this->hasMany(ProductAttributeValue::class,'attribute_id');
     }
 
 

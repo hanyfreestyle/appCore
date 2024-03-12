@@ -6,7 +6,7 @@ use App\Helpers\AdminHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class ProductAttributeOptionRequest extends FormRequest {
+class ProductAttributeValueRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;
@@ -29,11 +29,11 @@ class ProductAttributeOptionRequest extends FormRequest {
         $rules = [];
         foreach (config('app.web_lang') as $key => $lang) {
             if($id == '0') {
-                $rules[$key . ".name"] = "required|unique:pro_attribute_option_translations,name";
-                $rules[$key . ".slug"] = "required|unique:pro_attribute_option_translations,slug";
+                $rules[$key . ".name"] = "required|unique:pro_attribute_value_translations,name";
+                $rules[$key . ".slug"] = "required|unique:pro_attribute_value_translations,slug";
             } else {
-                $rules[$key . ".name"] = "required|unique:pro_attribute_option_translations,name,$id,option_id,locale,$key";
-                $rules[$key . ".slug"] = "required|unique:pro_attribute_option_translations,slug,$id,option_id,locale,$key";
+                $rules[$key . ".name"] = "required|unique:pro_attribute_value_translations,name,$id,value_id,locale,$key";
+                $rules[$key . ".slug"] = "required|unique:pro_attribute_value_translations,slug,$id,value_id,locale,$key";
             }
         }
         return $rules;

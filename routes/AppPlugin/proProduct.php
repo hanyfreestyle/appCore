@@ -1,7 +1,7 @@
 <?php
 
 use App\AppPlugin\Product\ShopAttributeController;
-use App\AppPlugin\Product\ShopAttributeOptionController;
+use App\AppPlugin\Product\ShopAttributeValueController;
 use App\AppPlugin\Product\ShopBrandController;
 use App\AppPlugin\Product\ShopCategoryController;
 use App\AppPlugin\Product\ShopProductController;
@@ -88,11 +88,11 @@ Route::post('/product/attribute/SaveSort',[ShopAttributeController::class,'SaveS
 Route::get('/product/attribute/config', [ShopAttributeController::class,'config'])->name('Shop.ProAttribute.config');
 
 
-Route::get('/attribute/option/{AttributeId}',[ShopAttributeOptionController::class,'index'])->name('Shop.ProAttributeOption.index');
-Route::get('/attribute/option/create/{AttributeId}',[ShopAttributeOptionController::class,'create'])->name('Shop.ProAttributeOption.create');
-Route::get('/attribute/option/edit/{id}',[ShopAttributeOptionController::class,'edit'])->name('Shop.ProAttributeOption.edit');
-Route::post('/attribute/option/update/{id}',[ShopAttributeOptionController::class,'storeUpdate'])->name('Shop.ProAttributeOption.update');
-Route::get('/attribute/option/destroy/{id}',[ShopAttributeOptionController::class,'ForceDeleteException'])->name('Shop.ProAttributeOption.destroy');
-Route::get('/attribute/option/Sort/{AttributeId}',[ShopAttributeOptionController::class,'Sort'])->name('Shop.ProAttributeOption.Sort');
-Route::post('/attribute/option/SaveSort',[ShopAttributeOptionController::class,'SaveSort'])->name('Shop.ProAttributeOption.SaveSort');
-Route::get('/attribute/option/config/{AttributeId}', [ShopAttributeOptionController::class,'config'])->name('Shop.ProAttributeOption.config');
+Route::get('/attribute/option/{AttributeId}',[ShopAttributeValueController::class,'index'])->name('Shop.ProAttributeValue.index');
+Route::get('/attribute/option/create/{AttributeId}',[ShopAttributeValueController::class,'create'])->name('Shop.ProAttributeValue.create');
+Route::get('/attribute/option/edit/{id}',[ShopAttributeValueController::class,'edit'])->name('Shop.ProAttributeValue.edit');
+Route::post('/attribute/option/update/{id}',[ShopAttributeValueController::class,'storeUpdate'])->name('Shop.ProAttributeValue.update');
+Route::get('/attribute/option/destroy/{id}',[ShopAttributeValueController::class,'ForceDeleteException'])->name('Shop.ProAttributeValue.destroy');
+Route::get('/attribute/option/Sort/{AttributeId}',[ShopAttributeValueController::class,'Sort'])->name('Shop.ProAttributeValue.Sort');
+Route::post('/attribute/option/SaveSort',[ShopAttributeValueController::class,'SaveSort'])->name('Shop.ProAttributeValue.SaveSort');
+Route::get('/attribute/option/config/{AttributeId}', [ShopAttributeValueController::class,'config'])->name('Shop.ProAttributeValue.config');

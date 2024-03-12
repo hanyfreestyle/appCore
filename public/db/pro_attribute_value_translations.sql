@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- Dumping data for table `pro_attribute_option_translations`
 --
 
-INSERT INTO `pro_attribute_option_translations` (`id`, `option_id`, `locale`, `slug`, `name`, `count`) VALUES
+INSERT INTO `pro_attribute_value_translations` (`id`, `value_id`, `locale`, `slug`, `name`, `count`) VALUES
 (1, 1, 'ar', '90-سم', '90 سم', NULL),
 (2, 1, 'en', '90-سم', '90 سم', NULL),
 (3, 2, 'ar', '100-سم', '100 سم', NULL),
