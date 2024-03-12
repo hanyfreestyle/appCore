@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class BrandCountry extends Model implements TranslatableContract {
+class Country extends Model implements TranslatableContract {
 
   use SoftDeletes;
   use Translatable;
