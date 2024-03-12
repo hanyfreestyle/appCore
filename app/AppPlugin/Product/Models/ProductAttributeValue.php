@@ -15,7 +15,7 @@ class ProductAttributeValue extends Model implements TranslatableContract {
     use Translatable;
     protected $table = "pro_attribute_values";
     protected $primaryKey = 'id';
-    protected $translationForeignKey = 'option_id';
+    protected $translationForeignKey = 'value_id';
     public $translatedAttributes = ['name', 'slug'];
     protected $fillable = [];
     public $timestamps = false;

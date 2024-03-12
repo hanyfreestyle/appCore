@@ -42,7 +42,7 @@
                 <td>{{$row->id}}</td>
                 <td>
                   @can($PrefixRole.'_add')
-                    <x-admin.form.action-button url="{{route('Shop.ProAttributeOption.index',$row->id)}}"
+                    <x-admin.form.action-button url="{{route('Shop.ProAttributeValue.index',$row->id)}}"
                                                 :print-lable="__('admin/form.button_add')" icon="fas fa-plus-circle"/>
                   @endcan
                 </td>
