@@ -3,6 +3,7 @@
 return
 [
 	'app_menu' => 'Manage Product',
+	'app_menu_attribute' => 'Attributes',
 	'app_menu_brand' => 'Brands',
 	'app_menu_category' => 'Category',
 	'app_menu_product' => 'Product',
@@ -11,10 +12,12 @@ return
 	'cat_del_related_pro' => 'Product Related to the content',
 	'cat_main_category' => 'Main Category',
 	'cat_text_name' => 'Category Name',
+	'pro_type' => 'Product Type',
+	'pro_type_1' => 'Simple product',
+	'pro_type_2' => 'Product with option',
 	'pro_text_discount' => 'Discount',
 	'pro_text_name' => 'Product Name',
 	'pro_text_price' => 'Price',
 	'pro_text_qty' => 'Quantity',
 	'pro_text_qty_max' => 'Maximum',
-	'app_menu_attribute' => 'Attributes',
 ];

@@ -9,6 +9,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Illuminate\Support\Collection;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Brand extends Model implements TranslatableContract {
@@ -24,13 +25,12 @@ class Brand extends Model implements TranslatableContract {
     protected $fillable = [];
 
 
-
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     scopeDef
     public function scopeDef(Builder $query): Builder {
         return $query->with('translations')->withCount('children');
     }
-    
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     children
     public function children(): hasMany {
@@ -53,9 +53,18 @@ class Brand extends Model implements TranslatableContract {
     }
 
     public function del_product() {
-        return $this->hasMany(Product::class,'brand_id');
+        return $this->hasMany(Product::class, 'brand_id');
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # CashBrandList
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    public function scopeCashBrandList(Builder $query): array|Collection {
+        return $query->select('id')->with(['translations' => function ($query) {
+            $query->select('brand_id', 'locale', 'name');
+        }])->get();
+    }
 
 }
 

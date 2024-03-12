@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->integer('cat_id')->nullable()->default(null);
             $table->integer('old_cat_id')->nullable()->default(null);
             $table->integer('children')->nullable()->default(null);
+            $table->integer('type')->nullable()->default(1);
             $table->text('tag_id')->nullable()->default(null);
 
             $table->float('price')->nullable()->default(null);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AppPlugin\Config\Meta\MetaTag;
 use App\AppPlugin\Data\Country\Country;
+use App\AppPlugin\Product\Models\Brand;
 use App\Models\admin\config\DefPhoto;
 use App\Models\admin\config\Setting;
 use Illuminate\Support\Facades\Cache;
@@ -91,7 +92,6 @@ class DefaultMainController extends Controller{
             return $WebMeta['home'] ?? '' ;
         }
     }
-
 
 
 }

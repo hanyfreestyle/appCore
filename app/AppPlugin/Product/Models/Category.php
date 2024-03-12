@@ -9,6 +9,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Illuminate\Support\Collection;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Category extends Model implements TranslatableContract {
@@ -76,6 +77,15 @@ class Category extends Model implements TranslatableContract {
         return $this->belongsToMany(Product::class, 'pro_category_product', 'category_id', 'product_id')->withTrashed();
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # CashCategoriesList
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    public function scopeCashCategoriesList(Builder $query): array|Collection {
+        return $query->select('id')->with(['translations' => function ($query) {
+            $query->select('category_id', 'locale', 'name');
+        }])->get();
+    }
 
 }
 

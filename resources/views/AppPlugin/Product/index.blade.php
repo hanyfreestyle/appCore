@@ -6,6 +6,10 @@
 
 @section('content')
   <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
+  <x-admin.hmtl.section>
+    <x-admin.product.filter :row="$rowData" form-name="{{$formName}}" />
+  </x-admin.hmtl.section>
+
 
   <x-admin.hmtl.section>
     <x-admin.card.def :page-data="$pageData">
@@ -18,6 +22,7 @@
               <tr>
                 <td>{{$row->id}}</td>
                 <td>{{$row->old_id}}</td>
+
                 <td class="tc">{!! TablePhoto($row,'photo') !!} </td>
                 <td>{!! printCategoryName(thisCurrentLocale(),$row,$PrefixRoute.".SubCategory") !!}</td>
                 @if($pageData['ViewType'] == 'deleteList')
