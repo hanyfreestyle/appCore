@@ -34,15 +34,13 @@ use App\AppPlugin\Leads\NewsLetter\SeederNewsLetter;
 
 
 use App\AppPlugin\Product\Seeder\BrandSeeder;
-use App\AppPlugin\Product\Seeder\BrandTranslationSeeder;
 use App\AppPlugin\Product\Seeder\CategoryProductSeeder;
 use App\AppPlugin\Product\Seeder\CategorySeeder;
-use App\AppPlugin\Product\Seeder\CategoryTranslationSeeder;
+
 use App\AppPlugin\Product\Seeder\ProductAttributeSeeder;
 use App\AppPlugin\Product\Seeder\ProductAttributeValueSeeder;
 use App\AppPlugin\Product\Seeder\ProductPhotoSeeder;
 use App\AppPlugin\Product\Seeder\ProductSeeder;
-use App\AppPlugin\Product\Seeder\ProductTranslationSeeder;
 use Database\Seeders\roles\AdminUserSeeder;
 use Database\Seeders\roles\PermissionSeeder;
 use Database\Seeders\roles\RoleSeeder;
@@ -71,6 +69,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DefPhotoSeeder::class);
         $this->call(UploadFilterSeeder::class);
         $this->call(UploadFilterSizeSeeder::class);
+
 //        $this->call(SeederWebPrivacy::class);
 //        $this->call(SeederWebPrivacyTranslation::class);
 //        $this->call(SeederCountry::class);
@@ -86,17 +85,12 @@ class DatabaseSeeder extends Seeder
 //        $this->call(SeederAppMenuTranslation::class);
 
         $this->call(CategorySeeder::class);
-        $this->call(CategoryTranslationSeeder::class);
         $this->call(BrandSeeder::class);
-        $this->call(BrandTranslationSeeder::class);
         $this->call(ProductAttributeSeeder::class);
         $this->call(ProductAttributeValueSeeder::class);
-
-        $this->call(ProductSeeder::class);
-        $this->call(ProductTranslationSeeder::class);
-        $this->call(ProductPhotoSeeder::class);
-        $this->call(CategoryProductSeeder::class);
-
+//        $this->call(ProductSeeder::class);
+//        $this->call(CategoryProductSeeder::class);
+//        $this->call(ProductPhotoSeeder::class);
 
 
 //        $this->call(FaqCategorySeeder::class);
