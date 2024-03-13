@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
 
     public function up(): void {
+
         Schema::create('faqcategory_faq', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBiginteger('category_id');
@@ -19,6 +20,7 @@ return new class extends Migration {
             $table->foreign('faq_id')->references('id')
                 ->on('faq_faqs')->onDelete('cascade');
         });
+
     }
 
 

@@ -7,10 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class SeederAppMenu extends Seeder {
 
-  public function run(): void {
-    AppMenu::unguard();
-    $tablePath = public_path('db/config_app_menus.sql');
-    DB::unprepared(file_get_contents($tablePath));
-  }
+    public function run(): void {
+        AppMenu::unguard();
+        $tablePath = public_path('db/config_app_menus.sql');
+        DB::unprepared(file_get_contents($tablePath));
+
+        AppMenuTranslation::unguard();
+        $tablePath = public_path('db/config_app_menu_translations.sql');
+        DB::unprepared(file_get_contents($tablePath));
+
+    }
 
 }
