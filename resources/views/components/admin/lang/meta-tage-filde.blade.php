@@ -1,4 +1,4 @@
-@if(count(config('app.web_lang')) > 1)
+@if(count(config('app.web_lang')) > 1 and  $showlang == true)
   <div class="col-lg-12 mt-3">
     <div class="LangHeader">{{$keyLang}}</div>
   </div>

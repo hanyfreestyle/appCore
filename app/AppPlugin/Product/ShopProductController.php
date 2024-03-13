@@ -2,8 +2,6 @@
 
 namespace App\AppPlugin\Product;
 
-
-use App\AppPlugin\Leads\ContactUs\ContactUsForm;
 use App\AppPlugin\Product\Models\Brand;
 use App\AppPlugin\Product\Models\Category;
 use App\AppPlugin\Product\Models\Product;
@@ -23,7 +21,6 @@ use Illuminate\Support\Facades\View;
 class ShopProductController extends AdminMainController {
 
     use CrudTraits;
-
 
     function __construct(Product $model, ProductTranslation $translation, ProductPhoto $modelPhoto) {
         parent::__construct();
@@ -106,47 +103,7 @@ class ShopProductController extends AdminMainController {
     }
 
 
-#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #
-    static function ProductFilterQ($query, $session, $order = null) {
-        $query->where('id', '!=', 0);
 
-        if(isset($session['from_date']) and $session['from_date'] != null) {
-            $query->whereDate('created_at', '>=', Carbon::createFromFormat('Y-m-d', $session['from_date']));
-        }
-
-        if(isset($session['to_date']) and $session['to_date'] != null) {
-            $query->whereDate('created_at', '<=', Carbon::createFromFormat('Y-m-d', $session['to_date']));
-        }
-
-        if(isset($session['is_active']) and $session['is_active'] != null) {
-            $query->where('is_active', $session['is_active']);
-        }
-        if(isset($session['type']) and $session['type'] != null) {
-            $query->where('type', $session['type']);
-        }
-        if(isset($session['brand_id']) and $session['brand_id'] != null) {
-            $query->where('brand_id', $session['brand_id']);
-        }
-
-        if(isset($session['cat_id']) and $session['cat_id'] != null) {
-            $id = $session['cat_id'];
-            $query->whereHas('categories', function ($query) use ($id) {
-                $query->where('category_id', $id);
-            });
-        }
-
-
-
-
-
-        if($order != null) {
-            $orderBy = explode("|", $order);
-            $query->orderBy($orderBy[0], $orderBy[1]);
-        }
-
-        return $query;
-    }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     SoftDeletes
     public function SoftDeletes() {
@@ -251,6 +208,46 @@ class ShopProductController extends AdminMainController {
 
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   ProductFilterQ
+    static function ProductFilterQ($query, $session, $order = null) {
+
+        $query->where('id', '!=', 0);
+
+        if(isset($session['from_date']) and $session['from_date'] != null) {
+            $query->whereDate('created_at', '>=', Carbon::createFromFormat('Y-m-d', $session['from_date']));
+        }
+
+        if(isset($session['to_date']) and $session['to_date'] != null) {
+            $query->whereDate('created_at', '<=', Carbon::createFromFormat('Y-m-d', $session['to_date']));
+        }
+
+        if(isset($session['is_active']) and $session['is_active'] != null) {
+            $query->where('is_active', $session['is_active']);
+        }
+        if(isset($session['type']) and $session['type'] != null) {
+            $query->where('type', $session['type']);
+        }
+        if(isset($session['brand_id']) and $session['brand_id'] != null) {
+            $query->where('brand_id', $session['brand_id']);
+        }
+
+        if(isset($session['cat_id']) and $session['cat_id'] != null) {
+            $id = $session['cat_id'];
+            $query->whereHas('categories', function ($query) use ($id) {
+                $query->where('category_id', $id);
+            });
+        }
+
+        if($order != null) {
+            $orderBy = explode("|", $order);
+            $query->orderBy($orderBy[0], $orderBy[1]);
+        }
+
+        return $query;
+    }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CashCountryList
     static function CashBrandList($stopCash=0){
         if($stopCash){
@@ -276,3 +273,6 @@ class ShopProductController extends AdminMainController {
         return $CashCategoriesList ;
     }
 }
+
+
+

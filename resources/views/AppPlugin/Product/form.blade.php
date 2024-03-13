@@ -2,72 +2,77 @@
 
 @section('content')
   <x-admin.hmtl.breadcrumb :pageData="$pageData"/>
-  <x-admin.hmtl.section>
-    @if($pageData['ViewType'] == 'Edit')
-      <div class="row mb-2">
-        <div class="col-9">
-          <h1 class="def_h1_new">{!! print_h1($rowData) !!}</h1>
+  <x-admin.product.form-top-icon :page-data="$pageData" :row="$rowData"/>
+
+  <div class="productForm">
+
+
+
+
+    <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
+      @csrf
+      <x-admin.hmtl.section>
+        @if($errors->has([]))
+          <div class="alert alert-danger alert-dismissible">
+            {{__('admin/alertMass.form_has_error')}}
+          </div>
+        @endif
+        
+        <div class="row mb-5">
+
+          <x-admin.card.normal col="col-lg-9">
+            <div class="row">
+              <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat" :col="9"/>
+              <x-admin.form.select-arr name="brand_id" sendvalue="{{old('brand_id',$rowData->brand_id)}}" :required-span="false"
+                                       :send-arr="$CashBrandList" label="{{__('admin/proProduct.app_menu_brand')}}" col="3"/>
+            </div>
+
+            <div class="row">
+              <x-admin.product.form-price :row="$rowData"/>
+            </div>
+
+            <hr>
+            <div class="row mt-2">
+              <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
+              <x-admin.product.form-content :lang-send="$LangAdd" :row="$rowData" :viewtype="$pageData['ViewType']" />
+            </div>
+
+          </x-admin.card.normal>
+
+          <x-admin.card.normal col="col-lg-3">
+            <x-admin.form.upload-model-photo :page="$pageData" :row="$rowData" :labelview="false" col="12"/>
+          </x-admin.card.normal>
+
+
+          <x-admin.form.submit-role-back :page-data="$pageData"/>
+
+
         </div>
-        <div class="col-3 dir_button">
-          <x-admin.form.action-button url="{{route($PrefixRoute.'.More_Photos',$rowData->id)}}" type="morePhoto" :tip="false"/>
-          <x-admin.lang.delete-button :row="$rowData"/>
-        </div>
-      </div>
-    @endif
-  </x-admin.hmtl.section>
+      </x-admin.hmtl.section>
 
 
-  <x-admin.hmtl.section>
-    <x-admin.card.def :page-data="$pageData">
-      <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="row">
-          <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat"  />
-        </div>
-
-        <div class="row">
-          <x-admin.form.input :row="$rowData" name="price" :label="__('admin/proProduct.pro_text_price')" col="3" tdir="en"/>
-          <x-admin.form.input :row="$rowData" name="sale_price" :label="__('admin/proProduct.pro_text_discount')" col="3" tdir="en"/>
-          <x-admin.form.input :row="$rowData" name="qty_left" :label="__('admin/proProduct.pro_text_qty')" col="3" tdir="en"/>
-          <x-admin.form.input :row="$rowData" name="qty_max" :label="__('admin/proProduct.pro_text_qty_max')" col="3" tdir="en"/>
-        </div>
-        <hr>
+    </form>
+  </div>
 
 
-        <div class="row">
-          <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
-          @foreach ( $LangAdd as $key=>$lang )
-            <x-admin.lang.meta-tage-filde :row="$rowData" :key="$key" :viewtype="$pageData['ViewType']" :label-view="$viewLabel"
-                                          :def-name="__('admin/proProduct.pro_text_name')"/>
-          @endforeach
-        </div>
 
-        <hr>
-        <div class="row">
-          <x-admin.form.check-active :row="$rowData" :lable="__('admin/form.check_is_published')" name="is_active"
-                                     page-view="{{$pageData['ViewType']}}"/>
-
-        </div>
-        <hr>
-        <div class="row">
-          <x-admin.form.upload-model-photo :page="$pageData" :row="$rowData" col="6"/>
-        </div>
-
-        <x-admin.form.submit-role-back :page-data="$pageData"/>
-
-      </form>
-
-    </x-admin.card.def>
-  </x-admin.hmtl.section>
 
 
 @endsection
+{{--            <div class="row">--}}
+{{--              <x-admin.form.check-active :row="$rowData" :lable="__('admin/form.check_is_published')" name="is_active"--}}
+{{--                                         page-view="{{$pageData['ViewType']}}"/>--}}
 
+{{--            </div>--}}
 
 @push('JsCode')
   <x-admin.table.sweet-delete-js/>
   <x-admin.java.update-slug :view-type="$pageData['ViewType']"/>
   @if($viewEditor)
-    <x-admin.form.ckeditor-jave height="350"/>
+    <script src="https://cdn.ckeditor.com/4.11.1/full/ckeditor.js"></script>
+    @foreach ( $LangAdd as $key=>$lang )
+      <x-admin.java.ckeditor-by-name name="{{$key}}[des]" :dir="$key" height="250"/>
+      <x-admin.java.ckeditor-by-name name="{{$key}}[short_des]" :dir="$key" height="250"/>
+    @endforeach
   @endif
 @endpush

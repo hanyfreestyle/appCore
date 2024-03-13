@@ -19,6 +19,7 @@ class MetaTageFilde extends Component {
     public $defdes;
     public $other;
     public $otherName;
+    public $showlang;
 
     public function __construct(
         $key = null,
@@ -33,6 +34,7 @@ class MetaTageFilde extends Component {
         $defdes = null,
         $other = false,
         $otherName = null,
+        $showlang = true,
     ) {
         $this->key = $key;
         $this->row = $row;
@@ -45,6 +47,7 @@ class MetaTageFilde extends Component {
         }
         $this->slug = $slug;
         $this->labelView = $labelView;
+
         $this->holder = $holder;
         if($labelView == false) {
             $this->holder = true;
@@ -65,6 +68,7 @@ class MetaTageFilde extends Component {
 
         $this->keyLang = __('admin.multiple_lang_key_' . $this->key);
 
+        $this->showlang = $showlang;
 
     }
 

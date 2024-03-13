@@ -23,14 +23,11 @@
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/bs-stepper/css/bs-stepper.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/dropzone/min/dropzone.min.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('plugins/sweet/sweetalert2.min.css') }}">
-
-
-
-
     @yield('StyleFile')
 
     <link rel="stylesheet" href="{{ defAdminAssets('css/adminlte.css') }}">
     <link rel="stylesheet" href="{{ defAdminAssets('css/custom_admin.css') }}">
+
     @if( thisCurrentLocale() == 'ar')
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/adminlte-rtl.css') }}">
         <link rel="stylesheet" href="{{ defAdminAssets('rtl/css/custom.css') }}">
@@ -38,6 +35,9 @@
     @elseif( thisCurrentLocale() == 'en')
         <link rel="stylesheet" href="{{ defAdminAssets('css/custom_en.css') }}">
     @endif
+
+    {!! (new \App\Helpers\MinifyTools)->setWebAssets('assets/admin/')->MinifyCss('css/custom_product.css','Seo',true) !!}
+
 </head>
 
 <body class="hold-transition {{ mainBodyStyle() }}">

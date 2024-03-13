@@ -11,7 +11,7 @@
     <th class="TD_100">{{__('admin/proProduct.cat_text_name')}}</th>
     <th class="TD_100">{{__('admin/proProduct.app_menu_brand')}}</th>
     <th class="TD_80">{{__('admin/proProduct.pro_text_price')}}</th>
-    <th class="TD_80">{{__('admin/proProduct.pro_text_discount')}}</th>
+    <th class="TD_80">{{__('admin/proProduct.pro_text_regular_price')}}</th>
 
     <x-admin.table.action-but po="top" type="edit"/>
     <x-admin.table.action-but po="top" type="addLang"/>

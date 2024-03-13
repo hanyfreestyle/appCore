@@ -1,7 +1,10 @@
 <script>
     CKEDITOR.replace('{{$name}}',
      {
-         language: '{{$dir}}',
+         language: 'en',
+         @if($dir == 'ar')
+         contentsLangDirection: 'rtl',
+         @endif
          height: {{$height}},
          toolbarGroups : [
              { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
@@ -11,7 +14,6 @@
              { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
              { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
              { name: 'links', groups: [ 'links' ] },
-             // '/',
              { name: 'colors', groups: [ 'colors' ] },
              { name: 'styles', groups: [ 'styles' ] },
              { name: 'tools', groups: [ 'tools' ] },

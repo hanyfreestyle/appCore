@@ -1,0 +1,28 @@
+.productForm{
+
+
+}
+
+.productForm .mainForm{
+
+}
+
+.productForm .card-body{
+    /*padding-top: 5px!important;*/
+
+}
+
+.productForm .mainForm .def_form_label{
+    font-size: 13px!important;
+}
+
+.productForm  .fileUploadCurrent img{
+    max-width: 100%!important;
+    margin-top: 5px;
+
+}
+
+.fileUploadCurrent_label{
+    display: none;
+
+}
