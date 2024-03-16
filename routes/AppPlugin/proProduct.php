@@ -98,4 +98,6 @@ Route::get('/attribute/option/Sort/{AttributeId}',[ShopAttributeValueController:
 Route::post('/attribute/option/SaveSort',[ShopAttributeValueController::class,'SaveSort'])->name('Shop.ProAttributeValue.SaveSort');
 Route::get('/attribute/option/config/{AttributeId}', [ShopAttributeValueController::class,'config'])->name('Shop.ProAttributeValue.config');
 
-Route::get('/product/manage-attribute/{id}',[ManageAttributeController::class,'ManageAttribute'])->name('Shop.ProAttribute.manage-attribute');
+Route::get('/product/manage-attribute/{id}',[ManageAttributeController::class,'ManageAttribute'])->name('Shop.Product.manage-attribute');
+Route::post('/product/manage-attribute-update/{id}',[ManageAttributeController::class,'ManageAttributeUpdate'])->name('Shop.Product.manage-attributeUpdate');
+Route::get('/product/remove-attribute/{proId}/{AttributeId}',[ManageAttributeController::class,'RemoveAttribute'])->name('Shop.Product.remove-attribute');

@@ -5,6 +5,7 @@ namespace App\AppPlugin\Product;
 use App\AppPlugin\Product\Models\Brand;
 use App\AppPlugin\Product\Models\Category;
 use App\AppPlugin\Product\Models\Product;
+use App\AppPlugin\Product\Models\ProductAttribute;
 use App\AppPlugin\Product\Models\ProductPhoto;
 use App\AppPlugin\Product\Models\ProductTranslation;
 use App\AppPlugin\Product\Request\ProductRequest;
@@ -49,13 +50,41 @@ class ManageAttributeController extends AdminMainController {
             'restore' => 1,
             'formName' => "ProductFilters",
         ];
+
+        self::loadConstructData($sendArr);
+
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #    ManageAttribute
     public function ManageAttribute($proId) {
-        $product = Product::where('id', $proId)->firstOrFail();
-        dd($product);
+
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
+        $product = Product::where('id', $proId)->with('categories')->with('attributes')->firstOrFail();
+        $product_attributes = $product->attributes->pluck('id');
+        $attributes = ProductAttribute::whereNotIn('id', $product_attributes)->get();
+        return view('AppPlugin.Product.manage-attribute', compact('pageData', 'product', 'attributes'));
     }
 
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #   ManageAttributeUpdate
+    public function ManageAttributeUpdate(Request $request, $proId) {
+        $product = Product::where('id', $proId)->firstOrFail();
+        $attributes = $request->input('attributes');
+        $product->attributes()->attach($attributes);
+        $product->save();
+        return back()->with('data_not_save', "");
+   }
+
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    public function RemoveAttribute($proId, $AttributeId) {
+        $product = Product::where('id', $proId)->firstOrFail();
+        $product->attributes()->detach($AttributeId);
+        return back()->with('data_not_save', "");
+    }
 
 }
 

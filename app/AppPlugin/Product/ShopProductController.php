@@ -153,7 +153,6 @@ class ShopProductController extends AdminMainController {
         $pageData['ViewType'] = "Edit";
         $Categories = Category::all();
         $rowData = Product::where('id', $id)->with('categories')->with('attributes')->firstOrFail();
-        dd($rowData->attributes);
         $selCat = $rowData->categories()->pluck('category_id')->toArray();
         $LangAdd = self::getAddLangForEdit($rowData);
         return view('AppPlugin.Product.form', compact('pageData', 'rowData', 'Categories', 'LangAdd', 'selCat'));

@@ -43,7 +43,7 @@
             <x-admin.product.status :row="$rowData" :viewtype="$pageData['ViewType']"/>
 
             <x-admin.card.normal>
-              <a href="{{route('Shop.ProAttribute.manage-attribute',$rowData->id)}}">Manage Attribute</a>
+              <a href="{{route('Shop.Product.manage-attribute',$rowData->id)}}">Manage Attribute</a>
 
             </x-admin.card.normal>
 
