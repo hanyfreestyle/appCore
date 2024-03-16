@@ -42,6 +42,12 @@ class Product extends Model implements TranslatableContract {
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| # attributes
+    public function attributes(): BelongsToMany {
+        return $this->belongsToMany(ProductAttribute::class,'pro_product_attribute','product_id','attribute_id')->with('translation');
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # more_photos
     public function more_photos(): HasMany {
         return $this->hasMany(ProductPhoto::class, 'product_id', 'id');

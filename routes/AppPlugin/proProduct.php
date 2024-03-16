@@ -1,5 +1,6 @@
 <?php
 
+use App\AppPlugin\Product\ManageAttributeController;
 use App\AppPlugin\Product\ShopAttributeController;
 use App\AppPlugin\Product\ShopAttributeValueController;
 use App\AppPlugin\Product\ShopBrandController;
@@ -96,3 +97,5 @@ Route::get('/attribute/option/destroy/{id}',[ShopAttributeValueController::class
 Route::get('/attribute/option/Sort/{AttributeId}',[ShopAttributeValueController::class,'Sort'])->name('Shop.ProAttributeValue.Sort');
 Route::post('/attribute/option/SaveSort',[ShopAttributeValueController::class,'SaveSort'])->name('Shop.ProAttributeValue.SaveSort');
 Route::get('/attribute/option/config/{AttributeId}', [ShopAttributeValueController::class,'config'])->name('Shop.ProAttributeValue.config');
+
+Route::get('/product/manage-attribute/{id}',[ManageAttributeController::class,'ManageAttribute'])->name('Shop.ProAttribute.manage-attribute');

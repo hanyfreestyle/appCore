@@ -43,10 +43,20 @@
             <x-admin.product.status :row="$rowData" :viewtype="$pageData['ViewType']"/>
 
             <x-admin.card.normal>
+              <a href="{{route('Shop.ProAttribute.manage-attribute',$rowData->id)}}">Manage Attribute</a>
+
+            </x-admin.card.normal>
+
+
+
+            <x-admin.card.normal>
               <div class="row">
               <x-admin.form.upload-model-photo :page="$pageData" :row="$rowData" :labelview="false" col="12"/>
               </div>
             </x-admin.card.normal>
+
+
+
           </div>
 
 
