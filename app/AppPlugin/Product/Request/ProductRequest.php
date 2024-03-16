@@ -29,6 +29,9 @@ class ProductRequest extends FormRequest {
         $id = $this->route('id');
 
         $rules = [
+            'is_active' => "required",
+            'on_stock' => "required",
+            'type' => "required",
             'categories' => 'required|array|min:1',
             'price' => "required|numeric",
             'regular_price' => "nullable|numeric|gt:price",

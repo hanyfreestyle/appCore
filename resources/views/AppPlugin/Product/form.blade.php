@@ -6,9 +6,6 @@
 
   <div class="productForm">
 
-
-
-
     <form class="mainForm" action="{{route($PrefixRoute.'.update',intval($rowData->id))}}" method="post" enctype="multipart/form-data">
       @csrf
       <x-admin.hmtl.section>
@@ -17,31 +14,41 @@
             {{__('admin/alertMass.form_has_error')}}
           </div>
         @endif
-        
+
         <div class="row mb-5">
 
-          <x-admin.card.normal col="col-lg-9">
-            <div class="row">
-              <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat" :col="9"/>
-              <x-admin.form.select-arr name="brand_id" sendvalue="{{old('brand_id',$rowData->brand_id)}}" :required-span="false"
-                                       :send-arr="$CashBrandList" label="{{__('admin/proProduct.app_menu_brand')}}" col="3"/>
-            </div>
 
-            <div class="row">
-              <x-admin.product.form-price :row="$rowData"/>
-            </div>
+          <div class="col-lg-9">
+            <x-admin.card.normal>
+              <div class="row">
+                <x-admin.form.select-multiple name="categories" :categories="$Categories" :sel-cat="$selCat" :col="9"/>
+                <x-admin.form.select-arr name="brand_id" sendvalue="{{old('brand_id',$rowData->brand_id)}}" :required-span="false"
+                                         :send-arr="$CashBrandList" label="{{__('admin/proProduct.app_menu_brand')}}" col="3"/>
+              </div>
 
-            <hr>
-            <div class="row mt-2">
-              <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
-              <x-admin.product.form-content :lang-send="$LangAdd" :row="$rowData" :viewtype="$pageData['ViewType']" />
-            </div>
+              <div class="row">
+                <x-admin.product.form-price :row="$rowData"/>
+              </div>
 
-          </x-admin.card.normal>
+              <hr>
+              <div class="row mt-2">
+                <input type="hidden" name="add_lang" value="{{json_encode($LangAdd)}}">
+                <x-admin.product.form-content :lang-send="$LangAdd" :row="$rowData" :viewtype="$pageData['ViewType']" />
+              </div>
 
-          <x-admin.card.normal col="col-lg-3">
-            <x-admin.form.upload-model-photo :page="$pageData" :row="$rowData" :labelview="false" col="12"/>
-          </x-admin.card.normal>
+            </x-admin.card.normal>
+          </div>
+
+          <div class="col-lg-3">
+            <x-admin.product.status :row="$rowData" :viewtype="$pageData['ViewType']"/>
+
+            <x-admin.card.normal>
+              <div class="row">
+              <x-admin.form.upload-model-photo :page="$pageData" :row="$rowData" :labelview="false" col="12"/>
+              </div>
+            </x-admin.card.normal>
+          </div>
+
 
 
           <x-admin.form.submit-role-back :page-data="$pageData"/>

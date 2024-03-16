@@ -58,6 +58,13 @@ class ShopProductController extends AdminMainController {
         ];
         View::share('ProductType_Arr', $ProductType_Arr);
 
+        $OnStock_Arr = [
+            "1"=> ['id'=>'0','name'=> __('admin/proProduct.pro_status_stock_0') ],
+            "2"=> ['id'=>'1','name'=> __('admin/proProduct.pro_status_stock_1') ],
+        ];
+        View::share('OnStock_Arr', $OnStock_Arr);
+
+
         $this->CashBrandList = self::CashBrandList($this->StopeCash);
         View::share('CashBrandList', $this->CashBrandList);
 
@@ -159,13 +166,15 @@ class ShopProductController extends AdminMainController {
         try {
             DB::transaction(function () use ($request, $saveData) {
                 $categories = $request->input('categories');
-                $saveData->is_active = intval((bool)$request->input('is_active'));
+                $saveData->is_active = $request->input('is_active');
+                $saveData->on_stock = $request->input('on_stock');
+                $saveData->type = $request->input('type');
+                $saveData->brand_id = $request->input('brand_id');
 
                 $saveData->price = $request->input('price');
-                $saveData->sale_price = $request->input('sale_price');
+                $saveData->regular_price = $request->input('regular_price');
                 $saveData->qty_left = $request->input('qty_left');
                 $saveData->qty_max = $request->input('qty_max');
-                $saveData->unit = $request->input('unit');
                 $saveData->save();
 
                 $saveData->categories()->sync($categories);
@@ -177,6 +186,7 @@ class ShopProductController extends AdminMainController {
                     $saveTranslation = $this->translation->where($dbName, $saveData->id)->where('locale', $key)->firstOrNew();
                     $saveTranslation->$dbName = $saveData->id;
                     $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
+                    $saveTranslation->short_des = $request->input($key . '.short_des');
                     $saveTranslation = self::saveTranslationMain($saveTranslation, $key, $request);
                     $saveTranslation->save();
                 }

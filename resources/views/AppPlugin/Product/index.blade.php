@@ -38,7 +38,7 @@
 
                   <td>{{$row->brand->name ?? ''}}</td>
                   <td>{{$row->price}}</td>
-                  <td>{{$row->sale_price}}</td>
+                  <td>{{$row->regular_price}}</td>
 
                   <x-admin.table.action-but type="Photos" :row="$row" />
                   <x-admin.table.action-but type="addLang" :row="$row"/>
