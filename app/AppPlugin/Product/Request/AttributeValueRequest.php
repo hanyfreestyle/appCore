@@ -6,7 +6,7 @@ use App\Helpers\AdminHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class ProductAttributeValueRequest extends FormRequest {
+class AttributeValueRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;

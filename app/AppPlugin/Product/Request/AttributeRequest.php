@@ -3,11 +3,10 @@
 namespace App\AppPlugin\Product\Request;
 
 use App\Helpers\AdminHelper;
-use App\Http\Controllers\AdminMainController;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
-class ProductAttributeRequest extends FormRequest {
+class AttributeRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;

@@ -5,6 +5,7 @@ namespace App\AppPlugin\Product;
 
 use App\AppPlugin\Product\Models\Attribute;
 use App\AppPlugin\Product\Models\AttributeTranslation;
+use App\AppPlugin\Product\Request\AttributeRequest;
 use App\AppPlugin\Product\Request\ProductAttributeRequest;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
@@ -76,7 +77,7 @@ class AttributeController extends AdminMainController {
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(ProductAttributeRequest $request, $id = 0) {
+    public function storeUpdate(AttributeRequest $request, $id = 0) {
         $saveData = Attribute::findOrNew($id);
         try {
             DB::transaction(function () use ($request, $saveData) {

@@ -6,6 +6,7 @@ namespace App\AppPlugin\Product;
 use App\AppPlugin\Product\Models\Attribute;
 use App\AppPlugin\Product\Models\AttributeValue;
 use App\AppPlugin\Product\Models\AttributeValueTranslation;
+use App\AppPlugin\Product\Request\AttributeValueRequest;
 use App\AppPlugin\Product\Request\ProductAttributeValueRequest;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
@@ -82,7 +83,7 @@ class AttributeValueController extends AdminMainController {
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(ProductAttributeValueRequest $request, $id = 0) {
+    public function storeUpdate(AttributeValueRequest $request, $id = 0) {
         $saveData = AttributeValue::findOrNew($id);
         try {
             DB::transaction(function () use ($request, $saveData) {
