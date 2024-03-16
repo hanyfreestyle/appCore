@@ -10,7 +10,7 @@ use Astrotomic\Translatable\Translatable;
 
 
 
-class ProductAttributeValue extends Model implements TranslatableContract {
+class AttributeValue extends Model implements TranslatableContract {
 
     use Translatable;
     protected $table = "pro_attribute_values";

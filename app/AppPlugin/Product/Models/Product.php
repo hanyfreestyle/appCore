@@ -47,6 +47,11 @@ class Product extends Model implements TranslatableContract {
         return $this->belongsToMany(ProductAttribute::class,'pro_product_attribute','product_id','attribute_id')->with('translation');
     }
 
+    public function variants(): HasMany {
+        return $this->hasMany(ProductVariants::class,'product_id');
+    }
+
+
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # more_photos
     public function more_photos(): HasMany {

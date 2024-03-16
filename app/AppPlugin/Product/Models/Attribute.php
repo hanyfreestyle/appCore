@@ -9,7 +9,7 @@ use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
-class ProductAttribute extends Model implements TranslatableContract {
+class Attribute extends Model implements TranslatableContract {
 
     use Translatable;
     protected $table = "pro_attributes";
@@ -26,12 +26,12 @@ class ProductAttribute extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #
     public function scopeDef(Builder $query): Builder {
-        return $query->with('translations')->withCount('option');
+        return $query->with('translations')->withCount('values');
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#|||||||||||||||||||||||||||||||||||||| #     children
-    public function option(): HasMany {
-        return $this->hasMany(ProductAttributeValue::class,'attribute_id');
+#|||||||||||||||||||||||||||||||||||||| #     Values
+    public function values(): HasMany {
+        return $this->hasMany(AttributeValue::class,'attribute_id')->with('translation');
     }
 
 

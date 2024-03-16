@@ -49,7 +49,7 @@
                 @foreach(config('app.web_lang') as $key => $lang)
                   <td>{!! printCategoryName($key,$row,$PrefixRoute.".SubCategory") !!}</td>
                 @endforeach
-                <td>{{$row->option_count}}</td>
+                <td>{{$row->values_count}}</td>
                 <td>{!! is_active($row->is_active) !!}</td>
                 <x-admin.table.action-but type="edit" :row="$row"/>
                 <x-admin.table.action-but type="delete" :row="$row"/>

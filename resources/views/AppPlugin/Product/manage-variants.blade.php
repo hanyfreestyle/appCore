@@ -35,7 +35,7 @@
             @foreach($product->attributes as $attribute)
               <x-admin.card.normal :title="$attribute->name">
 
-                <form class="mainForm" action="{{route('Shop.Product.value-update',$attribute->id)}}" method="post">
+                <form class="mainForm" action="{{route('Shop.Product.manage-attributeUpdate',$attribute->id)}}" method="post">
                   @csrf
                   <div class="row">
                     <x-admin.form.select-multiple name="attributes_values" :categories="$attribute->Values" :label-view="false" :col="12"/>
@@ -64,6 +64,8 @@
                   <td>{{$attribute->name}}</td>
                   <td>{{$attribute->name}}</td>
                   <td><a href="{{route('Shop.Product.remove-attribute',[$product->id,$attribute->id])}}">remove</a></td>
+
+
                 </tr>
               @endforeach
               </tbody>

@@ -6,6 +6,7 @@ use App\AppPlugin\Product\Models\Brand;
 use App\AppPlugin\Product\Models\Category;
 use App\AppPlugin\Product\Models\Product;
 use App\AppPlugin\Product\Models\ProductAttribute;
+use App\AppPlugin\Product\Models\ProductAttributeValue;
 use App\AppPlugin\Product\Models\ProductPhoto;
 use App\AppPlugin\Product\Models\ProductTranslation;
 use App\AppPlugin\Product\Request\ProductRequest;
@@ -61,9 +62,10 @@ class ManageAttributeController extends AdminMainController {
 
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
-        $product = Product::where('id', $proId)->with('categories')->with('attributes')->firstOrFail();
+        $product = Product::where('id', $proId)->with('attributes')->firstOrFail();
         $product_attributes = $product->attributes->pluck('id');
-        $attributes = ProductAttribute::whereNotIn('id', $product_attributes)->get();
+        $attributes = ProductAttribute::whereNotIn('id', $product_attributes)->with('Values')->get();
+
         return view('AppPlugin.Product.manage-attribute', compact('pageData', 'product', 'attributes'));
     }
 
@@ -84,6 +86,22 @@ class ManageAttributeController extends AdminMainController {
         $product = Product::where('id', $proId)->firstOrFail();
         $product->attributes()->detach($AttributeId);
         return back()->with('data_not_save', "");
+    }
+
+
+    public function ManageAttributeValueUpdate(Request $request,$id){
+        dd($request->all());
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    public function ManageVariants($proId){
+        $pageData = $this->pageData;
+        $pageData['ViewType'] = "Edit";
+
+        $product = Product::where('id', $proId)->with('variants')->with('attributes')->firstOrFail();
+//        dd($product->variants);
+        return view('AppPlugin.Product.manage-attribute', compact('pageData', 'product'));
     }
 
 }

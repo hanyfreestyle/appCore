@@ -2,10 +2,11 @@
 
 namespace App\AppPlugin\Product;
 
-use App\AppPlugin\Product\Models\Product;
-use App\AppPlugin\Product\Models\ProductAttribute;
-use App\AppPlugin\Product\Models\ProductAttributeTranslation;
-use App\AppPlugin\Product\Request\ProductAttributeRequest;
+
+use App\AppPlugin\Product\Models\Attribute;
+use App\AppPlugin\Product\Models\AttributeValue;
+use App\AppPlugin\Product\Models\AttributeValueTranslation;
+use App\AppPlugin\Product\Request\ProductAttributeValueRequest;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
@@ -14,12 +15,12 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 
-class ShopAttributeController extends AdminMainController {
+class AttributeValueController extends AdminMainController {
     use CrudTraits;
 
-    function __construct(ProductAttribute $model) {
+    function __construct(Request $request,AttributeValue $model) {
         parent::__construct();
-        $this->controllerName = "ProAttribute";
+        $this->controllerName = "ProAttributeValue";
         $this->PrefixRole = 'Product';
         $this->selMenu = "Shop.";
         $this->PrefixCatRoute = "";
@@ -36,6 +37,8 @@ class ShopAttributeController extends AdminMainController {
             'yajraTable' => false,
             'AddLang' => false,
             'restore' => 0,
+            'WithSubCat'=> true,
+            'ModelId'=> $request->route()->parameter('AttributeId'),
         ];
 
         self::loadConstructData($sendArr);
@@ -50,43 +53,46 @@ class ShopAttributeController extends AdminMainController {
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     index
-    public function index() {
+    public function index($AttributeId) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "List";
         $pageData['SubView'] = false;
-        $rowData = self::getSelectQuery(ProductAttribute::def());
-        return view('AppPlugin.Product.attribute_index', compact('pageData', 'rowData'));
+        $Attribute = Attribute::with('translation')->where('id',$AttributeId)->firstOrFail();
+        $rowData = self::getSelectQuery(AttributeValue::def()->where('attribute_id',$AttributeId));
+        return view('AppPlugin.Product.attribute_value_index', compact('pageData', 'rowData','Attribute'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     create
-    public function create() {
+    public function create($AttributeId) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Add";
-        $rowData = ProductAttribute::findOrNew(0);
-        return view('AppPlugin.Product.attribute_form' ,compact('pageData','rowData'));
+        $Attribute = Attribute::with('translation')->where('id',$AttributeId)->firstOrFail();
+        $rowData = AttributeValue::findOrNew(0);
+        return view('AppPlugin.Product.attribute_value_form',compact('rowData','pageData','Attribute'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     edit
     public function edit($id) {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
-        $rowData = ProductAttribute::where('id', $id)->firstOrFail();
-        return view('AppPlugin.Product.attribute_form' ,compact('pageData','rowData'));
+        $rowData = AttributeValue::where('id', $id)->firstOrFail();
+        $Attribute = Attribute::with('translation')->where('id',$rowData->attribute_id)->firstOrFail();
+        return view('AppPlugin.Product.attribute_value_form',compact('rowData','pageData','Attribute'));
     }
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     storeUpdate
-    public function storeUpdate(ProductAttributeRequest $request, $id = 0) {
-        $saveData = ProductAttribute::findOrNew($id);
+    public function storeUpdate(ProductAttributeValueRequest $request, $id = 0) {
+        $saveData = AttributeValue::findOrNew($id);
         try {
             DB::transaction(function () use ($request, $saveData) {
                 $saveData->is_active = intval((bool)$request->input('is_active'));
-                $saveData->type = intval((bool)$request->input('type'));
+                $saveData->attribute_id = $request->input('attribute_id');
                 $saveData->save();
                 foreach (config('app.web_lang') as $key => $lang) {
-                    $saveTranslation = ProductAttributeTranslation::where('attribute_id', $saveData->id)->where('locale', $key)->firstOrNew();
+                    $saveTranslation = AttributeValueTranslation::where('value_id', $saveData->id)->where('locale', $key)->firstOrNew();
                     $saveTranslation->locale = $key;
-                    $saveTranslation->attribute_id = $saveData->id;
+                    $saveTranslation->value_id = $saveData->id;
                     $saveTranslation->name = $request->input($key . '.name');
                     $saveTranslation->slug = AdminHelper::Url_Slug($request->input($key . '.slug'));
                     $saveTranslation->save();
@@ -96,18 +102,18 @@ class ShopAttributeController extends AdminMainController {
             return back()->with('data_not_save', "");
         }
         self::ClearCash();
-        return self::redirectWhere($request, $id, $this->PrefixRoute . '.index');
-    }
+        return  self::redirectWhereNew($request,$id, route($this->PrefixRoute.'.index',$request->input('attribute_id')));
 
+    }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     CategorySort
-    public function Sort() {
+    public function Sort($AttributeId) {
+        $Attribute = Attribute::with('translation')->where('id',$AttributeId)->firstOrFail();
         $pageData = $this->pageData;
         $pageData['ViewType'] = "List";
-        $thisRow = null;
-        $rowData = ProductAttribute::orderBy('postion')->get();
-        return view('AppPlugin.Product.attribute_sort', compact('pageData', 'rowData', 'thisRow'));
+        $rowData = AttributeValue::where('attribute_id',$Attribute->id)->orderBy('postion')->get();
+        return view('AppPlugin.Product.attribute_value_sort', compact('pageData', 'rowData', 'Attribute'));
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -117,7 +123,7 @@ class ShopAttributeController extends AdminMainController {
         foreach ($positions as $position) {
             $id = $position[0];
             $newPosition = $position[1];
-            $saveData = ProductAttribute::findOrFail($id);
+            $saveData = AttributeValue::findOrFail($id);
             $saveData->postion = $newPosition;
             $saveData->save();
         }
@@ -128,22 +134,19 @@ class ShopAttributeController extends AdminMainController {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| #     ForceDeletes
     public function ForceDeleteException($id) {
-
-        $deleteRow = ProductAttribute::where('id', $id)->withcount('option')->firstOrFail();
-        if($deleteRow->option_count == 0) {
-            try {
-                DB::transaction(function () use ($deleteRow, $id) {
-                    $deleteRow->forceDelete();
-                });
-            } catch (\Exception $exception) {
-                return back()->with(['confirmException' => '', 'fromModel' => 'Attribute', 'deleteRow' => $deleteRow]);
+        dd('hi');
+        $deleteRow = Product::onlyTrashed()->where('id', $id)->with('more_photos')->firstOrFail();
+        if(count($deleteRow->more_photos) > 0) {
+            foreach ($deleteRow->more_photos as $del_photo) {
+                AdminHelper::DeleteAllPhotos($del_photo);
             }
-        } else {
-            return back()->with(['confirmException' => '', 'fromModel' => 'Attribute', 'deleteRow' => $deleteRow]);
         }
-
+        $deleteRow = AdminHelper::DeleteAllPhotos($deleteRow);
+        AdminHelper::DeleteDir($this->UploadDirIs, $id);
+        $deleteRow->forceDelete();
         self::ClearCash();
         return back()->with('confirmDelete', "");
     }
+
 
 }
