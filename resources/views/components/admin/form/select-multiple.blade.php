@@ -11,7 +11,9 @@
       @if($type == 'Main')
         @foreach($categories as $category )
           <option value="{{$category->id}}"
-           {{ (in_array($category->id,$selCat)) ? 'selected' : ''}}
+           @if(is_array($selCat))
+             {{ (in_array($category->id,$selCat)) ? 'selected' : ''}}
+            @endif
            {{ (collect(old('categories'))->contains($category->id)) ? 'selected':'' }}>{{ print_h1($category)}}</option>
         @endforeach
       @else

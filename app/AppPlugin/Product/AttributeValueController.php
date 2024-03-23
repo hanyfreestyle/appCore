@@ -7,7 +7,6 @@ use App\AppPlugin\Product\Models\Attribute;
 use App\AppPlugin\Product\Models\AttributeValue;
 use App\AppPlugin\Product\Models\AttributeValueTranslation;
 use App\AppPlugin\Product\Request\AttributeValueRequest;
-use App\AppPlugin\Product\Request\ProductAttributeValueRequest;
 use App\Helpers\AdminHelper;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;

@@ -44,11 +44,12 @@ class Product extends Model implements TranslatableContract {
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #|||||||||||||||||||||||||||||||||||||| # attributes
     public function attributes(): BelongsToMany {
-        return $this->belongsToMany(ProductAttribute::class,'pro_product_attribute','product_id','attribute_id')->with('translation');
+        return $this->belongsToMany(Attribute::class,'pro_product_attribute','product_id','attribute_id')
+            ->with('translation')->with('values')->withPivot(['id','values']);
     }
 
     public function variants(): HasMany {
-        return $this->hasMany(ProductVariants::class,'product_id');
+        return $this->hasMany(ProductVariants::class,'product_id')->with('valueName')->with('attributeName');
     }
 
 

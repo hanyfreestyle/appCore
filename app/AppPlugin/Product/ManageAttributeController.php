@@ -2,22 +2,18 @@
 
 namespace App\AppPlugin\Product;
 
-use App\AppPlugin\Product\Models\Brand;
-use App\AppPlugin\Product\Models\Category;
+
 use App\AppPlugin\Product\Models\Product;
+use App\AppPlugin\Product\Models\Attribute;
+use App\AppPlugin\Product\Models\AttributeValue;
 use App\AppPlugin\Product\Models\ProductAttribute;
-use App\AppPlugin\Product\Models\ProductAttributeValue;
 use App\AppPlugin\Product\Models\ProductPhoto;
 use App\AppPlugin\Product\Models\ProductTranslation;
-use App\AppPlugin\Product\Request\ProductRequest;
-use App\Helpers\AdminHelper;
+
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Arr;
 
 
 class ManageAttributeController extends AdminMainController {
@@ -64,7 +60,7 @@ class ManageAttributeController extends AdminMainController {
         $pageData['ViewType'] = "Edit";
         $product = Product::where('id', $proId)->with('attributes')->firstOrFail();
         $product_attributes = $product->attributes->pluck('id');
-        $attributes = ProductAttribute::whereNotIn('id', $product_attributes)->with('Values')->get();
+        $attributes = Attribute::whereNotIn('id', $product_attributes)->with('values')->get();
 
         return view('AppPlugin.Product.manage-attribute', compact('pageData', 'product', 'attributes'));
     }
@@ -88,9 +84,14 @@ class ManageAttributeController extends AdminMainController {
         return back()->with('data_not_save', "");
     }
 
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
     public function ManageAttributeValueUpdate(Request $request,$id){
-        dd($request->all());
+
+        $update = ProductAttribute::where('id',$id)->firstOrFail();
+        $update->values = $request->attributes_values;
+        $update->save();
+        return back()->with('data_not_save', "");
     }
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -99,9 +100,42 @@ class ManageAttributeController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
 
-        $product = Product::where('id', $proId)->with('variants')->with('attributes')->firstOrFail();
-//        dd($product->variants);
-        return view('AppPlugin.Product.manage-attribute', compact('pageData', 'product'));
+        $product = Product::where('id', $proId)->with('variants')->firstOrFail();
+
+
+        foreach ($product->variants as $variant){
+
+
+
+            echobr($variant->id);
+            foreach ( $variant->attributeName as $attributeName) {
+
+                foreach ( $variant->valueName as $valueName) {
+
+//                    echobr($valueName->name);
+                }
+            }
+        }
+
+//        $arr1 = array(1,2,3);
+//        $arr2 = array(4,5);
+//        $ddd = Arr::crossJoin($arr1,$arr2);
+//        dd($ddd);
+
+
+//        $product = Product::where('id', $proId)->with('attributes')->firstOrFail();
+//        $thisattributes =$product->attributes->pluck('id');
+//
+//        foreach ($product->attributes as $attribute){
+//            foreach ($attribute->values as $value){
+//
+//                if (in_array($value->id, json_decode($attribute->pivot->values, true))) {
+//                    echobr($value->name ." ".$value->id);
+//                }
+//            }
+//        }
+
+      // return view('AppPlugin.Product.manage-variants', compact('pageData', 'product'));
     }
 
 }

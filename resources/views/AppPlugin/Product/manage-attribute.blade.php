@@ -33,12 +33,16 @@
 
         @if(count($product->attributes) > 0)
             @foreach($product->attributes as $attribute)
+{{--              {{dd($product->attributes)}}--}}
+
               <x-admin.card.normal :title="$attribute->name">
 
-                <form class="mainForm" action="{{route('Shop.Product.value-update',$attribute->id)}}" method="post">
+
+
+                <form class="mainForm" action="{{route('Shop.Product.value-update',$attribute->pivot->id)}}" method="post">
                   @csrf
                   <div class="row">
-                    <x-admin.form.select-multiple name="attributes_values" :categories="$attribute->Values" :label-view="false" :col="12"/>
+                    <x-admin.form.select-multiple name="attributes_values" :categories="$attribute->Values" :sel-cat="json_decode($attribute->pivot->values, true)" :label-view="false" :col="12"/>
                   </div>
                   <div class="row float-left ml-1">
                     <x-admin.form.submit text="Add"/>
