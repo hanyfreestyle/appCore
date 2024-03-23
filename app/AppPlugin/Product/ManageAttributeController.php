@@ -10,10 +10,13 @@ use App\AppPlugin\Product\Models\ProductAttribute;
 use App\AppPlugin\Product\Models\ProductPhoto;
 use App\AppPlugin\Product\Models\ProductTranslation;
 
+use App\AppPlugin\Product\Models\ProductVariants;
 use App\Http\Controllers\AdminMainController;
 use App\Http\Traits\CrudTraits;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 
 class ManageAttributeController extends AdminMainController {
@@ -100,44 +103,140 @@ class ManageAttributeController extends AdminMainController {
         $pageData = $this->pageData;
         $pageData['ViewType'] = "Edit";
 
-        $product = Product::where('id', $proId)->with('variants')->firstOrFail();
+        $product = Product::where('id', $proId)->firstOrFail();
+        $productAttr = ProductAttribute::where('product_id', $proId)->get();
 
-
-        foreach ($product->variants as $variant){
-
-
-
-            echobr($variant->id);
-            foreach ( $variant->attributeName as $attributeName) {
-
-                foreach ( $variant->valueName as $valueName) {
-
-//                    echobr($valueName->name);
-                }
+        $attributeValues = [];
+        foreach ($productAttr as $key => $attr) {
+            if($attr->values){
+                $thisAttrVaIds  =  json_decode($attr->values, true) ;
+                $attributeValues[] = AttributeValue::whereIn('id', $thisAttrVaIds)->get();
             }
         }
 
-//        $arr1 = array(1,2,3);
-//        $arr2 = array(4,5);
-//        $ddd = Arr::crossJoin($arr1,$arr2);
-//        dd($ddd);
+        $attributeValues = $this->get_combinations($attributeValues);
+
+        $attributeValue =  AttributeValue::get()->keyBy('id')->toArray();
+
+       return view('AppPlugin.Product.manage-variants', compact('pageData', 'product','attributeValues','attributeValue'));
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #
+    public function get_combinations($arrays) {
+        $result = array(array());
+        foreach ($arrays as $property => $property_values) {
+            $tmp = array();
+            foreach ($result as $result_item) {
+                foreach ($property_values as $property_value) {
+                    $tmp[] = $result_item + array(uniqid() => $property_value->id);
+                }
+            }
+            $result = $tmp;
+        }
+        return $result;
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     UpdateVariants
+
+    public function UpdateVariants(Request $request) {
+        $product = Product::findOrFail($request->proId);
+        $variantList = $request->input('product_variants');
+//        dd($variantList);
+
+        foreach ($variantList as $key => $list) {
+            if ($list['price'] > 0) {
+                $data = [];
+                sort($list['variants']);
+                sort($list['variants_id']);
+                $variants_slug = implode('-', $list['variants']);
+                $variants_slug_id = implode('-', $list['variants_id']);
+                $variants_string = implode(', ', $list['variants']);
+//                if ($request->hasFile('product_image')) {
+//                    if (array_key_exists($key, $request->file('product_image'))) {
+//                        $file = $request->file('product_image')[$key];
+//                        $filename = $variants_slug . '-' . time() * time() . '.' . $file->getClientOriginalExtension();
+//                        $file->move(public_path('/upload'), Str::slug($filename));
+//                        $data['image'] = Str::slug($filename);
+//                    }
+//                }
+
+                $data['product_id'] = $product->id;
+                $data['variants_string'] = $variants_string;
+                $data['variants_slug'] = $variants_slug;
+                $data['variants_slug_id'] = $variants_slug_id;
+                $data['price'] = $list['price'];
+                ProductVariants::updateOrCreate(['product_id' => $product->id, 'variants_slug' => $variants_slug], $data);
+            }
+        }
+        return back()->withSuccess("Updated Successful.");
+    }
+
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#|||||||||||||||||||||||||||||||||||||| #     edit
+    public function ManageVariantsCCCCCCCCCCCCC(Request $request) {
+
+        $product = Product::findOrFail($request->id);
+        $ProductVariant = ProductVariant::where('product_id', $product->id)->orderBy('id', 'DESC')->get();
+        $productAttr = ProductAttribute::where('product_id', $request->id)->get();
+
+        $attributeValues = [];
+        foreach ($productAttr as $key => $attr) {
+            $attributeValues[] = AttributeValue::where('attribute_id', $attr->attribute_id)->get();
+        }
+
+        $attributeValues = $this->get_combinations($attributeValues);
+//        dd($attributeValues);
+
+        $attributeValue =  AttributeValue::get()->keyBy('id')->toArray();
 
 
-//        $product = Product::where('id', $proId)->with('attributes')->firstOrFail();
-//        $thisattributes =$product->attributes->pluck('id');
+        return view('admin.ManageVariants', compact('product', 'attributeValues','ProductVariant','attributeValue'));
+    }
+
+
+//    public function ManageVariants($proId){
+//        $pageData = $this->pageData;
+//        $pageData['ViewType'] = "Edit";
 //
-//        foreach ($product->attributes as $attribute){
-//            foreach ($attribute->values as $value){
+//        $product = Product::where('id', $proId)->with('variants')->firstOrFail();
 //
-//                if (in_array($value->id, json_decode($attribute->pivot->values, true))) {
-//                    echobr($value->name ." ".$value->id);
+//
+//        foreach ($product->variants as $variant){
+//
+//
+//
+//            echobr($variant->id);
+//            foreach ( $variant->attributeName as $attributeName) {
+//
+//                foreach ( $variant->valueName as $valueName) {
+//
+////                    echobr($valueName->name);
 //                }
 //            }
 //        }
-
-      // return view('AppPlugin.Product.manage-variants', compact('pageData', 'product'));
-    }
-
+//
+////        $arr1 = array(1,2,3);
+////        $arr2 = array(4,5);
+////        $ddd = Arr::crossJoin($arr1,$arr2);
+////        dd($ddd);
+//
+//
+////        $product = Product::where('id', $proId)->with('attributes')->firstOrFail();
+////        $thisattributes =$product->attributes->pluck('id');
+////
+////        foreach ($product->attributes as $attribute){
+////            foreach ($attribute->values as $value){
+////
+////                if (in_array($value->id, json_decode($attribute->pivot->values, true))) {
+////                    echobr($value->name ." ".$value->id);
+////                }
+////            }
+////        }
+//
+//        // return view('AppPlugin.Product.manage-variants', compact('pageData', 'product'));
+//    }
 }
 
 

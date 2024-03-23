@@ -10,6 +10,10 @@ return new class extends Migration {
         Schema::create('pro_product_variants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
+            $table->string('variants_slug');
+            $table->string('variants_slug_id')->nullable();
+            $table->string('variants_string');
+
             $table->integer('sku')->nullable()->default(null);
 
             $table->float('price')->nullable()->default(null);

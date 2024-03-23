@@ -105,3 +105,4 @@ Route::post('/product/attribute-value-update/{id}',[ManageAttributeController::c
 
 
 Route::get('/product/manage-variants/{proId}',[ManageAttributeController::class,'ManageVariants'])->name('Shop.Product.ManageVariants');
+Route::post('/product/UpdateVariants/{proId}',[ManageAttributeController::class,'UpdateVariants'])->name('Shop.Product.UpdateVariants');
